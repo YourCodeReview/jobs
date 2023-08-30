@@ -7,10 +7,11 @@ import lxml
 def split_serch_word(text):
     return text.split(" ")
 
-search_vac = 'Стажер python'
+search_vac = 'Стажер PHP'
 area = 1 # Москва
 
 URL = f"https://hh.ru/search/vacancy?no_magic=true&L_save_area=true&text={split_serch_word(search_vac)[0]}+{split_serch_word(search_vac)[1]}&excluded_text=&{area}&page=1"
+# ToDo: Написать функцию для цикличного вставки слов в поиск
 
 session = requests.session()
 session.headers = {
