@@ -1,6 +1,6 @@
 <script setup>
 import TheJobsList from '../components/TheJobsList.vue'
-import { useStateStore } from '../stores'
+import { useStateStore } from '../stores/index'
 
 const store = useStateStore()
 </script>
