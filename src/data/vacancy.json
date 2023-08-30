@@ -1,0 +1,30 @@
+{
+    "id": 0,
+    "vacancy_name": "Python Developer",
+    "title": "We are seeking a skilled Python Developer to join our dynamic team. If you have a passion for writing clean, maintainable code and a strong background in Python, we want to hear from you!",
+    "description": [
+        {
+            "title": "Responsibilities",
+            "list": [
+                "Collaborate with cross-functional teams to design and develop high-quality software",
+                "Write efficient, reusable, and documented code.",
+                "Participate in code reviews and provide constructive feedback."
+            ]
+        },
+        {
+            "title": "Requirements",
+            "list": [
+                "Bachelor's degree in Computer Science or related field.",
+                "Proven experience with Python and its frameworks.",
+                "Strong problem-solving skills and attention to detail.",
+                "Excellent teamwork and communication skills."
+            ]
+        }
+    ],
+    "salary": "80000-100000",
+    "location": "Moscow, Russia",
+    "remote": false,
+    "company_name": "TechCo",
+    "specialty": "Python",
+    "url": "https://example.com/job/python-developer"
+}
