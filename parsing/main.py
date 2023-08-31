@@ -79,6 +79,11 @@ def get_vacancies(text, page=0):
         else:
             vacancy["name"] = item["name"]
 
+        if not item["snippet"]["requirement"]:
+            vacancy["requirement"] = 'null'
+        else:
+            vacancy["requirement"] = item["snippet"]["requirement"]
+
         if not item["snippet"]["responsibility"]:
             vacancy["responsibility"] = 'null'
         else:
