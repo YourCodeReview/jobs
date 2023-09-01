@@ -80,12 +80,12 @@ def get_vacancies(text, page=0):
             vacancy["responsibility"] = 'null'
         else:
             vacancy["responsibility"] = item["snippet"]["responsibility"]
-
+        # time.sleep(0.25)
 # -- description ----------------------------------------
-        # if not get_data_from_vacancy(f'{vacancy["id"]}'):
-        #     vacancy["description"] = 'null'
-        # else:
-            # vacancy["description"] = get_data_from_vacancy(f'{vacancy["id"]}')
+        if not get_description_from_vacancy(f'{vacancy["id"]}'):
+            vacancy["description"] = 'null'
+        else:
+            vacancy["description"] = get_description_from_vacancy(f'{vacancy["id"]}')
 
 # -- salary ----------------------------------------
         if not item["salary"]:
@@ -122,10 +122,10 @@ def get_vacancies(text, page=0):
 
     return vacansies, pages
 
-result = get_all_vacancies("стажер C++")
+result = get_all_vacancies("сопожник")
 
-# print(json.dumps(result, indent=4, ensure_ascii=False))
+print(json.dumps(result, indent=4, ensure_ascii=False))
 
-# print(len(result))
+print(len(result))
 
 # print(get_description_from_vacancy('85117536'))
