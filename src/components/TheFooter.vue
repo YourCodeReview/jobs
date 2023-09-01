@@ -8,7 +8,7 @@ const store = useStateStore()
 
 <template>
     <footer class="footer">
-        <div class="container footer-container">
+        <div class="container">
             <div class="footer-top">
                 <div class="footer-top__left">
                     <div class="footer-top__logo">
@@ -97,5 +97,46 @@ const store = useStateStore()
     grid-template-rows: repeat(4, 1fr);
     column-gap: 30px;
     row-gap: 10px;
+}
+
+@media screen and (max-width: 680px) {
+    .footer-top {
+        gap: var(--large-gap);
+        flex-direction: column;
+    }
+
+    .footer-top__left {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .footer-top__right {
+        gap: var(--small-gap)
+    }
+
+    .footer-top__links {
+        gap: var(--small-gap)
+    }
+}
+
+@media screen and (max-width: 425px) {
+    .footer-top__right {
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .footer-top__left {
+        align-items: center;
+        flex-direction: column;
+        gap: var(--medium-gap);
+    }
+
+    .footer-top__contact {
+        align-items: center;
+    }
+    .footer-top__links {
+        grid-template-columns: 1fr 1fr;
+        text-align: center;
+    }
 }
 </style>

@@ -35,23 +35,27 @@ const logout = () => {
             <SvgLogo />
             Jobs
         </router-link>
-        <div class="nav-links">
-            <a v-for="(link, idx) in props.links" :href="link.url" :key="idx" target="_blank">
-                {{ link.title }}
-            </a>
-            <div v-if="userName && userPhoto" class="user-info">
-                <img class="user-image" :src="userPhoto" alt="user-image" />
-                <span class="user-name">{{ userName }}</span>
+        <div class="nav-tools">
+            <div class="nav-tools__links">
+                <a v-for="(link, idx) in props.links" :href="link.url" :key="idx" target="_blank">
+                    {{ link.title }}
+                </a>
             </div>
-            <UiButton v-if="props.isLoggedIn" text="Выйти" @click="logout" />
-            <template v-else>
-                <UiButton text="Войти" @click="openModalType('login')" />
-                <UiButton
-                    text="Зарегистрироваться"
-                    color="black"
-                    @click="openModalType('register')"
-                />
-            </template>
+            <div class="nav-tools__buttons">
+                <div v-if="userName && userPhoto" class="user-info">
+                    <img class="user-image" :src="userPhoto" alt="user-image" />
+                    <span class="user-name">{{ userName }}</span>
+                </div>
+                <UiButton v-if="props.isLoggedIn" text="Выйти" @click="logout" />
+                <template v-else>
+                    <UiButton text="Войти" @click="openModalType('login')" />
+                    <UiButton
+                        text="Зарегистрироваться"
+                        color="black"
+                        @click="openModalType('register')"
+                    />
+                </template>
+            </div>
         </div>
     </nav>
 </template>
@@ -61,9 +65,7 @@ const logout = () => {
     display: flex;
     align-items: center;
     justify-content: space-between;
-
-    min-height: 72px;
-    max-height: 72px;
+    gap: var(--large-gap);
 }
 
 .nav-logo {
@@ -74,26 +76,57 @@ const logout = () => {
 
     font-size: 20px;
 
-    gap: 10px;
+    gap: var(--small-gap);
 }
-.nav-links {
+
+.nav-tools {
+    display: flex;
+    align-items: center;
+    gap: var(--large-gap);
+}
+.nav-tools__links {
     display: flex;
     align-items: center;
 
     color: white;
 
-    gap: 20px;
+    gap: var(--medium-gap);
+}
+
+.nav-tools__buttons {
+    display: flex;
+    align-items: center;
+    gap: var(--small-gap);
 }
 .user-info {
     display: flex;
     align-items: center;
 
-    gap: 10px;
+    gap: var(--small-gap);
 }
 .user-image {
     width: 32px;
     height: 32px;
 
     border-radius: 50%;
+}
+
+.user-name {
+    color: white;
+}
+
+@media screen and (max-width: 975px) {
+    .nav-tools {
+        flex-direction: column;
+        gap: var(--small-gap)
+    }
+}
+
+@media screen and (max-width: 680px) {
+
+    .nav {
+        flex-direction: column;
+        gap: var(--medium-gap);
+    }
 }
 </style>
