@@ -2,17 +2,26 @@
 import { ref, onMounted, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { useStateStore } from '../stores'
+import { useAuthStore } from '../stores/auth'
 
 import UiCard from '../components/ui/UiCard.vue'
 import UiButton from '../components/ui/UiButton.vue'
 
 import SvgBack from '../components/icons/SvgBack.vue'
+import { useModalStore } from '../stores/modal'
 
 const store = useStateStore()
+const auth = useAuthStore()
+const modal = useModalStore()
 
 const route = useRoute()
+
 const vacancyId = ref('')
 const currentVacancy = ref({})
+
+const responseVacancy = (url) => {
+    auth.isLoggedIn ? window.open(url, '_blank') : modal.open()
+}
 
 onMounted(async () => {
     vacancyId.value = route.params.id
@@ -61,9 +70,7 @@ watch(
                 <div class="vacancy-description__right">
                     <div class="button-response">
                         <p>Отклик</p>
-                        <a :href="currentVacancy.url" target="_blank">
-                            <UiButton text="Откликнуться" />
-                        </a>
+                        <UiButton text="Откликнуться" @click="responseVacancy(currentVacancy.url)"/>
                     </div>
                 </div>
             </div>
@@ -73,6 +80,8 @@ watch(
 
 <style scoped>
 .vacancy {
+    position: relative;
+
     display: grid;
 
     height: 100%;
@@ -185,5 +194,19 @@ watch(
     margin-bottom: 10px;
 
     font-weight: bold;
+}
+
+@media screen and (max-width: 1024px) {
+    .fixed-navigation {
+        position: static;
+        transform: translate(0);
+    }
+}
+
+@media screen and (max-width: 680px) {
+
+    .vacancy-description {
+        flex-direction: column;
+    }
 }
 </style>
