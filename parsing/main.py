@@ -3,6 +3,13 @@ import json
 import time
 import csv
 
+def get_description_from_vacancy(id):
+    """
+    возвращает описание вакансии.
+    """
+    response = json.loads(requests.get(f'https://api.hh.ru/vacancies/{id}').content.decode())['description']
+    return response
+
 def get_all_vacancies(text):
     """
     собирает все вакансии и получает количество страниц page_vacansies
@@ -16,7 +23,6 @@ def get_all_vacancies(text):
 
         vacansies.extend(page_vacansies)
     return vacansies
-
 
 def get_vacancies(text, page=0):
     """
@@ -50,58 +56,76 @@ def get_vacancies(text, page=0):
 
     for item in items:
         vacancy = {}
+
+# -- id ----------------------------------------
         if not item["id"]:
             vacancy["id"] = 'null'
         else:
             vacancy["id"] = item["id"]
 
+# -- name ----------------------------------------
         if not item["name"]:
             vacancy["name"] = 'null'
         else:
             vacancy["name"] = item["name"]
 
+# -- requirement ----------------------------------------
         if not item["snippet"]["requirement"]:
             vacancy["requirement"] = 'null'
         else:
             vacancy["requirement"] = item["snippet"]["requirement"]
 
+# -- responsibility ----------------------------------------
         if not item["snippet"]["responsibility"]:
             vacancy["responsibility"] = 'null'
         else:
             vacancy["responsibility"] = item["snippet"]["responsibility"]
 
+# -- description ----------------------------------------
+        # if not get_data_from_vacancy(f'{vacancy["id"]}'):
+        #     vacancy["description"] = 'null'
+        # else:
+            # vacancy["description"] = get_data_from_vacancy(f'{vacancy["id"]}')
+
+# -- salary ----------------------------------------
         if not item["salary"]:
             vacancy["salary"] = 'null'
         else:
             vacancy["salary"] = item["salary"]["from"]
 
+# -- address ----------------------------------------
         if not item["address"]:
             vacancy["address"] = 'null'
         else:
             vacancy["address"] = item["address"]["city"]
 
+# -- employment ----------------------------------------
         if not item["employment"]:
             vacancy["employment"] = 'null'
         else:
             vacancy["employment"] = item["employment"]["name"]
 
+# -- employer ----------------------------------------
         if not item["employer"]:
             vacancy["employer"] = 'null'
         else:
             vacancy["employer"] = item["employer"]["name"]
 
+# -- professional_roles ----------------------------------------
         if not item["professional_roles"]:
             vacancy["professional_roles"] = 'null'
         else:
             vacancy["professional_roles"] = item["professional_roles"][0]["name"]
-
+            
+# ------------------------------------------
         vacansies.append(vacancy)
 
     return vacansies, pages
 
 result = get_all_vacancies("стажер C++")
 
-print(json.dumps(result, indent=4, ensure_ascii=False))
+# print(json.dumps(result, indent=4, ensure_ascii=False))
 
-print(len(result))
+# print(len(result))
 
+# print(get_description_from_vacancy('85117536'))
