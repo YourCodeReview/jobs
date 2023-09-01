@@ -1,51 +1,32 @@
 import requests
-
-
 import json
 import time
 import csv
 
-
-
 def get_all_vacancies(text):
     """
-
     собирает все вакансии и получает количество страниц page_vacansies
-
     возвращает все вакансии 
     """
 
     vacansies, pages = get_vacancies(text)
-
     for page in range(1, pages):
 
         page_vacansies, _ = get_vacancies(text, page)
 
         vacansies.extend(page_vacansies)
-
     return vacansies
-
 
 
 def get_vacancies(text, page=0):
     """
-
     возвращает объявления на конкретной страниуе
     """
 
-
     params = { # параметры обращения к api
-
-
         'text': text,  # искомая вакансия
-
-
         'per_page': 20, # кол. вакансий на страницу
-
-
         'page': page  # номер страницы
-
-
     } 
 
     # ответ api 
@@ -117,7 +98,6 @@ def get_vacancies(text, page=0):
         vacansies.append(vacancy)
 
     return vacansies, pages
-
 
 result = get_all_vacancies("стажер C++")
 
