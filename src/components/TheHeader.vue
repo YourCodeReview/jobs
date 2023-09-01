@@ -1,7 +1,7 @@
 <script setup>
-import { ref } from 'vue'
 import { useStateStore } from '../stores/index'
 import { useAuthStore } from '../stores/auth'
+import { useModalStore } from '../stores/modal'
 
 import TheNavigation from './TheNavigation.vue'
 import UiButton from './ui/UiButton.vue'
@@ -10,27 +10,21 @@ import UiForm from './ui/UiForm.vue'
 
 const store = useStateStore()
 const auth = useAuthStore()
-const modalIsOpen = ref(false)
-const formType = ref('')
-
-const openModalType = (status) => {
-    formType.value = status
-    modalIsOpen.value = true
-}
+const modal = useModalStore()
 
 const register = async () => {
     await auth.register()
-    modalIsOpen.value = false
+    modal.close()
 }
 
 const login = async () => {
     await auth.login()
-    modalIsOpen.value = false
+    modal.close()
 }
 
 const signInWithGoogle = async () => {
     await auth.loginGoogle()
-    modalIsOpen.value = false
+    modal.close()
 }
 
 const logout = () => {
@@ -45,17 +39,17 @@ const logout = () => {
                 :links="store.headerLinks"
                 :user="auth.currentUser"
                 :is-logged-in="auth.isLoggedIn"
-                @openModalType="openModalType"
+                @openModalType="modal.open"
                 @logout="logout"
             />
         </div>
     </header>
-    <UiModal v-if="modalIsOpen" :title="formType === 'login' ? 'Авторизация' : 'Регистрация'">
+    <UiModal v-if="modal.isOpen" :title="modal.type === 'login' ? 'Авторизация' : 'Регистрация'">
         <UiForm
             @register="register"
             @login="login"
             @logout="logout"
-            :formType="formType"
+            :formType="modal.type"
             :errorMessage="auth.errMsg"
         />
         <UiButton text="Войти через Google" @click="signInWithGoogle" />
@@ -73,9 +67,5 @@ const logout = () => {
         rgba(32, 147, 254, 1) 0%,
         rgba(194, 23, 254, 1) 90%
     );
-}
-
-.header-container {
-    padding: 0 40px;
 }
 </style>

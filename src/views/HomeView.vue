@@ -32,4 +32,10 @@ const store = useStateStore()
     grid-template-columns: 1fr;
     grid-gap: 24px;
 }
+
+@media screen and (max-width: 680px) {
+    .job-nav {
+        padding: 40px 10px;
+    }
+}
 </style>

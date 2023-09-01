@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import { useFirebase } from '../firebase/useFirebase'
+import { useFirebase } from '../hooks/useFirebase'
 
 export const useAuthStore = defineStore('auth', () => {
     const {

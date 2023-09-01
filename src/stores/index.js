@@ -23,6 +23,10 @@ export const useStateStore = defineStore('state', () => {
             anchor: 'programma'
         },
         {
+            name: 'Вопросы и ответы',
+            anchor: 'faq'
+        },
+        {
             name: 'Вакансии',
             anchor: 'vakansii'
         },
@@ -46,10 +50,6 @@ export const useStateStore = defineStore('state', () => {
             name: 'О нас',
             anchor: 'onas'
         },
-        {
-            name: 'Вопросы и ответы',
-            anchor: 'faq'
-        }
     ]
 
     return { vacancies, vacancy, headerLinks, footerAnchors }

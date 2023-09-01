@@ -74,7 +74,7 @@ const props = defineProps({
 }
 
 .card-top {
-    padding: 16px 16px 4px;
+    padding: 16px 16px 5px;
 }
 
 .card-btm {
@@ -122,5 +122,31 @@ const props = defineProps({
 
 .info-span__salary {
     margin-left: auto;
+}
+
+@media screen and (max-width: 425px) {
+    .card-top {
+        padding: 10px 10px 5px;
+    }
+    .card-btm {
+        padding: 5px 10px;
+    }
+
+    .card-btm__title {
+        margin-bottom: 10px;
+    }
+
+    .card-btm__info {
+        align-items: start ;
+        flex-direction: column;
+    }
+
+    .info-span__salary {
+        margin-left: 0;
+    }
+
+    .info-span {
+        padding: 5px;
+    }
 }
 </style>

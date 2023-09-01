@@ -26,4 +26,10 @@ const props = defineProps({
 
     grid-gap: 20px;
 }
+
+@media screen and (max-width: 680px) {
+    .jobs-list {
+        min-width: auto;
+    }
+}
 </style>
