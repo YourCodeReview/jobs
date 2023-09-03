@@ -82,10 +82,14 @@ def get_vacancies(text, page=0):
             vacancy["responsibility"] = item["snippet"]["responsibility"]
         # time.sleep(0.25)
 # -- description ----------------------------------------
-        if not get_description_from_vacancy(f'{vacancy["id"]}'):
-            vacancy["description"] = 'null'
-        else:
-            vacancy["description"] = get_description_from_vacancy(f'{vacancy["id"]}')
+        try:
+            description = get_description_from_vacancy(f'{vacancy["id"]}')
+            if description:
+                vacancy["description"] = description
+            else:
+                vacancy["description"] = 'null'
+        except Exception as e:
+            print(vacancy["id"])
 
 # -- salary ----------------------------------------
         if not item["salary"]:
@@ -122,7 +126,7 @@ def get_vacancies(text, page=0):
 
     return vacansies, pages
 
-result = get_all_vacancies("сопожник")
+result = get_all_vacancies("питон c++")
 
 print(json.dumps(result, indent=4, ensure_ascii=False))
 
