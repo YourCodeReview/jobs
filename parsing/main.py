@@ -126,7 +126,7 @@ def get_vacancies(text, page=0):
 
     return vacansies, pages
 
-result = get_all_vacancies("питон c++")
+result = get_all_vacancies("стажер c++ junior")
 
 print(json.dumps(result, indent=4, ensure_ascii=False))
 
