@@ -1,5 +1,5 @@
 # Step 1: Build the Vue.js app
-FROM node:14 as build-stage
+FROM node:latest as build-stage
 WORKDIR /app
 COPY package*.json .
 RUN npm install
