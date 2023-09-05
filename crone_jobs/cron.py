@@ -1,6 +1,9 @@
 import cronitor.celery
 from celery import Celery
-from parsing import fetch_hh_page_vacancies
+import cronitor
+
+cronitor.api_key = 'b8cb4f4c7a09431bbb44bcd118e5500f'
+
 
 app = Celery()
 app.conf.beat_schedule = {
