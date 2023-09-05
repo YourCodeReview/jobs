@@ -34,21 +34,23 @@ def fetch_hh_page_vacancies(text, page=0):
     for item in items:
         vacancy = {
             "hh_id": item.get("id"),
-            "name": item.get("name") if item.get("name") else None,
-            "requirement": item.get("snippet")["requirement"] if item.get("snippet")["requirement"] else None,
-            "responsibility": item.get("snippet")["responsibility"] if item.get("snippet")["responsibility"] else None,
+            "name": item.get("name"),
+            'area': item.get("area")["name"] if item.get("area") else None,
+            "requirement": item.get("snippet")["requirement"] if item.get("snippet") else None,
+            "responsibility": item.get("snippet")["responsibility"] if item.get("snippet") else None,
             "description": get_description_from_vacancy(item.get("id")),
             "salary_from": item.get("salary")["from"] if item.get("salary") else None,
             "salary_to": item.get("salary")["to"] if item.get("salary") else None,
             "salary_currency": item.get("salary")["currency"] if item.get("salary") else None,
             "address": item.get("address")["raw"] if item.get("address") else None,
-            "employment": item.get("employment")["name"] if item.get("employment")["name"] else None,
+            "employment": item.get("employment")["name"] if item.get("employment") else None,
+            "employer": item.get("employer")["name"] if item.get("employer") else None,
             "professional_roles": item.get("professional_roles")[0]["name"] if item.get("professional_roles")[0] else None,
         }
         vacancies.append(vacancy)
     return vacancies, pages
 
 
-result = fetch_hh_vacancies("стажер аналитик")
+result = fetch_hh_vacancies("стажер php")
 print(json.dumps(result, indent=4, ensure_ascii=False))
 print(len(result))
