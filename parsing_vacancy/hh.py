@@ -52,5 +52,5 @@ def fetch_hh_page_vacancies(text, page=0):
 
 
 result = fetch_hh_vacancies("стажер php")
-print(json.dumps(result, indent=4, ensure_ascii=False))
-print(len(result))
+# print(json.dumps(result, indent=4, ensure_ascii=False))
+# print(len(result))
