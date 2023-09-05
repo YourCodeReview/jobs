@@ -50,7 +50,7 @@ def fetch_hh_page_vacancies(text, page=0):
         vacancies.append(vacancy)
     return vacancies, pages
 
-
-result = fetch_hh_vacancies("стажер php")
-# print(json.dumps(result, indent=4, ensure_ascii=False))
-# print(len(result))
+if __name__ == "__main__":
+    result = fetch_hh_vacancies("стажер php")
+    print(json.dumps(result, indent=4, ensure_ascii=False))
+    print(len(result))
