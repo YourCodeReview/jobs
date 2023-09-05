@@ -1,6 +1,7 @@
 import cronitor.celery
 from celery import Celery
 import cronitor
+import crontab
 
 cronitor.api_key = 'b8cb4f4c7a09431bbb44bcd118e5500f'
 
