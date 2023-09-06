@@ -7,7 +7,11 @@ def get_description_from_vacancy(id):
     """
     возвращает описание вакансии.
     """
-    response = json.loads(requests.get(f'https://api.hh.ru/vacancies/{id}').content.decode())['description']
+    server_response = requests.get(f'https://api.hh.ru/vacancies/{id}')
+    if server_response.status_code != 200:
+        print(server_response.status_code, server_response.content)
+        server_response.raise_for_status()
+    response = json.loads(server_response.content.decode())['description']
     return response
 
 def get_all_vacancies(text):
@@ -20,7 +24,6 @@ def get_all_vacancies(text):
     for page in range(1, pages):
 
         page_vacansies, _ = get_vacancies(text, page)
-
         vacansies.extend(page_vacansies)
     return vacansies
 
@@ -89,7 +92,8 @@ def get_vacancies(text, page=0):
             else:
                 vacancy["description"] = 'null'
         except Exception as e:
-            print(vacancy["id"])
+            print(vacancy["id"], type(e), e)
+            raise
 
 # -- salary ----------------------------------------
         if not item["salary"]:
@@ -126,7 +130,7 @@ def get_vacancies(text, page=0):
 
     return vacansies, pages
 
-result = get_all_vacancies("стажер c++ junior")
+result = get_all_vacancies("стажер c++")
 
 print(json.dumps(result, indent=4, ensure_ascii=False))
 
