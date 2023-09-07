@@ -1,0 +1,6 @@
+https://docs.rockylinux.org/guides/automation/cron_jobs_howto/
+
+
+#* * * * * date > /home/khach/projects/Codreview_jobs/parsing_vacancy/log.txt 
+
+#* * * * * /bin/python3 /home/khach/projects/Codreview_jobs/parsing_vacancy/hh.py > /home/khach/projects/Codreview_jobs/parsing_vacancy/log.txt
