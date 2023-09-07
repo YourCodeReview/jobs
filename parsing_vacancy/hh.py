@@ -1,5 +1,6 @@
 import requests
 import json
+import time
 
 
 def get_description_from_vacancy(id):
@@ -27,7 +28,7 @@ def fetch_hh_page_vacancies(text, page=0):
     }
     response = requests.get('https://api.hh.ru/vacancies', params)
     data = response.json()
-
+    response.close()
     pages = data['pages']
     items = data['items']
     vacancies = []
@@ -52,5 +53,7 @@ def fetch_hh_page_vacancies(text, page=0):
 
 if __name__ == "__main__":
     result = fetch_hh_vacancies("стажер php")
-    print(json.dumps(result, indent=4, ensure_ascii=False))
-    print(len(result))
+    # print(json.dumps(result, indent=4, ensure_ascii=False))
+    # print(len(result))
+    with open("log.txt", "a") as f:
+        f.write(f"{time.asctime()}\n")
