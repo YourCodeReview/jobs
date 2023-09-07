@@ -56,23 +56,8 @@ def fetch_hh_page_vacancies(text, page=0):
     return vacancies, pages
 
 if __name__ == "__main__":
-    result = []
-    total_vacancies = 0
-    for name in ['php',  # todo заменить на список с языками
-                 'python', 
-                 'c++', 
-                 'java', 
-                 'c#', 
-                 'data scientist',
-                 'javascript',
-                 'qa',
-                 ' ',
-                 ]:
-
-        res = fetch_hh_vacancies(f"стажер {name}")
-        result.append(res)  
-        total_vacancies += len(res)
-    print(json.dumps(result, indent=4, ensure_ascii=False))
-    print(total_vacancies)
-    # with open("log.txt", "a") as f:
-    #     f.write(f"{time.asctime()}\n")
+    result = fetch_hh_vacancies("стажер php")
+    # print(json.dumps(result, indent=4, ensure_ascii=False))
+    # print(len(result))
+    with open("log.txt", "a") as f:
+        f.write(f"{time.asctime()}\n")
