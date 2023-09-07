@@ -5,7 +5,11 @@ import time
 
 def get_description_from_vacancy(id):
     """ Возвращает полное описание вакансии по id """
-    vacancy_data = requests.get(f'https://api.hh.ru/vacancies/{id}').json()
+    server_resp = requests.get(f'https://api.hh.ru/vacancies/{id}')
+    if server_resp.status_code != 200:
+        return None
+    vacancy_data = server_resp.json()
+    server_resp.close()
     return vacancy_data['description']
 
 
@@ -52,8 +56,23 @@ def fetch_hh_page_vacancies(text, page=0):
     return vacancies, pages
 
 if __name__ == "__main__":
-    result = fetch_hh_vacancies("стажер php")
-    # print(json.dumps(result, indent=4, ensure_ascii=False))
-    # print(len(result))
-    with open("log.txt", "a") as f:
-        f.write(f"{time.asctime()}\n")
+    result = []
+    total_vacancies = 0
+    for name in ['php',  # todo заменить на список с языками
+                 'python', 
+                 'c++', 
+                 'java', 
+                 'c#', 
+                 'data scientist',
+                 'javascript',
+                 'qa',
+                 ' ',
+                 ]:
+
+        res = fetch_hh_vacancies(f"стажер {name}")
+        result.append(res)  
+        total_vacancies += len(res)
+    print(json.dumps(result, indent=4, ensure_ascii=False))
+    print(total_vacancies)
+    # with open("log.txt", "a") as f:
+    #     f.write(f"{time.asctime()}\n")
