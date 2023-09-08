@@ -56,8 +56,8 @@ def fetch_hh_page_vacancies(text, page=0):
     return vacancies, pages
 
 if __name__ == "__main__":
-    result = fetch_hh_vacancies("стажер php")
-    # print(json.dumps(result, indent=4, ensure_ascii=False))
-    # print(len(result))
-    with open("log.txt", "a") as f:
-        f.write(f"{time.asctime()}\n")
+    result = fetch_hh_vacancies("стажер")
+    print(json.dumps(result, indent=4, ensure_ascii=False))
+    print(len(result))
+    # with open("log.txt", "a") as f:
+    #     f.write(f"{time.asctime()}\n")
