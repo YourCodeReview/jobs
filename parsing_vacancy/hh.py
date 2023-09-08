@@ -1,10 +1,15 @@
 import requests
 import json
+import time
 
 
 def get_description_from_vacancy(id):
     """ Возвращает полное описание вакансии по id """
-    vacancy_data = requests.get(f'https://api.hh.ru/vacancies/{id}').json()
+    server_resp = requests.get(f'https://api.hh.ru/vacancies/{id}')
+    if server_resp.status_code != 200:
+        return None
+    vacancy_data = server_resp.json()
+    server_resp.close()
     return vacancy_data['description']
 
 
@@ -27,29 +32,32 @@ def fetch_hh_page_vacancies(text, page=0):
     }
     response = requests.get('https://api.hh.ru/vacancies', params)
     data = response.json()
-
+    response.close()
     pages = data['pages']
     items = data['items']
     vacancies = []
-
     for item in items:
         vacancy = {
             "hh_id": item.get("id"),
             "name": item.get("name"),
-            "requirement": item.get("snippet")["requirement"],
-            "responsibility": item.get("snippet")["responsibility"],
+            'area': item.get("area")["name"] if item.get("area") else None,
+            "requirement": item.get("snippet")["requirement"] if item.get("snippet") else None,
+            "responsibility": item.get("snippet")["responsibility"] if item.get("snippet") else None,
             "description": get_description_from_vacancy(item.get("id")),
-            "salary": item.get("salary"),
+            "salary_from": item.get("salary")["from"] if item.get("salary") else None,
+            "salary_to": item.get("salary")["to"] if item.get("salary") else None,
+            "salary_currency": item.get("salary")["currency"] if item.get("salary") else None,
             "address": item.get("address")["raw"] if item.get("address") else None,
-            "employment": item.get("employment")["name"],
-            "professional_roles": item.get("professional_roles")[0]["name"],
+            "employment": item.get("employment")["name"] if item.get("employment") else None,
+            "employer": item.get("employer")["name"] if item.get("employer") else None,
+            "professional_roles": item.get("professional_roles")[0]["name"] if item.get("professional_roles")[0] else None,
         }
         vacancies.append(vacancy)
-
     return vacancies, pages
 
-
-result = fetch_hh_vacancies("junior java")
-
-print(json.dumps(result, indent=4, ensure_ascii=False))
-print(len(result))
+if __name__ == "__main__":
+    result = fetch_hh_vacancies("стажер")
+    print(json.dumps(result, indent=4, ensure_ascii=False))
+    print(len(result))
+    # with open("log.txt", "a") as f:
+    #     f.write(f"{time.asctime()}\n")
