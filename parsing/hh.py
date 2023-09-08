@@ -71,5 +71,5 @@ if __name__ == "__main__":
     with open('result.json', 'w', encoding='utf-8', errors='ignore') as f:
         f.write(json.dumps(result, indent=4, ensure_ascii=False))
     end = time.time()
-    print(len(result), 'time:', round((end - start) / 60), 'мин.')
+    print(len(result), 'time:', round((end - start) / 60), 'мин.', time.asctime)
 
