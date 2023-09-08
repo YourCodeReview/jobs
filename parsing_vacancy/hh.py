@@ -56,8 +56,20 @@ def fetch_hh_page_vacancies(text, page=0):
     return vacancies, pages
 
 if __name__ == "__main__":
-    result = fetch_hh_vacancies("стажер")
-    print(json.dumps(result, indent=4, ensure_ascii=False))
-    print(len(result))
-    # with open("log.txt", "a") as f:
-    #     f.write(f"{time.asctime()}\n")
+    start = time.time()
+    main_words = ['junior', 'intern', 'стажер', 'младшый']
+    languages_stacks = ['php', 'java', 'javascript', 'data science', 
+                        'qa', 'c++', 'c#', 'c', 'sql', 'postgresql',
+                        'frontend', 'backend', 'ml', 'ds', 'mysql', 
+                        'flask', 'django', 'fastapi', 'data ingeneer']
+    result = []
+    for word in main_words:
+        temp_list = []
+        for stack in languages_stacks:
+            temp_list.append(fetch_hh_vacancies(f"{word} {stack}"))
+            result.extend(temp_list)
+    end = time.time()
+    with open('result.json', 'w') as f:
+        f.write(json.dumps(result, indent=4, ensure_ascii=False))
+    print(len(result), 'time:', end - start)
+
