@@ -68,8 +68,8 @@ if __name__ == "__main__":
         for stack in languages_stacks:
             temp_list.append(fetch_hh_vacancies(f"{word} {stack}"))
             result.extend(temp_list)
-    end = time.time()
-    with open('result.json', 'w') as f:
+    with open('result.json', 'w', encoding='utf-8', errors='ignore') as f:
         f.write(json.dumps(result, indent=4, ensure_ascii=False))
-    print(len(result), 'time:', end - start)
+    end = time.time()
+    print(len(result), 'time:', round((end - start) / 60), 'мин.')
 
