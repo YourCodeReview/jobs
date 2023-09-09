@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 
 from database import get_db
 from schemas import VacancyCreate
-from crud import create_vacancy, get_vacancies, get_vacancy_by_id
+from jobs.backend.crud import create_vacancy, get_vacancies, get_vacancy_by_id
 
 router = APIRouter()
 
