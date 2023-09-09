@@ -34,10 +34,10 @@ def fetch_hh_page_vacancies(text, page=0):
 
     for item in items:
         vacancy = {
-            "hh_id": item.get("id"),
+            "id": item.get("id"),
             "name": item.get("name"),
-            "requirement": item.get("snippet")["requirement"],
-            "responsibility": item.get("snippet")["responsibility"],
+            "requirements": item.get("snippet")["requirement"],
+            "responsibilities": item.get("snippet")["responsibility"],
             "description": get_description_from_vacancy(item.get("id")),
             "salary": item.get("salary"),
             "address": item.get("address")["raw"] if item.get("address") else None,
@@ -49,7 +49,8 @@ def fetch_hh_page_vacancies(text, page=0):
     return vacancies, pages
 
 
-result = fetch_hh_vacancies("junior java")
+result = fetch_hh_vacancies("junior python")
 
 print(json.dumps(result, indent=4, ensure_ascii=False))
 print(len(result))
+
