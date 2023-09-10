@@ -1,212 +1,276 @@
 <script setup>
-import { ref, onMounted, watch } from 'vue'
-import { useRoute } from 'vue-router'
-import { useStateStore } from '../stores'
-import { useAuthStore } from '../stores/auth'
+import { useGetVacancy } from "@/api/requests";
+import { useRoute } from "vue-router";
+import { ref, onMounted, watch } from "vue";
+import { useFirebase } from "@/hooks/useFirebase";
 
-import UiCard from '../components/ui/UiCard.vue'
-import UiButton from '../components/ui/UiButton.vue'
+import UiCard from "@/components/ui/uiCard.vue";
+import UiSnackbar from "@/components/ui/uiSnackbar.vue";
 
-import SvgBack from '../components/icons/SvgBack.vue'
-import { useModalStore } from '../stores/modal'
+const route = useRoute();
+const auth = useFirebase();
+const {
+    data,
+    isLoading,
+    isError,
+    execute
+  } = useGetVacancy();
 
-const store = useStateStore()
-const auth = useAuthStore()
-const modal = useModalStore()
+const vacancyId = ref("");
+const snackbar = ref(false);
+const dialog = ref(false);
 
-const route = useRoute()
-
-const vacancyId = ref('')
-const currentVacancy = ref({})
-
-const responseVacancy = (url) => {
-    auth.isLoggedIn ? window.open(url, '_blank') : modal.open()
-}
-
-onMounted(async () => {
-    vacancyId.value = route.params.id
-    currentVacancy.value = store.vacancy
-})
+const currentVacancy = {
+    hh_id: "85740036",
+    name: "Junior PHP разработчик",
+    title: "We are seeking a skilled Python Developer to join our dynamic team. If you have a passion for writing clean, maintainable code and a strong background in Python, we want to hear from you!",
+    description: [
+        {
+            title: "Responsibilities",
+            list: [
+                "Collaborate with cross-functional teams to design and develop high-quality software",
+                "Write efficient, reusable, and documented code.",
+                "Participate in code reviews and provide constructive feedback.",
+            ],
+        },
+        {
+            title: "Requirements",
+            list: [
+                "Bachelor's degree in Computer Science or related field.",
+                "Proven experience with Python and its frameworks.",
+                "Strong problem-solving skills and attention to detail.",
+                "Excellent teamwork and communication skills.",
+            ],
+        },
+    ],
+    salary_from: 800,
+    salary_to: null,
+    salary_currency: "USD",
+    area: "Минск",
+    employer: "Спортдата",
+    url: "https://example.com/job/python-developer",
+};
 
 watch(
     () => route.params.id,
     async (newVacancyId) => {
-        vacancyId.value = newVacancyId
-        // currentVacancy = ЗАПРОС
+        vacancyId.value = newVacancyId;
     }
-)
+);
+
+onMounted(async () => {
+    vacancyId.value = route.params.id;
+    await execute(vacancyId.value);
+    console.log('ID вакансии: ', vacancyId.value);
+    console.log('Ответ от сервера: ', data.value);
+});
+
+const copyText = () => {
+    navigator.clipboard
+        .writeText(`${currentVacancy.url}`)
+        .then(() => {
+            console.log("Async: Copying to clipboard was successful!");
+        })
+        .catch((err) => {
+            console.log("Something went wrong", err);
+        });
+};
 </script>
 
 <template>
-    <main class="vacancy">
-        <div class="container vacancy-container">
-            <div class="fixed-navigation">
-                <router-link class="fixed-navigation__link" to="/">
-                    <SvgBack />
-                </router-link>
-            </div>
-            <UiCard :job="currentVacancy" size="large" />
-            <div class="vacancy-description">
-                <div class="vacancy-description__left">
-                    <div class="vacancy-description__salary">{{ currentVacancy.salary }} ₽</div>
-                    <div class="vacancy-description__text">
-                        <h3 class="vacancy-description__title">{{ currentVacancy.title }}</h3>
-                        <ul
-                            class="description-list"
-                            v-for="(section, idx) in currentVacancy.description"
-                            :key="idx"
+    <div class="container py-4 position-relative">
+        <v-row class="page-nav justify-center">
+            <v-col cols="12" class="d-flex py-1">
+                <v-btn
+                    icon="mdi-arrow-left"
+                    size="small"
+                    @click="$router.back()"
+                />
+                <v-btn
+                    class="ml-auto"
+                    icon
+                    size="small"
+                    @click="auth.isLoggedIn.value ? copyText() : null"
+                >
+                    <v-icon>mdi-export-variant</v-icon>
+                    <ui-snackbar
+                        v-model="snackbar"
+                        activator="parent"
+                        :color="
+                            auth.isLoggedIn.value ? 'green' : 'red-darken-1'
+                        "
+                        :message="
+                            auth.isLoggedIn.value
+                                ? 'Ссылка на вакансию скопирована'
+                                : 'Необходимо авторизоваться'
+                        "
+                    />
+                </v-btn>
+            </v-col>
+        </v-row>
+        <v-row class="justify-center">
+            <v-col cols="12" lg="10" sm="12">
+                <ui-card :item="currentVacancy" size="lg" />
+            </v-col>
+        </v-row>
+        <v-row class="justify-center">
+            <v-col cols="12" lg="7" sm="8" class="d-flex flex-column">
+                <v-card class="pa-2" rounded="xl">
+                    <v-card-title class="font-weight-bold">
+                       от {{ currentVacancy.salary_from }} {{ currentVacancy.salary_to ? `- ${currentVacancy.salary_to}` : '' }} {{ currentVacancy.salary_currency }}
+                    </v-card-title>
+                </v-card>
+                <v-hover v-slot="{ isHovering, props }">
+                    <v-card
+                        v-bind="props"
+                        class="blue-banner mt-2 pa-2"
+                        rounded="xl"
+                        :elevation="isHovering ? 10 : 1"
+                        href="https://yourcodereview.com/"
+                    >
+                        <v-card-title
+                            class="d-flex align-center font-weight-bold"
                         >
-                            <li class="description-list__item">
-                                <p>{{ section.title }}</p>
-                                <ul>
-                                    <li v-for="(item, idx) in section.list" :key="idx">
-                                        <span>{{ item }}</span>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="vacancy-description__right">
-                    <div class="button-response">
-                        <p>Отклик</p>
-                        <UiButton text="Откликнуться" @click="responseVacancy(currentVacancy.url)"/>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </main>
+                            Как зарабатывать больше?
+                            <v-icon
+                                class="ml-auto"
+                                color="white"
+                                icon="mdi-arrow-right"
+                            />
+                        </v-card-title>
+                        <v-card-text>
+                            Расскажем в наших карьерных консультациях
+                        </v-card-text>
+                    </v-card>
+                </v-hover>
+                <v-card class="mt-2 pa-2" rounded="xl">
+                    <v-list
+                        v-for="item in currentVacancy.description"
+                        :key="item.title"
+                    >
+                        <v-list-item>
+                            <v-list-item-title class="font-weight-bold">{{
+                                item.title
+                            }}</v-list-item-title>
+                            <v-card-text
+                                v-for="item in item.list"
+                                :key="item"
+                                class="py-2"
+                            >
+                                - {{ item }}
+                            </v-card-text>
+                        </v-list-item>
+                    </v-list>
+                </v-card>
+            </v-col>
+            <v-col cols="12" lg="3" sm="4">
+                <v-card class="pa-4 d-flex flex-column" rounded="xl">
+                    <v-card-title class="pa-0 pb-1 font-weight-bold"
+                        >Отклик</v-card-title
+                    >
+                    <v-btn
+                        block
+                        size="large"
+                        class="card-btn__purple mb-2"
+                        rounded="lg"
+                    >
+                        Турбо отклик
+                        <v-dialog
+                            v-model="dialog"
+                            activator="parent"
+                            width="auto"
+                        >
+                            <v-card class="pa-4" rounded="xl" max-width="600">
+                                <v-img src="@/assets/images/popup.png" />
+                                <h2 class="pa-2 text-h4 font-weight-bold">
+                                    Поможем откликнуться и сопроводим на всех
+                                    этапах
+                                </h2>
+                                <p class="pa-2 text-h6 mb-4">
+                                    71% наших клиентов находят работу за 3
+                                    месяца. Среднее время поиска - 57 дней
+                                </p>
+                                <v-btn
+                                    height="60"
+                                    href="https://yourcodereview.com"
+                                    color="black"
+                                    size="large"
+                                    rounded="xl"
+                                    block
+                                >
+                                    Узнать подробнее
+                                </v-btn>
+                                <v-btn
+                                    class="close-popup"
+                                    size="small"
+                                    icon="mdi-close"
+                                    @click="dialog = false"
+                                />
+                            </v-card>
+                        </v-dialog>
+                    </v-btn>
+                    <v-btn
+                        v-if="auth.isLoggedIn.value"
+                        block
+                        color="black"
+                        size="large"
+                        :href="currentVacancy.url"
+                    >
+                        Отклик
+                    </v-btn>
+                    <v-btn
+                        v-else
+                        :to="{ name: 'Login' }"
+                        color="black"
+                        size="large"
+                        rounded="lg"
+                        block
+                    >
+                        Отклик
+                    </v-btn>
+                </v-card>
+            </v-col>
+            <v-col cols="12" sm="10">
+                <v-card class="lime-banner pa-6" rounded="xl">
+                    <h2 class="pa-2 text-h4 font-weight-bold">
+                        Поможем найти работу за 3 месяца 
+                    </h2>
+                    <p class="pa-2 text-h6 mb-4">
+                        71% наших клиентов находят работу за 3 месяца. Среднее
+                        время поиска - 57 дней
+                    </p>
+                    <v-btn color="black" rounded="xl" size="x-large" href="https://yourcodereview.com/">Узнать подробнее</v-btn>
+                </v-card>
+            </v-col>
+        </v-row>
+    </div>
 </template>
 
 <style scoped>
-.vacancy {
-    position: relative;
-
-    display: grid;
-
-    height: 100%;
-
-    grid-template-columns: 1fr;
+.close-popup {
+    position: absolute;
+    top: 25px;
+    right: 25px;
 }
-.vacancy-container {
-    display: flex;
-    flex-direction: column;
-
-    max-width: 960px;
-
-    gap: 10px;
+.card-btn__purple {
+    color: white;
+    background-image: var(--purple-gradient);
 }
 
-.vacancy-description__salary {
-    margin-bottom: 16px;
-    padding: 16px;
-
-    border-radius: 16px;
-    background: white;
-    box-shadow:
-        0px -1px 20px rgba(0, 0, 0, 0.03),
-        0px 16px 28px rgba(0, 0, 0, 0.04),
-        0px 2px 10px rgba(0, 0, 0, 0.02),
-        0px 0px 1px rgba(0, 0, 0, 0.04);
-
-    font-size: 20px;
-    font-weight: 700;
+.blue-banner {
+    color: white;
+    background-image: var(--blue-gradient);
+    cursor: pointer;
 }
 
-.vacancy-description {
-    position: relative;
-    z-index: 21;
-
-    display: flex;
-
-    gap: 10px;
+.page-nav {
+    border-radius: 50px;
+    position: sticky;
+    top: 90px;
+    z-index: 1006;
 }
 
-.vacancy-description__text {
-    margin-bottom: 16px;
-    padding: 16px;
-
-    border-radius: 16px;
-    background: white;
-    box-shadow:
-        0px -1px 20px rgba(0, 0, 0, 0.03),
-        0px 16px 28px rgba(0, 0, 0, 0.04),
-        0px 2px 10px rgba(0, 0, 0, 0.02),
-        0px 0px 1px rgba(0, 0, 0, 0.04);
-}
-
-.vacancy-description__title {
-    margin-bottom: 10px;
-}
-
-.fixed-navigation {
-    position: fixed;
-    top: 98px;
-    left: 50%;
-
-    width: 100%;
-    max-width: 1024px;
-    padding: 4px 16px;
-
-    transform: translate(-50%);
-}
-
-.fixed-navigation__link {
-    display: inline-block;
-
-    padding: 10px 10px;
-
-    border-radius: 50%;
-    box-shadow:
-        0px -1px 20px rgba(0, 0, 0, 0.1),
-        0px 16px 28px rgba(0, 0, 0, 0.11),
-        0px 2px 10px rgba(0, 0, 0, 0.09),
-        0px 0px 1px rgba(0, 0, 0, 0.11);
-}
-
-.description-list__item {
-    margin-bottom: 15px;
-}
-.description-list__item p {
-    margin-bottom: 5px;
-
-    font-weight: bold;
-}
-.description-list__item ul {
-    padding-left: 20px;
-
-    list-style: disc;
-}
-
-.button-response {
-    margin-bottom: 16px;
-    padding: 16px;
-
-    border-radius: 16px;
-    background: white;
-    box-shadow:
-        0px -1px 20px rgba(0, 0, 0, 0.03),
-        0px 16px 28px rgba(0, 0, 0, 0.04),
-        0px 2px 10px rgba(0, 0, 0, 0.02),
-        0px 0px 1px rgba(0, 0, 0, 0.04);
-}
-.button-response p {
-    margin-bottom: 10px;
-
-    font-weight: bold;
-}
-
-@media screen and (max-width: 1024px) {
-    .fixed-navigation {
-        position: static;
-        transform: translate(0);
-    }
-}
-
-@media screen and (max-width: 680px) {
-
-    .vacancy-description {
-        flex-direction: column;
-    }
+.lime-banner {
+    background-image: var(--lime-gradient);
 }
 </style>
