@@ -1,39 +1,45 @@
-/* color palette */
+@import "./variables.css";
+
 :root {
-    --c-white: #ffffff;
-    --c-white-soft: #f8f8f8;
-    --c-white-mute: #f2f2f2;
+  --font-family: 'Wix Madefor Text'
 }
 
-/* semantic color variables for this project */
-:root {
-    --small-gap: 10px;
-    --medium-gap: 20px;
-    --large-gap: 30px;
+::-webkit-scrollbar {
+  width: 0;
 }
 
-*,
-*::before,
-*::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+#app {
+  min-width: 300px;
+  color: white;
 }
 
-body {
-    min-height: 100vh;
-    color: var(--color-text);
+.v-application [class*='text-'] {
+  font-family: var(--font-family), sans-serif !important;
 }
 
+.v-application {
+  font-family: var(--font-family), sans-serif !important;
+}
+
+.container {
+  padding: 32px 16px;
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+@media (min-width: 960px) {
+  .container {
+    max-width: 900px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .container {
+    max-width: 1200px;
+  }
+}
 a {
-    text-decoration: none;
-    color: inherit;
-}
-
-button {
-    cursor: pointer;
-}
-
-ul {
-    list-style: none;
+  text-decoration: none;
+  color: inherit;
 }
