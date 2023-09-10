@@ -13,16 +13,16 @@ def get_description_from_vacancy(id):
     return vacancy_data['description']
 
 
-def fetch_hh_vacancies(text):
+def fetch_hh_vacancies(all_ides, text):
     """ Собирает все вакансии с hh по ключевым словам """
-    vacancies, pages = fetch_hh_page_vacancies(text)
+    vacancies, pages = fetch_hh_page_vacancies(all_ides, text)
     for page in range(1, pages):
-        page_vacancies, _ = fetch_hh_page_vacancies(text, page)
+        page_vacancies, _ = fetch_hh_page_vacancies(all_ides, text, page)
         vacancies.extend(page_vacancies)
     return vacancies
 
 
-def fetch_hh_page_vacancies(text, page=0):
+def fetch_hh_page_vacancies(all_ides, text, page=0):
     """ Собирает все вакансии с одной страницы hh по ключевым словам """
     params = {  # параметры обращения к api
         'text': text,
@@ -38,7 +38,7 @@ def fetch_hh_page_vacancies(text, page=0):
     vacancies = []
     for item in items:
         vacancy = {
-            "id": item.get("id"),
+            "hh_id": item.get("id"),
             "name": item.get("name"),
             'area': item.get("area")["name"] if item.get("area") else None,
             "requirement": item.get("snippet")["requirement"] if item.get("snippet") else None,
@@ -52,23 +52,33 @@ def fetch_hh_page_vacancies(text, page=0):
             "employer": item.get("employer")["name"] if item.get("employer") else None,
             "professional_roles": item.get("professional_roles")[0]["name"] if item.get("professional_roles")[0] else None,
         }
-        vacancies.append(vacancy)
+        if vacancy["hh_id"] not in all_ides:
+            vacancies.append(vacancy)
+            all_ides.add(vacancy["hh_id"])
     return vacancies, pages
 
 if __name__ == "__main__":
     start = time.time()
-    main_words = ['junior', 'intern', 'стажер', 'младшый']
-    languages_stacks = ['php', 'java', 'javascript', 'data science', 
+    main_words = ['junior', 
+                  'intern', 'стажер', 'младшый',
+                  ]
+    languages_stacks = ['php', 
+                        'java', 'javascript', 'data science', 'python',
                         'qa', 'c++', 'c#', 'c', 'sql', 'postgresql',
                         'frontend', 'backend', 'ml', 'ds', 'mysql', 
-                        'flask', 'django', 'fastapi', 'data ingeneer']
+                        'flask', 'django', 'fastapi', 'data ingeneer', 
+                        ]
     result = []
+    all_ides = set()
     for word in main_words:
         temp_list = []
         for stack in languages_stacks:
-            temp_list.append(fetch_hh_vacancies(f"{word} {stack}"))
-            result.extend(temp_list)
+            vacancies = fetch_hh_vacancies(all_ides, f"{word} {stack}")
+            result.extend(vacancies)
     with open('result.json', 'w', encoding='utf-8', errors='ignore') as f:
         f.write(json.dumps(result, indent=4, ensure_ascii=False))
     end = time.time()
-    print(len(result), 'time:', round((end - start) / 60), 'мин.', time.asctime)
+    print('вакансии:', len(result))
+    print('время ожидания:', round((end - start) / 60), 'мин.')
+    print(time.asctime())
+
