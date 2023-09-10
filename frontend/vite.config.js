@@ -6,6 +6,10 @@ import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
 import { defineConfig } from 'vite'
 import { fileURLToPath, URL } from 'node:url'
 
+<<<<<<< HEAD
+=======
+// https://vitejs.dev/config/
+>>>>>>> afbb07e1947c4ec090be488496d4ce92d2bc9a2d
 export default defineConfig({
   // base: '/codereview-vuetify/',
   plugins: [
@@ -16,6 +20,7 @@ export default defineConfig({
       autoImport: true,
     }),
   ],
+  define: { 'process.env': {} },
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
