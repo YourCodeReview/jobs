@@ -51,6 +51,7 @@ def fetch_hh_page_vacancies(all_ides, text, page=0):
             "employment": item.get("employment")["name"] if item.get("employment") else None,
             "employer": item.get("employer")["name"] if item.get("employer") else None,
             "professional_roles": item.get("professional_roles")[0]["name"] if item.get("professional_roles")[0] else None,
+            "schedule": item.get("schedule")["name"] if item.get("schedule") else None,
         }
         if vacancy["hh_id"] not in all_ides:
             vacancies.append(vacancy)
@@ -64,9 +65,11 @@ if __name__ == "__main__":
                   ]
     languages_stacks = ['php', 
                         'java', 'javascript', 'data science', 'python',
-                        'qa', 'c++', 'c#', 'c', 'sql', 'postgresql',
-                        'frontend', 'backend', 'ml', 'ds', 'mysql', 
-                        'flask', 'django', 'fastapi', 'data ingeneer', 
+                        'qa', 'c++', 'c#', 'c', 'sql', 'postgresql', 'vue.js',
+                        'frontend', 'backend', 'ml', 'ds', 'mysql', 'js',
+                        'flask', 'django', 'fastapi', 'data ingeneer', 'ruby on rails',
+                        'react.js', 'angular.js', 'node.js', 'swift', 'kotlin', 'unity',
+                        'ruby', 'go', 'rust', 'html/css', 'mongodb', 'nosql', 'devops', 'docker',
                         ]
     result = []
     all_ides = set()
