@@ -68,9 +68,9 @@ if __name__ == "__main__":
     languages_stacks = ['python', 
                         'java', 'javascript', 'data science', 'php',
                         'qa', 'c++', 'c#', 'c', 'sql', 'postgresql', 'vue.js',
-                        'frontend', 'backend', 'ml', 'ds', 'mysql', 'js',
-                        'flask', 'django', 'fastapi', 'data ingeneer', 'ruby on rails',
-                        'react.js', 'angular.js', 'node.js', 'swift', 'kotlin', 'unity',
+                        'frontend', 'backend', 'ml', 'ds', 'mysql', 'js', "greenplum",
+                        'flask', 'django', 'fastapi', 'data ingeneer', 'ruby',
+                        'react', 'angular', 'node', 'swift', 'kotlin', 'unity',
                         'ruby', 'go', 'rust', 'html/css', 'mongodb', 'nosql', 'devops', 'docker',
                         ]
     result = []
