@@ -3,14 +3,14 @@ import json
 import time
 
 
-def get_description_from_vacancy(id):
+def get_data_from_vacancy(id):
     """ Возвращает полное описание вакансии по id """
     server_resp = requests.get(f'https://api.hh.ru/vacancies/{id}')
     if server_resp.status_code != 200:
         return None
     vacancy_data = server_resp.json()
     server_resp.close()
-    return vacancy_data['description']
+    return vacancy_data
 
 
 def fetch_hh_vacancies(all_ides, text):
@@ -37,13 +37,14 @@ def fetch_hh_page_vacancies(all_ides, text, page=0):
     items = data['items']
     vacancies = []
     for item in items:
+        vacancy_data = get_data_from_vacancy(item.get("id"))
         vacancy = {
             "hh_id": item.get("id"),
             "name": item.get("name"),
             'area': item.get("area")["name"] if item.get("area") else None,
             "requirement": item.get("snippet")["requirement"] if item.get("snippet") else None,
             "responsibility": item.get("snippet")["responsibility"] if item.get("snippet") else None,
-            "description": get_description_from_vacancy(item.get("id")),
+            "description": vacancy_data["description"] if vacancy_data and vacancy_data["description"] else None,
             "salary_from": item.get("salary")["from"] if item.get("salary") else None,
             "salary_to": item.get("salary")["to"] if item.get("salary") else None,
             "salary_currency": item.get("salary")["currency"] if item.get("salary") else None,
@@ -51,7 +52,8 @@ def fetch_hh_page_vacancies(all_ides, text, page=0):
             "employment": item.get("employment")["name"] if item.get("employment") else None,
             "employer": item.get("employer")["name"] if item.get("employer") else None,
             "professional_roles": item.get("professional_roles")[0]["name"] if item.get("professional_roles")[0] else None,
-            "schedule": item.get("schedule")["name"] if item.get("schedule") else None,
+            "schedule": vacancy_data["schedule"]["name"] if vacancy_data and vacancy_data["schedule"] else None,
+            # "vacancy_data": vacancy_data
         }
         if vacancy["hh_id"] not in all_ides:
             vacancies.append(vacancy)
@@ -63,13 +65,13 @@ if __name__ == "__main__":
     main_words = ['junior', 
                   'intern', 'стажер', 'младшый',
                   ]
-    languages_stacks = ['php', 
-                        'java', 'javascript', 'data science', 'python',
-                        'qa', 'c++', 'c#', 'c', 'sql', 'postgresql', 'vue.js',
-                        'frontend', 'backend', 'ml', 'ds', 'mysql', 'js',
-                        'flask', 'django', 'fastapi', 'data ingeneer', 'ruby on rails',
-                        'react.js', 'angular.js', 'node.js', 'swift', 'kotlin', 'unity',
-                        'ruby', 'go', 'rust', 'html/css', 'mongodb', 'nosql', 'devops', 'docker',
+    languages_stacks = ['python', 
+                        # 'java', 'javascript', 'data science', 'php',
+                        # 'qa', 'c++', 'c#', 'c', 'sql', 'postgresql', 'vue.js',
+                        # 'frontend', 'backend', 'ml', 'ds', 'mysql', 'js',
+                        # 'flask', 'django', 'fastapi', 'data ingeneer', 'ruby on rails',
+                        # 'react.js', 'angular.js', 'node.js', 'swift', 'kotlin', 'unity',
+                        # 'ruby', 'go', 'rust', 'html/css', 'mongodb', 'nosql', 'devops', 'docker',
                         ]
     result = []
     all_ides = set()
