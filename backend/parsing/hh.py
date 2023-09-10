@@ -81,4 +81,3 @@ if __name__ == "__main__":
     print('вакансии:', len(result))
     print('время ожидания:', round((end - start) / 60), 'мин.')
     print(time.asctime())
-
