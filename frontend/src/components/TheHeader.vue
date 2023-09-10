@@ -1,71 +1,103 @@
 <script setup>
-import { useStateStore } from '../stores/index'
-import { useAuthStore } from '../stores/auth'
-import { useModalStore } from '../stores/modal'
+import { useFirebase } from "@/hooks/useFirebase";
 
-import TheNavigation from './TheNavigation.vue'
-import UiButton from './ui/UiButton.vue'
-import UiModal from './ui/UiModal.vue'
-import UiForm from './ui/UiForm.vue'
+import svgLogo from "./icons/svgLogo.vue";
+import TheNavigation from "./TheNavigation.vue";
+import uiMenu from "./ui/uiMenu.vue";
 
-const store = useStateStore()
-const auth = useAuthStore()
-const modal = useModalStore()
+const auth = useFirebase();
 
-const register = async () => {
-    await auth.register()
-    modal.close()
-}
+const links = [
+    {
+        title: "Комьюнити",
+        url: "https://t.me/YourCodeReview",
+    },
+    {
+        title: "Полезные материалы",
+        url: "https://blog.yourcodereview.com/category/career/",
+    },
+    {
+        title: "Блог",
+        url: "https://blog.yourcodereview.com/",
+    },
+];
 
-const login = async () => {
-    await auth.login()
-    modal.close()
-}
-
-const signInWithGoogle = async () => {
-    await auth.loginGoogle()
-    modal.close()
-}
-
-const logout = () => {
-    auth.logout()
-}
 </script>
 
 <template>
-    <header class="header">
-        <div class="container header-container">
-            <TheNavigation
-                :links="store.headerLinks"
-                :user="auth.currentUser"
-                :is-logged-in="auth.isLoggedIn"
-                @openModalType="modal.open"
-                @logout="logout"
-            />
+    <v-app-bar class="text-white" :elevation="3" height="80">
+        <template v-slot:image>
+            <v-img
+                gradient="to top right, rgba(32 147 254 / 90%), rgba(230 23 254 / 90%) 90%"
+            ></v-img>
+        </template>
+        <div class="container py-6">
+            <v-row justify="space-between">
+                <v-col
+                    cols="6"
+                    sm="4"
+                    md="4"
+                    lg="3"
+                    class="d-flex justify-start align-center"
+                >
+                    <v-app-bar-title>
+                        <router-link to="/" class="d-flex">
+                            <svg-logo />
+                        </router-link>
+                    </v-app-bar-title>
+                </v-col>
+                <v-col
+                    cols="6"
+                    sm="7"
+                    md="8"
+                    lg="9"
+                    class="d-flex justify-end align-center"
+                >
+                    <the-navigation
+                        v-if="$vuetify.display.lgAndUp"
+                        :links="links"
+                    />
+                    <v-btn
+                        v-if="$vuetify.display.smAndUp"
+                        height="50"
+                        class="custom-btn mx-1 mx-lg-2"
+                        color="lime"
+                        variant="elevated"
+                        rounded="lg"
+                        href="https://yourcodereview.com/"
+                    >
+                        Карьерная поддержка
+                    </v-btn>
+                    <v-btn
+                        v-if="!auth.isLoggedIn.value"
+                        class="mx-1 mx-lg-2"
+                        width="120"
+                        height="50"
+                        variant="elevated"
+                        rounded="lg"
+                        :to="{
+                            path: '/login',
+                            query: { type: 'login' },
+                        }"
+                    >
+                        Войти
+                    </v-btn>
+                    <v-btn
+                        width="120"
+                        height="50"
+                        class="mx-1 mx-lg-2"
+                        v-else
+                        variant="elevated"
+                        rounded="lg"
+                        @click="auth.logoutUser()"
+                    >
+                        Выйти
+                    </v-btn>
+                    <ui-menu v-if="$vuetify.display.mdAndDown">
+                        <the-navigation :links="links" />
+                    </ui-menu>
+                </v-col>
+            </v-row>
         </div>
-    </header>
-    <UiModal v-if="modal.isOpen" :title="modal.type === 'login' ? 'Авторизация' : 'Регистрация'">
-        <UiForm
-            @register="register"
-            @login="login"
-            @logout="logout"
-            :formType="modal.type"
-            :errorMessage="auth.errMsg"
-        />
-        <UiButton text="Войти через Google" @click="signInWithGoogle" />
-    </UiModal>
+    </v-app-bar>
 </template>
-
-<style scoped>
-.header {
-    position: sticky;
-    z-index: 100;
-    top: 0;
-
-    background-image: linear-gradient(
-        0.092turn,
-        rgba(32, 147, 254, 1) 0%,
-        rgba(194, 23, 254, 1) 90%
-    );
-}
-</style>

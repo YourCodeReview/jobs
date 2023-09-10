@@ -1,142 +1,124 @@
 <script setup>
-import SvgLogo from './icons/SvgLogo.vue'
-
-import { useStateStore } from '../stores/index'
-
-const store = useStateStore()
+const contacts = [
+    {
+        name: "+7 (499) 110-82-76",
+        href: "tel:7499108276",
+    },
+    {
+        name: "yourcodereview@gmail.com",
+        href: "mailto:yourcodereview@gmail.com",
+    },
+];
+const anchors = [
+    {
+        name: "Программа и тестирование",
+        anchor: "programma",
+    },
+    {
+        name: "Вакансии",
+        anchor: "vakansii",
+    },
+    {
+        name: "Тарифы",
+        anchor: "tarifi",
+    },
+    {
+        name: "Запись",
+        anchor: "zapis",
+    },
+    {
+        name: "Команда",
+        anchor: "komanda",
+    },
+    {
+        name: "Отзывы",
+        anchor: "otzivi",
+    },
+    {
+        name: "О нас",
+        anchor: "onas",
+    },
+    {
+        name: "Вопросы и ответы",
+        anchor: "faq",
+    },
+];
+const links = [
+    {
+        name: "Блог",
+        href: "https://blog.yourcodereview.com",
+    },
+    {
+        name: 'Тест "Возьмут ли меня в IT"',
+        href: "https://mrqz.me/6400c6ab9c4e9c004d2fecfa",
+    },
+];
 </script>
 
 <template>
-    <footer class="footer">
+    <v-footer class="footer px-0 py-6">
         <div class="container">
-            <div class="footer-top">
-                <div class="footer-top__left">
-                    <div class="footer-top__logo">
-                        <SvgLogo />
-                    </div>
-                    <div class="footer-top__contact">
-                        <a class="footer-top__contact-email" href="mailto:yourcodereview@gmail.com">
-                            yourcodereview@gmail.com
-                        </a>
-                        <a class="footer-top__contact-phone" href="tel:7499108276">
-                            +7 (499) 110-82-76
-                        </a>
-                    </div>
-                </div>
-                <div class="footer-top__right">
-                    <a href="https://mrqz.me/6400c6ab9c4e9c004d2fecfa"
-                        >Тест "Возьмут ли меня в IT"</a
+            <v-row>
+                <v-col cols="12" md="4" sm="12" class="d-flex flex-column py-1">
+                    <v-btn
+                        class="justify-start"
+                        variant="text"
+                        href="https://yourcodereview.com"
+                        >&#60; codereview &#47;&#62;</v-btn
                     >
-                    <ul class="footer-top__links">
-                        <li
-                            v-for="item in store.footerAnchors"
-                            :key="item.name"
-                            class="footer-top__link"
+                    <div class="mt-auto">
+                        <v-btn
+                            v-for="contact in contacts"
+                            :key="contact.name"
+                            class="justify-start"
+                            variant="text"
+                            :href="contact.href"
+                            block
+                            >{{ contact.name }}</v-btn
                         >
-                            <a
+                    </div>
+                </v-col>
+                <v-spacer />
+                <v-col cols="12" md="8" sm="12">
+                    <v-row>
+                        <v-col
+                            class="py-1"
+                            cols="12"
+                            md="6"
+                            sm="6"
+                            v-for="(item, index) in anchors"
+                            :key="index"
+                        >
+                            <v-btn
+                                variant="text"
                                 :href="`https://yourcodereview.com/#${item.anchor}`"
-                                target="_blank"
-                                >{{ item.name }}</a
                             >
-                        </li>
-                    </ul>
-                    <a href="https://blog.yourcodereview.com">Блог</a>
-                </div>
-            </div>
-            <div class="footer-bottom"></div>
+                                {{ item.name }}
+                            </v-btn>
+                        </v-col>
+                        <v-col
+                            v-for="(link, index) in links"
+                            :key="index"
+                            class="py-1"
+                            cols="12"
+                            md="6"
+                            sm="6"
+                        >
+                            <v-btn
+                                variant="text"
+                                :href="link.href"
+                                >{{ link.name }}</v-btn
+                            >
+                        </v-col>
+                    </v-row>
+                </v-col>
+            </v-row>
         </div>
-    </footer>
+    </v-footer>
 </template>
-
 <style scoped>
 .footer {
     color: white;
     background-color: #070012;
-}
-
-.footer-container {
-    display: flex;
-    flex-direction: column;
-}
-
-.footer-top {
-    display: flex;
-    justify-content: space-between;
-}
-
-.footer-top__left {
-    display: flex;
-    flex-direction: column;
-}
-
-.footer-top__right {
-    display: flex;
-    align-items: start;
-    justify-content: space-between;
-
-    gap: 30px;
-}
-
-.footer-top__contact {
-    display: flex;
-    flex-direction: column;
-
-    margin-top: auto;
-
-    gap: 8px;
-}
-
-.footer-top__links {
-    display: grid;
-
-    padding: 0;
-
-    list-style: none;
-
-    grid-template-columns: repeat(2, min-content);
-    grid-template-rows: repeat(4, 1fr);
-    column-gap: 30px;
-    row-gap: 10px;
-}
-
-@media screen and (max-width: 680px) {
-    .footer-top {
-        gap: var(--large-gap);
-        flex-direction: column;
-    }
-
-    .footer-top__left {
-        flex-direction: row;
-        justify-content: space-between;
-    }
-
-    .footer-top__right {
-        gap: var(--small-gap)
-    }
-
-    .footer-top__links {
-        gap: var(--small-gap)
-    }
-}
-
-@media screen and (max-width: 425px) {
-    .footer-top__right {
-        align-items: center;
-        flex-direction: column;
-    }
-
-    .footer-top__left {
-        align-items: center;
-        flex-direction: column;
-        gap: var(--medium-gap);
-    }
-
-    .footer-top__contact {
-        align-items: center;
-    }
-    .footer-top__links {
-        grid-template-columns: 1fr 1fr;
-        text-align: center;
-    }
 }
 </style>

@@ -1,15 +1,17 @@
-import './assets/main.css'
-
-import { createApp } from 'vue'
-import { createPinia } from 'pinia'
-
+// Components
 import App from './App.vue'
-import router from './router'
-import './firebase/firebase'
+
+// Composables
+import { createApp } from 'vue'
+
+// Plugins
+import { registerPlugins } from '@/plugins'
+
+// Styles 
+import '@/assets/base.css'
 
 const app = createApp(App)
 
-app.use(createPinia())
-app.use(router)
+registerPlugins(app)
 
 app.mount('#app')
