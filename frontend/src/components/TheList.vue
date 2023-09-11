@@ -1,18 +1,19 @@
 <template>
-    <router-link
-        class="mb-4"
-        v-for="item in items"
-        :key="item.id"
-        :to="{ name: 'Vacancy', params: { id: item.hh_id } }"
-    >
-        <ui-card :item="item" />
-    </router-link>
-</template>
+    <div>
+      <router-link
+        v-for="job in jobList"
+        :key="job.hh_id"
+        :to="{ name: 'Vacancy', params: { id: job.hh_id } }"
+      >
+        <ui-card :item="job" />
+      </router-link>
+    </div>
+  </template>
 
 <script setup>
 import UiCard from "@/components/ui/uiCard.vue";
 
-const items = [
+const jobList  = [
     {
         hh_id: "85740036",
         name: "Junior PHP разработчик",

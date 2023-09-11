@@ -2,7 +2,7 @@
     <v-hover v-slot="{ isHovering, props }">
         <v-card
             v-bind="props"
-            class="py-4 mx-auto"
+            class="py-4 mx-auto mb-4"
             :class="`card-${size}`"
             :elevation="isHovering && size === 'md' ? 10 : 3"
             rounded="xl"

@@ -6,10 +6,12 @@ const props = defineProps({
 
 <template>
     <v-btn
-        class="px-1 mx-1 mx-lg-2"
-        variant="text"
         v-for="link in props.links"
         :key="link.title"
+        class="px-1 mx-1 mx-lg-2"
+        height="50"
+        variant="text"
+        rounded="lg"
         :href="link.url"
         :block="$vuetify.display.mdAndDown"
     >

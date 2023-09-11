@@ -17,7 +17,7 @@
       </v-row>
       <v-row>
         <v-col cols="12" class="pt-0">
-          <span class="text-h4 font-weight-black" :class="`text-${item.color}`">{{ props.item.name }}</span>
+          <span class="text-h4 font-weight-bold" :class="`text-${item.color}`">{{ props.item.name }}</span>
         </v-col>
       </v-row>
     </v-card>
@@ -31,6 +31,12 @@ import svgJava from '../icons/svgJava.vue';
 import svgPython from '../icons/svgPython.vue';
 import svgQA from '../icons/svgQA.vue';
 import { computed } from 'vue';
+
+const props = defineProps({
+    item: Object,
+});
+
+const chips = ['Удаленная работа', 'Junior вакансии', 'Стажировки']
 
 const currentComponent = computed(() => {
   switch (props.item.type) {
@@ -48,13 +54,6 @@ const currentComponent = computed(() => {
       return svgJavaScript;
   }
 });
-
-const props = defineProps({
-    item: Object,
-});
-
-const chips = ['Удаленная работа', 'Junior вакансии', 'Стажировки']
-
 </script>
 
 <style scoped>

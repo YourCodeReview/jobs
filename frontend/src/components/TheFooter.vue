@@ -1,4 +1,7 @@
 <script setup>
+import TheContactSection from './TheContactSection.vue';
+import TheNavigationSection from './TheNavigationSection.vue';
+
 const contacts = [
     {
         name: "+7 (499) 110-82-76",
@@ -59,59 +62,9 @@ const links = [
     <v-footer class="footer px-0 py-6">
         <div class="container">
             <v-row>
-                <v-col cols="12" md="4" sm="12" class="d-flex flex-column py-1">
-                    <v-btn
-                        class="justify-start"
-                        variant="text"
-                        href="https://yourcodereview.com"
-                        >&#60; codereview &#47;&#62;</v-btn
-                    >
-                    <div class="mt-auto">
-                        <v-btn
-                            v-for="contact in contacts"
-                            :key="contact.name"
-                            class="justify-start"
-                            variant="text"
-                            :href="contact.href"
-                            block
-                            >{{ contact.name }}</v-btn
-                        >
-                    </div>
-                </v-col>
+                <the-contact-section :contacts="contacts"/>
                 <v-spacer />
-                <v-col cols="12" md="8" sm="12">
-                    <v-row>
-                        <v-col
-                            class="py-1"
-                            cols="12"
-                            md="6"
-                            sm="6"
-                            v-for="(item, index) in anchors"
-                            :key="index"
-                        >
-                            <v-btn
-                                variant="text"
-                                :href="`https://yourcodereview.com/#${item.anchor}`"
-                            >
-                                {{ item.name }}
-                            </v-btn>
-                        </v-col>
-                        <v-col
-                            v-for="(link, index) in links"
-                            :key="index"
-                            class="py-1"
-                            cols="12"
-                            md="6"
-                            sm="6"
-                        >
-                            <v-btn
-                                variant="text"
-                                :href="link.href"
-                                >{{ link.name }}</v-btn
-                            >
-                        </v-col>
-                    </v-row>
-                </v-col>
+                <the-navigation-section :anchors="anchors" :links="links"/>
             </v-row>
         </div>
     </v-footer>

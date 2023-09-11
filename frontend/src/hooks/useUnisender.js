@@ -10,7 +10,7 @@ const unisender = axios.create({
 
 export function useUnisender() {
   const data = ref(null)
-  const errorMsg = ref('')
+  const error = ref('')
 
   const sendEmail = async (email, message) => {
     await unisender.post('sendEmail', {
@@ -20,22 +20,21 @@ export function useUnisender() {
       }).then(res => {
         data.value = res.data
       }).catch(err => {
-        errorMsg.value = err
+        error.value = err
       })
   };
 
-  const subscribe = async (email, name) => {
+  const subscribe = async (email) => {
       await unisender.post('subscribe', {
         api_key: apiKey,
         list_id: listId,
         fields: {
           EMAIL: email,
-          NAME: name,
         },
       }).then(res => {
         data.value = res.data
       }).catch(err => {
-        errorMsg.value = err
+        error.value = err
       });
   };
 
@@ -45,7 +44,7 @@ export function useUnisender() {
       }).then(res => {
         data.value = res.data
       }).catch(err => {
-        errorMsg.value = err
+        error.value = err
       })
   };
 
