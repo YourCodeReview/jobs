@@ -81,9 +81,9 @@ if __name__ == "__main__":
         for stack in languages_stacks:
             vacancies = fetch_hh_vacancies(all_ides, f"{word} {stack}")
             result.extend(vacancies)
-    with open('result.json', 'w', encoding='utf-8', errors='ignore') as f:
+    with open('~\result.json', 'w', encoding='utf-8', errors='ignore') as f:
         f.write(json.dumps(result, indent=4, ensure_ascii=False))
     end = time.time()
-    print('вакансии:', len(result))
-    print('время ожидания:', round((end - start) / 60), 'мин.')
-    print(time.asctime())
+    # print('вакансии:', len(result))
+    # print('время ожидания:', round((end - start) / 60), 'мин.')
+    # print(time.asctime())
