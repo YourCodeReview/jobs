@@ -42,18 +42,19 @@ def fetch_hh_page_vacancies(all_ides, text, page=0):
             "hh_id": item.get("id"),
             "name": item.get("name"),
             'area': item.get("area")["name"] if item.get("area") else None,
-            "requirement": item.get("snippet")["requirement"] if item.get("snippet") else None,
-            "responsibility": item.get("snippet")["responsibility"] if item.get("snippet") else None,
+            # "requirement": item.get("snippet")["requirement"] if item.get("snippet") else None,
+            # "responsibility": item.get("snippet")["responsibility"] if item.get("snippet") else None,
             "description": vacancy_data["description"] if vacancy_data and vacancy_data["description"] else None,
-            "salary_from": item.get("salary")["from"] if item.get("salary") else None,
-            "salary_to": item.get("salary")["to"] if item.get("salary") else None,
-            "salary_currency": item.get("salary")["currency"] if item.get("salary") else None,
-            "address": item.get("address")["raw"] if item.get("address") else None,
+            # "salary_from": item.get("salary")["from"] if item.get("salary") else None,
+            # "salary_to": item.get("salary")["to"] if item.get("salary") else None,
+            # "salary_currency": item.get("salary")["currency"] if item.get("salary") else None,
+            # "address": item.get("address")["raw"] if item.get("address") else None,
             "employment": item.get("employment")["name"] if item.get("employment") else None,
             "employer": item.get("employer")["name"] if item.get("employer") else None,
-            "professional_roles": item.get("professional_roles")[0]["name"] if item.get("professional_roles")[0] else None,
+            # "professional_roles": item.get("professional_roles")[0]["name"] if item.get("professional_roles")[0] else None,
             "schedule": vacancy_data["schedule"]["name"] if vacancy_data and vacancy_data["schedule"] else None,
-            # "vacancy_data": vacancy_data
+            # "vacancy_data": vacancy_data,
+            "salary": vacancy_data["salary"] if vacancy_data and vacancy_data["salary"] else None,
         }
         if vacancy["hh_id"] not in all_ides:
             vacancies.append(vacancy)
@@ -66,7 +67,7 @@ if __name__ == "__main__":
                   'intern', 'стажер', 'младшый',
                   ]
     languages_stacks = ['python', 
-                        'java', 'javascript', 'data science', 'php',
+                        'java', 'javascript', 'data science', 'php', 'r', 'pandas',
                         'qa', 'c++', 'c#', 'c', 'sql', 'postgresql', 'vue.js',
                         'frontend', 'backend', 'ml', 'ds', 'mysql', 'js', "greenplum",
                         'flask', 'django', 'fastapi', 'data ingeneer', 'ruby',
@@ -86,3 +87,4 @@ if __name__ == "__main__":
     print('вакансии:', len(result))
     print('время ожидания:', round((end - start) / 60), 'мин.')
     print(time.asctime())
+
