@@ -48,13 +48,15 @@ def fetch_hh_page_vacancies(all_ides, text, page=0):
             # "salary_from": item.get("salary")["from"] if item.get("salary") else None,
             # "salary_to": item.get("salary")["to"] if item.get("salary") else None,
             # "salary_currency": item.get("salary")["currency"] if item.get("salary") else None,
-            # "address": item.get("address")["raw"] if item.get("address") else None,
+            "address": item.get("address")["raw"] if item.get("address") else None,
             "employment": item.get("employment")["name"] if item.get("employment") else None,
             "employer": item.get("employer")["name"] if item.get("employer") else None,
             # "professional_roles": item.get("professional_roles")[0]["name"] if item.get("professional_roles")[0] else None,
             "schedule": vacancy_data["schedule"]["name"] if vacancy_data and vacancy_data["schedule"] else None,
             # "vacancy_data": vacancy_data,
+            "url": vacancy_data["alternate_url"] if vacancy_data and vacancy_data["alternate_url"] else None,
             "salary": vacancy_data["salary"] if vacancy_data and vacancy_data["salary"] else None,
+            "specialty": text.split(' ')[1],
         }
         if vacancy["hh_id"] not in all_ides:
             vacancies.append(vacancy)
@@ -66,8 +68,10 @@ if __name__ == "__main__":
     main_words = ['junior', 
                   'intern', 'стажер', 'младший',
                   ]
-    languages_stacks = ['python', 'java', 'javascript', 'data science', 'qa', 'c#',
-                        'frontend', 'backend', 
+    stop_words = ['senior', 'middle', 'expert', 'techlead', 'teamlead', 'старший']
+    languages_stacks = ['python', 
+                        # 'java', 'javascript', 'data science', 'qa', 'c#',
+                        #'frontend', 'backend', 
                         #  'r', 'pandas', 'php',
                         # 'c++', 'c', 'sql', 'postgresql', 'vue.js',
                         #  'ml', 'ds', 'mysql', 'js', "greenplum",
@@ -82,7 +86,7 @@ if __name__ == "__main__":
         for stack in languages_stacks:
             vacancies = fetch_hh_vacancies(all_ides, f"{word} {stack}")
             result.extend(vacancies)
-    with open('/root/jobs/backend/parsing/result.json', 'w', encoding='utf-8', errors='ignore') as f:
+    with open('result.json', 'w', encoding='utf-8', errors='ignore') as f:
         f.write(json.dumps(result, indent=4, ensure_ascii=False))
     end = time.time()
     print('вакансии:', len(result))
