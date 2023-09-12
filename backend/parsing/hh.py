@@ -64,12 +64,13 @@ def fetch_hh_page_vacancies(all_ides, text, page=0):
 if __name__ == "__main__":
     start = time.time()
     main_words = ['junior', 
-                #   'intern', 'стажер', 'младшый',
+                  'intern', 'стажер', 'младший',
                   ]
-    languages_stacks = ['python', 
-                        # 'java', 'javascript', 'data science', 'php', 'r', 'pandas',
-                        # 'qa', 'c++', 'c#', 'c', 'sql', 'postgresql', 'vue.js',
-                        # 'frontend', 'backend', 'ml', 'ds', 'mysql', 'js', "greenplum",
+    languages_stacks = ['python', 'java', 'javascript', 'data science', 'qa', 'php', 'c#',
+                        'frontend', 'backend', 
+                        #  'r', 'pandas',
+                        # 'c++', 'c', 'sql', 'postgresql', 'vue.js',
+                        #  'ml', 'ds', 'mysql', 'js', "greenplum",
                         # 'flask', 'django', 'fastapi', 'data ingeneer', 'ruby',
                         # 'react', 'angular', 'node', 'swift', 'kotlin', 'unity',
                         # 'ruby', 'go', 'rust', 'html/css', 'mongodb', 'nosql', 'devops', 'docker',
