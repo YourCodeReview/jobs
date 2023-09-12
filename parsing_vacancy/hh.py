@@ -66,9 +66,9 @@ if __name__ == "__main__":
     main_words = ['junior', 
                   'intern', 'стажер', 'младший',
                   ]
-    languages_stacks = ['python', 'java', 'javascript', 'data science', 'qa', 'php', 'c#',
+    languages_stacks = ['python', 'java', 'javascript', 'data science', 'qa', 'c#',
                         'frontend', 'backend', 
-                        #  'r', 'pandas',
+                        #  'r', 'pandas', 'php',
                         # 'c++', 'c', 'sql', 'postgresql', 'vue.js',
                         #  'ml', 'ds', 'mysql', 'js', "greenplum",
                         # 'flask', 'django', 'fastapi', 'data ingeneer', 'ruby',
