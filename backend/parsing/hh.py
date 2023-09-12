@@ -64,15 +64,15 @@ def fetch_hh_page_vacancies(all_ides, text, page=0):
 if __name__ == "__main__":
     start = time.time()
     main_words = ['junior', 
-                  'intern', 'стажер', 'младшый',
+                #   'intern', 'стажер', 'младшый',
                   ]
     languages_stacks = ['python', 
-                        'java', 'javascript', 'data science', 'php', 'r', 'pandas',
-                        'qa', 'c++', 'c#', 'c', 'sql', 'postgresql', 'vue.js',
-                        'frontend', 'backend', 'ml', 'ds', 'mysql', 'js', "greenplum",
-                        'flask', 'django', 'fastapi', 'data ingeneer', 'ruby',
-                        'react', 'angular', 'node', 'swift', 'kotlin', 'unity',
-                        'ruby', 'go', 'rust', 'html/css', 'mongodb', 'nosql', 'devops', 'docker',
+                        # 'java', 'javascript', 'data science', 'php', 'r', 'pandas',
+                        # 'qa', 'c++', 'c#', 'c', 'sql', 'postgresql', 'vue.js',
+                        # 'frontend', 'backend', 'ml', 'ds', 'mysql', 'js', "greenplum",
+                        # 'flask', 'django', 'fastapi', 'data ingeneer', 'ruby',
+                        # 'react', 'angular', 'node', 'swift', 'kotlin', 'unity',
+                        # 'ruby', 'go', 'rust', 'html/css', 'mongodb', 'nosql', 'devops', 'docker',
                         ]
     result = []
     all_ides = set()
@@ -87,4 +87,3 @@ if __name__ == "__main__":
     # print('вакансии:', len(result))
     # print('время ожидания:', round((end - start) / 60), 'мин.')
     # print(time.asctime())
-    
