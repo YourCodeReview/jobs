@@ -5,6 +5,7 @@ import { useFirebase } from "@/hooks/useFirebase";
 import UiLoginButton from "@/components/ui/uiLoginButton.vue"
 import UiLogoutButton from "@/components/ui/uiLogoutButton.vue";
 import UiCareerButton from "@/components/ui/uiCareerButton.vue";
+import uiAddVacancyButton from "@/components/ui/uiAddVacancyButton.vue";
 
 defineProps({
     list: Array,
@@ -25,11 +26,12 @@ const showLoginButton = computed(() => !auth.isLoggedIn.value);
                     <v-icon>mdi-menu</v-icon>
                 </v-btn>
             </template>
-            <v-card height="300" class="d-flex flex-column align-center pa-4 bg-white" rounded="lg">
+            <v-card class="d-flex flex-column align-center pa-4 bg-white" rounded="lg">
                 <UiCareerButton variant="flat" block/>
                 <UiLoginButton v-if="showLoginButton" variant="flat" block/>
                 <UiLogoutButton v-else variant="flat" block/>
                 <slot />
+                <uiAddVacancyButton variant="flat" block/>
             </v-card>
         </v-menu>
     </div>
