@@ -8,7 +8,7 @@ const props = defineProps({
     <v-btn
         v-for="link in props.links"
         :key="link.title"
-        class="px-1 mx-1 mx-lg-2"
+        class="px-1 mx-1"
         height="50"
         variant="text"
         rounded="lg"

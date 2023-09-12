@@ -1,6 +1,6 @@
 <template>
     <v-btn
-        class="custom-btn mx-1 mx-lg-2"
+        class="mx-1"
         height="50"
         color="lime"
         rounded="lg"

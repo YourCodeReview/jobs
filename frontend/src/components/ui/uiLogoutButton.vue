@@ -1,6 +1,6 @@
 <template>
     <v-btn
-        class="mx-1 mx-lg-2"
+        class="mx-1"
         height="50"
         rounded="lg"
         :variant="variant"
