@@ -84,6 +84,6 @@ if __name__ == "__main__":
     with open('/root/jobs/backend/parsing/result.json', 'w', encoding='utf-8', errors='ignore') as f:
         f.write(json.dumps(result, indent=4, ensure_ascii=False))
     end = time.time()
-    # print('вакансии:', len(result))
-    # print('время ожидания:', round((end - start) / 60), 'мин.')
-    # print(time.asctime())
+    print('вакансии:', len(result))
+    print('время ожидания:', round((end - start) / 60), 'мин.')
+    print(time.asctime())
