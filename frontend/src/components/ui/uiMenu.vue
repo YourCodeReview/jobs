@@ -1,52 +1,11 @@
-<template>
-    <div class="text-center">
-        <v-menu v-model="menu" :close-on-content-click="false" location="start" transition="slide-x-reverse-transition">
-            <template v-slot:activator="{ props }">
-                <v-btn color="white" v-bind="props" icon="mdi-menu"></v-btn>
-            </template>
-            <v-card height="300" class="d-flex flex-column pa-4 bg-white" rounded="lg">
-                <v-btn
-                    height="60"
-                    class="px-4 mx-lg-2"
-                    color="lime"
-                    rounded="lg"
-                    variant="flat"
-                    href="https://yourcodereview.com/"
-                >
-                    <span class="text-wrap"> Карьерная поддержка </span>
-                </v-btn>
-                <v-btn
-                    v-if="!auth.isLoggedIn.value"
-                    height="50"
-                    class="px-4 mx-1 mx-lg-2"
-                    rounded="lg"
-                    variant="flat"
-                    :to="{
-                        path: '/login',
-                        query: { type: 'login' },
-                    }"
-                >
-                    Войти
-                </v-btn>
-                <v-btn
-                    v-else
-                    height="50"
-                    class="px-2 mx-1 mx-lg-2"
-                    rounded="lg"
-                    variant="flat"
-                    @click="auth.logoutUser()"
-                >
-                    Выйти
-                </v-btn>
-                <slot />
-            </v-card>
-        </v-menu>
-    </div>
-</template>
-
 <script setup>
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import { useFirebase } from "@/hooks/useFirebase";
+
+import UiLoginButton from "@/components/ui/uiLoginButton.vue"
+import UiLogoutButton from "@/components/ui/uiLogoutButton.vue";
+import UiCareerButton from "@/components/ui/uiCareerButton.vue";
+import uiAddVacancyButton from "@/components/ui/uiAddVacancyButton.vue";
 
 defineProps({
     list: Array,
@@ -54,4 +13,26 @@ defineProps({
 
 const auth = useFirebase();
 const menu = ref(false);
+
+const showLoginButton = computed(() => !auth.isLoggedIn.value);
 </script>
+
+
+<template>
+    <div class="text-center">
+        <v-menu v-model="menu" :close-on-content-click="false" location="start" transition="slide-x-reverse-transition">
+            <template v-slot:activator="{ props }">
+                <v-btn color="white" v-bind="props" icon>
+                    <v-icon>mdi-menu</v-icon>
+                </v-btn>
+            </template>
+            <v-card class="d-flex flex-column align-center pa-4 bg-white" rounded="lg">
+                <UiCareerButton variant="flat" block/>
+                <UiLoginButton v-if="showLoginButton" variant="flat" block/>
+                <UiLogoutButton v-else variant="flat" block/>
+                <slot />
+                <uiAddVacancyButton variant="flat" block/>
+            </v-card>
+        </v-menu>
+    </div>
+</template>

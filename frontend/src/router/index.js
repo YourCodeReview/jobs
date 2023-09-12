@@ -35,6 +35,17 @@ const routes = [
       }
     ]
   },
+  {
+    path: '/add',
+    component: () => import('@/layouts/DefaultLayout.vue'),
+    children: [
+      {
+        name: 'NewVacancy',
+        path: '',
+        component: () => import('@/views/AddVacancyView.vue'),
+      },
+    ]
+  },
 ]
 
 const router = createRouter({

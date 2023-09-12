@@ -1,19 +1,21 @@
 <script setup>
 import { ref, onMounted } from "vue";
-import { useFirebase } from "@/hooks/useFirebase";
 import { useRouter } from "vue-router";
+import { useFirebase } from "@/hooks/useFirebase";
+import { useUnisender } from "@/hooks/useUnisender";
 
 import svgLogo from "@/components/icons/svgLogo.vue";
 import uiSnackbar from "@/components/ui/uiSnackbar.vue";
 
 const router = useRouter();
-
-const visible = ref(false);
-
 const auth = useFirebase();
+const { subscribe } = useUnisender();
+
 const email = ref("");
 const password = ref("");
 const type = ref("login");
+
+const visible = ref(false);
 const snackbar = ref(false);
 const expand = ref(false);
 
@@ -23,11 +25,13 @@ const authenticate = async (email, password) => {
     } else if (type.value === "login") {
         await auth.loginUser(email, password);
     }
+    subscribe(auth.currentUser.value.email);
     auth.isLoggedIn.value ? router.back() : (snackbar.value = true);
 };
 
 const googleAuth = async () => {
     await auth.loginWithGoogle();
+    subscribe(auth.currentUser.value.email);
     auth.isLoggedIn.value ? router.back() : (snackbar.value = true);
 };
 
