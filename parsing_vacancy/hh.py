@@ -64,15 +64,16 @@ def fetch_hh_page_vacancies(all_ides, text, page=0):
 if __name__ == "__main__":
     start = time.time()
     main_words = ['junior', 
-                  'intern', 'стажер', 'младшый',
+                  'intern', 'стажер', 'младший',
                   ]
-    languages_stacks = ['python', 
-                        'java', 'javascript', 'data science', 'php', 'r', 'pandas',
-                        'qa', 'c++', 'c#', 'c', 'sql', 'postgresql', 'vue.js',
-                        'frontend', 'backend', 'ml', 'ds', 'mysql', 'js', "greenplum",
-                        'flask', 'django', 'fastapi', 'data ingeneer', 'ruby',
-                        'react', 'angular', 'node', 'swift', 'kotlin', 'unity',
-                        'ruby', 'go', 'rust', 'html/css', 'mongodb', 'nosql', 'devops', 'docker',
+    languages_stacks = ['python', 'java', 'javascript', 'data science', 'qa', 'php', 'c#',
+                        'frontend', 'backend', 
+                        #  'r', 'pandas',
+                        # 'c++', 'c', 'sql', 'postgresql', 'vue.js',
+                        #  'ml', 'ds', 'mysql', 'js', "greenplum",
+                        # 'flask', 'django', 'fastapi', 'data ingeneer', 'ruby',
+                        # 'react', 'angular', 'node', 'swift', 'kotlin', 'unity',
+                        # 'ruby', 'go', 'rust', 'html/css', 'mongodb', 'nosql', 'devops', 'docker',
                         ]
     result = []
     all_ides = set()
@@ -81,7 +82,7 @@ if __name__ == "__main__":
         for stack in languages_stacks:
             vacancies = fetch_hh_vacancies(all_ides, f"{word} {stack}")
             result.extend(vacancies)
-    with open('result.json', 'w', encoding='utf-8', errors='ignore') as f:
+    with open('/root/jobs/backend/parsing/result.json', 'w', encoding='utf-8', errors='ignore') as f:
         f.write(json.dumps(result, indent=4, ensure_ascii=False))
     end = time.time()
     print('вакансии:', len(result))
