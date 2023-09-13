@@ -1,100 +1,57 @@
 <script setup>
-import { ref, onMounted, watch } from "vue";
-import { useRoute } from "vue-router";
+import { ref } from "vue";
 import { useFirebase } from "@/hooks/useFirebase";
-import { useGetVacancy } from "@/api/requests";
 
 import UiCard from "@/components/ui/uiCard.vue";
-import UiSnackbar from "@/components/ui/uiSnackbar.vue";
+// import UiSnackbar from "@/components/ui/uiSnackbar.vue";
 
-const { execute } = useGetVacancy();
-const route = useRoute();
-const auth = useFirebase();
-
-const vacancyId = ref("");
-const snackbar = ref(false);
-const dialog = ref(false);
-
-const currentVacancy = {
-    hh_id: "85740036",
-    name: "Junior PHP разработчик",
-    title: "We are seeking a skilled Python Developer to join our dynamic team. If you have a passion for writing clean, maintainable code and a strong background in Python, we want to hear from you!",
-    description: [
-        {
-            title: "Responsibilities",
-            list: [
-                "Collaborate with cross-functional teams to design and develop high-quality software",
-                "Write efficient, reusable, and documented code.",
-                "Participate in code reviews and provide constructive feedback.",
-            ],
-        },
-        {
-            title: "Requirements",
-            list: [
-                "Bachelor's degree in Computer Science or related field.",
-                "Proven experience with Python and its frameworks.",
-                "Strong problem-solving skills and attention to detail.",
-                "Excellent teamwork and communication skills.",
-            ],
-        },
-    ],
-    salary_from: 800,
-    salary_to: null,
-    salary_currency: "USD",
-    area: "Минск",
-    employer: "Спортдата",
-    url: "https://example.com/job/python-developer",
-};
-
-watch(
-    () => route.params.id,
-    async (newVacancyId) => {
-        vacancyId.value = newVacancyId;
-    }
-);
-
-onMounted(async () => {
-    vacancyId.value = route.params.id;
-    await execute(vacancyId.value);
+const props = defineProps({
+    data: Object,
 });
 
-const copyText = () => {
-    navigator.clipboard
-        .writeText(`${currentVacancy.url}`)
-        .then(() => {
-            console.log("Async: Copying to clipboard was successful!");
-        })
-        .catch((err) => {
-            console.log("Something went wrong", err);
-        });
-};
+const auth = useFirebase();
+const dialog = ref(false);
+
+
+// const snackbar = ref(false);
+// const copyText = () => {
+//     navigator.clipboard
+//         .writeText(`${currentVacancy.url}`)
+//         .then(() => {
+//             console.log("Async: Copying to clipboard was successful!");
+//         })
+//         .catch((err) => {
+//             console.log("Something went wrong", err);
+//         });
+// };
 </script>
 
 <template>
-    <div class="container py-4 position-relative">
+    <div v-if="props.data" class="py-4 position-relative">
         <v-row class="page-nav justify-center">
             <v-col cols="12" class="d-flex py-1">
                 <v-btn icon="mdi-arrow-left" size="small" @click="$router.back()" />
-                <v-btn class="ml-auto" icon size="small" @click="auth.isLoggedIn.value ? copyText() : null">
+                <!-- <v-btn class="ml-auto" icon size="small" @click="auth.isLoggedIn.value ? copyText() : null">
                     <v-icon>mdi-export-variant</v-icon>
                     <ui-snackbar v-model="snackbar" activator="parent"
                         :color="auth.isLoggedIn.value ? 'green' : 'red-darken-1'"
                         :message="auth.isLoggedIn.value ? 'Ссылка на вакансию скопирована' : 'Необходимо авторизоваться'" />
-                </v-btn>
+                </v-btn> -->
             </v-col>
         </v-row>
         <v-row class="justify-center">
             <v-col cols="12" lg="10" sm="12">
-                <ui-card :item="currentVacancy" size="lg" />
+                <ui-card :item="props.data" size="lg" />
             </v-col>
         </v-row>
         <v-row class="justify-center">
             <v-col cols="12" lg="7" sm="8" class="d-flex flex-column">
                 <v-card class="pa-2" rounded="xl">
-                    <v-card-title class="font-weight-bold">
-                        от {{ currentVacancy.salary_from }} {{ currentVacancy.salary_to ? `- ${currentVacancy.salary_to}` :
-                            '' }} {{ currentVacancy.salary_currency }}
-                    </v-card-title>
+                    <!-- <v-card-title class="font-weight-bold">
+                        от {{ currentSalary.from }} {{ currentSalary.to ? `- ${currentSalary.to}` :
+                            '' }} {{ currentSalary. }}
+                    </v-card-title> -->
+                    <span class="font-weight-bold">неверный формат salary</span>
                 </v-card>
                 <v-hover v-slot="{ isHovering, props }">
                     <v-card v-bind="props" class="blue-banner mt-2 pa-2" rounded="xl" :elevation="isHovering ? 10 : 1"
@@ -108,17 +65,18 @@ const copyText = () => {
                         </v-card-text>
                     </v-card>
                 </v-hover>
-                <v-card class="mt-2 pa-2" rounded="xl">
-                    <v-list v-for="item in currentVacancy.description" :key="item.title">
+                <v-card class="mt-2 pa-6" rounded="xl">
+                    <!-- <v-list v-for="item in data.description" :key="item.title">
                         <v-list-item>
                             <v-list-item-title class="font-weight-bold">{{
                                 item.title
                             }}</v-list-item-title>
                             <v-card-text v-for="item in item.list" :key="item" class="py-2">
-                                - {{ item }}
+                                - {{ data.description}}
                             </v-card-text>
                         </v-list-item>
-                    </v-list>
+                    </v-list> -->
+                    <div class="description" v-html="props.data.description" />
                 </v-card>
             </v-col>
             <v-col cols="12" lg="3" sm="4">
@@ -153,7 +111,7 @@ const copyText = () => {
                     </v-btn>
                 </v-card>
             </v-col>
-            <v-col cols="12" sm="10">
+            <v-col cols="12" lg="10" sm="12">
                 <v-card class="lime-banner pa-6" rounded="xl">
                     <h2 class="pa-2 text-h4 font-weight-bold">
                         Поможем найти работу за 3 месяца
@@ -197,6 +155,12 @@ const copyText = () => {
 
 .lime-banner {
     background-image: var(--lime-gradient);
+}
+
+.description {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 }
 </style>
   

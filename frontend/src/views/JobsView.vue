@@ -6,17 +6,18 @@ import TheTools from "@/components/TheTools.vue";
 
 import { useGetJobs } from "@/api/requests";
 
-const { data, isLoading, isError, execute } = useGetJobs();
+const { data, isLoading, execute } = useGetJobs();
 
 onMounted(async () => {
     await execute();
-    console.log("Ответ от сервера: ", data.value);
+    console.log(data.value);
 });
 </script>
 
 <template>
     <div class="container">
-        <v-row justify-sm="center" justify-md="start">
+        <v-progress-circular v-if="isLoading" class="d-block mx-auto mt-8" size="74" width="10" indeterminate />
+        <v-row v-else justify-sm="center" justify-md="start">
             <v-col
                 cols="12"
                 sm="10"
@@ -27,8 +28,15 @@ onMounted(async () => {
                 <the-tools />
             </v-col>
             <v-col cols="12" sm="10" md="6" lg="6" class="d-flex flex-column">
-                <the-list />
+
+                <the-list :job-list="data"/>
             </v-col>
         </v-row>
     </div>
 </template>
+
+<style scoped>
+.container {
+    min-height: 100vh;
+}
+</style>

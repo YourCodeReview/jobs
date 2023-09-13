@@ -4,16 +4,17 @@
             v-bind="props"
             class="py-4 mx-auto mb-4"
             :class="`card-${size}`"
-            :elevation="isHovering && size === 'md' ? 10 : 3"
+            :elevation="isHovering && size === 'md' ? 10 : 1"
             rounded="xl"
         >
             <v-card-subtitle class="font-weight-bold">{{
-                item.employer
+                item?.company
             }}</v-card-subtitle>
             <v-card-title
+                v-if="item.title"
                 class="font-weight-bold"
                 :class="size === 'lg' ? 'text-h5' : ''"
-                >{{ item.name }}</v-card-title
+                >{{ item.title }}</v-card-title
             >
             <v-chip-group class="custom-chips">
                 <v-chip
@@ -25,19 +26,18 @@
                 >
 
                 <v-chip
-                    v-if="item.area"
+                    v-if="item.address"
                     class="chip text-grey-darken-2"
                     prepend-icon="mdi-map-marker"
                     label
-                    >{{ item.area }}</v-chip
+                    >{{ item.address.split(',')[0] }}</v-chip
                 >
 
                 <v-chip
-                    v-if="item.salary_from && size !== 'lg'"
+                    v-if="item.salary && size !== 'lg'"
                     class="chip chip-salary text-grey-darken-2"
                     label
-                    >от {{ item.salary_from }}
-                    {{ item.salary_currency }}</v-chip
+                    >неверный формат salary</v-chip
                 >
             </v-chip-group>
         </v-card>
