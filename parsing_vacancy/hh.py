@@ -3,6 +3,18 @@ import json
 import time
 
 
+def stop_invalid_vacancies(vacancy):
+    ''' Проверяет на валидность вакансии '''
+    stop_words = ['senior', 'middle', 'expert', 'techlead', 'tech lead', 
+                  'teamlead', 'team lead', 'старший']
+    for checked_word in vacancy.get("name").lower().replace('(', '').replace(')', '').split():
+        if checked_word in main_words:
+            break
+        if checked_word in stop_words:
+            return True
+    return False
+  
+
 def get_data_from_vacancy(id):
     """ Возвращает полное описание вакансии по id """
     server_resp = requests.get(f'https://api.hh.ru/vacancies/{id}')
@@ -87,7 +99,7 @@ if __name__ == "__main__":
                         # 'flask', 'django', 'fastapi', 'data ingeneer', 'ruby',
                         # 'react', 'angular', 'node', 'swift', 'kotlin', 'unity',
                         # 'ruby', 'go', 'rust', 'html/css', 'mongodb', 'nosql', 'devops', 'docker',
-                        ]
+                        # ]
     result = []
     all_ides = set()
     for word in main_words:
@@ -95,8 +107,11 @@ if __name__ == "__main__":
         for stack in languages_stacks:
             vacancies = fetch_hh_vacancies(all_ides, f"{word} {stack}")
             result.extend(vacancies)
+    # создает файл на локальный диск
     with open('result.json', 'w', encoding='utf-8', errors='ignore') as f:
         f.write(json.dumps(result, indent=4, ensure_ascii=False))
+
+    # создает файл на сервере
     # with open('/root/jobs/backend/parsing/result.json', 'w', encoding='utf-8', errors='ignore') as f:
     #     f.write(json.dumps(result, indent=4, ensure_ascii=False))
     end = time.time()
