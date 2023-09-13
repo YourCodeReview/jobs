@@ -1,4 +1,4 @@
-import axiosInstance from '@/services/default'
+import axiosInstance from '@/services/axiosInstance'
 
 export const apiService = {
   async getCurrentVacancy(id) {
