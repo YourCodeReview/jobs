@@ -48,7 +48,6 @@ def fetch_hh_page_vacancies(all_ides, text, page=0):
     pages = data['pages']
     items = data['items']
     
-        
     vacancies = []
     for item in items:
         vacancy_data = get_data_from_vacancy(item.get("id"))
@@ -105,7 +104,7 @@ if __name__ == "__main__":
                         # 'flask', 'django', 'fastapi', 'data ingeneer', 'ruby',
                         # 'react', 'angular', 'node', 'swift', 'kotlin', 'unity',
                         # 'ruby', 'go', 'rust', 'html/css', 'mongodb', 'nosql', 'devops', 'docker',
-                        # ]
+                        ]
     result = []
     all_ides = set()
     for word in main_words:
@@ -120,6 +119,7 @@ if __name__ == "__main__":
     # создает файл на сервере
     # with open('/root/jobs/backend/parsing/result.json', 'w', encoding='utf-8', errors='ignore') as f:
     #     f.write(json.dumps(result, indent=4, ensure_ascii=False))
+    
     end = time.time()
     print('вакансии:', len(result))
     print('время ожидания:', round((end - start) / 60), 'мин.')
