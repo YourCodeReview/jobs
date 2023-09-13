@@ -11,8 +11,14 @@ Base.metadata.create_all(bind=engine)
 app = FastAPI()
 
 origins = [
+    "http://68.183.220.246",
+    "https://68.183.220.246",
+    "http://68.183.220.246:80",
+    "https://68.183.220.246:80",
     "http://localhost:80",
     "https://localhost:80",
+    "http://localhost",
+    "https://localhost",
 ]
 
 app.add_middleware(
