@@ -3,6 +3,17 @@ import json
 import time
 
 
+def stop_invalid_vacancies(vacancy):
+    stop_words = ['senior', 'middle', 'expert', 'techlead', 'tech lead', 
+                  'teamlead', 'team lead', 'старший']
+    for checked_word in vacancy.get("name").lower().replace('(', '').replace(')', '').split():
+        if checked_word in main_words:
+            break
+        if checked_word in stop_words:
+            return True
+    return False
+  
+
 def get_data_from_vacancy(id):
     """ Возвращает полное описание вакансии по id """
     server_resp = requests.get(f'https://api.hh.ru/vacancies/{id}')
@@ -35,9 +46,17 @@ def fetch_hh_page_vacancies(all_ides, text, page=0):
     response.close()
     pages = data['pages']
     items = data['items']
+    
+        
     vacancies = []
     for item in items:
         vacancy_data = get_data_from_vacancy(item.get("id"))
+
+        if stop_invalid_vacancies(item):
+            with open('log.txt', 'a', encoding='utf-8', errors='ignore') as f:
+                f.write(f"id: {item['id']}, {item['name']}\n")
+            break    
+
         vacancy = {
             "hh_id": item.get("id"),
             "name": item.get("name"),
@@ -58,9 +77,11 @@ def fetch_hh_page_vacancies(all_ides, text, page=0):
             "salary": vacancy_data["salary"] if vacancy_data and vacancy_data["salary"] else None,
             "specialty": text.split(' ')[1],
         }
+
         if vacancy["hh_id"] not in all_ides:
             vacancies.append(vacancy)
             all_ides.add(vacancy["hh_id"])
+
     return vacancies, pages
 
 if __name__ == "__main__":
@@ -68,13 +89,12 @@ if __name__ == "__main__":
     main_words = ['junior', 
                   'intern', 'стажер', 'младший',
                   ]
-    stop_words = ['senior', 'middle', 'expert', 'techlead', 'teamlead', 'старший']
     languages_stacks = ['python', 
                         # 'java', 'javascript', 'data science', 'qa', 'c#',
-                        #'frontend', 'backend', 
-                        #  'r', 'pandas', 'php',
+                        # 'frontend', 'backend', 
+                        # 'r', 'pandas', 'php',
                         # 'c++', 'c', 'sql', 'postgresql', 'vue.js',
-                        #  'ml', 'ds', 'mysql', 'js', "greenplum",
+                        # 'ml', 'ds', 'mysql', 'js', "greenplum",
                         # 'flask', 'django', 'fastapi', 'data ingeneer', 'ruby',
                         # 'react', 'angular', 'node', 'swift', 'kotlin', 'unity',
                         # 'ruby', 'go', 'rust', 'html/css', 'mongodb', 'nosql', 'devops', 'docker',
@@ -88,6 +108,8 @@ if __name__ == "__main__":
             result.extend(vacancies)
     with open('result.json', 'w', encoding='utf-8', errors='ignore') as f:
         f.write(json.dumps(result, indent=4, ensure_ascii=False))
+    # with open('/root/jobs/backend/parsing/result.json', 'w', encoding='utf-8', errors='ignore') as f:
+    #     f.write(json.dumps(result, indent=4, ensure_ascii=False))
     end = time.time()
     print('вакансии:', len(result))
     print('время ожидания:', round((end - start) / 60), 'мин.')
