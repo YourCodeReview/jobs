@@ -54,8 +54,14 @@ def fetch_hh_page_vacancies(all_ides, text, page=0):
         vacancy_data = get_data_from_vacancy(item.get("id"))
 
         if stop_invalid_vacancies(item):
-            with open('log.txt', 'a', encoding='utf-8', errors='ignore') as f:
+            # создает файл на локальном диске
+            # with open('log.txt', 'a', encoding='utf-8', errors='ignore') as f:
+            #     f.write(f"id: {item['id']}, {item['name']}\n")
+            
+            # создает файл на сервере
+            with open('/root/jobs/backend/parsing/log.txt', 'a', encoding='utf-8', errors='ignore') as f:
                 f.write(f"id: {item['id']}, {item['name']}\n")
+
             break    
 
         vacancy = {
