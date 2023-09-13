@@ -7,7 +7,7 @@ def stop_invalid_vacancies(vacancy):
     ''' Проверяет на валидность вакансии '''
     stop_words = ['senior', 'middle', 'expert', 'techlead', 'tech lead', 
                   'teamlead', 'team lead', 'старший']
-    for checked_word in vacancy.get("name").lower().replace('(', '').replace(')', '').split():
+    for checked_word in vacancy.get("name").replace('(', '').replace(')', '').replace(',', '').lower().split():
         if checked_word in main_words:
             break
         if checked_word in stop_words:
@@ -54,7 +54,7 @@ def fetch_hh_page_vacancies(all_ides, text, page=0):
 
         if stop_invalid_vacancies(item):
             # создает файл на локальный диск
-            with open('log.txt', 'a', encoding='utf-8', errors='ignore') as f:
+            with open('log.txt', 'w', encoding='utf-8', errors='ignore') as f:
                 f.write(f"id: {item['id']}, {item['name']}\n")
             
             # создает файл на сервере
@@ -93,10 +93,12 @@ def fetch_hh_page_vacancies(all_ides, text, page=0):
 if __name__ == "__main__":
     start = time.time()
     main_words = ['junior', 
-                  'intern', 'стажер', 'младший',
+                #   'intern', 'стажер', 'младший', 'начинающий'
                   ]
-    languages_stacks = ['python', 
-                        # 'java', 'javascript', 'data science', 'qa', 'c#',
+    languages_stacks = [
+                        # 'python', 
+                        'java', 
+                        # 'javascript', 'data science', 'qa', 'c#',
                         # 'frontend', 'backend', 
                         # 'r', 'pandas', 'php',
                         # 'c++', 'c', 'sql', 'postgresql', 'vue.js',
@@ -112,6 +114,7 @@ if __name__ == "__main__":
         for stack in languages_stacks:
             vacancies = fetch_hh_vacancies(all_ides, f"{word} {stack}")
             result.extend(vacancies)
+
     # создает файл на локальный диск
     with open('result.json', 'w', encoding='utf-8', errors='ignore') as f:
         f.write(json.dumps(result, indent=4, ensure_ascii=False))
