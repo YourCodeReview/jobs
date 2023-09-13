@@ -96,9 +96,9 @@ watch(
         Object.keys(queries).forEach((key) => {
             queries[key] = route.query[key];
         });
-    }
-),
-    { deep: true };
+    },
+    { deep: true }
+);
 
 onMounted(async () => {
     Object.keys(queries).forEach((key) => {

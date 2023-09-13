@@ -1,4 +1,3 @@
-// useFirebase.js
 import { ref, onMounted } from 'vue'
 import {
     getAuth,
@@ -20,9 +19,9 @@ export function useFirebase() {
     const errorConversion = (error) => {
         switch (error.code) {
             case 'auth/invalid-email':
-                return 'Некорректный email'
+                return 'Некорректный email'
             case 'auth/user-not-found':
-                return 'Пользователь не найден'
+                return 'Пользователь не найден'
             case 'auth/wrong-password':
                 return 'Неверный пароль'
             default:
@@ -30,14 +29,20 @@ export function useFirebase() {
         }
     }
 
+    const handleAuthError = (error) => {
+        isLoading.value = false
+        errorMsg.value = errorConversion(error)
+        console.log(errorMsg.value)
+    }
+
     const checkAuthState = () => {
         onAuthStateChanged(auth, (user) => {
             if (user) {
-                isLoggedIn.value = true
                 currentUser.value = user
+                isLoggedIn.value = true
             } else {
-                isLoggedIn.value = false
                 currentUser.value = {}
+                isLoggedIn.value = false
             }
         })
     }
@@ -48,9 +53,9 @@ export function useFirebase() {
             const result = await createUserWithEmailAndPassword(auth, email, password)
             currentUser.value = result.user
             isLoggedIn.value = true
+            clearError()
         } catch (error) {
-            errorMsg.value = errorConversion(error)
-            console.log(errorMsg.value)
+            handleAuthError(error)
         } finally {
             isLoading.value = false
         }
@@ -62,9 +67,9 @@ export function useFirebase() {
             const result = await signInWithEmailAndPassword(auth, email, password)
             currentUser.value = result.user
             isLoggedIn.value = true
+            clearError()
         } catch (error) {
-            errorMsg.value = errorConversion(error)
-            console.log(errorMsg.value)
+            handleAuthError(error)
         } finally {
             isLoading.value = false
         }
@@ -76,6 +81,7 @@ export function useFirebase() {
             const result = await signInWithPopup(auth, new GoogleAuthProvider())
             currentUser.value = result.user
             isLoggedIn.value = true
+            clearError()
         } catch (error) {
             console.log(error)
         } finally {
@@ -91,6 +97,10 @@ export function useFirebase() {
         } catch (error) {
             console.log(error)
         }
+    }
+
+    const clearError = () => {
+        errorMsg.value = ''
     }
 
     onMounted(() => {
