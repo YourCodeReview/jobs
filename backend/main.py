@@ -17,6 +17,8 @@ origins = [
     "https://68.183.220.246:80",
     "http://localhost:80",
     "https://localhost:80",
+    "http://localhost:3000",
+    "https://localhost:3000",
     "http://localhost",
     "https://localhost",
 ]
