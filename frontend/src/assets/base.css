@@ -43,3 +43,7 @@ a {
   text-decoration: none;
   color: inherit;
 }
+
+ul {
+  padding-left: 24px;
+}
