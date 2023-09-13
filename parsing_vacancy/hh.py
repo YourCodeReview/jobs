@@ -3,18 +3,6 @@ import json
 import time
 
 
-def stop_invalid_vacancies(vacancy):
-    ''' Проверяет на валидность '''
-    stop_words = ['senior', 'middle', 'expert', 'techlead', 'tech lead', 
-                  'teamlead', 'team lead', 'старший']
-    for checked_word in vacancy.get("name").lower().replace('(', '').replace(')', '').split():
-        if checked_word in main_words:
-            break
-        if checked_word in stop_words:
-            return True
-    return False
-  
-
 def get_data_from_vacancy(id):
     """ Возвращает полное описание вакансии по id """
     server_resp = requests.get(f'https://api.hh.ru/vacancies/{id}')
