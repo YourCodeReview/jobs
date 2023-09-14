@@ -24,11 +24,14 @@ def create_vacancy(db: Session, vacancy: VacancyCreate):
     """
     db_vacancy = Vacancy(
         external_id=vacancy["id"],
-        title=vacancy["name"],
-        salary=str(vacancy["salary"]),
-        address=vacancy["address"],
-        requirements=vacancy["requirements"],
-        responsibilities=vacancy["responsibilities"],
+        company_name=vacancy["company_name"],
+        title=vacancy["title"],
+        salary=vacancy["salary"],
+        location=vacancy["location"],
+        speciality=vacancy["speciality"],
+        internship=vacancy["internship"],
+        remote=vacancy["remote"],
+        url=vacancy["url"],
         description=vacancy["description"],
     )
     db.add(db_vacancy)
