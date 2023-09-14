@@ -3,11 +3,19 @@ import json
 import time
 
 
+def clean_name(text):
+    '''
+    Очищает поле name от скобок и запятых и переводит в нижний регистр
+    todo: поменять на рег. вырожения
+    '''
+    return text.replace('(', '').replace(')', '').replace(',', '').lower()
+
+
 def stop_invalid_vacancies(vacancy):
     ''' Проверяет на валидность вакансии '''
     stop_words = ['senior', 'middle', 'expert', 'techlead', 'tech lead', 
                   'teamlead', 'team lead', 'старший']
-    for checked_word in vacancy.get("name").replace('(', '').replace(')', '').replace(',', '').lower().split():
+    for checked_word in clean_name(vacancy.get("name")).split():
         if checked_word in main_words:
             break
         if checked_word in stop_words:
