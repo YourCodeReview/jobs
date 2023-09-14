@@ -3,6 +3,21 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 const routes = [
   {
+    path: '/:catchAll(.*)',
+    redirect:'404',
+  },
+  {
+    path: '/404',
+    component: () => import('@/layouts/JobsLayout.vue'),
+    children: [
+      {
+        name: "NotFound",
+        path: '',
+        component: () => import('@/views/NotFoundView.vue'),
+      },
+    ]
+  },
+  {
     path: '/',
     component: () => import('@/layouts/DefaultLayout.vue'),
     children: [
