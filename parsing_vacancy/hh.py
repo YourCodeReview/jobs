@@ -7,9 +7,9 @@ import time
 def clean_name(text):
     '''
     Очищает поле name от скобок и запятых и переводит в нижний регистр
-    todo: поменять на рег. вырожения
     '''
-    return text.replace('(', '').replace(')', '').replace(',', '').lower()
+    cleaned_text = re.sub(r'[(.-~),]', '', text)
+    return cleaned_text.lower()
 
 
 def stop_invalid_vacancies(vacancy):
@@ -94,27 +94,49 @@ def fetch_hh_page_vacancies(all_ides, text, page=0):
 
         vacancy = {
             "id": item.get("id"),
+            "company_name": item.get("employer")["name"] if item.get("employer") else None,
             "title": item.get("name"),
+            "salary": get_salary(vacancy_data["salary"]) if vacancy_data and vacancy_data["salary"] else None,
+            "location": item.get("address")["raw"] if item.get("address") else None,
+            "speciality": text.split(' ')[1],
+            "internship": get_internship(item.get("employment")["name"] if item.get("employment") else None),
+            "remote": True if item.get("schedule") and item.get("schedule")["name"] == 'удаленная работа' else False,
+            "url": vacancy_data["alternate_url"] if vacancy_data and vacancy_data["alternate_url"] else None,
+            "description": vacancy_data["description"] if vacancy_data and vacancy_data["description"] else None,
             # 'area': item.get("area")["name"] if item.get("area") else None,
             # "requirement": item.get("snippet")["requirement"] if item.get("snippet") else None,
             # "responsibility": item.get("snippet")["responsibility"] if item.get("snippet") else None,
-            "description": vacancy_data["description"] if vacancy_data and vacancy_data["description"] else None,
             # "salary_from": item.get("salary")["from"] if item.get("salary") else None,
             # "salary_to": item.get("salary")["to"] if item.get("salary") else None,
             # "salary_currency": item.get("salary")["currency"] if item.get("salary") else None,
-            "location": item.get("address")["raw"] if item.get("address") else None,
             # "employment": item.get("employment")["name"] if item.get("employment") else None,
-            "company_name": item.get("employer")["name"] if item.get("employer") else None,
             # "professional_roles": item.get("professional_roles")[0]["name"] if item.get("professional_roles")[0] else None,
-            "schedule": vacancy_data["schedule"]["name"] if vacancy_data and vacancy_data["schedule"] else None,
+            # "schedule": vacancy_data["schedule"]["name"] if vacancy_data and vacancy_data["schedule"] else None,
             # "vacancy_data": vacancy_data,
-            "url": vacancy_data["alternate_url"] if vacancy_data and vacancy_data["alternate_url"] else None,
-            "salary": get_salary(vacancy_data["salary"]) if vacancy_data and vacancy_data["salary"] else None,
-            "speciality": text.split(' ')[1],
-            "internship": get_internship(item.get("employment")["name"] if item.get("employment") else None),
-            "remote": True if any(i in vacancy['title'] for i in ['удаленно', 'remote']) else False,
         }
 
+        if not vacancy['location']:
+            vacancy['location'] =  item.get("area")["name"] if item.get("area") else None       
+
+        if vacancy['description'] and re.search(r"удаленная работа|удаленн", vacancy['description'], re.IGNORECASE):
+            vacancy["remote"] = True   
+        # elif  re.search(r"(?<!не )[удаленн|удаленная](?! не)\b", vacancy['description'], re.IGNORECASE):
+        #     vacancy["remote"] = False 
+        if vacancy['description'] and  re.search(r'\bне удаленная\b|\bудаленная не\b', vacancy['description'], re.IGNORECASE):
+            vacancy["remote"] = False 
+
+        # match term:
+        #     case pattern-1:
+        #         action-1
+        #     case pattern-2:
+        #         action-2
+        #     case pattern-3:
+        #         action-3
+        #     case _:
+        #         action-default
+
+        # if re.search(r"удаленн (?! НЕ)", vacancy['description'], re.IGNORECASE):
+        #     vacancy["remote"] = False 
 
         if vacancy["id"] not in all_ides:
             vacancies.append(vacancy)
@@ -125,19 +147,19 @@ def fetch_hh_page_vacancies(all_ides, text, page=0):
 if __name__ == "__main__":
     start = time.time()
     main_words = ['junior', 
-                #   'intern', 'стажер', 'младший', 'начинающий'
+                  'intern', 'стажер', 'младший', 'начинающий'
                   ]
     languages_stacks = [
-                        # 'python', 
+                        'python', 
                         'java', 
-                        # 'javascript', 'data science', 'qa', 'c#',
-                        # 'frontend', 'backend', 
-                        # 'r', 'pandas', 'php',
-                        # 'c++', 'c', 'sql', 'postgresql', 'vue.js',
-                        # 'ml', 'ds', 'mysql', 'js', "greenplum",
-                        # 'flask', 'django', 'fastapi', 'data ingeneer', 'ruby',
-                        # 'react', 'angular', 'node', 'swift', 'kotlin', 'unity',
-                        # 'ruby', 'go', 'rust', 'html/css', 'mongodb', 'nosql', 'devops', 'docker',
+                        'javascript', 'data science', 'qa', 'c#',
+                        'frontend', 'backend', 
+                        'r', 'pandas', 'php',
+                        'c++', 'c', 'sql', 'postgresql', 'vue.js',
+                        'ml', 'ds', 'mysql', 'js', "greenplum",
+                        'flask', 'django', 'fastapi', 'data ingeneer', 'ruby',
+                        'react', 'angular', 'node', 'swift', 'kotlin', 'unity',
+                        'ruby', 'go', 'rust', 'html/css', 'mongodb', 'nosql', 'devops', 'docker',
                         ]
     result = []
     all_ides = set()
