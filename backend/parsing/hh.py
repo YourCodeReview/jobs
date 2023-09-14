@@ -1,8 +1,10 @@
 import requests
+import re
 
 
 def clean_name(text):
-    return text.replace('(', '').replace(')', '').replace(',', '').lower()
+    cleaned_text = re.sub(r'[(.-~),]', '', text)
+    return cleaned_text.lower()
 
 
 def stop_invalid_vacancies(vacancy):
@@ -13,7 +15,8 @@ def stop_invalid_vacancies(vacancy):
                   'tech lead', 
                   'teamlead', 
                   'team lead', 
-                  'старший']
+                  'старший'
+                  ]
     for checked_word in clean_name(vacancy.get("name")).split():
         if checked_word in main_words:
             break
@@ -39,6 +42,26 @@ def fetch_hh_vacancies(all_ides, text):
     return vacancies
 
 
+def get_salary(txt_dict):
+    if not txt_dict["currency"]:
+        return None 
+    salary_from = txt_dict["from"] if txt_dict.get("from") else ''
+    salary_to = txt_dict["to"] if txt_dict.get("to") else ''
+    if salary_from and salary_to:
+        salary = str(salary_from) + ' - ' + str(salary_to) + ' ' + txt_dict["currency"]
+    elif salary_from and not salary_to:
+        salary = str(salary_from) + ' ' + txt_dict["currency"]
+    elif not salary_from and salary_to:
+        salary = str(salary_to) + ' ' + txt_dict["currency"]
+    return salary
+
+
+def get_internship(text):
+    pattern = r'\b(?:стажировка|internship)\b'
+    matches = re.findall(pattern, text, re.IGNORECASE)
+    return True if matches else False
+
+
 def fetch_hh_page_vacancies(all_ides, text, page=0):
     params = {
         'text': text,
@@ -57,21 +80,24 @@ def fetch_hh_page_vacancies(all_ides, text, page=0):
         if stop_invalid_vacancies(item):
             break    
         vacancy = {
-            "hh_id": item.get("id"),
-            "name": item.get("name"),
-            'area': item.get("area")["name"] if item.get("area") else None,
-            "description": vacancy_data["description"] if vacancy_data and vacancy_data["description"] else None,
-            "address": item.get("address")["raw"] if item.get("address") else None,
-            "employment": item.get("employment")["name"] if item.get("employment") else None,
-            "employer": item.get("employer")["name"] if item.get("employer") else None,
-            "schedule": vacancy_data["schedule"]["name"] if vacancy_data and vacancy_data["schedule"] else None,
+            "id": item.get("id"),
+            "company_name": item.get("employer")["name"] if item.get("employer") else None,
+            "title": item.get("name"),
+            "salary": get_salary(vacancy_data["salary"]) if vacancy_data and vacancy_data["salary"] else None,
+            "location": item.get("address")["raw"] if item.get("address") else None,
+            "speciality": text.split(' ')[1],
+            "internship": get_internship(item.get("employment")["name"] if item.get("employment") else None),
+            "remote": True if item.get("schedule") and item.get("schedule")["name"] == 'удаленная работа' else False,
             "url": vacancy_data["alternate_url"] if vacancy_data and vacancy_data["alternate_url"] else None,
-            "salary": vacancy_data["salary"] if vacancy_data and vacancy_data["salary"] else None,
-            "specialty": text.split(' ')[1],
+            "description": vacancy_data["description"] if vacancy_data and vacancy_data["description"] else None,
         }
-        if vacancy["hh_id"] not in all_ides:
+        if vacancy["id"] not in all_ides:
             vacancies.append(vacancy)
-            all_ides.add(vacancy["hh_id"])
+            all_ides.add(vacancy["id"])
+        if vacancy['description'] and re.search(r"удаленная работа|удаленн", vacancy['description'], re.IGNORECASE):
+            vacancy["remote"] = True   
+        if vacancy['description'] and re.search(r'\bне удаленная\b|\bудаленная не\b', vacancy['description'], re.IGNORECASE):
+            vacancy["remote"] = False 
     return vacancies, pages
 
 
