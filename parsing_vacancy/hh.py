@@ -14,8 +14,15 @@ def clean_name(text):
 
 def stop_invalid_vacancies(vacancy):
     ''' Проверяет на валидность вакансии '''
-    stop_words = ['senior', 'middle', 'expert', 'techlead', 'tech lead', 
-                  'teamlead', 'team lead', 'старший']
+    stop_words = ['senior', 
+                  'middle', 
+                  'expert',
+                   'techlead', 
+                   'tech lead', 
+                  'teamlead', 
+                  'team lead', 
+                  'старший'
+                  ]
     for checked_word in clean_name(vacancy.get("name")).split():
         if checked_word in main_words:
             break
@@ -44,6 +51,7 @@ def fetch_hh_vacancies(all_ides, text):
 
 
 def get_salary(txt_dict):
+    '''србирает в одну строку данные о зарплате'''
     if not txt_dict["currency"]:
         return None 
     salary_from = txt_dict["from"] if txt_dict.get("from") else ''
@@ -58,6 +66,7 @@ def get_salary(txt_dict):
 
 
 def get_internship(text):
+    '''выводит Trur или False стажировки'''
     pattern = r'\b(?:стажировка|internship)\b'
     matches = re.findall(pattern, text, re.IGNORECASE)
     return True if matches else False
@@ -76,7 +85,6 @@ def fetch_hh_page_vacancies(all_ides, text, page=0):
     response.close()
     pages = data['pages']
     items = data['items']
-    
     vacancies = []
     for item in items:
         vacancy_data = get_data_from_vacancy(item.get("id"))
@@ -147,7 +155,10 @@ def fetch_hh_page_vacancies(all_ides, text, page=0):
 if __name__ == "__main__":
     start = time.time()
     main_words = ['junior', 
-                  'intern', 'стажер', 'младший', 'начинающий'
+                  'intern', 
+                  'стажер', 
+                  'младший', 
+                  'начинающий'
                   ]
     languages_stacks = [
                         'python', 
