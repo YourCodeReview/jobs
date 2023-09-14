@@ -5,12 +5,14 @@ import TheList from "@/components/TheList.vue";
 import TheTools from "@/components/TheTools.vue";
 
 import { useGetJobs } from "@/api/requests";
+import { ref } from "vue";
 
 const { data, isLoading, execute } = useGetJobs();
+const jobsLength = ref(0);
 
 onMounted(async () => {
     await execute();
-    console.log(data.value);
+    jobsLength.value = Object.keys(data.value).length;
 });
 </script>
 
@@ -28,8 +30,8 @@ onMounted(async () => {
                 <the-tools />
             </v-col>
             <v-col cols="12" sm="10" md="6" lg="6" class="d-flex flex-column">
-
-                <the-list :job-list="data"/>
+                <the-list v-if="jobsLength" :job-list="data"/>
+                <h1 v-else class="mx-auto text-h4">Вакансий пока нет</h1>
             </v-col>
         </v-row>
     </div>
