@@ -1,4 +1,5 @@
 import requests
+import re
 import json
 import time
 
@@ -42,6 +43,26 @@ def fetch_hh_vacancies(all_ides, text):
     return vacancies
 
 
+def get_salary(txt_dict):
+    if not txt_dict["currency"]:
+        return None 
+    salary_from = txt_dict["from"] if txt_dict.get("from") else ''
+    salary_to = txt_dict["to"] if txt_dict.get("to") else ''
+    if salary_from and salary_to:
+        salary = str(salary_from) + ' - ' + str(salary_to) + ' ' + txt_dict["currency"]
+    elif salary_from and not salary_to:
+        salary = str(salary_from) + ' ' + txt_dict["currency"]
+    elif not salary_from and salary_to:
+        salary = str(salary_to) + ' ' + txt_dict["currency"]
+    return salary
+
+
+def get_internship(text):
+    pattern = r'\b(?:стажировка|internship)\b'
+    matches = re.findall(pattern, text, re.IGNORECASE)
+    return True if matches else False
+
+
 def fetch_hh_page_vacancies(all_ides, text, page=0):
     """ Собирает все вакансии с одной страницы hh по ключевым словам """
     params = {  # параметры обращения к api
@@ -72,29 +93,32 @@ def fetch_hh_page_vacancies(all_ides, text, page=0):
             break    
 
         vacancy = {
-            "hh_id": item.get("id"),
-            "name": item.get("name"),
-            'area': item.get("area")["name"] if item.get("area") else None,
+            "id": item.get("id"),
+            "title": item.get("name"),
+            # 'area': item.get("area")["name"] if item.get("area") else None,
             # "requirement": item.get("snippet")["requirement"] if item.get("snippet") else None,
             # "responsibility": item.get("snippet")["responsibility"] if item.get("snippet") else None,
             "description": vacancy_data["description"] if vacancy_data and vacancy_data["description"] else None,
             # "salary_from": item.get("salary")["from"] if item.get("salary") else None,
             # "salary_to": item.get("salary")["to"] if item.get("salary") else None,
             # "salary_currency": item.get("salary")["currency"] if item.get("salary") else None,
-            "address": item.get("address")["raw"] if item.get("address") else None,
-            "employment": item.get("employment")["name"] if item.get("employment") else None,
-            "employer": item.get("employer")["name"] if item.get("employer") else None,
+            "location": item.get("address")["raw"] if item.get("address") else None,
+            # "employment": item.get("employment")["name"] if item.get("employment") else None,
+            "company_name": item.get("employer")["name"] if item.get("employer") else None,
             # "professional_roles": item.get("professional_roles")[0]["name"] if item.get("professional_roles")[0] else None,
             "schedule": vacancy_data["schedule"]["name"] if vacancy_data and vacancy_data["schedule"] else None,
             # "vacancy_data": vacancy_data,
             "url": vacancy_data["alternate_url"] if vacancy_data and vacancy_data["alternate_url"] else None,
-            "salary": vacancy_data["salary"] if vacancy_data and vacancy_data["salary"] else None,
-            "specialty": text.split(' ')[1],
+            "salary": get_salary(vacancy_data["salary"]) if vacancy_data and vacancy_data["salary"] else None,
+            "speciality": text.split(' ')[1],
+            "internship": get_internship(item.get("employment")["name"] if item.get("employment") else None),
+            "remote": True if any(i in vacancy['title'] for i in ['удаленно', 'remote']) else False,
         }
 
-        if vacancy["hh_id"] not in all_ides:
+
+        if vacancy["id"] not in all_ides:
             vacancies.append(vacancy)
-            all_ides.add(vacancy["hh_id"])
+            all_ides.add(vacancy["id"])
 
     return vacancies, pages
 
