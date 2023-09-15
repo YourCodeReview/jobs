@@ -13,6 +13,7 @@ const props = defineProps({
         variant="text"
         rounded="lg"
         :href="link.url"
+        target="_blank"
         :block="$vuetify.display.mdAndDown"
     >
         {{ link.title }}
