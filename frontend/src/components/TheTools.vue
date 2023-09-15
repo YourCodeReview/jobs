@@ -11,7 +11,7 @@ const groups = [
         list: [
             {
                 title: "Не имеет значения",
-                type: "",
+                type: "none",
             },
             {
                 title: "От 10000 руб.",
@@ -43,10 +43,6 @@ const groups = [
             {
                 title: "Офис",
                 type: "office",
-            },
-            {
-                title: "Гибрид",
-                type: "hybrid",
             },
         ],
         type: "checkbox",
@@ -85,7 +81,7 @@ const groups = [
     },
 ];
 const queries = reactive({
-    salary: "",
+    salary: "none",
     stack: "",
 });
 const format = ref([]);
@@ -100,11 +96,11 @@ watch(
     { deep: true }
 );
 
-onMounted(async () => {
-    Object.keys(queries).forEach((key) => {
-        queries[key] = route.query[key];
-    });
-});
+// onMounted(async () => {
+//     Object.keys(queries).forEach((key) => {
+//         queries[key] ? queries[key] = route.query[key] : null;
+//     });
+// });
 </script>
 
 <template>
@@ -116,6 +112,7 @@ onMounted(async () => {
             rounded="xl"
             size="small"
             href="https://t.me/YCRJobs"
+            target="_blank"
         >
             <span>{{
                 $vuetify.display.md ? "Вакансии" : "Вакансии в Telegram"
