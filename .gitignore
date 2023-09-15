@@ -1,2 +1,13 @@
 parsing_vacancy/result.json
 parsing_vacancy/log.txt
+backend/__pycache__/crud.cpython-311.pyc
+backend/__pycache__/database.cpython-311.pyc
+backend/__pycache__/main.cpython-311.pyc
+backend/__pycache__/models.cpython-311.pyc
+backend/__pycache__/schemas.cpython-311.pyc
+backend/api/__pycache__/__init__.cpython-311.pyc
+backend/api/__pycache__/routes.cpython-311.pyc
+backend/parsing/__pycache__/__init__.cpython-311.pyc
+backend/parsing/__pycache__/api_routes.cpython-311.pyc
+backend/parsing/__pycache__/hh.cpython-311.pyc
+backend/jobs.db

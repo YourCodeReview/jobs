@@ -80,7 +80,7 @@ def fetch_hh_page_vacancies(all_ides, text, page=0):
         if stop_invalid_vacancies(item):
             break    
         vacancy = {
-            "id": item.get("id"),
+            "id": int(item.get("id")),
             "company_name": item.get("employer")["name"] if item.get("employer") else None,
             "title": item.get("name"),
             "salary": get_salary(vacancy_data["salary"]) if vacancy_data and vacancy_data["salary"] else None,
@@ -101,26 +101,24 @@ def fetch_hh_page_vacancies(all_ides, text, page=0):
     return vacancies, pages
 
 
-if __name__ == "__main__":
-    main_words = ['junior', 
-                  'intern', 
-                  'стажер', 
-                  'младший', 
-                  'начинающий',
-                  ]
-    languages_stacks = ['python', 
-                        'java', 
-                        'javascript', 
-                        'data science', 
-                        'qa', 
-                        'c#',
-                        'frontend', 
-                        'backend', 
-                        ]
-    result = []
-    all_ides = set()
-    for word in main_words:
-        temp_list = []
-        for stack in languages_stacks:
-            vacancies = fetch_hh_vacancies(all_ides, f"{word} {stack}")
-            result.extend(vacancies)
+main_words = ['junior', 
+                'intern', 
+                # 'стажер', 
+                # 'младший', 
+                # 'начинающий',
+                ]
+languages_stacks = ['python', 
+                    # 'java', 
+                    # 'javascript', 
+                    # 'data science', 
+                    # 'qa', 
+                    # 'c#',
+                    # 'frontend', 
+                    # 'backend', 
+                    ]
+all_ides = set()
+result = []
+for word in main_words:
+    for stack in languages_stacks:
+        vacancies = fetch_hh_vacancies(all_ides, f"{word} {stack}")
+        result.extend(vacancies)
