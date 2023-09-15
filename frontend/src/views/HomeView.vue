@@ -1,9 +1,9 @@
 <script setup>
-import TheWelcomeForm from '@/components/TheWelcomeForm.vue';
+import TheWelcomeCards from '@/components/TheWelcomeCards.vue';
 </script>
 
 <template>
     <div class="text-white">
-        <the-welcome-form />
+        <the-welcome-cards />
     </div>
 </template>

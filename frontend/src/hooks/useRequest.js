@@ -2,25 +2,25 @@ import { ref } from 'vue'
 
 export const useRequest = (requestFunction) => {
   const data = ref(null)
-  const isLoading = ref(false)
-  const isError = ref(false)
+  const loading = ref(false)
+  const error = ref('')
 
   const execute = async (params) => {
-    isLoading.value = true
+    loading.value = true
     try {
       data.value = await requestFunction(params)
     } catch(e) {
-      isError.value = true
-      console.log(e);
+      error.value = e.response
+      console.log(error.value);
     } finally {
-      isLoading.value = false
+      loading.value = false
     }
   }
 
   return {
     data,
-    isLoading,
-    isError,
+    loading,
+    error,
     execute
   }
 }
