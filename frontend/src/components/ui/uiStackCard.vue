@@ -6,10 +6,8 @@
         elevation="10"
     >
       <v-row>
-        <v-col cols="8">
-          <v-chip-group class="flex-column align-start">
-            <v-chip v-for="chip in chips" :key="chip" rounded="lg">{{ chip }}</v-chip>
-          </v-chip-group>
+        <v-col cols="8" class="d-flex flex-column align-start">
+          <v-chip class="mb-2" v-for="chip in chips" :key="chip" rounded="lg">{{ chip }}</v-chip>
         </v-col>
         <v-col cols="4" class="d-flex justify-end">
           <component :is="currentComponent"></component>
