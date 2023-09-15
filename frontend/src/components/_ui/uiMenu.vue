@@ -2,10 +2,10 @@
 import { ref, computed } from 'vue'
 import { useFirebase } from '@/hooks/useFirebase'
 
-import UiLoginButton from '@/components/ui/uiLoginButton.vue'
-import UiLogoutButton from '@/components/ui/uiLogoutButton.vue'
-import UiCareerButton from '@/components/ui/uiCareerButton.vue'
-import uiAddVacancyButton from '@/components/ui/uiAddVacancyButton.vue'
+import UiLoginButton from '@/components/_ui/uiLoginButton.vue'
+import UiLogoutButton from '@/components/_ui/uiLogoutButton.vue'
+import UiCareerButton from '@/components/_ui/uiCareerButton.vue'
+import uiAddVacancyButton from '@/components/_ui/uiAddVacancyButton.vue'
 
 defineProps({
   list: Array

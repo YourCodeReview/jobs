@@ -1,0 +1,34 @@
+[
+  {
+    "name": "Программа и тестирование",
+    "anchor": "programma"
+  },
+  {
+    "name": "Вакансии",
+    "anchor": "vakansii"
+  },
+  {
+    "name": "Тарифы",
+    "anchor": "tarifi"
+  },
+  {
+    "name": "Запись",
+    "anchor": "zapis"
+  },
+  {
+    "name": "Команда",
+    "anchor": "komanda"
+  },
+  {
+    "name": "Отзывы",
+    "anchor": "otzivi"
+  },
+  {
+    "name": "О нас",
+    "anchor": "onas"
+  },
+  {
+    "name": "Вопросы и ответы",
+    "anchor": "faq"
+  }
+]

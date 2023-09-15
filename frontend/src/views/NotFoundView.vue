@@ -1,7 +1,7 @@
 <template>
   <div class="container">
-    <h1 class="mx-auto text-h4 mb-6">Такой страницы неть...</h1>
-    <v-btn @click="$router.back()" size="large" rounded="lg">Назад</v-btn>
+    <span class="d-block mx-auto text-h4 mb-6">Такой страницы неть...</span>
+    <v-btn class="btn__purple" @click="$router.back()" size="large" rounded="lg">Назад</v-btn>
   </div>
 </template>
 
@@ -12,11 +12,11 @@
   text-align: center;
 }
 
-.v-btn {
+.btn__purple {
   color: white;
   background-image: var(--purple-gradient);
 }
-.v-btn:hover {
+.btn__purple:hover {
   opacity: 0.8;
 }
 </style>

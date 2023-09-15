@@ -1,11 +1,11 @@
 <template>
-  <the-header />
+  <vue-header />
   <default-layout />
-  <the-footer />
+  <vue-footer />
 </template>
 
 <script setup>
 import DefaultLayout from '@/layouts/DefaultLayout.vue'
-import TheHeader from '@/components/TheHeader.vue'
-import TheFooter from '@/components/TheFooter.vue'
+import VueHeader from '@/components/Header/VueHeader.vue'
+import VueFooter from '@/components/Footer/VueFooter.vue'
 </script>

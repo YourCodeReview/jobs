@@ -1,9 +1,9 @@
 <script setup>
-import TheWelcomeCards from '@/components/TheWelcomeCards.vue'
+import HomepageCards from '@/components/VueHomepageCards.vue'
 </script>
 
 <template>
   <div class="text-white">
-    <the-welcome-cards />
+    <homepage-cards />
   </div>
 </template>

@@ -2,8 +2,8 @@
 import { ref } from 'vue'
 import { useFirebase } from '@/hooks/useFirebase'
 
-import UiCard from '@/components/ui/uiCard.vue'
-// import UiSnackbar from "@/components/ui/uiSnackbar.vue";
+import UiCard from '@/components/_ui/uiCard.vue'
+import UiSnackbar from '@/components/_ui/uiSnackbar.vue'
 
 const props = defineProps({
   data: Object
@@ -12,17 +12,17 @@ const props = defineProps({
 const auth = useFirebase()
 const dialog = ref(false)
 
-// const snackbar = ref(false);
-// const copyText = () => {
-//     navigator.clipboard
-//         .writeText(`${currentVacancy.url}`)
-//         .then(() => {
-//             console.log("Async: Copying to clipboard was successful!");
-//         })
-//         .catch((err) => {
-//             console.log("Something went wrong", err);
-//         });
-// };
+const snackbar = ref(false)
+const copyText = () => {
+  navigator.clipboard
+    .writeText('Это ссылка на вакансию')
+    .then(() => {
+      console.log('Async: Copying to clipboard was successful!')
+    })
+    .catch((err) => {
+      console.log('Something went wrong', err)
+    })
+}
 </script>
 
 <template>
@@ -30,12 +30,17 @@ const dialog = ref(false)
     <v-row class="page-nav justify-center">
       <v-col cols="12" class="d-flex py-1">
         <v-btn icon="mdi-arrow-left" size="small" @click="$router.back()" />
-        <!-- <v-btn class="ml-auto" icon size="small" @click="auth.isLoggedIn.value ? copyText() : null">
-                    <v-icon>mdi-export-variant</v-icon>
-                    <ui-snackbar v-model="snackbar" activator="parent"
-                        :color="auth.isLoggedIn.value ? 'green' : 'red-darken-1'"
-                        :message="auth.isLoggedIn.value ? 'Ссылка на вакансию скопирована' : 'Необходимо авторизоваться'" />
-                </v-btn> -->
+        <v-btn class="ml-auto" icon size="small" @click="auth.isLoggedIn.value ? copyText() : null">
+          <v-icon>mdi-export-variant</v-icon>
+          <ui-snackbar
+            v-model="snackbar"
+            activator="parent"
+            :color="auth.isLoggedIn.value ? 'green' : 'red-darken-1'"
+            :message="
+              auth.isLoggedIn.value ? 'Ссылка на вакансию скопирована' : 'Необходимо авторизоваться'
+            "
+          />
+        </v-btn>
       </v-col>
     </v-row>
     <v-row class="justify-center">
@@ -68,16 +73,16 @@ const dialog = ref(false)
           </v-card>
         </v-hover>
         <v-card class="mt-2 pa-6" rounded="xl">
-          <!-- <v-list v-for="item in data.description" :key="item.title">
-                        <v-list-item>
-                            <v-list-item-title class="font-weight-bold">{{
-                                item.title
-                            }}</v-list-item-title>
-                            <v-card-text v-for="item in item.list" :key="item" class="py-2">
-                                - {{ data.description}}
-                            </v-card-text>
-                        </v-list-item>
-                    </v-list> -->
+      <!-- <v-list v-for="item in data.description" :key="item.title">
+              <v-list-item>
+                  <v-list-item-title class="font-weight-bold">{{
+                      item.title
+                  }}</v-list-item-title>
+                  <v-card-text v-for="item in item.list" :key="item" class="py-2">
+                      - {{ data.description}}
+                  </v-card-text>
+              </v-list-item>
+          </v-list> -->
           <div class="description" v-html="props.data.description" />
         </v-card>
       </v-col>

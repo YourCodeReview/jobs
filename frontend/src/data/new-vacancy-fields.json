@@ -1,0 +1,35 @@
+{
+  "name": {
+    "type": "text",
+    "label": "Должность"
+  },
+  "employer": {
+    "type": "text",
+    "label": "Компания"
+  },
+  "area": {
+    "type": "text",
+    "label": "Город"
+  },
+  "salary": {
+    "from": null,
+    "to": null,
+    "currency": null,
+    "gross": false
+  },
+  "employment": {
+    "type": "select",
+    "label": "Занятость",
+    "items": ["Полная занятость", "Частичная занятость", "Стажировка", "Проектная работа"]
+  },
+  "schedule": {
+    "type": "select",
+    "label": "Формат работы",
+    "items": ["Удаленный", "Офис", "Гибрид"]
+  },
+  "specialty": {
+    "type": "select",
+    "label": "Специализация",
+    "items": ["Python", "Java", "JavaScript", "Data Science", "QA", "C#"]
+  }
+}

@@ -1,3 +1,9 @@
+<script setup>
+const props = defineProps({
+  contacts: Array
+})
+</script>
+
 <template>
   <v-col cols="12" md="4" sm="12" class="d-flex flex-column py-1">
     <v-btn class="justify-start" variant="text" href="https://yourcodereview.com"
@@ -16,9 +22,3 @@
     </div>
   </v-col>
 </template>
-
-<script setup>
-const props = defineProps({
-  contacts: Array
-})
-</script>

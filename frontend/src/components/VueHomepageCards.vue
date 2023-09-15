@@ -1,53 +1,8 @@
 <script setup>
-import { ref, onMounted } from 'vue'
-import UiStackCard from './ui/uiStackCard.vue'
-import svgLogo from '@/components/icons/svgLogo.vue'
+import uiStackCard from '@/components/_ui/uiStackCard.vue'
+import svgLogo from '@/components/_icons/svgLogo.vue'
 
-const expand = ref(false)
-
-const cards = [
-  {
-    id: 1,
-    name: 'Python',
-    type: 'python',
-    color: 'indigo-darken-1'
-  },
-  {
-    id: 2,
-    name: 'Java',
-    type: 'java',
-    color: 'orange-darken-1',
-    icon: 'SvgJavaScript'
-  },
-  {
-    id: 3,
-    name: 'JavaScript',
-    type: 'javascript',
-    color: 'yellow-darken-3'
-  },
-  {
-    id: 4,
-    name: 'Data Science',
-    type: 'data-science',
-    color: 'light-blue-accent-2'
-  },
-  {
-    id: 5,
-    name: 'QA',
-    type: 'qa',
-    color: 'deep-purple-accent-3'
-  },
-  {
-    id: 6,
-    name: 'C#',
-    type: 'c-sharp',
-    color: 'green-darken-1'
-  }
-]
-
-onMounted(() => {
-  expand.value = true
-})
+import cards from '@/data/welcome-cards.json'
 </script>
 
 <template>
@@ -67,12 +22,9 @@ onMounted(() => {
     </header>
     <div class="container pt-2 justify-center">
       <div class="grid-cards">
-        <v-fade-transition v-for="item in cards" :key="item.id">
-          <!-- <router-link :to="{ name: 'Jobs', query: { stack: item.type } }" v-show="expand"> -->
-          <router-link :to="{ name: 'Jobs' }" v-show="expand">
+          <router-link v-for="item in cards" :key="item.id" :to="{ name: 'Jobs', query: { specialty: item.type } }">
             <ui-stack-card :item="item" />
           </router-link>
-        </v-fade-transition>
       </div>
     </div>
   </div>
@@ -101,16 +53,13 @@ onMounted(() => {
   gap: 12px;
 }
 
+.background {
+  background-image: var(--purple-gradient);
+}
+
 @media screen and (max-width: 550px) {
   .grid-cards {
     grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
   }
-}
-
-.background {
-  background-image: var(--purple-gradient);
-}
-.fade-transition-enter-active {
-  transition-delay: 0.5s;
 }
 </style>

@@ -57,7 +57,7 @@ const routes = [
       {
         name: 'NewVacancy',
         path: '',
-        component: () => import('@/views/AddVacancyView.vue')
+        component: () => import('@/views/NewVacancyView.vue')
       }
     ]
   }

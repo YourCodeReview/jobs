@@ -1,3 +1,10 @@
+<script setup>
+const props = defineProps({
+  links: Array,
+  anchors: Array
+})
+</script>
+
 <template>
   <v-col cols="12" md="8" sm="12">
     <v-row>
@@ -19,10 +26,3 @@
     </v-row>
   </v-col>
 </template>
-
-<script setup>
-const props = defineProps({
-  links: Array,
-  anchors: Array
-})
-</script>

@@ -1,0 +1,39 @@
+[
+  {
+    "id": 1,
+    "name": "Python",
+    "type": "python",
+    "color": "indigo-darken-1"
+  },
+  {
+    "id": 2,
+    "name": "Java",
+    "type": "java",
+    "color": "orange-darken-1",
+    "icon": "SvgJavaScript"
+  },
+  {
+    "id": 3,
+    "name": "JavaScript",
+    "type": "javascript",
+    "color": "yellow-darken-3"
+  },
+  {
+    "id": 4,
+    "name": "Data Science",
+    "type": "data-science",
+    "color": "light-blue-accent-2"
+  },
+  {
+    "id": 5,
+    "name": "QA",
+    "type": "qa",
+    "color": "deep-purple-accent-3"
+  },
+  {
+    "id": 6,
+    "name": "C#",
+    "type": "c-sharp",
+    "color": "green-darken-1"
+  }
+]

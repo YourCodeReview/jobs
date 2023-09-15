@@ -2,7 +2,8 @@
 import { useRoute } from 'vue-router'
 import { ref, onMounted, watch } from 'vue'
 import { useGetVacancy } from '@/api/requests'
-import TheJobsDetails from '@/components/TheJobsDetails.vue'
+
+import VacancyDetails from '@/components/Vacancy/VueVacancyDetails.vue'
 
 const { data, loading, error, execute } = useGetVacancy()
 const vacancyId = ref('')
@@ -34,7 +35,7 @@ onMounted(async () => {
       <h1 class="text-center text-h4">{{ error.status }}</h1>
       <h3 class="text-center text-h5">{{ error.data.detail }}</h3>
     </template>
-    <the-jobs-details v-else :data="data" />
+    <vacancy-details v-else :data="data" />
   </div>
 </template>
 

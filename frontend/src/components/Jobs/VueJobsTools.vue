@@ -2,7 +2,7 @@
 import { ref, reactive, onMounted, watch } from 'vue'
 import { useRoute } from 'vue-router'
 
-import svgTelegram from '@/components/icons/svgTelegram.vue'
+import svgTelegram from '@/components/_icons/svgTelegram.vue'
 
 const route = useRoute()
 const groups = [

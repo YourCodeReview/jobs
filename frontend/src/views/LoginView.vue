@@ -4,8 +4,8 @@ import { useRouter } from 'vue-router'
 import { useFirebase } from '@/hooks/useFirebase'
 import { useUnisender } from '@/hooks/useUnisender'
 
-import svgLogo from '@/components/icons/svgLogo.vue'
-import uiSnackbar from '@/components/ui/uiSnackbar.vue'
+import svgLogo from '@/components/_icons/svgLogo.vue'
+import uiSnackbar from '@/components/_ui/uiSnackbar.vue'
 
 const router = useRouter()
 const auth = useFirebase()
