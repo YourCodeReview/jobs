@@ -14,8 +14,8 @@ export default createVuetify({
           primary: '#1867C0',
           secondary: '#5CBBF6',
           lime: '#ceff44'
-        },
-      },
-    },
-  },
+        }
+      }
+    }
+  }
 })

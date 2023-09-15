@@ -1,21 +1,21 @@
 <script setup>
 const props = defineProps({
-    links: Array,
-});
+  links: Array
+})
 </script>
 
 <template>
-    <v-btn
-        v-for="link in props.links"
-        :key="link.title"
-        class="px-1 mx-1"
-        height="50"
-        variant="text"
-        rounded="lg"
-        :href="link.url"
-        target="_blank"
-        :block="$vuetify.display.mdAndDown"
-    >
-        {{ link.title }}
-    </v-btn>
+  <v-btn
+    v-for="link in props.links"
+    :key="link.title"
+    class="px-1 mx-1"
+    height="50"
+    variant="text"
+    rounded="lg"
+    :href="link.url"
+    target="_blank"
+    :block="$vuetify.display.mdAndDown"
+  >
+    {{ link.title }}
+  </v-btn>
 </template>

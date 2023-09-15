@@ -1,6 +1,12 @@
 :root {
-    --blue-gradient: linear-gradient(80deg, rgba(0,87,255,1) 0%,rgb(117, 244, 229) 91%);
-    /* --purple-gradient: linear-gradient(.092turn,rgb(32 147 254 / 80%) 0%,rgb(194 23 254 / 80%) 90%); */
-    --purple-gradient: linear-gradient(.24turn,rgb(32 147 254 / 90%) 0%,rgb(230 23 254 / 90%) 90%);
-    --lime-gradient: linear-gradient(98.14deg,#ceff44 2.93%,#b2f235 36.34%,#90e325 64.01%,#62ce0d 98.01%);
+  --blue-gradient: linear-gradient(80deg, rgba(0, 87, 255, 1) 0%, rgb(117, 244, 229) 91%);
+  /* --purple-gradient: linear-gradient(.092turn,rgb(32 147 254 / 80%) 0%,rgb(194 23 254 / 80%) 90%); */
+  --purple-gradient: linear-gradient(0.24turn, rgb(32 147 254 / 90%) 0%, rgb(230 23 254 / 90%) 90%);
+  --lime-gradient: linear-gradient(
+    98.14deg,
+    #ceff44 2.93%,
+    #b2f235 36.34%,
+    #90e325 64.01%,
+    #62ce0d 98.01%
+  );
 }

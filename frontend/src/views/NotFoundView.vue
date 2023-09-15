@@ -1,21 +1,22 @@
 <template>
-    <div class="container">
-        <h1 class="mx-auto text-h4 mb-6">Такой страницы неть...</h1>
-        <v-btn @click="$router.back()" size="large" rounded="lg">Назад</v-btn>
-    </div>
+  <div class="container">
+    <h1 class="mx-auto text-h4 mb-6">Такой страницы неть...</h1>
+    <v-btn @click="$router.back()" size="large" rounded="lg">Назад</v-btn>
+  </div>
 </template>
 
 <style scoped>
 .container {
-    text-align: center;
-    min-height: 100vh;
+  min-height: 100vh;
+
+  text-align: center;
 }
 
 .v-btn {
-    color: white;
-    background-image: var(--purple-gradient);
+  color: white;
+  background-image: var(--purple-gradient);
 }
 .v-btn:hover {
-    opacity: 0.8;
+  opacity: 0.8;
 }
 </style>

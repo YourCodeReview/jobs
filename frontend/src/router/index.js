@@ -4,17 +4,17 @@ import { createRouter, createWebHistory } from 'vue-router'
 const routes = [
   {
     path: '/:catchAll(.*)',
-    redirect:'404',
+    redirect: '404'
   },
   {
     path: '/404',
     component: () => import('@/layouts/JobsLayout.vue'),
     children: [
       {
-        name: "NotFound",
+        name: 'NotFound',
         path: '',
-        component: () => import('@/views/NotFoundView.vue'),
-      },
+        component: () => import('@/views/NotFoundView.vue')
+      }
     ]
   },
   {
@@ -24,13 +24,13 @@ const routes = [
       {
         name: 'Home',
         path: '',
-        component: () => import('@/views/HomeView.vue'),
+        component: () => import('@/views/HomeView.vue')
       },
       {
         name: 'Login',
         path: '/login',
-        component: () => import('@/views/LoginView.vue'),
-      },
+        component: () => import('@/views/LoginView.vue')
+      }
     ]
   },
   {
@@ -40,7 +40,7 @@ const routes = [
       {
         name: 'Jobs',
         path: '',
-        component: () => import('@/views/JobsView.vue'),
+        component: () => import('@/views/JobsView.vue')
       },
       {
         name: 'Vacancy',
@@ -57,10 +57,10 @@ const routes = [
       {
         name: 'NewVacancy',
         path: '',
-        component: () => import('@/views/AddVacancyView.vue'),
-      },
+        component: () => import('@/views/AddVacancyView.vue')
+      }
     ]
-  },
+  }
 ]
 
 const router = createRouter({
@@ -68,7 +68,7 @@ const router = createRouter({
   routes,
   scrollBehavior(to, from, savedPosition) {
     return from.name !== 'Vacancy' ? { top: 0 } : savedPosition
-  },
+  }
 })
 
 export default router

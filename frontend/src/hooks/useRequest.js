@@ -9,9 +9,9 @@ export const useRequest = (requestFunction) => {
     loading.value = true
     try {
       data.value = await requestFunction(params)
-    } catch(e) {
+    } catch (e) {
       error.value = e.response
-      console.log(error.value);
+      console.log(error.value)
     } finally {
       loading.value = false
     }
