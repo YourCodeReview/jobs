@@ -117,10 +117,13 @@ if __name__ == "__main__":
                         'frontend', 
                         'backend', 
                         ]
-    result = []
+
+
+def get_vacancies(main_words, languages_stacks):
     all_ides = set()
+    result = []
     for word in main_words:
-        temp_list = []
         for stack in languages_stacks:
             vacancies = fetch_hh_vacancies(all_ides, f"{word} {stack}")
             result.extend(vacancies)
+    return result
