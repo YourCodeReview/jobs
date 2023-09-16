@@ -101,22 +101,21 @@ def fetch_hh_page_vacancies(all_ides, text, page=0):
     return vacancies, pages
 
 
-if __name__ == "__main__":
-    main_words = ['junior', 
-                  'intern', 
-                  'стажер', 
-                  'младший', 
-                  'начинающий',
-                  ]
-    languages_stacks = ['python', 
-                        'java', 
-                        'javascript', 
-                        'data science', 
-                        'qa', 
-                        'c#',
-                        'frontend', 
-                        'backend', 
-                        ]
+main_words = ['junior', 
+                'intern', 
+                'стажер', 
+                'младший', 
+                'начинающий',
+                ]
+languages_stacks = ['python', 
+                    'java', 
+                    'javascript', 
+                    'data science', 
+                    'qa', 
+                    'c#',
+                    'frontend', 
+                    'backend', 
+                    ]
 
 
 def get_vacancies(main_words, languages_stacks):

@@ -33,5 +33,3 @@ app.add_middleware(
 
 app.include_router(routes.router, prefix="/api", tags=["API"])
 app.include_router(api_routes.router, prefix="/parse", tags=["Parsing"])
-
-api_routes.test_vacancy()
