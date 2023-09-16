@@ -6,6 +6,8 @@ from models import Base
 from parsing import api_routes
 from api import routes
 
+
+
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
@@ -33,3 +35,7 @@ app.add_middleware(
 
 app.include_router(routes.router, prefix="/api", tags=["API"])
 app.include_router(api_routes.router, prefix="/parse", tags=["Parsing"])
+
+# if __name__ == '__main__':
+#     import uvicorn
+#     uvicorn.run(app, reload=True)

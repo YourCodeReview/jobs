@@ -100,7 +100,6 @@ def fetch_hh_page_vacancies(all_ides, text, page=0):
             vacancy["remote"] = False 
     return vacancies, pages
 
-
 main_words = ['junior', 
                 'intern', 
                 # 'стажер', 
@@ -116,9 +115,13 @@ languages_stacks = ['python',
                     # 'frontend', 
                     # 'backend', 
                     ]
-all_ides = set()
-result = []
-for word in main_words:
-    for stack in languages_stacks:
-        vacancies = fetch_hh_vacancies(all_ides, f"{word} {stack}")
-        result.extend(vacancies)
+
+
+def get_vacancies(main_words, languages_stacks):
+    all_ides = set()
+    result = []
+    for word in main_words:
+        for stack in languages_stacks:
+            vacancies = fetch_hh_vacancies(all_ides, f"{word} {stack}")
+            result.extend(vacancies)
+    return result
