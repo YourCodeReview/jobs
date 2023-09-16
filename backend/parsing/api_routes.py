@@ -22,3 +22,5 @@ def test_vacancy():
     for db in get_db():
         for job in result:
             create_vacancy(db, job)
+
+test_vacancy()
