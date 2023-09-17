@@ -111,18 +111,32 @@ def get_vacancies(main_words, languages_stacks):
     return result
 
 
+def import_vacancies():
+    from backend.database import get_db
+    from backend.crud import create_vacancy
+    
+    result = get_vacancies(main_words, languages_stacks)
+    for db in get_db():
+        for job in result:
+            create_vacancy(db, job)
+
+
 main_words = ['junior', 
-              'intern', 
-              'стажер', 
-              'младший', 
-              'начинающий',
+            #   'intern', 
+            #   'стажер', 
+            #   'младший', 
+            #   'начинающий',
                 ]
 languages_stacks = ['python', 
-                    'java', 
-                    'javascript', 
-                    'data science', 
-                    'qa', 
-                    'c#',
-                    'frontend', 
-                    'backend', 
+#                     'java', 
+#                     'javascript', 
+#                     'data science', 
+#                     'qa', 
+#                     'c#',
+#                     'frontend', 
+#                     'backend', 
                     ]
+
+
+if __name__ == "__main__":
+    import_vacancies()

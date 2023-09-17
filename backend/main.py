@@ -33,18 +33,3 @@ app.add_middleware(
 
 app.include_router(routes.router, prefix="/api", tags=["API"])
 app.include_router(api_routes.router, prefix="/parse", tags=["Parsing"])
-
-
-def import_vacancies():
-    from database import get_db
-    from crud import create_vacancy
-    from parsing.hh import get_vacancies, main_words, languages_stacks
-    
-    result = get_vacancies(main_words, languages_stacks)
-    for db in get_db():
-        for job in result:
-            create_vacancy(db, job)
-
-
-if __name__ == "__main__":
-    import_vacancies()
