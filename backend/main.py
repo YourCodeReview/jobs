@@ -36,9 +36,9 @@ app.include_router(api_routes.router, prefix="/parse", tags=["Parsing"])
 
 
 def import_vacancies():
-    from backend.database import get_db
-    from backend.crud import create_vacancy
-    from backend.parsing.hh import get_vacancies, main_words, languages_stacks
+    from database import get_db
+    from crud import create_vacancy
+    from parsing.hh import get_vacancies, main_words, languages_stacks
     
     result = get_vacancies(main_words, languages_stacks)
     for db in get_db():
