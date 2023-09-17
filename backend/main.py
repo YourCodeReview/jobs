@@ -35,11 +35,11 @@ app.include_router(routes.router, prefix="/api", tags=["API"])
 app.include_router(api_routes.router, prefix="/parse", tags=["Parsing"])
 
 if __name__ == "__main__":
-    import uvicorn
-    import subprocess
-    command = "uvicorn main:app --reload"
-    subprocess.call(command, shell=True)
-    api_routes.test_vacancy()
+    # import uvicorn
     # uvicorn.run(app, reload=True)
+    api_routes.test_vacancy()
+
+    # import subprocess
+    # command = "uvicorn main:app --reload"
+    # subprocess.call(command, shell=True)
     # api_routes.test_vacancy()
-    # print("Fastapi starts")
