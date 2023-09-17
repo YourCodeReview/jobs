@@ -1,9 +1,11 @@
+from typing import List
+
 from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy.orm import Session
 
 from database import get_db
 from schemas import VacancyCreate
-from crud import create_vacancy, get_vacancies, get_vacancy_by_id
+from crud import create_vacancy, get_vacancies, get_vacancies_with_specialities, get_vacancy_by_id
 
 router = APIRouter()
 
@@ -17,9 +19,13 @@ def new_vacancy(vacancy: VacancyCreate, db: Session = Depends(get_db)):
 def read_vacancies(
     skip: int = Query(0, description="Offset for pagination"),
     limit: int = Query(10, description="Limit for pagination"),
+    specialities: List[str] = Query([], description="List of specialities to filter by, separated by '&'"),
     db: Session = Depends(get_db)
 ):
-    vacancies = get_vacancies(db, skip, limit)
+    if specialities:
+        vacancies = get_vacancies_with_specialities(db, skip, limit, specialities)
+    else:
+        vacancies = get_vacancies(db, skip, limit)
     return vacancies
 
 
