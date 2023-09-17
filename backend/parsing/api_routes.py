@@ -9,7 +9,7 @@ from .hh import get_vacancies, main_words, languages_stacks
 router = APIRouter()
 
 
-@router.post("/parse/parse-hh/")
+@router.post("/parse-hh/")
 async def save_vacancies_to_db(db: Session = Depends(get_db)):
     result = get_vacancies(main_words, languages_stacks)
     for job in result:
