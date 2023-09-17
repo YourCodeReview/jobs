@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, String, Boolean, Text
 
-from database import Base
+from backend.database import Base
 
 
 class Vacancy(Base):
