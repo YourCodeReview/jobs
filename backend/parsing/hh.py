@@ -101,11 +101,21 @@ def fetch_hh_page_vacancies(all_ides, text, page=0):
     return vacancies, pages
 
 
+def get_vacancies(main_words, languages_stacks):
+    all_ides = set()
+    result = []
+    for word in main_words:
+        for stack in languages_stacks:
+            vacancies = fetch_hh_vacancies(all_ides, f"{word} {stack}")
+            result.extend(vacancies)
+    return result
+
+
 main_words = ['junior', 
-                'intern', 
-                'стажер', 
-                'младший', 
-                'начинающий',
+              'intern', 
+              'стажер', 
+              'младший', 
+              'начинающий',
                 ]
 languages_stacks = ['python', 
                     'java', 
@@ -116,13 +126,3 @@ languages_stacks = ['python',
                     'frontend', 
                     'backend', 
                     ]
-
-
-def get_vacancies(main_words, languages_stacks):
-    all_ides = set()
-    result = []
-    for word in main_words:
-        for stack in languages_stacks:
-            vacancies = fetch_hh_vacancies(all_ides, f"{word} {stack}")
-            result.extend(vacancies)
-    return result
