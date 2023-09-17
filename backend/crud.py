@@ -5,23 +5,22 @@ from models import Vacancy
 
 
 def get_vacancies(db: Session, skip: int = 0, limit: int = 10):
-    """
-    Retrieve all vacancies with pagination
-    """
+    """ Retrieve all vacancies with pagination """
     return db.query(Vacancy).offset(skip).limit(limit).all()
 
 
+def get_vacancies_with_specialities(db: Session, skip: int, limit: int, specialities: list):
+    """ Retrieve vacancies filtered by speciality """
+    return db.query(Vacancy).filter(Vacancy.speciality.in_(specialities)).offset(skip).limit(limit).all()
+
+
 def get_vacancy_by_id(db: Session, vacancy_id: int):
-    """
-    Retrieve a single vacancy by its ID.
-    """
+    """ Retrieve a single vacancy by its ID. """
     return db.query(Vacancy).filter(Vacancy.id == vacancy_id).first()
 
 
 def create_vacancy(db: Session, vacancy: VacancyCreate):
-    """
-    Create a new vacancy and insert it into the database.
-    """
+    """ Create a new vacancy and insert it into the database. """
     db_vacancy = Vacancy(
         external_id=vacancy["id"],
         company_name=vacancy["company_name"],
