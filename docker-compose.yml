@@ -9,6 +9,7 @@ services:
       - ./backend:/app
     depends_on:
       - database
+    restart: on-failure
   database:
     image: postgres:latest
     environment:
