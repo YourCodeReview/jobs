@@ -4,3 +4,4 @@ __pycache__/
 backend/parsing/result.json
 jobs.db
 venv
+virtenv

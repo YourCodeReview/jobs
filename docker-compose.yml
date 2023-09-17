@@ -7,6 +7,18 @@ services:
       - "8000:8000"
     volumes:
       - ./backend:/app
+    depends_on:
+      - database
+  database:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: team
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: jobs
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./backend/db_data:/var/lib/postgresql/data
   frontend:
     build:
       context: ./frontend
