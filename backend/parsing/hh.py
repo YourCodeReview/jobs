@@ -112,8 +112,8 @@ def get_vacancies(main_words, languages_stacks):
 
 
 def import_vacancies():
-    from backend.database import get_db
-    from backend.crud import create_vacancy
+    from database import get_db
+    from crud import create_vacancy
     
     result = get_vacancies(main_words, languages_stacks)
     for db in get_db():

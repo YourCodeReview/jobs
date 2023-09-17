@@ -7,7 +7,7 @@ from sqlalchemy.orm import sessionmaker
 # DB_PATH = os.path.join(CUR_DIR, 'jobs.db')
 
 # SQLALCHEMY_DATABASE_URL = f"sqlite:///{DB_PATH}"
-SQLALCHEMY_DATABASE_URL = "postgresql://team:password@database/jobs"
+SQLALCHEMY_DATABASE_URL = "postgresql://team:password@68.183.220.246/jobs"
 
 engine = create_engine(
     SQLALCHEMY_DATABASE_URL,  # connect_args={"check_same_thread": False}
