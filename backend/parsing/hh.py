@@ -1,5 +1,6 @@
 import requests
 import re
+from api_routes import import_vacancies
 
 
 def clean_name(text):
@@ -111,6 +112,17 @@ def get_vacancies(main_words, languages_stacks):
     return result
 
 
+def import_vacancies():
+    from database import get_db
+    from crud import create_vacancy
+    from parsing.hh import get_vacancies, main_words, languages_stacks
+    
+    result = get_vacancies(main_words, languages_stacks)
+    for db in get_db():
+        for job in result:
+            create_vacancy(db, job)
+
+
 main_words = ['junior', 
               'intern', 
               'стажер', 
@@ -126,3 +138,7 @@ languages_stacks = ['python',
                     'frontend', 
                     'backend', 
                     ]
+
+
+if __name__ == "__main__":
+    import_vacancies()
