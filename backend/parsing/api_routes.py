@@ -15,10 +15,3 @@ async def save_vacancies_to_db(db: Session = Depends(get_db)):
     for job in result:
         create_vacancy(db, job)
     return {"message": "Vacancies saved successfully"}
-
-
-def test_vacancy():
-    result = get_vacancies(main_words, languages_stacks)
-    for db in get_db():
-        for job in result:
-            create_vacancy(db, job)

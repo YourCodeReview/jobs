@@ -34,12 +34,17 @@ app.add_middleware(
 app.include_router(routes.router, prefix="/api", tags=["API"])
 app.include_router(api_routes.router, prefix="/parse", tags=["Parsing"])
 
-if __name__ == "__main__":
-    # import uvicorn
-    # uvicorn.run(app, reload=True)
-    api_routes.test_vacancy()
 
-    # import subprocess
-    # command = "uvicorn main:app --reload"
-    # subprocess.call(command, shell=True)
-    # api_routes.test_vacancy()
+def import_vacancies():
+    from backend.database import get_db
+    from backend.crud import create_vacancy
+    from backend.parsing.hh import get_vacancies, main_words, languages_stacks
+    
+    result = get_vacancies(main_words, languages_stacks)
+    for db in get_db():
+        for job in result:
+            create_vacancy(db, job)
+
+
+if __name__ == "__main__":
+    import_vacancies()
