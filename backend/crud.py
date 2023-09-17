@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
 
-from backend.schemas import VacancyCreate
-from backend.models import Vacancy
+from schemas import VacancyCreate
+from models import Vacancy
 
 
 def get_vacancies(db: Session, skip: int = 0, limit: int = 10):
