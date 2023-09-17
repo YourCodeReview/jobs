@@ -112,17 +112,17 @@ def get_vacancies(main_words, languages_stacks):
 
 
 main_words = ['junior', 
-              'intern', 
-              'стажер', 
-              'младший', 
-              'начинающий',
+            #   'intern', 
+            #   'стажер', 
+            #   'младший', 
+            #   'начинающий',
                 ]
 languages_stacks = ['python', 
-                    'java', 
-                    'javascript', 
-                    'data science', 
-                    'qa', 
-                    'c#',
-                    'frontend', 
-                    'backend', 
+                    # 'java', 
+                    # 'javascript', 
+                    # 'data science', 
+                    # 'qa', 
+                    # 'c#',
+                    # 'frontend', 
+                    # 'backend', 
                     ]
