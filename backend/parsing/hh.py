@@ -168,4 +168,3 @@ languages_stacks = ['python',
 if __name__ == "__main__":
     clear_db()
     import_vacancies()
-    
