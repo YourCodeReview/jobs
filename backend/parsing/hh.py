@@ -113,20 +113,38 @@ def get_vacancies(main_words, languages_stacks):
 
 from database import get_db
 from crud import create_vacancy
-
-
 def import_vacancies():
     result = get_vacancies(main_words, languages_stacks)
     for db in get_db():
         for job in result:
             create_vacancy(db, job)
 
+import psycopg2
+def clear_db():
+    try:
+        # Replace these with your database connection details
+        conn = psycopg2.connect(
+            dbname='jobs',
+            user='team',
+            password='password',
+            host='68.183.220.246',
+            port='5432'
+        )
 
-from sqlalchemy.orm import Session
-def clear_db(db: Session):
-    """ Clear all vacancies from the database. """
-    db.query().delete()
-    db.commit()
+        # Create a cursor
+        cur = conn.cursor()
+
+        cur.execute("DELETE FROM vacancies;")
+
+        # Commit the changes
+        conn.commit()
+
+        # Close the cursor and the connection
+        cur.close()
+        conn.close()
+    except Exception as e:
+        print("Error: ", str(e))
+        print("Database cleared successfully.")
 
 
 main_words = ['junior', 
@@ -148,4 +166,5 @@ languages_stacks = ['python',
 
 if __name__ == "__main__":
     clear_db()
-    # import_vacancies()
+    import_vacancies()
+    
