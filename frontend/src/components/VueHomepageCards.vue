@@ -3,6 +3,17 @@ import uiStackCard from '@/components/_ui/uiStackCard.vue'
 import svgLogo from '@/components/_icons/svgLogo.vue'
 
 import cards from '@/data/welcome-cards.json'
+import { useJobsStore } from '@/store/jobs';
+
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+const jobsStore = useJobsStore();
+
+const fetchWithQuery = (newValue) => {
+  jobsStore.changeQuery('specialities', newValue)
+  router.push({ name: 'Jobs' })
+}
 </script>
 
 <template>
@@ -22,9 +33,7 @@ import cards from '@/data/welcome-cards.json'
     </header>
     <div class="container pt-2 justify-center">
       <div class="grid-cards">
-          <router-link v-for="item in cards" :key="item.id" :to="{ name: 'Jobs', query: { specialty: item.type } }">
-            <ui-stack-card :item="item" />
-          </router-link>
+        <ui-stack-card v-for="item in cards" :key="item.id" @click="fetchWithQuery(item.type)" :item="item" />
       </div>
     </div>
   </div>

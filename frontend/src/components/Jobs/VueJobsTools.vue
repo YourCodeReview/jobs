@@ -1,106 +1,27 @@
 <script setup>
-import { ref, reactive, onMounted, watch } from 'vue'
-import { useRoute } from 'vue-router'
+import { ref, onMounted } from 'vue'
 
 import svgTelegram from '@/components/_icons/svgTelegram.vue'
+import groups from '@/data/tools-groups.json'
 
-const route = useRoute()
-const groups = [
-  {
-    title: 'Зарплата',
-    list: [
-      {
-        title: 'Не имеет значения',
-        type: 'none'
-      },
-      {
-        title: 'От 10000 руб.',
-        type: '10000'
-      },
-      {
-        title: 'От 50000 руб.',
-        type: '50000'
-      },
-      {
-        title: 'От 100000 руб.',
-        type: '100000'
-      },
-      {
-        title: 'От 150000 руб.',
-        type: '150000'
-      }
-    ],
-    type: 'radio',
-    queriesName: 'salary'
-  },
-  {
-    title: 'Формат работы',
-    list: [
-      {
-        title: 'Удаленно',
-        type: 'remote'
-      },
-      {
-        title: 'Офис',
-        type: 'office'
-      }
-    ],
-    type: 'checkbox',
-    queriesName: 'format'
-  },
-  {
-    title: 'Специализация',
-    list: [
-      {
-        title: 'Python',
-        type: 'python'
-      },
-      {
-        title: 'Java',
-        type: 'java'
-      },
-      {
-        title: 'JavaScript',
-        type: 'javascript'
-      },
-      {
-        title: 'Data Science',
-        type: 'data_science'
-      },
-      {
-        title: 'QA',
-        type: 'qa'
-      },
-      {
-        title: 'C#',
-        type: 'c-sharp'
-      }
-    ],
-    type: 'radio',
-    queriesName: 'stack'
-  }
-]
-const queries = reactive({
-  salary: 'none',
-  stack: ''
+import { useJobsStore } from '@/store/jobs';
+import { watch } from 'vue';
+
+const jobsStore = useJobsStore()
+const specialities = ref([])
+
+const changeQuery = () => {
+  jobsStore.changeQuery('specialities', specialities.value || null);
+  jobsStore.fetchJobsDataWithDebounce();
+}
+
+onMounted(() => {
+  specialities.value = jobsStore.fetchQuery.specialities
 })
-const format = ref([])
 
-watch(
-  () => route.query,
-  async () => {
-    Object.keys(queries).forEach((key) => {
-      queries[key] = route.query[key]
-    })
-  },
-  { deep: true }
-)
-
-// onMounted(async () => {
-//     Object.keys(queries).forEach((key) => {
-//         queries[key] ? queries[key] = route.query[key] : null;
-//     });
-// });
+watch(() => jobsStore.fetchQuery.specialities, () => {
+  specialities.value = jobsStore.fetchQuery.specialities
+})
 </script>
 
 <template>
@@ -121,7 +42,7 @@ watch(
     </v-btn>
     <v-expansion-panel v-for="group in groups" :key="group.title" :title="group.title" rounded="xl">
       <v-expansion-panel-text>
-        <template v-if="group.type === 'checkbox'">
+        <!-- <template v-if="group.queriesName === 'format'">
           <v-checkbox
             v-for="item in group.list"
             v-model="format"
@@ -132,8 +53,8 @@ watch(
             :value="item.type"
           ></v-checkbox>
         </template>
-        <template v-if="group.type === 'radio'">
-          <v-radio-group v-model="queries[group.queriesName]">
+        <template v-if="group.queriesName === 'salary'">
+          <v-radio-group v-model="salary">
             <v-radio
               v-for="item in group.list"
               :key="item.title"
@@ -141,6 +62,18 @@ watch(
               :value="item.type"
             />
           </v-radio-group>
+        </template> -->
+        <template v-if="group.queriesName === 'specialities'">
+          <v-checkbox
+            v-for="item in group.list"
+            v-model="specialities"
+            @change="changeQuery()"
+            density="compact"
+            hide-details
+            :key="item.title"
+            :label="item.title"
+            :value="item.type"
+          ></v-checkbox>
         </template>
       </v-expansion-panel-text>
     </v-expansion-panel>
