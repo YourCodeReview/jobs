@@ -1,0 +1,33 @@
+[
+  {
+    "title": "Специализация",
+    "list": [
+      {
+        "title": "Python",
+        "type": "python"
+      },
+      {
+        "title": "Java",
+        "type": "java"
+      },
+      {
+        "title": "JavaScript",
+        "type": "javascript"
+      },
+      {
+        "title": "Data Science",
+        "type": "data science"
+      },
+      {
+        "title": "QA",
+        "type": "qa"
+      },
+      {
+        "title": "C#",
+        "type": "c#"
+      }
+    ],
+    "type": "radio",
+    "queriesName": "specialities"
+  }
+]

@@ -21,7 +21,7 @@
   {
     "id": 4,
     "name": "Data Science",
-    "type": "data-science",
+    "type": "data science",
     "color": "light-blue-accent-2"
   },
   {
@@ -33,7 +33,7 @@
   {
     "id": 6,
     "name": "C#",
-    "type": "c-sharp",
+    "type": "c#",
     "color": "green-darken-1"
   }
 ]
