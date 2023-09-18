@@ -111,14 +111,22 @@ def get_vacancies(main_words, languages_stacks):
     return result
 
 
+from database import get_db
+from crud import create_vacancy
+
+
 def import_vacancies():
-    from database import get_db
-    from crud import create_vacancy
-    
     result = get_vacancies(main_words, languages_stacks)
     for db in get_db():
         for job in result:
             create_vacancy(db, job)
+
+
+from sqlalchemy.orm import Session
+def clear_db(db: Session):
+    """ Clear all vacancies from the database. """
+    db.query().delete()
+    db.commit()
 
 
 main_words = ['junior', 
@@ -139,4 +147,5 @@ languages_stacks = ['python',
 
 
 if __name__ == "__main__":
-    import_vacancies()
+    clear_db()
+    # import_vacancies()
