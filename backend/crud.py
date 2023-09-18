@@ -1,4 +1,5 @@
 from sqlalchemy.orm import Session
+from sqlalchemy import func
 
 from schemas import VacancyCreate
 from models import Vacancy
@@ -6,7 +7,9 @@ from models import Vacancy
 
 def get_vacancies(db: Session, skip: int = 0, limit: int = 10):
     """ Retrieve all vacancies with pagination """
-    return db.query(Vacancy).offset(skip).limit(limit).all()
+    vacancies = db.query(Vacancy).offset(skip).limit(limit).all()
+    total_count = db.query(func.count(Vacancy.id)).scalar()
+    return total_count, vacancies
 
 
 def get_vacancies_with_specialities(db: Session, skip: int, limit: int, specialities: list):
