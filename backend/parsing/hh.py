@@ -122,7 +122,6 @@ def import_vacancies():
 import psycopg2
 def clear_db():
     try:
-        # Replace these with your database connection details
         conn = psycopg2.connect(
             dbname='jobs',
             user='team',
@@ -131,20 +130,16 @@ def clear_db():
             port='5432'
         )
 
-        # Create a cursor
         cur = conn.cursor()
 
         cur.execute("DELETE FROM vacancies;")
 
-        # Commit the changes
         conn.commit()
 
-        # Close the cursor and the connection
         cur.close()
         conn.close()
     except Exception as e:
         print("Error: ", str(e))
-        print("Database cleared successfully.")
 
 
 main_words = ['junior', 
