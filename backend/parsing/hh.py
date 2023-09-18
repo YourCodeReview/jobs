@@ -119,15 +119,21 @@ def import_vacancies():
         for job in result:
             create_vacancy(db, job)
 
+import os
 import psycopg2
+from dotenv import load_dotenv
+
+load_dotenv()
+
+
 def clear_db():
     try:
         conn = psycopg2.connect(
-            dbname='jobs',
-            user='team',
-            password='password',
-            host='68.183.220.246',
-            port='5432'
+            dbname=os.getenv('DB_NAME'),
+            user=os.getenv('DB_USER'),
+            password=os.getenv('DB_PASSWORD'),
+            host=os.getenv('DB_HOST'),
+            port=os.getenv('DB_PORT')
         )
 
         cur = conn.cursor()
