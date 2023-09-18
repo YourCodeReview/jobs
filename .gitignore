@@ -6,3 +6,4 @@ jobs.db
 venv
 virtenv
 .env
+*.json

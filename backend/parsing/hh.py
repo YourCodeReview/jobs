@@ -1,5 +1,6 @@
 import requests
 import re
+import time
 
 
 def clean_name(text):
@@ -91,6 +92,7 @@ def fetch_hh_page_vacancies(all_ides, text, page=0):
             "url": vacancy_data["alternate_url"] if vacancy_data and vacancy_data["alternate_url"] else None,
             "description": vacancy_data["description"] if vacancy_data and vacancy_data["description"] else None,
         }
+        time.sleep(0.25)
         if vacancy["id"] not in all_ides:
             vacancies.append(vacancy)
             all_ides.add(vacancy["id"])
@@ -115,9 +117,13 @@ from database import get_db
 from crud import create_vacancy
 def import_vacancies():
     result = get_vacancies(main_words, languages_stacks)
+    # res = []
     for db in get_db():
         for job in result:
             create_vacancy(db, job)
+            # res.append(job)
+    # with open('test.txt', 'a', encoding='utf-8') as f:
+    #     f.write(str(res))
 
 import os
 import psycopg2
@@ -154,12 +160,15 @@ main_words = ['junior',
               'младший', 
               'начинающий',
                 ]
-languages_stacks = ['python', 
+languages_stacks = [
+                    'python', 
                     'java', 
                     'javascript', 
-                    'data science', 
+                    'data scientist', 
                     'qa', 
                     'c#',
+                    'ds',
+                    'аналитик данных',
                     'frontend', 
                     'backend', 
                     ]
