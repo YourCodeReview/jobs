@@ -7,6 +7,7 @@
     href="https://yourcodereview.com/"
     :variant="variant"
     :block="block"
+    target="_blank"
   >
     Карьерная поддержка
   </v-btn>

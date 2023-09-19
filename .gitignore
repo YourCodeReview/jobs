@@ -5,3 +5,5 @@ backend/parsing/result.json
 jobs.db
 venv
 virtenv
+.env
+*.json

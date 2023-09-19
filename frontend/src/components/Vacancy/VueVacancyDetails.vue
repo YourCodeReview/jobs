@@ -3,7 +3,6 @@ import { ref } from 'vue'
 import { useFirebase } from '@/hooks/useFirebase'
 
 import UiCard from '@/components/_ui/uiCard.vue'
-import UiSnackbar from '@/components/_ui/uiSnackbar.vue'
 
 const props = defineProps({
   data: Object
@@ -11,36 +10,13 @@ const props = defineProps({
 
 const auth = useFirebase()
 const dialog = ref(false)
-
-const snackbar = ref(false)
-const copyText = () => {
-  navigator.clipboard
-    .writeText('Это ссылка на вакансию')
-    .then(() => {
-      console.log('Async: Copying to clipboard was successful!')
-    })
-    .catch((err) => {
-      console.log('Something went wrong', err)
-    })
-}
 </script>
 
 <template>
-  <div v-if="props.data" class="py-4 position-relative">
+  <div v-if="props.data" class="position-relative">
     <v-row class="page-nav justify-center">
       <v-col cols="12" class="d-flex py-1">
         <v-btn icon="mdi-arrow-left" size="small" @click="$router.back()" />
-        <v-btn class="ml-auto" icon size="small" @click="auth.isLoggedIn.value ? copyText() : null">
-          <v-icon>mdi-export-variant</v-icon>
-          <ui-snackbar
-            v-model="snackbar"
-            activator="parent"
-            :color="auth.isLoggedIn.value ? 'green' : 'red-darken-1'"
-            :message="
-              auth.isLoggedIn.value ? 'Ссылка на вакансию скопирована' : 'Необходимо авторизоваться'
-            "
-          />
-        </v-btn>
       </v-col>
     </v-row>
     <v-row class="justify-center">
@@ -49,13 +25,9 @@ const copyText = () => {
       </v-col>
     </v-row>
     <v-row class="justify-center">
-      <v-col cols="12" lg="7" sm="8" class="d-flex flex-column">
-        <v-card class="pa-2" rounded="xl">
-          <!-- <v-card-title class="font-weight-bold">
-                        от {{ currentSalary.from }} {{ currentSalary.to ? `- ${currentSalary.to}` :
-                            '' }} {{ currentSalary. }}
-                    </v-card-title> -->
-          <span class="font-weight-bold">неверный формат salary</span>
+      <v-col cols="12" lg="7" sm="8" class="card-info">
+        <v-card v-if="props.data.salary" class="pa-2" rounded="xl">
+          <span class="text-h5 font-weight-bold px-2">{{ props.data.salary }}</span>
         </v-card>
         <v-hover v-slot="{ isHovering, props }">
           <v-card
@@ -72,17 +44,7 @@ const copyText = () => {
             <v-card-text> Расскажем в наших карьерных консультациях </v-card-text>
           </v-card>
         </v-hover>
-        <v-card class="mt-2 pa-6" rounded="xl">
-      <!-- <v-list v-for="item in data.description" :key="item.title">
-              <v-list-item>
-                  <v-list-item-title class="font-weight-bold">{{
-                      item.title
-                  }}</v-list-item-title>
-                  <v-card-text v-for="item in item.list" :key="item" class="py-2">
-                      - {{ data.description}}
-                  </v-card-text>
-              </v-list-item>
-          </v-list> -->
+        <v-card v-if="props.data.description" class="mt-2 pa-6" rounded="xl">
           <div class="description" v-html="props.data.description" />
         </v-card>
       </v-col>
@@ -107,6 +69,7 @@ const copyText = () => {
                   size="large"
                   rounded="xl"
                   block
+                  target="_blank"
                 >
                   Узнать подробнее
                 </v-btn>
@@ -119,7 +82,7 @@ const copyText = () => {
             block
             color="black"
             size="large"
-            :href="currentVacancy.url"
+            :href="props.data.url"
           >
             Отклик
           </v-btn>
@@ -144,6 +107,11 @@ const copyText = () => {
 </template>
 
 <style scoped>
+.card-info {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
 .close-popup {
   position: absolute;
   top: 25px;
@@ -179,5 +147,10 @@ const copyText = () => {
   flex-direction: column;
 
   gap: 16px;
+}
+
+.description > ul,
+.description > ol {
+  padding-left: 16px;
 }
 </style>

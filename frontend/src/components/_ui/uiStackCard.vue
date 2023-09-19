@@ -16,9 +16,9 @@ const chips = ['Удаленная работа', 'Junior вакансии', 'С
 
 const currentComponent = computed(() => {
   switch (props.item.type) {
-    case 'data-science':
+    case 'ds':
       return svgDataScience
-    case 'c-sharp':
+    case 'c#':
       return svgCSharp
     case 'java':
       return svgJava
@@ -33,7 +33,13 @@ const currentComponent = computed(() => {
 </script>
 
 <template>
-  <v-card max-width="400" class="pa-4 mx-auto d-flex flex-column justify-end" rounded="xl" elevation="10">
+  <v-card
+    max-width="400"
+    width="100%"
+    class="pa-4 mx-auto d-flex flex-column justify-end"
+    rounded="xl"
+    elevation="10"
+  >
     <v-row>
       <v-col cols="8" class="d-flex flex-column align-start">
         <v-chip class="mb-2" v-for="chip in chips" :key="chip" rounded="lg">{{ chip }}</v-chip>

@@ -3,7 +3,8 @@ import UiCard from '@/components/_ui/uiCard.vue'
 
 const props = defineProps({
   list: {
-    type: Array
+    type: Array,
+    required: true
   }
 })
 </script>

@@ -23,10 +23,16 @@ def read_vacancies(
     db: Session = Depends(get_db)
 ):
     if specialities:
-        vacancies = get_vacancies_with_specialities(db, skip, limit, specialities)
+        # if specialities == ['ds']:
+        #     specialities.extend(['scientist', 'data', 'аналитик'])
+        total_count, vacancies = get_vacancies_with_specialities(db, skip, limit, specialities)
     else:
-        vacancies = get_vacancies(db, skip, limit)
-    return vacancies
+        total_count, vacancies = get_vacancies(db, skip, limit)
+
+    return {
+        "total_count": total_count,
+        "data": vacancies,
+    }
 
 
 @router.get("/jobs/{vacancy_id}")

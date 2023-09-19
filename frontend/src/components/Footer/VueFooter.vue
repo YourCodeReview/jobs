@@ -5,7 +5,6 @@ import NavigationSection from '@/components/Footer/VueFooterNavigation.vue'
 import contacts from '@/data/contacts.json'
 import anchors from '@/data/anchors.json'
 import links from '@/data/links.json'
-
 </script>
 
 <template>

@@ -1,41 +1,33 @@
 <script setup>
 import { useRoute } from 'vue-router'
-import { ref, onMounted, watch } from 'vue'
-import { useGetVacancy } from '@/api/requests'
+import { onMounted } from 'vue'
+import { useVacancyStore } from '@/store/vacancy'
 
 import VacancyDetails from '@/components/Vacancy/VueVacancyDetails.vue'
 
-const { data, loading, error, execute } = useGetVacancy()
-const vacancyId = ref('')
+const vacancyStore = useVacancyStore()
 const route = useRoute()
 
-watch(
-  () => route.params.id,
-  async (newVacancyId) => {
-    vacancyId.value = newVacancyId
-  }
-)
-
-onMounted(async () => {
-  vacancyId.value = route.params.id
-  await execute(vacancyId.value)
+onMounted(() => {
+  const id = route.params.id
+  vacancyStore.changeId(id)
 })
 </script>
 
 <template>
   <div class="container">
     <v-progress-circular
-      v-if="loading"
+      v-if="vacancyStore.loading"
       class="d-block mx-auto mt-8"
       size="74"
       width="10"
       indeterminate
     />
-    <template v-else-if="error">
-      <h1 class="text-center text-h4">{{ error.status }}</h1>
-      <h3 class="text-center text-h5">{{ error.data.detail }}</h3>
+    <template v-else-if="vacancyStore.error">
+      <h1 class="text-center text-h4">{{ vacancyStore.error.status }}</h1>
+      <h3 class="text-center text-h5">{{ vacancyStore.error.data.detail }}</h3>
     </template>
-    <vacancy-details v-else :data="data" />
+    <vacancy-details v-else :data="vacancyStore.vacancy" />
   </div>
 </template>
 
