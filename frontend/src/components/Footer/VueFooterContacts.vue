@@ -16,6 +16,7 @@ const props = defineProps({
         class="justify-start"
         variant="text"
         :href="contact.href"
+        target="_blank"
         block
         >{{ contact.name }}</v-btn
       >

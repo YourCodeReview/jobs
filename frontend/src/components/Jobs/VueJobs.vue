@@ -1,6 +1,7 @@
 <script setup>
 import JobsList from '@/components/Jobs/VueJobsList.vue'
 import JobsTools from '@/components/Jobs/VueJobsTools.vue'
+import JobsPagination from '@/components/Jobs/VueJobsPagination.vue'
 
 import { useJobsStore } from '@/store/jobs'
 import { onMounted } from 'vue'
@@ -14,7 +15,7 @@ onMounted(() => {
 
 <template>
   <div class="container">
-    <v-row justify-sm="center" justify-md="start">
+    <v-row class="min-height" justify-sm="center" justify-md="start">
       <v-col cols="12" sm="10" md="3" lg="3" class="d-flex flex-column align-end">
         <jobs-tools />
       </v-col>
@@ -32,23 +33,12 @@ onMounted(() => {
         >
       </v-col>
     </v-row>
-    <v-pagination
-      class="pagination"
-      v-model="jobsStore.page"
-      :size="$vuetify.display.smAndUp ? 'default' : 'x-small'"
-      rounded="circle"
-      :length="jobsStore.pages"
-    ></v-pagination>
+    <jobs-pagination />
   </div>
 </template>
 
 <style scoped>
-.container {
+.min-height {
   min-height: 100vh;
-}
-.pagination {
-  position: sticky;
-  bottom: 0;
-  background-color: #f5f5f5;
 }
 </style>

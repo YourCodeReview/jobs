@@ -69,6 +69,7 @@ const dialog = ref(false)
                   size="large"
                   rounded="xl"
                   block
+                  target="_blank"
                 >
                   Узнать подробнее
                 </v-btn>

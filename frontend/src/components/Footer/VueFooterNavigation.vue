@@ -16,12 +16,12 @@ const props = defineProps({
         md="6"
         sm="6"
       >
-        <v-btn variant="text" :href="`https://yourcodereview.com/#${item.anchor}`">
+        <v-btn variant="text" :href="`https://yourcodereview.com/#${item.anchor}`" target="_blank">
           {{ item.name }}
         </v-btn>
       </v-col>
       <v-col v-for="(link, index) in props.links" :key="index" class="py-1" cols="12" md="6" sm="6">
-        <v-btn variant="text" :href="link.href">{{ link.name }}</v-btn>
+        <v-btn variant="text" :href="link.href" target="_blank">{{ link.name }}</v-btn>
       </v-col>
     </v-row>
   </v-col>

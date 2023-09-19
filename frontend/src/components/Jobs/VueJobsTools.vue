@@ -1,30 +1,15 @@
 <script setup>
-import { ref, onMounted } from 'vue'
-
 import svgTelegram from '@/components/_icons/svgTelegram.vue'
 import groups from '@/data/tools-groups.json'
 
 import { useJobsStore } from '@/store/jobs'
-import { watch } from 'vue'
 
 const jobsStore = useJobsStore()
-const specialities = ref([])
 
-const changeQuery = () => {
-  jobsStore.changeQuery('specialities', specialities.value || null)
+const fetchWithQuery = (event) => {
+  jobsStore.changeQuery('specialities', event.target.value)
   jobsStore.fetchJobsDataWithDebounce()
 }
-
-onMounted(() => {
-  specialities.value = jobsStore.fetchQuery.specialities
-})
-
-watch(
-  () => jobsStore.fetchQuery.specialities,
-  () => {
-    specialities.value = jobsStore.fetchQuery.specialities
-  }
-)
 </script>
 
 <template>
@@ -67,16 +52,21 @@ watch(
           </v-radio-group>
         </template> -->
         <template v-if="group.queriesName === 'specialities'">
-          <v-checkbox
-            v-for="item in group.list"
-            v-model="specialities"
-            @change="changeQuery()"
-            density="compact"
+          <v-radio-group
+            v-model="jobsStore.fetchQuery.specialities"
+            @change="fetchWithQuery"
             hide-details
-            :key="item.title"
-            :label="item.title"
-            :value="item.type"
-          ></v-checkbox>
+          >
+            <v-radio
+              class="mb-2"
+              v-for="item in group.list"
+              :key="item.title"
+              :label="item.title"
+              :value="item.type"
+              density="compact"
+              hide-details
+            />
+          </v-radio-group>
         </template>
       </v-expansion-panel-text>
     </v-expansion-panel>
