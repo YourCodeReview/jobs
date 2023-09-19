@@ -4,24 +4,27 @@ import { ref, onMounted } from 'vue'
 import svgTelegram from '@/components/_icons/svgTelegram.vue'
 import groups from '@/data/tools-groups.json'
 
-import { useJobsStore } from '@/store/jobs';
-import { watch } from 'vue';
+import { useJobsStore } from '@/store/jobs'
+import { watch } from 'vue'
 
 const jobsStore = useJobsStore()
 const specialities = ref([])
 
 const changeQuery = () => {
-  jobsStore.changeQuery('specialities', specialities.value || null);
-  jobsStore.fetchJobsDataWithDebounce();
+  jobsStore.changeQuery('specialities', specialities.value || null)
+  jobsStore.fetchJobsDataWithDebounce()
 }
 
 onMounted(() => {
   specialities.value = jobsStore.fetchQuery.specialities
 })
 
-watch(() => jobsStore.fetchQuery.specialities, () => {
-  specialities.value = jobsStore.fetchQuery.specialities
-})
+watch(
+  () => jobsStore.fetchQuery.specialities,
+  () => {
+    specialities.value = jobsStore.fetchQuery.specialities
+  }
+)
 </script>
 
 <template>

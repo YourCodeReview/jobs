@@ -23,6 +23,6 @@ export const useVacancyStore = defineStore('vacancy', () => {
     changeId,
     vacancy,
     loading,
-    error,
+    error
   }
 })

@@ -1,7 +1,7 @@
 <script setup>
 import { useRoute } from 'vue-router'
 import { onMounted } from 'vue'
-import { useVacancyStore } from '@/store/vacancy';
+import { useVacancyStore } from '@/store/vacancy'
 
 import VacancyDetails from '@/components/Vacancy/VueVacancyDetails.vue'
 

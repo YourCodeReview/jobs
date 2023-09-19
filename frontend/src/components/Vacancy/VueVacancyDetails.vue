@@ -3,7 +3,6 @@ import { ref } from 'vue'
 import { useFirebase } from '@/hooks/useFirebase'
 
 import UiCard from '@/components/_ui/uiCard.vue'
-import UiSnackbar from '@/components/_ui/uiSnackbar.vue'
 
 const props = defineProps({
   data: Object
@@ -11,36 +10,13 @@ const props = defineProps({
 
 const auth = useFirebase()
 const dialog = ref(false)
-
-const snackbar = ref(false)
-const copyText = () => {
-  navigator.clipboard
-  .writeText(`${props.data.url}`)
-    .then(() => {
-      console.log('Async: Copying to clipboard was successful!')
-    })
-    .catch((err) => {
-      console.log('Something went wrong', err)
-    })
-}
 </script>
 
 <template>
-  <div v-if="props.data" class="py-4 position-relative">
+  <div v-if="props.data" class="position-relative">
     <v-row class="page-nav justify-center">
       <v-col cols="12" class="d-flex py-1">
         <v-btn icon="mdi-arrow-left" size="small" @click="$router.back()" />
-        <v-btn class="ml-auto" icon size="small" @click="auth.isLoggedIn.value ? copyText() : null">
-          <v-icon>mdi-export-variant</v-icon>
-          <ui-snackbar
-            v-model="snackbar"
-            activator="parent"
-            :color="auth.isLoggedIn.value ? 'green' : 'red-darken-1'"
-            :message="
-              auth.isLoggedIn.value ? 'Ссылка на вакансию скопирована' : 'Необходимо авторизоваться'
-            "
-          />
-        </v-btn>
       </v-col>
     </v-row>
     <v-row class="justify-center">
@@ -105,7 +81,7 @@ const copyText = () => {
             block
             color="black"
             size="large"
-            :href="currentVacancy.url"
+            :href="props.data.url"
           >
             Отклик
           </v-btn>
@@ -170,5 +146,10 @@ const copyText = () => {
   flex-direction: column;
 
   gap: 16px;
+}
+
+.description > ul,
+.description > ol {
+  padding-left: 16px;
 }
 </style>

@@ -3,12 +3,12 @@ import uiStackCard from '@/components/_ui/uiStackCard.vue'
 import svgLogo from '@/components/_icons/svgLogo.vue'
 
 import cards from '@/data/welcome-cards.json'
-import { useJobsStore } from '@/store/jobs';
+import { useJobsStore } from '@/store/jobs'
 
-import { useRouter } from 'vue-router';
+import { useRouter } from 'vue-router'
 
-const router = useRouter();
-const jobsStore = useJobsStore();
+const router = useRouter()
+const jobsStore = useJobsStore()
 
 const fetchWithQuery = (newValue) => {
   jobsStore.changeQuery('specialities', newValue)
@@ -33,7 +33,12 @@ const fetchWithQuery = (newValue) => {
     </header>
     <div class="container pt-2 justify-center">
       <div class="grid-cards">
-        <ui-stack-card v-for="item in cards" :key="item.id" @click="fetchWithQuery(item.type)" :item="item" />
+        <ui-stack-card
+          v-for="item in cards"
+          :key="item.id"
+          @click="fetchWithQuery(item.type)"
+          :item="item"
+        />
       </div>
     </div>
   </div>
