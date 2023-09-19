@@ -163,10 +163,8 @@ languages_stacks = [
                     'javascript', 
                     'qa', 
                     'c#',
-                    'ds',
-                    # 'data', 
-                    # 'scientist', 
-                    # 'аналитик',
+                    'data scientist', 
+                    'data science',
                     'frontend', 
                     'backend', 
                     ]
