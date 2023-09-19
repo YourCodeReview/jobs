@@ -85,14 +85,14 @@ def fetch_hh_page_vacancies(all_ides, text, page=0):
             "company_name": item.get("employer")["name"] if item.get("employer") else None,
             "title": item.get("name"),
             "salary": get_salary(vacancy_data["salary"]) if vacancy_data and vacancy_data["salary"] else None,
-            "location": item.get("address")["raw"] if item.get("address") else None,
+            "location": item.get("address")["raw"] if item.get("address") else item.get("area")["name"] if  item.get("area") else None,
             "speciality": text.split(' ')[1],
             "internship": get_internship(item.get("employment")["name"] if item.get("employment") else None),
             "remote": True if item.get("schedule") and item.get("schedule")["name"] == 'удаленная работа' else False,
             "url": vacancy_data["alternate_url"] if vacancy_data and vacancy_data["alternate_url"] else None,
             "description": vacancy_data["description"] if vacancy_data and vacancy_data["description"] else None,
         }
-        time.sleep(0.25)
+        time.sleep(0.5)
         if vacancy["id"] not in all_ides:
             vacancies.append(vacancy)
             all_ides.add(vacancy["id"])
@@ -117,13 +117,10 @@ from database import get_db
 from crud import create_vacancy
 def import_vacancies():
     result = get_vacancies(main_words, languages_stacks)
-    # res = []
     for db in get_db():
         for job in result:
             create_vacancy(db, job)
-            # res.append(job)
-    # with open('test.txt', 'a', encoding='utf-8') as f:
-    #     f.write(str(res))
+
 
 import os
 import psycopg2
@@ -175,5 +172,8 @@ languages_stacks = [
 
 
 if __name__ == "__main__":
+    start = time.time()
     clear_db()
     import_vacancies()
+    end = time.time()
+    print(f'Время: {round(end - start) / 60} мин.')
