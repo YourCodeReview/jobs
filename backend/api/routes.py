@@ -23,8 +23,8 @@ def read_vacancies(
     db: Session = Depends(get_db)
 ):
     if specialities:
-        if specialities == ['ds']:
-            specialities.extend(['scientist', 'data', 'аналитик'])
+        # if specialities == ['ds']:
+        #     specialities.extend(['scientist', 'data', 'аналитик'])
         total_count, vacancies = get_vacancies_with_specialities(db, skip, limit, specialities)
     else:
         total_count, vacancies = get_vacancies(db, skip, limit)
