@@ -164,6 +164,7 @@ languages_stacks = [
                     'qa', 
                     'c#',
                     'data scientist', 
+                    'data science',
                     'frontend', 
                     'backend', 
                     ]
