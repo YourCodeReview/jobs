@@ -16,7 +16,7 @@ const chips = ['Удаленная работа', 'Junior вакансии', 'С
 
 const currentComponent = computed(() => {
   switch (props.item.type) {
-    case 'ds':
+    case 'data':
       return svgDataScience
     case 'c#':
       return svgCSharp
