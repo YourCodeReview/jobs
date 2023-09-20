@@ -106,7 +106,7 @@ const dialog = ref(false)
   </div>
 </template>
 
-<style scoped>
+<style>
 .card-info {
   display: flex;
   flex-direction: column;
@@ -149,8 +149,8 @@ const dialog = ref(false)
   gap: 16px;
 }
 
-.description > ul,
-.description > ol {
+.description ul,
+.description ol {
   padding-left: 16px;
 }
 </style>
