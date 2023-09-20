@@ -13,6 +13,7 @@ watch(() => jobsStore.page, jobsStore.editCurrentPage)
       v-model="jobsStore.page"
       :size="$vuetify.display.smAndUp ? 'default' : 'x-small'"
       rounded="circle"
+      :total-visible="7"
       :length="jobsStore.pages"
     ></v-pagination>
 </template>
