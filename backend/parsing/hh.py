@@ -175,4 +175,4 @@ if __name__ == "__main__":
     clear_db()
     import_vacancies()
     end = time.time()
-    print(f'Время: {round(end - start) / 60} мин.')
+    print(f'Время: {round((end - start) / 60)} мин.')
