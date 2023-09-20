@@ -11,7 +11,8 @@ Base.metadata.create_all(bind=engine)
 app = FastAPI()
 
 origins = [
-    "http://jobs.yourcodereview.com"
+    "http://jobs.yourcodereview.com",
+    "https://jobs.yourcodereview.com",
     "http://68.183.220.246",
     "https://68.183.220.246",
     "http://68.183.220.246:80",
