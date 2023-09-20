@@ -156,7 +156,7 @@ main_words = ['junior',
               'стажер', 
               'младший', 
               'начинающий',
-                ]
+              ]
 languages_stacks = [
                     'python', 
                     'java', 
@@ -166,7 +166,7 @@ languages_stacks = [
                     'data scientist', 
                     'data science',
                     'frontend', 
-                    'backend', 
+                    # 'backend', 
                     ]
 
 
