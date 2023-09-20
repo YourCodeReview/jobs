@@ -165,6 +165,7 @@ languages_stacks = [
                     'c#',
                     'data scientist', 
                     'data science',
+                    'аналитик данных',
                     'frontend', 
                     # 'backend', 
                     ]
