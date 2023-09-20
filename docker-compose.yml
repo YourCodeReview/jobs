@@ -25,8 +25,3 @@ services:
       context: ./frontend
     ports:
       - "80:80"
-    volumes:
-      - ./frontend:/app
-      - /etc/letsencrypt/live/jobs.yourcodereview.com/fullchain.pem:/etc/nginx/certs/fullchain.pem
-      - /etc/letsencrypt/live/jobs.yourcodereview.com/privkey.pem:/etc/nginx/certs/privkey.pem
-
