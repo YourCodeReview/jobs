@@ -34,11 +34,18 @@ defineProps({
         class="custom-chips"
       >
         <v-chip
-          v-if="item.location"
+          v-if="item.location && size !== 'lg'"
           class="chip text-grey-darken-2"
           prepend-icon="mdi-map-marker"
           label
           >{{ item.location.split(',')[0] }}</v-chip
+        >
+        <v-chip
+          v-else
+          class="chip text-grey-darken-2"
+          prepend-icon="mdi-map-marker"
+          label
+          >{{ item.location }}</v-chip
         >
         <v-chip
           v-if="item.remote"
@@ -47,15 +54,15 @@ defineProps({
           label
           >Удаленно</v-chip
         >
-        <v-chip v-if="item.internship" class="chip chip-salary text-grey-darken-2" label
+        <v-chip v-if="item.internship" class="chip text-grey-darken-2" label
           >Стажировка</v-chip
         >
         
         <v-chip
-          v-if="item.salary && size !== 'lg'"
+          v-if="size !== 'lg'"
           class="chip chip-salary text-grey-darken-2"
           label
-          >{{ item.salary }}</v-chip
+          >{{ item.salary ? item.salary : 'з/п не указана' }}</v-chip
         >
       </v-chip-group>
     </v-card>
