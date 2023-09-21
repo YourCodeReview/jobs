@@ -160,15 +160,15 @@ main_words = ['junior',
               'начинающий',
               ]
 languages_stacks = [
-                    # 'python', 
-                    # 'java', 
-                    # 'javascript', 
-                    # 'qa', 
-                    # 'c#',
-                    # 'data scientist', 
-                    # 'data science',
+                    'python', 
+                    'java', 
+                    'javascript', 
+                    'qa', 
+                    'c#',
+                    'data scientist', 
+                    'data science',
                     'аналитик данных',
-                    # 'frontend', 
+                    'frontend', 
                     # 'backend', 
                     ]
 
