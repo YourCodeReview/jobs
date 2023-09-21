@@ -100,6 +100,8 @@ def fetch_hh_page_vacancies(all_ides, text, page=0):
             vacancy["remote"] = True   
         if vacancy['description'] and re.search(r'\bне удаленная\b|\bудаленная не\b', vacancy['description'], re.IGNORECASE):
             vacancy["remote"] = False 
+        if vacancy["speciality"] == 'аналитик':
+            vacancy["speciality"] = 'data'
     return vacancies, pages
 
 
@@ -158,15 +160,15 @@ main_words = ['junior',
               'начинающий',
               ]
 languages_stacks = [
-                    'python', 
-                    'java', 
-                    'javascript', 
-                    'qa', 
-                    'c#',
-                    'data scientist', 
-                    'data science',
+                    # 'python', 
+                    # 'java', 
+                    # 'javascript', 
+                    # 'qa', 
+                    # 'c#',
+                    # 'data scientist', 
+                    # 'data science',
                     'аналитик данных',
-                    'frontend', 
+                    # 'frontend', 
                     # 'backend', 
                     ]
 
