@@ -12,8 +12,8 @@ FROM nginx:alpine
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 # Copy SSL certificates
-COPY ../certs/cert.pem /etc/nginx/cert.pem
-COPY ../certs/privkey.pem /etc/nginx/privkey.pem
+COPY certs/cert.pem /etc/nginx/cert.pem
+COPY certs/privkey.pem /etc/nginx/privkey.pem
 
 COPY --from=build-stage /app/dist /usr/share/nginx/html
 EXPOSE 80
