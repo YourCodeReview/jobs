@@ -4,8 +4,8 @@ WORKDIR /app
 COPY . /app
 
 # Copy SSL certificates
-COPY certs/cert.pem /app/cert.pem
-COPY certs/privkey.pem /app/privkey.pem
+COPY ../certs/cert.pem /app/cert.pem
+COPY ../certs/privkey.pem /app/privkey.pem
 
 RUN pip install --no-cache-dir -r requirements.txt
 
