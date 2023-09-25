@@ -171,7 +171,7 @@ languages_stacks = [
                     'data engineer',
                     'ml',
                     'аналитик данных',
-                    'frontend', 
+                    # 'frontend', 
                     # 'backend', 
                     ]
 
