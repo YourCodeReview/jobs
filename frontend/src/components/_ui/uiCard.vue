@@ -30,7 +30,6 @@ defineProps({
         >{{ item.title }}</v-card-title
       >
       <v-chip-group
-        v-if="item.remote || item.location || item.internship || item.salary"
         class="custom-chips"
       >
         <v-chip
@@ -39,13 +38,6 @@ defineProps({
           prepend-icon="mdi-map-marker"
           label
           >{{ item.location.split(',')[0] }}</v-chip
-        >
-        <v-chip
-          v-else
-          class="chip text-grey-darken-2"
-          prepend-icon="mdi-map-marker"
-          label
-          >{{ item.location }}</v-chip
         >
         <v-chip
           v-if="item.remote"
@@ -59,10 +51,16 @@ defineProps({
         >
         
         <v-chip
-          v-if="size !== 'lg'"
+          v-if="item.salary && size !== 'lg'"
           class="chip chip-salary text-grey-darken-2"
           label
-          >{{ item.salary ? item.salary : 'з/п не указана' }}</v-chip
+          >{{ item.salary }}</v-chip
+        >
+        <v-chip
+          v-else
+          class="chip chip-salary text-grey-darken-2"
+          label
+          >з/п не указана</v-chip
         >
       </v-chip-group>
     </v-card>
