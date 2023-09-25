@@ -83,6 +83,7 @@ const dialog = ref(false)
             color="black"
             size="large"
             :href="props.data.url"
+            target="_blank"
           >
             Отклик
           </v-btn>
