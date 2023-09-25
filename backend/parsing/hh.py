@@ -17,8 +17,7 @@ def stop_invalid_vacancies(vacancy):
                   'teamlead', 
                   'team lead', 
                   'старший',
-                  'заместитель руководителя',
-                  'заместитель начальника',
+                  'заместитель',
                   ]
     for checked_word in clean_name(vacancy.get("name")).split():
         if checked_word in main_words:
