@@ -16,7 +16,9 @@ def stop_invalid_vacancies(vacancy):
                   'tech lead', 
                   'teamlead', 
                   'team lead', 
-                  'старший'
+                  'старший',
+                  'Заместитель руководителя',
+                  'Заместитель начальника',
                   ]
     for checked_word in clean_name(vacancy.get("name")).split():
         if checked_word in main_words:
@@ -96,6 +98,8 @@ def fetch_hh_page_vacancies(all_ides, text, page=0):
         if vacancy["id"] not in all_ides:
             vacancies.append(vacancy)
             all_ides.add(vacancy["id"])
+        else:
+            continue
         if vacancy['description'] and re.search(r"удаленная работа|удаленн", vacancy['description'], re.IGNORECASE):
             vacancy["remote"] = True   
         if vacancy['description'] and re.search(r'\bне удаленная\b|\bудаленная не\b', vacancy['description'], re.IGNORECASE):

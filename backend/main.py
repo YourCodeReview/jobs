@@ -13,6 +13,8 @@ app = FastAPI()
 origins = [
     "http://jobs.yourcodereview.com",
     "https://jobs.yourcodereview.com",
+    "http://jobs.yourcodereview.com:80",
+    "https://jobs.yourcodereview.com:80",
     "http://68.183.220.246",
     "https://68.183.220.246",
     "http://68.183.220.246:80",
