@@ -19,7 +19,7 @@ def stop_invalid_vacancies(vacancy):
                   'старший',
                   'заместитель',
                   ]
-    for checked_word in clean_name(vacancy.get("name")).split().lower():
+    for checked_word in clean_name(vacancy.get("name").lower()).split():
         if checked_word in main_words:
             break
         if checked_word in stop_words:
