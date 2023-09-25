@@ -8,25 +8,6 @@ def clean_name(text):
     return cleaned_text.lower()
 
 
-# def stop_invalid_vacancies(vacancy):
-#     stop_words = ['senior', 
-#                   'middle', 
-#                   'expert', 
-#                   'techlead', 
-#                   'tech lead', 
-#                   'teamlead', 
-#                   'team lead', 
-#                   'старший',
-#                   'заместитель',
-#                   ]
-#     for checked_word in clean_name(vacancy.get("name").lower()).split():
-#         if checked_word in main_words:
-#             break
-#         if checked_word in stop_words:
-#             return True
-#     return False
-
-
 def stop_invalid_vacancies(vacancy):
     stop_words = ['senior', 
                   'middle', 
@@ -38,13 +19,13 @@ def stop_invalid_vacancies(vacancy):
                   'старший',
                   'заместитель',
                   ]
-    name = clean_name(vacancy.get("name").lower())
-    for checked_word in name.split():
+    for checked_word in clean_name(vacancy.get("name").lower()).split():
+        if checked_word in main_words:
+            break
         if checked_word in stop_words:
             return True
     return False
 
-  
 
 def get_data_from_vacancy(id):
     server_resp = requests.get(f'https://api.hh.ru/vacancies/{id}')
