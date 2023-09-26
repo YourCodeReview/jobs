@@ -55,7 +55,7 @@ const dialog = ref(false)
             Турбо отклик
             <v-dialog v-model="dialog" activator="parent" width="auto">
               <v-card class="pa-4" rounded="xl" max-width="600">
-                <v-img src="@/assets/images/popup.png" />
+                <v-img src="/images/popup.png" />
                 <h2 class="pa-2 text-h4 font-weight-bold">
                   Поможем откликнуться и сопроводим на всех этапах
                 </h2>

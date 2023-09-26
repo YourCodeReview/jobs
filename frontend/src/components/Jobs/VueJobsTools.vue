@@ -1,5 +1,4 @@
 <script setup>
-import svgTelegram from '@/components/_icons/svgTelegram.vue'
 import groups from '@/data/tools-groups.json'
 
 import { useJobsStore } from '@/store/jobs'
@@ -25,32 +24,11 @@ const fetchWithQuery = (event) => {
     >
       <span>{{ $vuetify.display.md ? 'Вакансии' : 'Вакансии в Telegram' }}</span>
       <template #prepend>
-        <svg-telegram />
+        <v-img width="30" height="30" src="/images/telegram.png" />
       </template>
     </v-btn>
     <v-expansion-panel v-for="group in groups" :key="group.title" :title="group.title" rounded="xl">
       <v-expansion-panel-text>
-        <!-- <template v-if="group.queriesName === 'format'">
-          <v-checkbox
-            v-for="item in group.list"
-            v-model="format"
-            density="compact"
-            hide-details
-            :key="item.title"
-            :label="item.title"
-            :value="item.type"
-          ></v-checkbox>
-        </template>
-        <template v-if="group.queriesName === 'salary'">
-          <v-radio-group v-model="salary">
-            <v-radio
-              v-for="item in group.list"
-              :key="item.title"
-              :label="item.title"
-              :value="item.type"
-            />
-          </v-radio-group>
-        </template> -->
         <template v-if="group.queriesName === 'specialities'">
           <v-radio-group
             v-model="jobsStore.fetchQuery.specialities"

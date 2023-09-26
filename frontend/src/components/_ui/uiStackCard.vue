@@ -1,13 +1,6 @@
 <script setup>
 import { computed } from 'vue'
 
-import svgDataScience from '@/components/_icons/svgDataScience.vue'
-import svgCSharp from '@/components/_icons/svgCSharp.vue'
-import svgJavaScript from '@/components/_icons/svgJavaScript.vue'
-import svgJava from '@/components/_icons/svgJava.vue'
-import svgPython from '@/components/_icons/svgPython.vue'
-import svgQA from '@/components/_icons/svgQA.vue'
-
 const props = defineProps({
   item: Object
 })
@@ -17,17 +10,17 @@ const chips = ['Удаленная работа', 'Junior вакансии', 'С
 const currentComponent = computed(() => {
   switch (props.item.type) {
     case 'data':
-      return svgDataScience
+      return 'data-science'
     case 'c#':
-      return svgCSharp
+      return 'c-sharp'
     case 'java':
-      return svgJava
+      return 'java'
     case 'python':
-      return svgPython
+      return 'python'
     case 'qa':
-      return svgQA
+      return 'qa'
     default:
-      return svgJavaScript
+      return 'js'
   }
 })
 </script>
@@ -45,7 +38,7 @@ const currentComponent = computed(() => {
         <v-chip class="mb-2" v-for="chip in chips" :key="chip" rounded="lg">{{ chip }}</v-chip>
       </v-col>
       <v-col cols="4" class="d-flex justify-end">
-        <component :is="currentComponent"></component>
+        <v-img width="100px" height="100px" :src="`/images/${currentComponent}.png`" />
       </v-col>
     </v-row>
     <v-row>
