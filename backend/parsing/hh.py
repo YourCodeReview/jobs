@@ -15,7 +15,8 @@ def stop_invalid_vacancies(vacancy):
                   'techlead', 
                   'tech lead', 
                   'teamlead', 
-                  'team lead', 
+                  'team lead',
+                  'lead', 
                   'старший',
                   'заместитель',
                   ]
