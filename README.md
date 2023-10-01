@@ -4,6 +4,8 @@
 JavaScript, C#, а также по направлениям DataScience, QA. Приложение получает
 данные с публичного API hh.ru.
 
+https://jobs.yourcodereview.com/
+
 
 ## *Технологический стек*
 
