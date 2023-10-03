@@ -10,8 +10,8 @@ https://jobs.yourcodereview.com/
 ## *Технологический стек*
 
 <ul>
-    <li>Python, JavaScript</li>
-    <li>fastAPI, Vue.js</li>
+    <li>Python, fastAPI,</li>
+    <li>JavaScript, Vue.js</li>
     <li>PostgreSQL, SQLAlchemy</li>
     <li>Docker, Docker-compose</li>
 </ul>
