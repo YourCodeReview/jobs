@@ -1,6 +1,7 @@
 import requests
 import re
 import time
+from datetime import datetime
 
 
 def clean_name(text):
@@ -93,6 +94,7 @@ def fetch_hh_page_vacancies(all_ides, text, page=0):
             "remote": True if item.get("schedule") and item.get("schedule")["name"] == 'удаленная работа' else False,
             "url": vacancy_data["alternate_url"] if vacancy_data and vacancy_data["alternate_url"] else None,
             "description": vacancy_data["description"] if vacancy_data and vacancy_data["description"] else None,
+            "date_publication": datetime.strptime(item["published_at"], "%Y-%m-%dT%H:%M:%S%z") if item.get("published_at") else None,
         }
         time.sleep(0.5)
         if vacancy["id"] not in all_ides:
@@ -157,32 +159,57 @@ def clear_db():
         print("Error: ", str(e))
 
 
-main_words = ['junior', 
-              'intern', 
-              'стажер', 
-              'младший', 
-              'начинающий',
-              ]
+from models import Vacancy, Base
+from database import engine, SessionLocal
+from sqlalchemy import func
+
+Base.metadata.create_all(engine)
+session = SessionLocal()
+
+
+def delete_duplicates():
+    column_name = Vacancy.external_id
+
+    subquery = (
+        session.query(column_name, func.min(Vacancy.id).label("min_id"))
+        .group_by(column_name)
+        .subquery()
+    )
+
+    session.query(Vacancy).filter(
+        ~Vacancy.id.in_(session.query(subquery.c.min_id))
+    ).delete(synchronize_session=False)
+    session.commit()
+
+
+main_words = [
+    "junior",
+    "intern",
+    "стажер",
+    "младший",
+    "начинающий",
+]
 languages_stacks = [
-                    'python', 
-                    'java', 
-                    'javascript', 
-                    'qa', 
-                    'c#',
-                    'data scientist', 
-                    'data science',
-                    'data analyst',
-                    'data engineer',
-                    'ml',
-                    'аналитик данных',
-                    'frontend', 
-                    'backend', 
-                    ]
+    "python",
+    "java",
+    "javascript",
+    "qa",
+    "c#",
+    "data scientist",
+    "data science",
+    "data analyst",
+    "data engineer",
+    "ml",
+    "аналитик данных",
+    "frontend",
+    "backend",
+]
 
 
 if __name__ == "__main__":
     start = time.time()
-    clear_db()
+    # clear_db()
     import_vacancies()
+    delete_duplicates()
     end = time.time()
-    print(f'Время: {round((end - start) / 60)} мин.')
+    print(f"Время: {round((end - start) / 60)} мин.")

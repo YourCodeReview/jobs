@@ -7,6 +7,11 @@ const props = defineProps({
     required: true
   }
 })
+
+import { useRouter } from 'vue-router'
+const router = useRouter()
+const currentQueryParams = router.currentRoute.value.query
+
 </script>
 
 <template>
@@ -14,7 +19,7 @@ const props = defineProps({
     <router-link
       v-for="job in props.list"
       :key="job.id"
-      :to="{ name: 'Vacancy', params: { id: job.id } }"
+      :to="{ name: 'Vacancy', params: { id: job.id }, query: currentQueryParams }"
     >
       <ui-card :item="job" />
     </router-link>

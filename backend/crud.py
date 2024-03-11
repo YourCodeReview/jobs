@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Session
-from sqlalchemy import func
+from sqlalchemy import func, desc
 
 from schemas import VacancyCreate
 from models import Vacancy
@@ -14,7 +14,7 @@ def get_vacancies(db: Session, skip: int = 0, limit: int = 10):
 
 def get_vacancies_with_specialities(db: Session, skip: int, limit: int, specialities: list):
     """ Retrieve vacancies filtered by speciality along with the total count """
-    query = db.query(Vacancy).filter(Vacancy.speciality.in_(specialities))
+    query = db.query(Vacancy).filter(Vacancy.speciality.in_(specialities)).order_by(desc(Vacancy.date_publication))
     total_count = query.count()  # Count the total matching rows
     vacancies = query.offset(skip).limit(limit).all()
     return total_count, vacancies
@@ -38,6 +38,7 @@ def create_vacancy(db: Session, vacancy: VacancyCreate):
         remote=vacancy["remote"],
         url=vacancy["url"],
         description=vacancy["description"],
+        date_publication=vacancy.get("date_publication", None),
     )
     db.add(db_vacancy)
     db.commit()

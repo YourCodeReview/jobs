@@ -1,5 +1,5 @@
 # Step 1: Build the Vue.js app
-FROM node:latest as build-stage
+FROM node:latest as build-stage-1
 WORKDIR /app
 COPY package*.json .
 RUN npm install
@@ -15,7 +15,8 @@ COPY nginx.conf /etc/nginx/conf.d/default.conf
 COPY certs/cert.pem /etc/nginx/cert.pem
 COPY certs/privkey.pem /etc/nginx/privkey.pem
 
-COPY --from=build-stage /app/dist /usr/share/nginx/html
+COPY --from=build-stage-1 /app/dist /usr/share/nginx/html
 EXPOSE 80
 EXPOSE 443
+
 CMD ["nginx", "-g", "daemon off;"]

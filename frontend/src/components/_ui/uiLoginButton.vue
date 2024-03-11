@@ -7,7 +7,7 @@
     :block="block"
     :to="{
       path: '/login',
-      query: { type: 'login' }
+      query: { ...currentQueryParams, type: 'login' }
     }"
   >
     Войти
@@ -19,4 +19,10 @@ defineProps({
   variant: String,
   block: Boolean
 })
+
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+const currentQueryParams = router.currentRoute.value.query
+
 </script>

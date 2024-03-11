@@ -10,9 +10,14 @@ import { useRouter } from 'vue-router'
 const router = useRouter()
 const jobsStore = useJobsStore()
 
+const currentQueryParams = router.currentRoute.value.query
+
 const fetchWithQuery = (newValue) => {
   jobsStore.changeQuery('specialities', newValue)
-  router.push({ name: 'Jobs' })
+  router.push({
+    name: 'Jobs',
+    query: currentQueryParams
+  })
 }
 </script>
 

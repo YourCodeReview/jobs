@@ -3,6 +3,9 @@ const props = defineProps({
   links: Array,
   anchors: Array
 })
+
+import { generateTargetUrl } from '@/components/utils/utils';
+
 </script>
 
 <template>
@@ -16,7 +19,7 @@ const props = defineProps({
         md="6"
         sm="6"
       >
-        <v-btn variant="text" :href="`https://yourcodereview.com/#${item.anchor}`" target="_blank">
+        <v-btn variant="text" :href="`https://yourcodereview.com/#${item.anchor}` + generateTargetUrl('button_footer')" target="_blank">
           {{ item.name }}
         </v-btn>
       </v-col>

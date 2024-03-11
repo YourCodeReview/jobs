@@ -32,6 +32,7 @@ const authenticate = async (email, password) => {
 const googleAuth = async () => {
   await auth.loginWithGoogle()
   subscribe(auth.currentUser.value.email)
+  console.log(auth.currentUser.value.email)
   auth.isLoggedIn.value ? router.back() : (snackbar.value = true)
 }
 

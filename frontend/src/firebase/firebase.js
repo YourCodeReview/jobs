@@ -1,12 +1,13 @@
 import { initializeApp } from 'firebase/app'
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyCUpusWxJFyA7LFgicBdCZ5CIDr-xnwcRo',
-  authDomain: 'yourcodereview-35312.firebaseapp.com',
-  projectId: 'yourcodereview-35312',
-  storageBucket: 'yourcodereview-35312.appspot.com',
-  messagingSenderId: '710177683003',
-  appId: '1:710177683003:web:f6c3e6b8ebde7f46754e1e'
+  apiKey: "AIzaSyBtDB_K432v81AcCv3x-jvfs-wymseFh8U",
+  authDomain: "codereview-jobs.firebaseapp.com",
+  projectId: "codereview-jobs",
+  storageBucket: "codereview-jobs.appspot.com",
+  messagingSenderId: "1056554077979",
+  appId: "1:1056554077979:web:dd86c5c5976c9fdc44cdbe",
+  measurementId: "G-10PZV4WFCG"
 }
 
 initializeApp(firebaseConfig)

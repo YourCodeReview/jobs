@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import { useFirebase } from '@/hooks/useFirebase'
+import { generateTargetUrl } from '@/components/utils/utils'
 
 import UiCard from '@/components/_ui/uiCard.vue'
 
@@ -10,6 +11,8 @@ const props = defineProps({
 
 const auth = useFirebase()
 const dialog = ref(false)
+
+
 </script>
 
 <template>
@@ -35,7 +38,7 @@ const dialog = ref(false)
             class="blue-banner mt-2 pa-2"
             rounded="xl"
             :elevation="isHovering ? 10 : 1"
-            href="https://yourcodereview.com/"
+            :href="'https://yourcodereview.com/' + generateTargetUrl('button_2')"
           >
             <v-card-title class="d-flex align-center font-weight-bold">
               Как зарабатывать больше?
@@ -64,7 +67,7 @@ const dialog = ref(false)
                 </p>
                 <v-btn
                   height="60"
-                  href="https://yourcodereview.com"
+                  :href="'https://yourcodereview.com/' + generateTargetUrl('button_3')"
                   color="black"
                   size="large"
                   rounded="xl"
@@ -98,7 +101,7 @@ const dialog = ref(false)
           <p class="pa-2 text-h6 mb-4">
             71% наших клиентов находят работу за 3 месяца. Среднее время поиска - 57 дней
           </p>
-          <v-btn color="black" rounded="xl" size="x-large" href="https://yourcodereview.com/"
+          <v-btn color="black" rounded="xl" size="x-large" :href="'https://yourcodereview.com/' + generateTargetUrl('button_4')"
             >Узнать подробнее</v-btn
           >
         </v-card>
