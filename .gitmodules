@@ -1,0 +1,3 @@
+[submodule "LinkedInParser"]
+	path = LinkedInParser
+	url = https://github.com/Valpydeveloper/LinkedInParser.git
