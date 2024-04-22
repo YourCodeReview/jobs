@@ -9,11 +9,7 @@ Description:
 
 # Getting Started
 
-1. Clone this project https://github.com/Valpydeveloper/LinkedInParser.git
-2. Create a Python Virtual Environment: `python3 -m venv venv`
-3. Activate the Python Virtual Environment: `source venv/bin/activate`
-4. Install requirements.txt: `pip install -r requirements.txt`
-5. Listing the scrapy projects `scrapy list` 
+1. Write in terminal `cd backend/parsing/LinkedInParser/linkedin_spider`
 6. Running the scrapy project: `scrapy crawl linkedin_jobs` 
 
 
