@@ -6,9 +6,7 @@ from sqlalchemy.orm import Session
 
 from database import get_db
 from schemas import VacancyCreate
-from crud import (
-    create_vacancy, get_vacancies, get_vacancies_by_filters, get_vacancy_by_id
-)
+from crud import create_vacancy, get_vacancies, get_vacancy_by_id
 
 
 router = APIRouter()
@@ -44,21 +42,17 @@ def read_vacancies(
     location: Optional[list[str]] = Query([], description=LOCATION),
     db: Session = Depends(get_db)
 ):
-    if specialities or internship or remote or location:
-        if specialities == ['data']:
-            specialities.extend(DATA_JOBS)
-        total_count, vacancies = get_vacancies_by_filters(
-            db,
-            skip,
-            limit,
-            specialities or None,
-            internship or None,
-            remote or None,
-            location or [],
+    if specialities and 'data' in specialities:
+        specialities.extend(DATA_JOBS)
+    total_count, vacancies = get_vacancies(
+        db,
+        skip,
+        limit,
+        specialities=specialities,
+        internship=internship,
+        remote=remote,
+        location=location,
         )
-    else:
-        total_count, vacancies = get_vacancies(db, skip, limit)
-
     return {
         "total_count": total_count,
         "data": vacancies,

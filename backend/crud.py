@@ -1,25 +1,17 @@
-from sqlalchemy import func
 from sqlalchemy.orm import Session
 
 from schemas import VacancyCreate
 from models import Vacancy
 
 
-def get_vacancies(db: Session, skip, limit: int):
-    """ Retrieve all vacancies with pagination """
-    vacancies = db.query(Vacancy).offset(skip).limit(limit).all()
-    total_count = db.query(func.count(Vacancy.id)).scalar()
-    return total_count, vacancies
-
-
-def get_vacancies_by_filters(
+def get_vacancies(
         db: Session,
         skip: int,
         limit: int,
         specialities: list[str],
         internship: bool,
         remote: bool,
-        location: list[str]
+        locations: list[str]
 
 ):
     """ Retrieve filtred vacancies """
@@ -30,20 +22,10 @@ def get_vacancies_by_filters(
         query = query.filter(Vacancy.internship)
     if remote:
         query = query.filter(Vacancy.remote)
-    if location:
-        query = query.filter(Vacancy.location.in_(location))
+    if locations:
+        query = query.filter(Vacancy.location.in_(locations))
     vacancies = query.offset(skip).limit(limit).all()
     total_count = query.count()
-    return total_count, vacancies
-
-
-def get_vacancies_with_specialities(
-        db: Session, skip: int, limit: int, specialities: list
-):
-    """Retrieve vacancies filtered by speciality along with the total count """
-    query = db.query(Vacancy).filter(Vacancy.speciality.in_(specialities))
-    total_count = query.count()  # Count the total matching rows
-    vacancies = query.offset(skip).limit(limit).all()
     return total_count, vacancies
 
 
