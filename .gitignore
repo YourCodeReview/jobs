@@ -7,3 +7,4 @@ venv
 virtenv
 .env
 # *.json
+.DS_Store

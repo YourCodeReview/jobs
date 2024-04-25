@@ -51,7 +51,7 @@ def read_vacancies(
         specialities=specialities,
         internship=internship,
         remote=remote,
-        location=location,
+        locations=location,
         )
     return {
         "total_count": total_count,
