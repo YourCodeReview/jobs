@@ -6,7 +6,9 @@ from sqlalchemy.orm import Session
 
 from database import get_db
 from schemas import VacancyCreate
-from crud import create_vacancy, get_vacancies, get_vacancy_by_id
+from crud import (
+    create_vacancy, get_locations, get_vacancies, get_vacancy_by_id
+)
 
 
 router = APIRouter()
@@ -68,3 +70,12 @@ def read_vacancy(vacancy_id: int, db: Session = Depends(get_db)):
             detail=NOT_FOUND
         )
     return vacancy
+
+
+@router.get("/locations/")
+def read_locations(db: Session = Depends(get_db)):
+    total_count, locations = get_locations(db)
+    return {
+        "total_count": total_count,
+        "data": locations
+    }

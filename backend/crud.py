@@ -14,7 +14,7 @@ def get_vacancies(
         locations: list[str]
 
 ):
-    """ Retrieve filtred vacancies """
+    """ Retrieve filtred vacancies. """
     query = db.query(Vacancy)
     if specialities:
         query = query.filter(Vacancy.speciality.in_(specialities))
@@ -24,9 +24,7 @@ def get_vacancies(
         query = query.filter(Vacancy.remote)
     if locations:
         query = query.filter(Vacancy.location.in_(locations))
-    vacancies = query.offset(skip).limit(limit).all()
-    total_count = query.count()
-    return total_count, vacancies
+    return query.count(), query.offset(skip).limit(limit).all()
 
 
 def get_vacancy_by_id(db: Session, vacancy_id: int):
@@ -52,3 +50,9 @@ def create_vacancy(db: Session, vacancy: VacancyCreate):
     db.commit()
     db.refresh(db_vacancy)
     return db_vacancy
+
+
+def get_locations(db: Session):
+    """ Retrieve list of all locations. """
+    locations = db.query(Vacancy.location).distinct()
+    return locations.count(), [location[0] for location in locations]
