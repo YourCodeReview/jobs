@@ -1,7 +1,6 @@
 <script setup>
 import JobsList from '@/components/Jobs/VueJobsList.vue'
 import JobsTools from '@/components/Jobs/VueJobsTools.vue'
-import JobsToolsFilter from '@/components/Jobs/VueJobsToolsFilter.vue'
 import JobsPagination from '@/components/Jobs/VueJobsPagination.vue'
 
 import { useJobsStore } from '@/store/jobs'
@@ -19,7 +18,6 @@ onMounted(() => {
     <v-row class="min-height" justify-sm="center" justify-md="start">
       <v-col cols="12" sm="10" md="3" lg="3" class="d-flex flex-column align-end">
         <jobs-tools />
-        <jobs-tools-filter />
       </v-col>
       <v-col cols="12" sm="10" md="6" lg="6" class="d-flex flex-column">
         <v-progress-circular

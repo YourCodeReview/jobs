@@ -1,6 +1,6 @@
 <script setup>
 import groups from '@/data/tools-groups.json'
-
+import CheckboxTools from '@/components/Jobs/VueCheckboxTools.vue'
 import { useJobsStore } from '@/store/jobs'
 
 const jobsStore = useJobsStore()
@@ -46,6 +46,8 @@ const fetchWithQuery = (event) => {
             />
           </v-radio-group>
         </template>
+        <v-divider />
+        <checkbox-tools />
       </v-expansion-panel-text>
     </v-expansion-panel>
   </v-expansion-panels>
