@@ -6,5 +6,8 @@ export const apiService = {
   },
   async getJobs(params) {
     return (await axiosInstance.get('jobs/?', { params })).data
+  },
+  async getAllLocations() {
+    return (await axiosInstance.get('locations')).data
   }
 }
