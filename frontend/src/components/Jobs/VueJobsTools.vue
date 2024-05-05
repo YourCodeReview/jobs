@@ -2,6 +2,7 @@
 import groups from '@/data/tools-groups.json'
 import CheckboxTools from '@/components/Jobs/VueCheckboxTools.vue'
 import LocationsTools from '@/components/Jobs/VueLocationsTools.vue'
+import SourceTools from '@/components/Jobs/VueSourceTools.vue'
 import { useJobsStore } from '@/store/jobs'
 
 const jobsStore = useJobsStore()
@@ -49,6 +50,8 @@ const fetchWithQuery = (event) => {
         </template>
         <v-divider />
         <checkbox-tools />
+        <v-divider />
+        <source-tools />
         <v-divider />
         <locations-tools />
       </v-expansion-panel-text>
