@@ -14,7 +14,7 @@ const fetchWithQuery = (event) => {
 </script>
 
 <template>
-  <v-expansion-panels variant="accordion" class="sticky-expansion-panels">
+  <v-expansion-panels variant="accordion" class="sticky-expansion-panels mb-2">
     <v-btn
       block
       class="px-6 py-4 font-weight-bold justify-start"
@@ -29,7 +29,13 @@ const fetchWithQuery = (event) => {
         <v-img width="30" height="30" src="/images/telegram.png" />
       </template>
     </v-btn>
-    <v-expansion-panel v-for="group in groups" :key="group.title" :title="group.title" rounded="xl">
+    <v-expansion-panel
+      v-for="group in groups"
+      :key="group.title"
+      :title="group.title"
+      rounded="xl"
+      class="mb-2"
+    >
       <v-expansion-panel-text>
         <template v-if="group.queriesName === 'specialities'">
           <v-radio-group
@@ -48,13 +54,16 @@ const fetchWithQuery = (event) => {
             />
           </v-radio-group>
         </template>
-        <v-divider />
-        <checkbox-tools />
-        <v-divider />
-        <source-tools />
-        <v-divider />
-        <locations-tools />
       </v-expansion-panel-text>
+    </v-expansion-panel>
+    <v-expansion-panel class="mb-2">
+      <checkbox-tools />
+    </v-expansion-panel>
+    <v-expansion-panel class="mb-2">
+      <source-tools />
+    </v-expansion-panel>
+    <v-expansion-panel>
+      <locations-tools />
     </v-expansion-panel>
   </v-expansion-panels>
 </template>
