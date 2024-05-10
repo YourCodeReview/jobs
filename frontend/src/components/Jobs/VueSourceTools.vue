@@ -2,7 +2,6 @@
 import { onMounted, watch, ref } from 'vue'
 import { useJobsStore } from '@/store/jobs'
 import sourceTools from '@/data/jobs-source-tools.json'
-import UiFilterCard from '@/components/_ui/uiFilterCard.vue'
 
 const checked = ref([])
 const jobStore = useJobsStore()
@@ -23,22 +22,14 @@ watch(checked, () => {
 </script>
 
 <template>
-  <UiFilterCard title="выберете источник">
-    <v-checkbox
-      v-for="tool in sourceTools"
-      :key="tool.value"
-      v-model="checked"
-      :label="tool.label"
-      :value="tool.value"
-      density="compact"
-      hide-details
-      disabled
-    ></v-checkbox>
-  </UiFilterCard>
+  <v-checkbox
+    v-for="tool in sourceTools"
+    :key="tool.value"
+    v-model="checked"
+    :label="tool.label"
+    :value="tool.value"
+    density="compact"
+    hide-details
+    disabled
+  ></v-checkbox>
 </template>
-
-<style scoped>
-p {
-  font-size: 0.8rem;
-}
-</style>

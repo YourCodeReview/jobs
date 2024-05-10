@@ -2,7 +2,6 @@
 import { useJobsStore } from '@/store/jobs'
 import { useLocationsStore } from '@/store/locations'
 import { onMounted, watch, ref } from 'vue'
-import UiFilterCard from '@/components/_ui/uiFilterCard.vue'
 
 const jobsStore = useJobsStore()
 const locationStore = useLocationsStore()
@@ -28,19 +27,16 @@ onMounted(() => {
 </script>
 
 <template>
-  <UiFilterCard title="выберете город">
-    <v-autocomplete
-      class="mt-2"
-      label="Город"
-      v-model="location"
-      @click:append="handleClick"
-      :items="locationStore.locationsList"
-      density="compact"
-      hide-details
-      variant="plain"
-      clearable
-    ></v-autocomplete>
-  </UiFilterCard>
+  <v-autocomplete
+    label="Город"
+    v-model="location"
+    @click:append="handleClick"
+    :items="locationStore.locationsList"
+    density="compact"
+    hide-details
+    variant="plain"
+    clearable
+  ></v-autocomplete>
 </template>
 
 <style scoped></style>

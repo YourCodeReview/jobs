@@ -56,14 +56,20 @@ const fetchWithQuery = (event) => {
         </template>
       </v-expansion-panel-text>
     </v-expansion-panel>
-    <v-expansion-panel class="mb-2">
-      <checkbox-tools />
-    </v-expansion-panel>
-    <v-expansion-panel class="mb-2">
-      <source-tools />
-    </v-expansion-panel>
-    <v-expansion-panel>
-      <locations-tools />
+    <v-expansion-panel title="Фильтрация" rounded="xl" class="mb-2">
+      <v-expansion-panel-text>
+        <checkbox-tools />
+        <v-divider />
+      </v-expansion-panel-text>
+
+      <v-expansion-panel-text>
+        <source-tools />
+        <v-divider />
+      </v-expansion-panel-text>
+
+      <v-expansion-panel-text>
+        <locations-tools />
+      </v-expansion-panel-text>
     </v-expansion-panel>
   </v-expansion-panels>
 </template>
