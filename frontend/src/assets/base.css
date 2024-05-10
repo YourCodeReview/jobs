@@ -2,7 +2,7 @@
 @import './fonts/fonts.css';
 
 :root {
-  --font-family: 'Wix Madefor Text'
+  --font-family: 'Wix Madefor Text';
 }
 
 ::-webkit-scrollbar {

@@ -8,3 +8,7 @@ export const useGetVacancy = () => {
 export const useGetJobs = () => {
   return useRequest(apiService.getJobs)
 }
+
+export const useGetLocations = () => {
+  return useRequest(apiService.getAllLocations)
+}

@@ -1,6 +1,8 @@
 <script setup>
 import groups from '@/data/tools-groups.json'
-
+import CheckboxTools from '@/components/Jobs/VueCheckboxTools.vue'
+import LocationsTools from '@/components/Jobs/VueLocationsTools.vue'
+import SourceTools from '@/components/Jobs/VueSourceTools.vue'
 import { useJobsStore } from '@/store/jobs'
 
 const jobsStore = useJobsStore()
@@ -12,7 +14,7 @@ const fetchWithQuery = (event) => {
 </script>
 
 <template>
-  <v-expansion-panels variant="accordion" class="sticky-expansion-panels">
+  <v-expansion-panels variant="accordion" class="sticky-expansion-panels mb-2">
     <v-btn
       block
       class="px-6 py-4 font-weight-bold justify-start"
@@ -46,6 +48,24 @@ const fetchWithQuery = (event) => {
             />
           </v-radio-group>
         </template>
+      </v-expansion-panel-text>
+    </v-expansion-panel>
+
+    <v-expansion-panel title="Город" rounded="xl">
+      <v-expansion-panel-text>
+        <locations-tools />
+      </v-expansion-panel-text>
+    </v-expansion-panel>
+
+    <v-expansion-panel title="Источник вакансии" rounded="xl">
+      <v-expansion-panel-text>
+        <source-tools />
+      </v-expansion-panel-text>
+    </v-expansion-panel>
+
+    <v-expansion-panel title="Дополнительно" rounded="xl">
+      <v-expansion-panel-text>
+        <checkbox-tools />
       </v-expansion-panel-text>
     </v-expansion-panel>
   </v-expansion-panels>
