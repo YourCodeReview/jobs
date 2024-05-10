@@ -33,7 +33,7 @@ onMounted(() => {
     density="compact"
     hide-details
     variant="filled"
-    placeholder="Выберете город"
+    placeholder="Выберите город"
     clearable
   ></v-autocomplete>
 </template>
