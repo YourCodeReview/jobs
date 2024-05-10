@@ -8,7 +8,7 @@ const jobStore = useJobsStore()
 
 onMounted(() => {
   const sourceFieldsFromStorage = JSON.parse(localStorage.getItem('sources'))
-  if (sourceFieldsFromStorage) {
+  if (sourceFieldsFromStorage?.length) {
     checked.value = sourceFieldsFromStorage
   }
 })

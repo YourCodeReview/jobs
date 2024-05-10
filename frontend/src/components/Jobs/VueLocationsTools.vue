@@ -28,15 +28,12 @@ onMounted(() => {
 
 <template>
   <v-autocomplete
-    label="Город"
     v-model="location"
-    @click:append="handleClick"
     :items="locationStore.locationsList"
     density="compact"
     hide-details
-    variant="plain"
+    variant="filled"
+    placeholder="Выберете город"
     clearable
   ></v-autocomplete>
 </template>
-
-<style scoped></style>

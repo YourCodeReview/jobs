@@ -16,7 +16,7 @@ const fetchFilteredData = (e) => {
 
 onMounted(() => {
   const filterFieldsFromStorage = JSON.parse(localStorage.getItem('filter'))
-  if (filterFieldsFromStorage) {
+  if (filterFieldsFromStorage?.length) {
     checked.value = filterFieldsFromStorage
   }
 })

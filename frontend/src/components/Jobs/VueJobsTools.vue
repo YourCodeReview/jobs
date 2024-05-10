@@ -29,13 +29,7 @@ const fetchWithQuery = (event) => {
         <v-img width="30" height="30" src="/images/telegram.png" />
       </template>
     </v-btn>
-    <v-expansion-panel
-      v-for="group in groups"
-      :key="group.title"
-      :title="group.title"
-      rounded="xl"
-      class="mb-2"
-    >
+    <v-expansion-panel v-for="group in groups" :key="group.title" :title="group.title" rounded="xl">
       <v-expansion-panel-text>
         <template v-if="group.queriesName === 'specialities'">
           <v-radio-group
@@ -56,19 +50,22 @@ const fetchWithQuery = (event) => {
         </template>
       </v-expansion-panel-text>
     </v-expansion-panel>
-    <v-expansion-panel title="Фильтрация" rounded="xl" class="mb-2">
-      <v-expansion-panel-text>
-        <checkbox-tools />
-        <v-divider />
-      </v-expansion-panel-text>
 
-      <v-expansion-panel-text>
-        <source-tools />
-        <v-divider />
-      </v-expansion-panel-text>
-
+    <v-expansion-panel title="Город" rounded="xl">
       <v-expansion-panel-text>
         <locations-tools />
+      </v-expansion-panel-text>
+    </v-expansion-panel>
+
+    <v-expansion-panel title="Источник вакансии" rounded="xl">
+      <v-expansion-panel-text>
+        <source-tools />
+      </v-expansion-panel-text>
+    </v-expansion-panel>
+
+    <v-expansion-panel title="Дополнительно" rounded="xl">
+      <v-expansion-panel-text>
+        <checkbox-tools />
       </v-expansion-panel-text>
     </v-expansion-panel>
   </v-expansion-panels>
