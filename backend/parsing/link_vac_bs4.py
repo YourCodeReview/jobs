@@ -84,7 +84,7 @@ def parse_vacancy(vacancy):
         "description": r_text,
     }
 
-    with open("vacancy_lit.json", "a", encoding="utf-8") as json_file:
+    with open("all_link_vacancy.json", "a", encoding="utf-8") as json_file:
         json.dump(vacancy, json_file, indent=4, ensure_ascii=False)
 
 
