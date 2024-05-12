@@ -7,6 +7,12 @@ from bs4 import BeautifulSoup
 
 
 def vacancy_validation(vacancy_title):
+    """Функция проверяет заголовок вакансии на наличие слов из списка направлений, по которым мы ведем поиск,
+    а также проверяет наличие слов из списка "грэйдов" (stop words), которые мы хотим исключить из поиска.
+
+    Вход: Заголовок вакансии.
+    Выход: - True, если присутствует любое слово из списка languages_stacks и отсутствуют слова из списка stop_words.
+           - False во всех остальных случаях."""
     languages_stacks = [
         "python",
         "java",
@@ -45,13 +51,45 @@ def vacancy_validation(vacancy_title):
         return False
 
 
+def make_request(url):
+    """Функция для обработки ошибки 429. Если при запросе мы получаем такой ответ,
+    то эта функция выполняет повторный запрос через 5 секунд.
+
+    Вход: URL, по которому выполняется запрос.
+    Выход: - Ответ сервера, если запрос выполнен успешно.
+           - Повторный вызов этой функции, если возникла ошибка 429.
+           - Наименование другой ошибки, если возникла иная ошибка."""
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
+        print(f"Status Code: {response.status_code}")
+        print(f"Status Message: {response.reason}")
+        return response
+    except requests.exceptions.HTTPError as err:
+        if response.status_code == 429:
+            print(f"Status Code: {response.status_code}")
+            print(f"Status Message: {response.reason}")
+            print(
+                "Слишком много запросов, через 5 секунд будет отправлен повторный зарос"
+            )
+            time.sleep(5)
+            return make_request(url)
+        else:
+            raise err
+
+
 def parse_vacancy(vacancy):
+    """Основная функция для парсинга вакансий. Она принимает отдельные элементы div, собранные в функции parse_all_page,
+    и извлекает из них следующие данные: заголовок, название компании, локация вакансии и URL со ссылкой на вакансию.
+    Затем функция извлекает refid и tracking_id из ссылки на вакансию и формирует ссылку на описание вакансии.
+    После этого она обрабатывает ответ по этой ссылке.
+    Все полученные данные сохраняются в словарь vacancy и записываются в файл all_link_vacancy.json.
+    """
     title = vacancy.find("h3", class_="base-search-card__title").text
     if not vacancy_validation(title):
         return None
 
     company_name = vacancy.find("h4", class_="base-search-card__subtitle").text
-    title = vacancy.find("h3", class_="base-search-card__title").text
     location = vacancy.find("span", class_="job-search-card__location").text
     url_vacancy = vacancy.find(
         "a",
@@ -94,47 +132,38 @@ def parse_vacancy(vacancy):
 
 
 def parse_one_page(all_vacancy_on_page):
+    """В данной функции вызывается цикл for, который проходит по каждому отдельному div из списка all_vacancy_on_page
+    и вызывает для него функцию parse_vacancy."""
     for vacancy in all_vacancy_on_page:
         parse_vacancy(vacancy)
 
 
 def parse_all_page():
-    start = 0
-    while start < 1000:
-        url = (
-            "https://www.linkedin.com/jobs-guest/jobs/api/seeMoreJobPostings/search?keywords=&location=&geoId=101728296&trk=guest_homepage-basic_jobs-search-bar_search-submit&start="
-            + str(start)
-        )
-        print(f"Обрабатывается страница {url}")
-        r = requests.get(url)
-        print(f"Status Code: {r.status_code}")
-        print(f"Status Message: {r.reason}")
-        soup = BeautifulSoup(r.text, "lxml")
-        all_vacancy_on_page = soup.findAll(
-            "div",
-            class_="base-card relative w-full hover:no-underline focus:no-underline base-card--link base-search-card base-search-card--link job-search-card",
-        )
-        parse_one_page(all_vacancy_on_page)
-        start += 25
-        time.sleep(1)
-    start = 0
-    print("Начинаю поиск по Беларуси")
-    while start < 1000:
-        url = (
-            "https://www.linkedin.com/jobs-guest/jobs/api/seeMoreJobPostings/search?keywords=&location=&geoId=101705918&trk=public_jobs_jobs-search-bar_search-submit&start="
-            + str(start)
-        )
-        print(f"Обрабатывается страница {url}")
-        r = requests.get(url)
-        print(f"Status Code: {r.status_code}")
-        print(f"Status Message: {r.reason}")
-        soup = BeautifulSoup(r.text, "lxml")
-        all_vacancy_on_page = soup.findAll(
-            "div",
-            class_="base-card relative w-full hover:no-underline focus:no-underline base-card--link base-search-card base-search-card--link job-search-card",
-        )
-        parse_one_page(all_vacancy_on_page)
-        start += 25
-        time.sleep(1)
+    """Функция для сбора данных со всех страниц с открытым доступом (без авторизации), на которых выводится список вакансий.
+    Цикл for проходит по каждому geoid из списка, и для каждого элемента вызывается цикл while. В цикле while выполняется запрос
+    на страницу со списком вакансий (каждая страница возвращает по 10 вакансий). Полученный ответ обрабатывается с помощью
+    BeautifulSoup, где ищутся интересующие нас элементы, и записываются в переменную all_vacancy_on_page.
+    Затем вызывается функция parse_one_page и передается переменная all_vacancy_on_page.
+    """
+    list_geoid = [
+        101728296,
+        101705918,
+    ]  # список geoid, они подставляются в ссылку по которой будем делать запрос.
+    for geoid in list_geoid:
+        start = 0
+        while start < 1000:
+            url = f"https://www.linkedin.com/jobs-guest/jobs/api/seeMoreJobPostings/search?keywords=&location=&geoId={geoid}&trk=guest_homepage-basic_jobs-search-bar_search-submit&start={start}"
+            print(f"Обрабатывается страница {url}")
+            r = make_request(url)
+            soup = BeautifulSoup(r.text, "lxml")
+            all_vacancy_on_page = soup.findAll(
+                "div",
+                class_="base-card relative w-full hover:no-underline focus:no-underline base-card--link base-search-card base-search-card--link job-search-card",
+            )
+
+            parse_one_page(all_vacancy_on_page)
+            start += 10
+            time.sleep(1)
 
 
+#parse_all_page()
