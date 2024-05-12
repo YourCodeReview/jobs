@@ -62,16 +62,10 @@ def make_request(url):
     try:
         response = requests.get(url)
         response.raise_for_status()
-        print(f"Status Code: {response.status_code}")
-        print(f"Status Message: {response.reason}")
         return response
     except requests.exceptions.HTTPError as err:
         if response.status_code == 429:
-            print(f"Status Code: {response.status_code}")
-            print(f"Status Message: {response.reason}")
-            print(
-                "Слишком много запросов, через 5 секунд будет отправлен повторный зарос"
-            )
+            print("Слишком много запросов, через 5 секунд будет отправлен повторный зарос")
             time.sleep(5)
             return make_request(url)
         else:
@@ -106,7 +100,7 @@ def parse_vacancy(vacancy):
     tracking_id = match_trackingid_position.group(1)
     detail_url = f"https://www.linkedin.com/jobs-guest/jobs/api/jobPosting/{ten_chars_before_refid}?trackingId={tracking_id}"
 
-    r_description = requests.get(detail_url)
+    r_description = make_request(detail_url)
     soup_detail = BeautifulSoup(r_description.text, "lxml")
     div_element = soup_detail.select_one(
         ".show-more-less-html__markup.show-more-less-html__markup--clamp-after-5"
@@ -155,6 +149,8 @@ def parse_all_page():
             url = f"https://www.linkedin.com/jobs-guest/jobs/api/seeMoreJobPostings/search?keywords=&location=&geoId={geoid}&trk=guest_homepage-basic_jobs-search-bar_search-submit&start={start}"
             print(f"Обрабатывается страница {url}")
             r = make_request(url)
+            print(f"Status Code: {r.status_code}")
+            print(f"Status Message: {r.reason}")
             soup = BeautifulSoup(r.text, "lxml")
             all_vacancy_on_page = soup.findAll(
                 "div",
