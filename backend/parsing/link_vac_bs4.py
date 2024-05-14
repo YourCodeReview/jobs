@@ -1,4 +1,3 @@
-import json
 import re
 import time
 
@@ -65,7 +64,9 @@ def make_request(url):
         return response
     except requests.exceptions.HTTPError as err:
         if response.status_code == 429:
-            print("Слишком много запросов, через 5 секунд будет отправлен повторный зарос")
+            print(
+                "Слишком много запросов, через 5 секунд будет отправлен повторный зарос"
+            )
             time.sleep(5)
             return make_request(url)
         else:
@@ -74,11 +75,12 @@ def make_request(url):
 
 def parse_vacancy(vacancy):
     """Основная функция для парсинга вакансий. Она принимает отдельные элементы div, собранные в функции parse_all_page,
-    и извлекает из них следующие данные: заголовок, название компании, локация вакансии и URL со ссылкой на вакансию.
+    и извлекает из них следующие данные: заголовок, название компании, местоположение вакансии и URL со ссылкой на вакансию.
     Затем функция извлекает refid и tracking_id из ссылки на вакансию и формирует ссылку на описание вакансии.
     После этого она обрабатывает ответ по этой ссылке.
-    Все полученные данные сохраняются в словарь vacancy и записываются в файл all_link_vacancy.json.
-    """
+    Все полученные данные сохраняются в словарь vacancy и возвращаются функцией.
+
+    Выход: словарь "vacancy" """
     title = vacancy.find("h3", class_="base-search-card__title").text
     if not vacancy_validation(title):
         return None
@@ -121,24 +123,37 @@ def parse_vacancy(vacancy):
         "description": r_text,
     }
 
-    with open("all_link_vacancy.json", "a", encoding="utf-8") as json_file:
-        json.dump(vacancy, json_file, indent=4, ensure_ascii=False)
+    return vacancy
 
 
 def parse_one_page(all_vacancy_on_page):
-    """В данной функции вызывается цикл for, который проходит по каждому отдельному div из списка all_vacancy_on_page
-    и вызывает для него функцию parse_vacancy."""
+    """В данной функции создается список vacancy_list и вызывается цикл for,
+    который проходит по каждому отдельному элементу div из списка all_vacancy_on_page.
+    Затем для каждого элемента вызывается функция parse_vacancy, и полученные вакансии добавляются в список vacancy_list.
+
+    Вход: переменная all_vacancy_on_page
+    Выход: список вакансий с одной страницы vacancy_list"""
+    vacancy_list = []
     for vacancy in all_vacancy_on_page:
-        parse_vacancy(vacancy)
+        parsed_vacancy = parse_vacancy(vacancy)
+        if parsed_vacancy is not None:
+            vacancy_list.append(parsed_vacancy)
+    return vacancy_list
 
 
 def parse_all_page():
     """Функция для сбора данных со всех страниц с открытым доступом (без авторизации), на которых выводится список вакансий.
-    Цикл for проходит по каждому geoid из списка, и для каждого элемента вызывается цикл while. В цикле while выполняется запрос
-    на страницу со списком вакансий (каждая страница возвращает по 10 вакансий). Полученный ответ обрабатывается с помощью
-    BeautifulSoup, где ищутся интересующие нас элементы, и записываются в переменную all_vacancy_on_page.
+    Цикл for проходит по каждому geoid из списка, и для каждого элемента вызывается цикл while.
+    В цикле while выполняется запрос на страницу со списком вакансий (каждая страница возвращает по 10 вакансий).
+    Полученный ответ обрабатывается с помощью BeautifulSoup, где ищутся интересующие нас элементы,
+    и записываются в переменную all_vacancy_on_page.
     Затем вызывается функция parse_one_page и передается переменная all_vacancy_on_page.
+    В начале функции создается список vacancy_list.
+    По ходу работы функции он дополняется, и в конце возвращается результат парсинга всех доступных страниц.
+
+    Выход: список вакансий со всех страниц vacancy_list
     """
+    vacancy_list = []
     list_geoid = [
         101728296,
         101705918,
@@ -156,10 +171,15 @@ def parse_all_page():
                 "div",
                 class_="base-card relative w-full hover:no-underline focus:no-underline base-card--link base-search-card base-search-card--link job-search-card",
             )
-
-            parse_one_page(all_vacancy_on_page)
+            if all_vacancy_on_page == []:
+                print("Следующие страницы не содержат вакансий")
+                break
+            new_vacancies = parse_one_page(all_vacancy_on_page)
+            vacancy_list.extend(new_vacancies)
             start += 10
             time.sleep(1)
+    return vacancy_list
 
 
-#parse_all_page()
+list_of_vacancies = parse_all_page()  # Список полученных вакансий
+print(f"Итого: количество подходящих вакансий - {len(list_of_vacancies)}")
