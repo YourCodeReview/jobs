@@ -24,6 +24,8 @@ export function useFirebase() {
         return 'Пользователь не найден'
       case 'auth/wrong-password':
         return 'Неверный пароль'
+      case 'auth/email-already-in-use':
+        return 'Пользователь с таким email существует'
       default:
         return 'Неверный email или пароль'
     }
