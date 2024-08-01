@@ -1,11 +1,17 @@
 <script setup>
 import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 
 const props = defineProps({
   item: Object
 })
 
-const chips = ['Удаленная работа', 'Junior вакансии', 'Стажировки']
+const chips = [
+  t('homeCard.remoteBadge'),
+  t('homeCard.vacanciesBadge'),
+  t('homeCard.internshipsBadge')
+]
 
 const currentComponent = computed(() => {
   switch (props.item.type) {
