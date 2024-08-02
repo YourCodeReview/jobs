@@ -7,26 +7,30 @@ import HeaderNavigation from '@/components/Header/VueHeaderNavigation.vue'
 import UiLoginButton from '@/components/_ui/uiLoginButton.vue'
 import UiLogoutButton from '@/components/_ui/uiLogoutButton.vue'
 import UiCareerButton from '@/components/_ui/uiCareerButton.vue'
+import uiLanguageButton from '../_ui/uiLanguageButton.vue'
 import UiMenu from '@/components/_ui/uiMenu.vue'
+import { useI18n } from 'vue-i18n'
 
 import SvgLogo from '@/components/_icons/svgLogo.vue'
 
+const { t } = useI18n()
+
 const auth = useFirebase()
 
-const links = [
+const links = computed(() => [
   {
-    title: 'Комьюнити',
+    title: t('headerNavigation.community'),
     url: 'https://t.me/YourCodeReview'
   },
   {
-    title: 'Полезные материалы',
+    title: t('headerNavigation.useful'),
     url: 'https://blog.yourcodereview.com/category/career/'
   },
   {
-    title: 'Блог',
+    title: t('headerNavigation.blog'),
     url: 'https://blog.yourcodereview.com/'
   }
-]
+])
 
 const showLoginButton = computed(() => !auth.isLoggedIn.value)
 </script>
@@ -47,6 +51,7 @@ const showLoginButton = computed(() => !auth.isLoggedIn.value)
         </v-col>
         <v-col cols="6" sm="7" md="8" lg="9" class="d-flex justify-end align-center">
           <header-navigation v-if="$vuetify.display.lgAndUp" :links="links" />
+          <ui-language-button />
           <ui-career-button v-if="$vuetify.display.smAndUp" variant="elevated" />
           <ui-login-button v-if="showLoginButton" variant="elevated" />
           <ui-logout-button v-else variant="elevated" />

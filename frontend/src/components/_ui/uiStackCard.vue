@@ -7,11 +7,11 @@ const props = defineProps({
   item: Object
 })
 
-const chips = [
+const chips = computed(() => [
   t('homeCard.remoteBadge'),
   t('homeCard.vacanciesBadge'),
   t('homeCard.internshipsBadge')
-]
+])
 
 const currentComponent = computed(() => {
   switch (props.item.type) {

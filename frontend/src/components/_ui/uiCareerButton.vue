@@ -9,13 +9,15 @@
     :block="block"
     target="_blank"
   >
-    Карьерная поддержка
+    {{ t('careerButton') }}
   </v-btn>
 </template>
 
 <script setup>
+import { useI18n } from 'vue-i18n'
 defineProps({
   variant: String,
   block: Boolean
 })
+const { t } = useI18n()
 </script>

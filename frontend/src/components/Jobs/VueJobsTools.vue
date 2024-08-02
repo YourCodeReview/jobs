@@ -1,9 +1,12 @@
 <script setup>
+import { useI18n } from 'vue-i18n'
 import groups from '@/data/tools-groups.json'
 import CheckboxTools from '@/components/Jobs/VueCheckboxTools.vue'
 import LocationsTools from '@/components/Jobs/VueLocationsTools.vue'
 import SourceTools from '@/components/Jobs/VueSourceTools.vue'
 import { useJobsStore } from '@/store/jobs'
+
+const { t } = useI18n()
 
 const jobsStore = useJobsStore()
 
@@ -24,12 +27,19 @@ const fetchWithQuery = (event) => {
       href="https://t.me/YCRJobs"
       target="_blank"
     >
-      <span>{{ $vuetify.display.md ? 'Вакансии' : 'Вакансии в Telegram' }}</span>
+      <span>{{
+        $vuetify.display.md ? t('jobsTools.vacancies') : t('jobsTools.vacanciesTelegram')
+      }}</span>
       <template #prepend>
         <v-img width="30" height="30" src="/images/telegram.png" />
       </template>
     </v-btn>
-    <v-expansion-panel v-for="group in groups" :key="group.title" :title="group.title" rounded="xl">
+    <v-expansion-panel
+      v-for="group in groups"
+      :key="group.title"
+      :title="t('jobsTools.specialization')"
+      rounded="xl"
+    >
       <v-expansion-panel-text>
         <template v-if="group.queriesName === 'specialities'">
           <v-radio-group
@@ -51,19 +61,19 @@ const fetchWithQuery = (event) => {
       </v-expansion-panel-text>
     </v-expansion-panel>
 
-    <v-expansion-panel title="Город" rounded="xl">
+    <v-expansion-panel :title="t('jobsTools.city')" rounded="xl">
       <v-expansion-panel-text>
         <locations-tools />
       </v-expansion-panel-text>
     </v-expansion-panel>
 
-    <v-expansion-panel title="Источник вакансии" rounded="xl">
+    <v-expansion-panel :title="t('jobsTools.source')" rounded="xl">
       <v-expansion-panel-text>
         <source-tools />
       </v-expansion-panel-text>
     </v-expansion-panel>
 
-    <v-expansion-panel title="Дополнительно" rounded="xl">
+    <v-expansion-panel :title="t('jobsTools.additionally')" rounded="xl">
       <v-expansion-panel-text>
         <checkbox-tools />
       </v-expansion-panel-text>

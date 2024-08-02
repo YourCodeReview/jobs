@@ -1,5 +1,6 @@
 <script setup>
 import uiStackCard from '@/components/_ui/uiStackCard.vue'
+import UiLanguageButton from '@/components/_ui/uiLanguageButton.vue'
 import svgLogo from '@/components/_icons/svgLogo.vue'
 
 import cards from '@/data/welcome-cards.json'
@@ -26,7 +27,7 @@ const fetchWithQuery = (newValue) => {
           <router-link class="flex-fill" :to="{ name: 'Home' }">
             <svg-logo />
           </router-link>
-          <v-btn class="text-none bg-none" prepend-icon="mdi-web" variant="text"> RU </v-btn>
+          <ui-language-button />
         </v-row>
         <h1 class="text-sm-h2 text-center mt-auto font-weight-bold">
           {{ t('homePage.title') }}
