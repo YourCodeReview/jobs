@@ -1,0 +1,35 @@
+{
+  "name": {
+    "type": "text",
+    "label": "Position"
+  },
+  "employer": {
+    "type": "text",
+    "label": "Company"
+  },
+  "area": {
+    "type": "text",
+    "label": "City"
+  },
+  "salary": {
+    "from": null,
+    "to": null,
+    "currency": null,
+    "gross": false
+  },
+  "employment": {
+    "type": "select",
+    "label": "Employment",
+    "items": ["Full-time", "Part-time", "Internship", "Project work"]
+  },
+  "schedule": {
+    "type": "select",
+    "label": "Work format",
+    "items": ["Remote", "Office", "Hybrid"]
+  },
+  "specialty": {
+    "type": "select",
+    "label": "Specialty",
+    "items": ["Python", "Java", "JavaScript", "Data Science", "QA", "C#"]
+  }
+}

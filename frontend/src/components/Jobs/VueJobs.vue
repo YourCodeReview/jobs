@@ -1,4 +1,5 @@
 <script setup>
+import { useI18n } from 'vue-i18n'
 import JobsList from '@/components/Jobs/VueJobsList.vue'
 import JobsTools from '@/components/Jobs/VueJobsTools.vue'
 import JobsPagination from '@/components/Jobs/VueJobsPagination.vue'
@@ -6,6 +7,7 @@ import JobsPagination from '@/components/Jobs/VueJobsPagination.vue'
 import { useJobsStore } from '@/store/jobs'
 import { onMounted } from 'vue'
 
+const { t } = useI18n()
 const jobsStore = useJobsStore()
 
 onMounted(() => {
@@ -28,9 +30,9 @@ onMounted(() => {
           indeterminate
         />
         <jobs-list v-if="!jobsStore.loading && jobsStore.list" :list="jobsStore.list.data" />
-        <span v-if="jobsStore.listIsEmpty && !jobsStore.loading" class="mx-auto text-h4"
-          >Вакансий пока нет</span
-        >
+        <span v-if="jobsStore.listIsEmpty && !jobsStore.loading" class="mx-auto text-h4">{{
+          t('noVacancies')
+        }}</span>
       </v-col>
     </v-row>
     <jobs-pagination />

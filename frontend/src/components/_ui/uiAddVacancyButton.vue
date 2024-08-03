@@ -9,15 +9,19 @@
       path: '/add'
     }"
   >
-    Добавить вакансию
+    {{ t('addButton') }}
   </v-btn>
 </template>
 
 <script setup>
+import { useI18n } from 'vue-i18n'
+
 defineProps({
   variant: String,
   block: Boolean
 })
+
+const { t } = useI18n()
 </script>
 
 <style scoped>
