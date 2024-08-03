@@ -15,6 +15,12 @@ export const i18n = createI18n({
         vacanciesBadge: 'Junior вакансии',
         internshipsBadge: 'Стажировки'
       },
+      loginPage: {
+        email: 'Почта',
+        emailPlaceholder: 'Введите почту',
+        password: 'Пароль',
+        passwordPlaceholder: 'Введите пароль'
+      },
       headerNavigation: {
         community: 'КОМЬЮНИТИ',
         useful: 'ПОЛЕЗНЫЕ МАТЕРИАЛЫ',
@@ -23,7 +29,9 @@ export const i18n = createI18n({
       careerButton: 'КАРЬЕРНАЯ ПОДДЕРЖКА',
       authButton: {
         logIn: 'ВОЙТИ',
-        logOut: 'ВЫЙТИ'
+        logOut: 'ВЫЙТИ',
+        signUp: 'Зарегистрироваться',
+        google: 'Войти через Google'
       },
       jobsTools: {
         vacancies: 'Вакансии',
@@ -44,6 +52,12 @@ export const i18n = createI18n({
         vacanciesBadge: 'Junior vacancies',
         internshipsBadge: 'Internships'
       },
+      loginPage: {
+        email: 'Email',
+        emailPlaceholder: 'Enter your email',
+        password: 'Password',
+        passwordPlaceholder: 'Enter your password'
+      },
       headerNavigation: {
         community: 'COMMUNITY',
         useful: 'USEFUL MATERIALS',
@@ -52,7 +66,9 @@ export const i18n = createI18n({
       careerButton: 'CAREER SUPPORT',
       authButton: {
         logIn: 'LOGIN',
-        logOut: 'LOGOUT'
+        logOut: 'LOGOUT',
+        signUp: 'SIGNUP',
+        google: 'Login via Google'
       },
       jobsTools: {
         vacancies: 'Vacancies',

@@ -1,11 +1,15 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 import { useFirebase } from '@/hooks/useFirebase'
 import { useUnisender } from '@/hooks/useUnisender'
 
 import svgLogo from '@/components/_icons/svgLogo.vue'
 import uiSnackbar from '@/components/_ui/uiSnackbar.vue'
+import uiLanguageButton from '@/components/_ui/uiLanguageButton.vue'
+
+const { t } = useI18n()
 
 const router = useRouter()
 const auth = useFirebase()
@@ -52,19 +56,19 @@ onMounted(() => {
         max-width="600"
         rounded="lg"
       >
-        <div class="text-subtitle-1 text-medium-emphasis">Почта</div>
+        <div class="text-subtitle-1 text-medium-emphasis">{{ t('loginPage.email') }}</div>
 
         <v-text-field
           v-model="email"
           density="compact"
-          placeholder="Введите почту"
+          :placeholder="t('loginPage.emailPlaceholder')"
           prepend-inner-icon="mdi-email-outline"
           variant="outlined"
           required
         ></v-text-field>
 
         <div class="text-subtitle-1 text-medium-emphasis d-flex align-center justify-space-between">
-          Пароль
+          {{ t('loginPage.password') }}
         </div>
 
         <v-text-field
@@ -72,7 +76,7 @@ onMounted(() => {
           :append-inner-icon="visible ? 'mdi-eye-off' : 'mdi-eye'"
           :type="visible ? 'text' : 'password'"
           density="compact"
-          placeholder="Введите пароль"
+          :placeholder="t('loginPage.passwordPlaceholder')"
           prepend-inner-icon="mdi-lock-outline"
           variant="outlined"
           required
@@ -80,10 +84,10 @@ onMounted(() => {
         ></v-text-field>
 
         <v-btn block type="submit" class="mb-2" size="large" variant="tonal">
-          {{ type === 'register' ? 'Зарегистрироваться' : 'Войти' }}
+          {{ type === 'register' ? t('authButton.signUp') : t('authButton.logIn') }}
         </v-btn>
         <v-btn class="btn__google mb-2" @click="googleAuth" size="large" block>
-          Войти через Google
+          {{ t('authButton.google') }}
         </v-btn>
 
         <v-card-text class="text-center">
@@ -93,13 +97,14 @@ onMounted(() => {
             size="small"
             @click="type === 'login' ? (type = 'register') : (type = 'login')"
           >
-            {{ type !== 'register' ? 'Зарегистрироваться' : 'Войти' }}
+            {{ type !== 'register' ? t('authButton.signUp') : t('authButton.logIn') }}
             <v-icon icon="mdi-chevron-right"></v-icon>
           </v-btn>
         </v-card-text>
       </v-card>
       <ui-snackbar color="red" v-model="snackbar" :message="auth.errorMsg.value" />
     </v-form>
+    <ui-language-button style="position: absolute; top: 0; left: 0; color: #fff" />
     <v-btn class="btn__close" icon="mdi-close" @click="router.back()"></v-btn>
   </div>
 </template>
