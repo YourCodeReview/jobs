@@ -1,8 +1,10 @@
 <script setup>
+import { useI18n } from 'vue-i18n'
 import { useJobsStore } from '@/store/jobs'
 import { useLocationsStore } from '@/store/locations'
 import { onMounted, watch, ref } from 'vue'
 
+const { t } = useI18n()
 const jobsStore = useJobsStore()
 const locationStore = useLocationsStore()
 const location = ref('')
@@ -33,7 +35,7 @@ onMounted(() => {
     density="compact"
     hide-details
     variant="filled"
-    placeholder="Выберите город"
+    :placeholder="t('jobsTools.cityPlaceholder')"
     clearable
   ></v-autocomplete>
 </template>

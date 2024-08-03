@@ -1,10 +1,30 @@
 <script setup>
-import { reactive } from 'vue'
+import { useI18n } from 'vue-i18n'
+import { computed, reactive, ref, watchEffect } from 'vue'
 import { useRouter } from 'vue-router'
+import uiLanguageButton from '@/components/_ui/uiLanguageButton.vue'
 
 import NewVacancyDescription from '@/components/NewVacancy/VueNewVacancyDescription.vue'
 
-import formFields from '@/data/new-vacancy-fields'
+const { t, locale } = useI18n()
+
+const formFields = ref({})
+
+const loadFormFields = async (locale) => {
+  if (locale.value === 'en') {
+    formFields.value = await import('@/data/new-vacancy-fields.en.json')
+  } else {
+    formFields.value = await import('@/data/new-vacancy-fields.ru.json')
+  }
+}
+
+const employmentDefault = computed(() => t('newVacancyPage.default.employment'))
+const scheduleDefault = computed(() => t('newVacancyPage.default.schedule'))
+const descriptionDefault = computed(() => t('newVacancyPage.default.description'))
+
+watchEffect(() => {
+  loadFormFields(locale)
+})
 
 const router = useRouter()
 
@@ -21,23 +41,23 @@ const state = reactive({
     gross: false
   },
   specialty: '',
-  employment: 'Полная занятость',
-  schedule: 'Офис',
-  description: '<p>Описание вакансии!</p>'
+  employment: employmentDefault,
+  schedule: scheduleDefault,
+  description: descriptionDefault
 })
 
 const validations = {
-  name: [(v) => !!v || 'Поле должно быть заполнено'],
-  employer: [(v) => !!v || 'Поле должно быть заполнено'],
-  area: [(v) => !!v || 'Поле должно быть заполнено'],
-  'salary.currency': [(v) => !!v || 'Поле должно быть заполнено'],
-  'salary.from': [(v) => !!v || 'Поле должно быть заполнено'],
-  'salary.to': [(v) => !!v || 'Поле должно быть заполнено'],
-  description: [(v) => !!v || 'Поле должно быть заполнено'],
-  nameFrom: [(v) => !!v || 'Поле должно быть заполнено'],
+  name: [(v) => !!v || t('newVacancyPage.errorMessage')],
+  employer: [(v) => !!v || t('newVacancyPage.errorMessage')],
+  area: [(v) => !!v || t('newVacancyPage.errorMessage')],
+  'salary.currency': [(v) => !!v || t('newVacancyPage.errorMessage')],
+  'salary.from': [(v) => !!v || t('newVacancyPage.errorMessage')],
+  'salary.to': [(v) => !!v || t('newVacancyPage.errorMessage')],
+  description: [(v) => !!v || t('newVacancyPage.errorMessage')],
+  nameFrom: [(v) => !!v || t('newVacancyPage.errorMessage')],
   email: [
-    (v) => !!v || 'Поле должно быть заполнено',
-    (v) => /.+@.+..+/.test(v) || 'Введите действительный адрес электронной почты'
+    (v) => !!v || t('newVacancyPage.errorMessage'),
+    (v) => /.+@.+..+/.test(v) || t('newVacancyPage.emailErrorMessage')
   ]
 }
 
@@ -52,9 +72,9 @@ const onSubmit = () => {
 
 <template>
   <div class="container">
-    <h1 class="w-75 mb-4 px-2 text-white text-h4">Разместить вакансию</h1>
+    <h1 class="w-75 mb-4 px-2 text-white text-h4">{{ t('newVacancyPage.title') }}</h1>
     <h1 class="mb-4 px-2 text-white text-h6">
-      Размещать вакансии здесь можно бесплатно. Просто заполните форму ниже.
+      {{ t('newVacancyPage.subtitle') }}
     </h1>
     <form @submit.prevent="onSubmit">
       <v-card class="pa-8 mb-4" rounded="xl" elevation="8">
@@ -91,12 +111,12 @@ const onSubmit = () => {
                 <v-checkbox
                   v-if="itemName === 'gross'"
                   v-model="state.salary.gross"
-                  label="До вычета налогов"
+                  :label="t('newVacancyPage.beforeTaxes')"
                 ></v-checkbox>
                 <v-text-field
                   v-else-if="itemName === 'currency'"
                   v-model="state.salary[itemName]"
-                  label="Валюта"
+                  :label="t('newVacancyPage.currency')"
                   :rules="getValidationRules('salary.' + itemName)"
                   clearable
                   variant="solo"
@@ -104,7 +124,7 @@ const onSubmit = () => {
                 <v-text-field
                   v-else-if="itemName === 'from'"
                   v-model="state.salary[itemName]"
-                  label="Зарплата от"
+                  :label="t('newVacancyPage.salaryFrom')"
                   :rules="getValidationRules('salary.' + itemName)"
                   clearable
                   variant="solo"
@@ -112,7 +132,7 @@ const onSubmit = () => {
                 <v-text-field
                   v-else-if="itemName === 'to'"
                   v-model="state.salary[itemName]"
-                  label="До"
+                  :label="t('newVacancyPage.salaryUpTo')"
                   :rules="getValidationRules('salary.' + itemName)"
                   clearable
                   variant="solo"
@@ -127,7 +147,7 @@ const onSubmit = () => {
         />
         <v-text-field
           v-model="state.nameFrom"
-          label="Ваше имя"
+          :label="t('newVacancyPage.name')"
           :rules="getValidationRules('nameFrom')"
           clearable
           variant="solo"
@@ -139,10 +159,11 @@ const onSubmit = () => {
           clearable
           variant="solo"
         />
-        <v-btn block color="purple" type="submit">Отправить</v-btn>
+        <v-btn block color="purple" type="submit">{{ t('newVacancyPage.submit') }}</v-btn>
       </v-card>
     </form>
     <v-btn class="btn__close" icon="mdi-close" @click="router.back()"></v-btn>
+    <ui-language-button style="position: absolute; top: 0; left: 0; color: #fff" />
   </div>
 </template>
 

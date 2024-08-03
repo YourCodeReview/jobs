@@ -1,12 +1,15 @@
 <script setup>
 import uiStackCard from '@/components/_ui/uiStackCard.vue'
+import UiLanguageButton from '@/components/_ui/uiLanguageButton.vue'
 import svgLogo from '@/components/_icons/svgLogo.vue'
 
 import cards from '@/data/welcome-cards.json'
 import { useJobsStore } from '@/store/jobs'
 
 import { useRouter } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const router = useRouter()
 const jobsStore = useJobsStore()
 
@@ -20,14 +23,17 @@ const fetchWithQuery = (newValue) => {
   <div class="welcome background">
     <header class="pt-1 pb-4">
       <div class="container px-4 py-6">
-        <router-link :to="{ name: 'Home' }">
-          <svg-logo />
-        </router-link>
+        <v-row>
+          <router-link class="flex-fill" :to="{ name: 'Home' }">
+            <svg-logo />
+          </router-link>
+          <ui-language-button />
+        </v-row>
         <h1 class="text-sm-h2 text-center mt-auto font-weight-bold">
-          Junior вакансии и стажировки
+          {{ t('homePage.title') }}
         </h1>
         <p class="text-sm-h4 text-center mt-8">
-          Всё, что нужно, чтобы найти первую работу разработчиком
+          {{ t('homePage.subtitle') }}
         </p>
       </div>
     </header>

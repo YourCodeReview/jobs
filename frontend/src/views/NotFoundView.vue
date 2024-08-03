@@ -1,7 +1,14 @@
+<script setup>
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
+</script>
+
 <template>
   <div class="container">
-    <span class="d-block mx-auto text-h4 mb-6">Такой страницы неть...</span>
-    <v-btn class="btn__purple" @click="$router.back()" size="large" rounded="lg">Назад</v-btn>
+    <span class="d-block mx-auto text-h4 mb-6">{{ t('notFoundPage.notFound') }}</span>
+    <v-btn class="btn__purple" @click="$router.back()" size="large" rounded="lg">{{
+      t('backButton')
+    }}</v-btn>
   </div>
 </template>
 

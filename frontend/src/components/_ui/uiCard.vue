@@ -1,4 +1,5 @@
 <script setup>
+import { useI18n } from 'vue-i18n'
 defineProps({
   item: Object,
   size: {
@@ -6,6 +7,7 @@ defineProps({
     default: 'md'
   }
 })
+const { t } = useI18n()
 </script>
 
 <template>
@@ -29,9 +31,7 @@ defineProps({
         :class="size === 'lg' ? 'text-h5' : ''"
         >{{ item.title }}</v-card-title
       >
-      <v-chip-group
-        class="custom-chips"
-      >
+      <v-chip-group class="custom-chips">
         <v-chip
           v-if="item.location && size !== 'lg'"
           class="chip text-grey-darken-2"
@@ -44,24 +44,21 @@ defineProps({
           class="chip text-grey-darken-2"
           prepend-icon="mdi-briefcase"
           label
-          >Удаленно</v-chip
+          >{{ t('jobCard.remoteBadge') }}</v-chip
         >
-        <v-chip v-if="item.internship" class="chip text-grey-darken-2" label
-          >Стажировка</v-chip
-        >
-        
+        <v-chip v-if="item.internship" class="chip text-grey-darken-2" label>{{
+          t('jobCard.internshipsBadge')
+        }}</v-chip>
+
         <v-chip
           v-if="item.salary && size !== 'lg'"
           class="chip chip-salary text-grey-darken-2"
           label
           >{{ item.salary }}</v-chip
         >
-        <v-chip
-          v-else
-          class="chip chip-salary text-grey-darken-2"
-          label
-          >з/п не указана</v-chip
-        >
+        <v-chip v-else class="chip chip-salary text-grey-darken-2" label>{{
+          t('jobCard.noSalary')
+        }}</v-chip>
       </v-chip-group>
     </v-card>
   </v-hover>
