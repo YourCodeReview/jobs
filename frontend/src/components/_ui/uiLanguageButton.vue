@@ -10,11 +10,12 @@ const languages = [
 ]
 
 const currentLanguageLabel = computed(() => {
-  return languages.filter((l) => l.value === locale.value)[0].title
+  return languages.filter((l) => l.value === locale.value)[0].title || 'unknown'
 })
 
 const switchLanguage = (langItem) => {
   locale.value = langItem.value
+  localStorage.setItem('language', langItem.value)
 }
 </script>
 
