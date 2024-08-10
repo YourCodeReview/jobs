@@ -1,11 +1,13 @@
 <script setup>
-import { reactive } from 'vue'
+import { reactive, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
+import { useFirebase } from '@/hooks/useFirebase'
 
 import NewVacancyDescription from '@/components/NewVacancy/VueNewVacancyDescription.vue'
 
 import formFields from '@/data/new-vacancy-fields'
 
+const auth = useFirebase()
 const router = useRouter()
 
 const state = reactive({
@@ -44,6 +46,14 @@ const validations = {
 const getValidationRules = (field) => {
   return validations[field] || []
 }
+
+onMounted(() => {
+  if (!auth.isLoggedIn.value) {
+    router.push('/login');  // Перенаправление на страницу входа, если пользователь не аутентифицирован
+    return;
+  }
+
+});
 
 const onSubmit = () => {
   console.log(state)
