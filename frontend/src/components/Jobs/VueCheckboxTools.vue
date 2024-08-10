@@ -1,10 +1,25 @@
 <script setup>
-import { onMounted, watch, ref } from 'vue'
+import { onMounted, watch, ref, computed } from 'vue'
 import { useJobsStore } from '@/store/jobs'
-import filterTools from '@/data/jobs-filter-tools.json'
+import { useTranslation } from '@/hooks/useTranslation'
+import filterToolsEn from '@/data/jobs-filter-tools.en.json'
+import filterToolsRu from '@/data/jobs-filter-tools.ru.json'
 
 const checked = ref([])
 const jobStore = useJobsStore()
+
+const { locale } = useTranslation()
+
+const filterTools = computed(() => {
+  switch (locale.value) {
+    case 'ru':
+      return filterToolsRu
+    case 'en':
+      return filterToolsEn
+    default:
+      return filterToolsRu
+  }
+})
 
 const fetchFilteredData = (e) => {
   const field = e.target.value
