@@ -103,7 +103,7 @@ onMounted(() => {
       </v-card>
       <ui-snackbar color="red" v-model="snackbar" :message="auth.errorMsg.value" />
     </v-form>
-    <ui-language-button style="position: absolute; top: 0; left: 0; color: #fff" />
+    <ui-language-button class="btn__language" />
     <v-btn class="btn__close" icon="mdi-close" @click="router.back()"></v-btn>
   </div>
 </template>
@@ -124,5 +124,11 @@ onMounted(() => {
   position: absolute;
   top: 25px;
   right: 25px;
+}
+.btn__language {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: #fff;
 }
 </style>

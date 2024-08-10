@@ -163,7 +163,7 @@ const onSubmit = () => {
       </v-card>
     </form>
     <v-btn class="btn__close" icon="mdi-close" @click="router.back()"></v-btn>
-    <ui-language-button style="position: absolute; top: 0; left: 0; color: #fff" />
+    <ui-language-button class="btn__language" />
   </div>
 </template>
 
@@ -182,5 +182,11 @@ const onSubmit = () => {
   position: absolute;
   top: 25px;
   right: 25px;
+}
+.btn__language {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: #fff;
 }
 </style>
