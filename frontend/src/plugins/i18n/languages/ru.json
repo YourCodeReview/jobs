@@ -1,0 +1,66 @@
+{
+  "homePage": {
+    "title": "Junior вакансии и стажировки",
+    "subtitle": "Всё, что нужно, чтобы найти первую работу разработчиком"
+  },
+  "homeCard": {
+    "remoteBadge": "Удаленная работа",
+    "vacanciesBadge": "Junior вакансии",
+    "internshipsBadge": "Стажировки"
+  },
+  "jobCard": {
+    "remoteBadge": "Удаленно",
+    "internshipsBadge": "Стажировка",
+    "noSalary": "з/п не указана"
+  },
+  "loginPage": {
+    "email": "Почта",
+    "emailPlaceholder": "Введите почту",
+    "password": "Пароль",
+    "passwordPlaceholder": "Введите пароль"
+  },
+  "newVacancyPage": {
+    "title": "Разместить вакансию",
+    "subtitle": "Размещать вакансии здесь можно бесплатно. Просто заполните форму ниже.",
+    "default": {
+      "employment": "Полная занятость",
+      "schedule": "Офис",
+      "description": "<p>Описание вакансии!</p>"
+    },
+    "errorMessage": "Поле должно быть заполнено",
+    "emailErrorMessage": "Введите действительный адрес электронной почты",
+    "beforeTaxes": "До вычета налогов",
+    "salaryFrom": "Зарплата от",
+    "salaryUpTo": "До",
+    "currency": "Валюта",
+    "name": "Ваше имя",
+    "submit": "Отправить"
+  },
+  "notFoundPage": {
+    "notFound": "Такой страницы нет..."
+  },
+  "headerNavigation": {
+    "community": "Коммьюнити",
+    "useful": "Полезные материалы",
+    "blog": "Блог"
+  },
+  "careerButton": "Карьерная поддержка",
+  "backButton": "Назад",
+  "addButton": "Добавить вакансию",
+  "authButton": {
+    "logIn": "Войти",
+    "logOut": "Выйти",
+    "signUp": "Зарегистрироваться",
+    "google": "Войти через Google"
+  },
+  "jobsTools": {
+    "vacancies": "Вакансии",
+    "vacanciesTelegram": "Вакансии в Telegram",
+    "specialization": "Специализация",
+    "city": "Город",
+    "cityPlaceholder": "Выберете город",
+    "source": "Источник вакансии",
+    "additionally": "Дополнительно"
+  },
+  "noVacancies": "Вакансий пока нет"
+}

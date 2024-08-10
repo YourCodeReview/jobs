@@ -1,0 +1,66 @@
+{
+  "homePage": {
+    "title": "Junior vacancies and internships",
+    "subtitle": "Everything you need to find your first job as a developer"
+  },
+  "homeCard": {
+    "remoteBadge": "Remote job",
+    "vacanciesBadge": "Junior vacancies",
+    "internshipsBadge": "Internships"
+  },
+  "jobCard": {
+    "remoteBadge": "Remotely",
+    "internshipsBadge": "Internship",
+    "noSalary": "Salary not specified"
+  },
+  "loginPage": {
+    "email": "Email",
+    "emailPlaceholder": "Enter your email",
+    "password": "Password",
+    "passwordPlaceholder": "Enter your password"
+  },
+  "newVacancyPage": {
+    "title": "Post a vacancy",
+    "subtitle": "You can post vacancies here for free. Just fill out the form below.",
+    "default": {
+      "employment": "Full-time",
+      "schedule": "Office",
+      "description": "<p>Vacancy description!</p>"
+    },
+    "errorMessage": "The field must be filled",
+    "emailErrorMessage": "Please enter a valid email address",
+    "beforeTaxes": "Before taxes",
+    "salaryFrom": "Salary from",
+    "salaryUpTo": "Up to",
+    "currency": "Currency",
+    "name": "Your name",
+    "submit": "Submit"
+  },
+  "notFoundPage": {
+    "notFound": "There is no such page..."
+  },
+  "headerNavigation": {
+    "community": "Community",
+    "useful": "Useful materials",
+    "blog": "Blog"
+  },
+  "careerButton": "Career support",
+  "backButton": "Back",
+  "addButton": "Add a vacancy",
+  "authButton": {
+    "logIn": "Login",
+    "logOut": "LogOut",
+    "signUp": "SignUp",
+    "google": "Login via Google"
+  },
+  "jobsTools": {
+    "vacancies": "Vacancies",
+    "vacanciesTelegram": "Vacancies in Telegram",
+    "specialization": "Specialization",
+    "city": "City",
+    "cityPlaceholder": "Select a city",
+    "source": "Source of vacancy",
+    "additionally": "Additionally"
+  },
+  "noVacancies": "There are no vacancies yet"
+}
