@@ -1,12 +1,12 @@
 <script setup>
-import { useI18n } from 'vue-i18n'
+import { useTranslation } from '@/hooks/useTranslation'
 import { computed, reactive, ref, watchEffect } from 'vue'
 import { useRouter } from 'vue-router'
 import uiLanguageButton from '@/components/_ui/uiLanguageButton.vue'
 
 import NewVacancyDescription from '@/components/NewVacancy/VueNewVacancyDescription.vue'
 
-const { t, locale } = useI18n()
+const { t, locale } = useTranslation()
 
 const formFields = ref({})
 

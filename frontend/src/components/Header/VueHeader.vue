@@ -9,11 +9,11 @@ import UiLogoutButton from '@/components/_ui/uiLogoutButton.vue'
 import UiCareerButton from '@/components/_ui/uiCareerButton.vue'
 import uiLanguageButton from '../_ui/uiLanguageButton.vue'
 import UiMenu from '@/components/_ui/uiMenu.vue'
-import { useI18n } from 'vue-i18n'
+import { useTranslation } from '@/hooks/useTranslation'
 
 import SvgLogo from '@/components/_icons/svgLogo.vue'
 
-const { t } = useI18n()
+const { t } = useTranslation()
 
 const auth = useFirebase()
 

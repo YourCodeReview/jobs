@@ -13,7 +13,7 @@
 
 <script setup>
 import { useFirebase } from '@/hooks/useFirebase'
-import { useI18n } from 'vue-i18n'
+import { useTranslation } from '@/hooks/useTranslation'
 
 const auth = useFirebase()
 const handleLogout = () => {
@@ -23,5 +23,5 @@ defineProps({
   variant: String,
   block: Boolean
 })
-const { t } = useI18n()
+const { t } = useTranslation()
 </script>

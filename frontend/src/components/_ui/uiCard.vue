@@ -1,5 +1,5 @@
 <script setup>
-import { useI18n } from 'vue-i18n'
+import { useTranslation } from '@/hooks/useTranslation'
 defineProps({
   item: Object,
   size: {
@@ -7,7 +7,7 @@ defineProps({
     default: 'md'
   }
 })
-const { t } = useI18n()
+const { t } = useTranslation()
 </script>
 
 <template>

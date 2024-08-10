@@ -15,10 +15,10 @@
 </template>
 
 <script setup>
-import { useI18n } from 'vue-i18n'
+import { useTranslation } from '@/hooks/useTranslation'
 defineProps({
   variant: String,
   block: Boolean
 })
-const { t } = useI18n()
+const { t } = useTranslation()
 </script>

@@ -1,12 +1,12 @@
 <script setup>
-import { useI18n } from 'vue-i18n'
+import { useTranslation } from '@/hooks/useTranslation'
 import groups from '@/data/tools-groups.json'
 import CheckboxTools from '@/components/Jobs/VueCheckboxTools.vue'
 import LocationsTools from '@/components/Jobs/VueLocationsTools.vue'
 import SourceTools from '@/components/Jobs/VueSourceTools.vue'
 import { useJobsStore } from '@/store/jobs'
 
-const { t } = useI18n()
+const { t } = useTranslation()
 
 const jobsStore = useJobsStore()
 

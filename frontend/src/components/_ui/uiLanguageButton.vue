@@ -1,8 +1,8 @@
 <script setup>
 import { computed } from 'vue'
-import { useI18n } from 'vue-i18n'
+import { useTranslation } from '@/hooks/useTranslation'
 
-const { locale } = useI18n()
+const { locale } = useTranslation()
 
 const languages = [
   { title: 'RU', value: 'ru' },

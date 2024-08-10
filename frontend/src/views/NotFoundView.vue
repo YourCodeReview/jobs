@@ -1,6 +1,6 @@
 <script setup>
-import { useI18n } from 'vue-i18n'
-const { t } = useI18n()
+import { useTranslation } from '@/hooks/useTranslation'
+const { t } = useTranslation()
 </script>
 
 <template>

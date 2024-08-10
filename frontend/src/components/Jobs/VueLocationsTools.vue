@@ -1,10 +1,10 @@
 <script setup>
-import { useI18n } from 'vue-i18n'
+import { useTranslation } from '@/hooks/useTranslation'
 import { useJobsStore } from '@/store/jobs'
 import { useLocationsStore } from '@/store/locations'
 import { onMounted, watch, ref } from 'vue'
 
-const { t } = useI18n()
+const { t } = useTranslation()
 const jobsStore = useJobsStore()
 const locationStore = useLocationsStore()
 const location = ref('')

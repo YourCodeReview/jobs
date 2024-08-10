@@ -1,5 +1,5 @@
 <script setup>
-import { useI18n } from 'vue-i18n'
+import { useTranslation } from '@/hooks/useTranslation'
 import JobsList from '@/components/Jobs/VueJobsList.vue'
 import JobsTools from '@/components/Jobs/VueJobsTools.vue'
 import JobsPagination from '@/components/Jobs/VueJobsPagination.vue'
@@ -7,7 +7,7 @@ import JobsPagination from '@/components/Jobs/VueJobsPagination.vue'
 import { useJobsStore } from '@/store/jobs'
 import { onMounted } from 'vue'
 
-const { t } = useI18n()
+const { t } = useTranslation()
 const jobsStore = useJobsStore()
 
 onMounted(() => {

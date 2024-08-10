@@ -1,15 +1,14 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-import { useI18n } from 'vue-i18n'
 import { useFirebase } from '@/hooks/useFirebase'
 import { useUnisender } from '@/hooks/useUnisender'
-
+import { useTranslation } from '@/hooks/useTranslation'
 import svgLogo from '@/components/_icons/svgLogo.vue'
 import uiSnackbar from '@/components/_ui/uiSnackbar.vue'
 import uiLanguageButton from '@/components/_ui/uiLanguageButton.vue'
 
-const { t } = useI18n()
+const { t } = useTranslation()
 
 const router = useRouter()
 const auth = useFirebase()

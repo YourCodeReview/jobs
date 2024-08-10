@@ -7,9 +7,9 @@ import cards from '@/data/welcome-cards.json'
 import { useJobsStore } from '@/store/jobs'
 
 import { useRouter } from 'vue-router'
-import { useI18n } from 'vue-i18n'
+import { useTranslation } from '@/hooks/useTranslation'
 
-const { t } = useI18n()
+const { t } = useTranslation()
 const router = useRouter()
 const jobsStore = useJobsStore()
 
