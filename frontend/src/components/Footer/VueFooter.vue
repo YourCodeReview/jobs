@@ -1,10 +1,38 @@
 <script setup>
+import { computed } from 'vue'
+import { useTranslation } from '@/hooks/useTranslation'
 import ContactSection from '@/components/Footer/VueFooterContacts.vue'
 import NavigationSection from '@/components/Footer/VueFooterNavigation.vue'
 
 import contacts from '@/data/contacts.json'
-import anchors from '@/data/anchors.json'
-import links from '@/data/links.json'
+import anchorsRu from '@/data/anchors.ru.json'
+import anchorsEn from '@/data/anchors.en.json'
+import linksRu from '@/data/links.ru.json'
+import linksEn from '@/data/links.en.json'
+
+const { locale } = useTranslation()
+
+const links = computed(() => {
+  switch (locale.value) {
+    case 'ru':
+      return linksRu
+    case 'en':
+      return linksEn
+    default:
+      return linksRu
+  }
+})
+
+const anchors = computed(() => {
+  switch (locale.value) {
+    case 'ru':
+      return anchorsRu
+    case 'en':
+      return anchorsEn
+    default:
+      return anchorsRu
+  }
+})
 </script>
 
 <template>
@@ -13,7 +41,7 @@ import links from '@/data/links.json'
       <v-row>
         <contact-section :contacts="contacts" />
         <v-spacer />
-        <navigation-section :anchors="anchors" :links="links" />
+        <navigation-section v-if="links.length" :anchors="anchors" :links="links" />
       </v-row>
     </div>
   </v-footer>

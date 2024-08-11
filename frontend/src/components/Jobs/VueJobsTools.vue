@@ -1,12 +1,25 @@
 <script setup>
+import { computed } from 'vue'
 import { useTranslation } from '@/hooks/useTranslation'
-import groups from '@/data/tools-groups.json'
+import groupsRu from '@/data/tools-groups.ru.json'
+import groupsEn from '@/data/tools-groups.en.json'
 import CheckboxTools from '@/components/Jobs/VueCheckboxTools.vue'
 import LocationsTools from '@/components/Jobs/VueLocationsTools.vue'
 import SourceTools from '@/components/Jobs/VueSourceTools.vue'
 import { useJobsStore } from '@/store/jobs'
 
-const { t } = useTranslation()
+const { t, locale } = useTranslation()
+
+const groups = computed(() => {
+  switch (locale.value) {
+    case 'ru':
+      return groupsRu
+    case 'en':
+      return groupsEn
+    default:
+      return groupsRu
+  }
+})
 
 const jobsStore = useJobsStore()
 
@@ -34,12 +47,7 @@ const fetchWithQuery = (event) => {
         <v-img width="30" height="30" src="/images/telegram.png" />
       </template>
     </v-btn>
-    <v-expansion-panel
-      v-for="group in groups"
-      :key="group.title"
-      :title="t('jobsTools.specialization')"
-      rounded="xl"
-    >
+    <v-expansion-panel v-for="group in groups" :key="group.title" :title="group.title" rounded="xl">
       <v-expansion-panel-text>
         <template v-if="group.queriesName === 'specialities'">
           <v-radio-group
