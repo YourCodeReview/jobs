@@ -18,7 +18,7 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - ./backend/db_data:/var/lib/postgresql/data
+      - ./db_data:/var/lib/postgresql/data
   frontend:
     build:
       context: ./frontend
