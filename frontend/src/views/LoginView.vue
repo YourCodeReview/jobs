@@ -2,6 +2,7 @@
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useFirebase } from '@/hooks/useFirebase'
+import { useDatabase } from '@/hooks/useDatabase'
 import { useUnisender } from '@/hooks/useUnisender'
 import { useField, useForm } from 'vee-validate'
 import * as yup from 'yup'
@@ -27,7 +28,7 @@ const validationSchema = yup.object({
     .required('Поле для телефона обязательно')
 })
 
-const { handleSubmit, handleReset } = useForm({
+const { handleReset } = useForm({
   validationSchema
 })
 
@@ -37,6 +38,7 @@ const phone = useField('phone')
 
 const router = useRouter()
 const auth = useFirebase()
+const database = useDatabase()
 const { subscribe } = useUnisender()
 
 const type = ref('login')
@@ -46,27 +48,43 @@ const snackbar = ref(false)
 const expand = ref(false)
 const showModal = ref(false)
 
-const phoneSubmit = handleSubmit((values) => {
+const handlePhoneModalWithGoogle = async ({ act }) => {
+  if (act) {
+    await database.writeUserDataById(
+      auth.currentUser.value.uid,
+      auth.currentUser.value.email,
+      phone.value.value
+    )
+    subscribe(auth.currentUser.value.email)
+  } else {
+    console.log('нужно ввести номер телефона')
+  }
   showModal.value = false
-  auth.isLoggedIn.value ? router.back() : (snackbar.value = true)
-  console.log(values)
   handleReset()
-})
+  auth.isLoggedIn.value ? router.back() : (snackbar.value = true)
+}
 
-const authenticate = async (email, password) => {
-  if (type.value === 'register') {
+const authenticate = async (email, password, phoneNumber) => {
+  if (type.value === 'register' && !phone.errorMessage.value) {
     await auth.registerUser(email, password)
-    phoneSubmit()
+    await database.writeUserDataById(auth.currentUser.value.uid, email, phoneNumber)
   } else if (type.value === 'login') {
     await auth.loginUser(email, password)
   }
   subscribe(auth.currentUser.value.email)
+  handleReset()
+  auth.isLoggedIn.value ? router.back() : (snackbar.value = true)
 }
 
 const googleAuth = async () => {
   await auth.loginWithGoogle()
-  subscribe(auth.currentUser.value.email)
-  showModal.value = true
+  const currentUserFromDatabase = await database.readUserDataById(auth.currentUser.value.uid)
+
+  if (!currentUserFromDatabase.phone) {
+    showModal.value = true
+  } else {
+    auth.isLoggedIn.value ? router.back() : (snackbar.value = true)
+  }
 }
 
 onMounted(() => {
@@ -78,7 +96,10 @@ onMounted(() => {
 <template>
   <div class="background pa-8 h-screen d-flex flex-column justify-center align-center">
     <svg-logo />
-    <v-form @submit.prevent="authenticate(email.value.value, password.value.value)" v-show="expand">
+    <v-form
+      @submit.prevent="authenticate(email.value.value, password.value.value, phone.value.value)"
+      v-show="expand"
+    >
       <v-card
         class="mx-auto pa-8 mt-8 w-100"
         elevation="8"
@@ -170,9 +191,9 @@ onMounted(() => {
           <template v-slot:actions>
             <v-spacer></v-spacer>
 
-            <v-btn @click="showModal = false"> Отмена </v-btn>
+            <v-btn @click="handlePhoneModalWithGoogle({ act: false })"> Отмена </v-btn>
 
-            <v-btn @click="phoneSubmit"> OK </v-btn>
+            <v-btn @click="handlePhoneModalWithGoogle({ act: true })"> OK </v-btn>
           </template>
         </v-card>
       </v-form>
