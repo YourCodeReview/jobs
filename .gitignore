@@ -8,3 +8,5 @@ virtenv
 .env
 # *.json
 .DS_Store
+
+db_data/
