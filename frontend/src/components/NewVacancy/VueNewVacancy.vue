@@ -2,6 +2,7 @@
 import { reactive, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useFirebase } from '@/hooks/useFirebase'
+import { useClientStore } from '@/store/checkUserAccess'
 
 import NewVacancyDescription from '@/components/NewVacancy/VueNewVacancyDescription.vue'
 
@@ -9,6 +10,8 @@ import formFields from '@/data/new-vacancy-fields'
 
 const auth = useFirebase()
 const router = useRouter()
+const userId = auth.currentUser.value.uid // Получение ID пользователя из Firebase
+const clientStore = useClientStore()
 
 const state = reactive({
   name: '',
@@ -47,13 +50,33 @@ const getValidationRules = (field) => {
   return validations[field] || []
 }
 
-onMounted(() => {
-  if (!auth.isLoggedIn.value) {
-    router.push('/login');  // Перенаправление на страницу входа, если пользователь не аутентифицирован
-    return;
+const canCreateJobVacancy = async (userId) => {
+  clientStore.changeId(userId)
+  try {
+    await clientStore.checkClientPermissions()
+    console.log(clientStore.clientId.value)
+    const clientPermissionData = clientStore.userPermissions
+    return clientPermissionData
+  } catch (error) {
+    console.error('No data user permission:', error)
+    throw error
   }
+}
 
-});
+
+onMounted(async () => {
+      if (!auth.isLoggedIn.value) {
+        router.push('/login');  // Перенаправление на страницу входа, если пользователь не аутентифицирован
+        return;
+      }
+
+      const hasPermission = await canCreateJobVacancy(userId); // Используем await здесь
+      if (!hasPermission) {
+        router.push('/');  // Перенаправление на домашнюю страницу, если пользователь не имеет прав на создание вакансий
+        return;
+      }
+    });
+
 
 const onSubmit = () => {
   console.log(state)

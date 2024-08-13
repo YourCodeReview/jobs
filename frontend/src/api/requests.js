@@ -12,3 +12,7 @@ export const useGetJobs = () => {
 export const useGetLocations = () => {
   return useRequest(apiService.getAllLocations)
 }
+
+export const useAddVacancies = () => {
+  return useRequest(apiService.isUserCanAddNewVacancy) // Запрос на право создавать вакансии
+}
