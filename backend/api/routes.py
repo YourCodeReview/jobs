@@ -2,13 +2,19 @@ from http import HTTPStatus
 from typing import Optional
 
 from fastapi import APIRouter, Depends, HTTPException, Query
+import requests
 from sqlalchemy.orm import Session
 
 from database import get_db
-from schemas import EntityId, VacancyCreate
+from schemas import EntityId, UserData, VacancyCreate
 from crud import (
     create_vacancy, get_locations, get_vacancies, get_vacancy_by_id
 )
+
+from dotenv import dotenv_values
+import urllib.parse
+
+config = dotenv_values(".env")
 
 
 router = APIRouter()
@@ -27,6 +33,23 @@ SKIP = "Offset for pagination"
 SPECIALITIES = "List of specialities to filter by, separated by '&"
 
 NOT_FOUND = "Job not found"
+
+
+@router.post("/register")
+def register_user(data: UserData):
+    crm_url = config["CRM_URL"]
+    post_url = urllib.parse.urljoin(crm_url, "/api/v4/leads")
+    crm_token = config["CRM_TOKEN"]
+    postData = {
+        "name": f"{data.email} / {data.phone}",
+        "status_id": 66541410,
+        "pipeline_id": 8134114
+    }
+    payload = [
+        postData
+    ]
+    headers = {'Authorization': f'Bearer {crm_token}'}
+    requests.post(post_url, json=payload, headers=headers)
 
 
 @router.post("/jobs/", response_model=EntityId)

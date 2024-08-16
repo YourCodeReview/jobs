@@ -12,9 +12,16 @@ export const apiService = {
   },
   async addJob(data) {
     return (await axiosInstance.post('jobs', data, {
-      headers: {
-        'Content-Type': 'application/json'
-      }
-  })).data
-  }
+        headers: {
+          'Content-Type': 'application/json'
+        }
+    })).data
+  },
+  async register(data) {
+    return (await axiosInstance.post('register', data, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+    })).data
+  },
 }

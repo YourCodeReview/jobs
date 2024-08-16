@@ -16,3 +16,7 @@ export const useGetLocations = () => {
 export const useAddJob = () => {
   return useRequest(apiService.addJob)
 }
+
+export const useRegister = () => {
+  return useRequest(apiService.register)
+}

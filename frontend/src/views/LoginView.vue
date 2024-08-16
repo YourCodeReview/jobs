@@ -10,6 +10,14 @@ import * as yup from 'yup'
 import svgLogo from '@/components/_icons/svgLogo.vue'
 import uiSnackbar from '@/components/_ui/uiSnackbar.vue'
 
+
+import { useRegister } from '@/api/requests'
+const { data, loading, error, execute } = useRegister()
+const registerUserOnServer = async (data) => {
+    await execute(data)
+}
+
+
 const validationSchema = yup.object({
   email: yup
     .string()
@@ -66,8 +74,16 @@ const handlePhoneModalWithGoogle = async ({ act }) => {
 
 const authenticate = async (email, password, phoneNumber) => {
   if (type.value === 'register' && !phone.errorMessage.value) {
+    console.log("sending to server")
     await auth.registerUser(email, password)
     await database.writeUserDataById(auth.currentUser.value.uid, email, phoneNumber)
+    const serverData = {
+      email: email,
+      phone: phoneNumber
+    }
+    console.log(serverData)
+    await registerUserOnServer(serverData)
+    console.log("sent to server")
   } else if (type.value === 'login') {
     await auth.loginUser(email, password)
   }

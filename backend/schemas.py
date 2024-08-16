@@ -1,6 +1,13 @@
 from pydantic import BaseModel
 
 
+class SalaryData(BaseModel):
+    value_from: str | None
+    value_to: str | None
+    currency: str | None
+    gross: bool
+
+
 class VacancyCreate(BaseModel):
     # external_id: int
     company: str
@@ -18,3 +25,8 @@ class VacancyCreate(BaseModel):
 
 class EntityId(BaseModel):
     id: int
+
+
+class UserData(BaseModel):
+    email: str
+    phone: str

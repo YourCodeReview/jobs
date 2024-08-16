@@ -56,10 +56,23 @@ const getValidationRules = (field) => {
 
 const onSubmit = () => {
   console.log(state);
+  const salaryData = [];
+  if (!!state.salary.from) {
+    salaryData.push(`от ${state.salary.from}`)
+  }
+  if (!!state.salary.to) {
+    salaryData.push(`до ${state.salary.to}`)
+  }
+  if (!!state.salary.currency) {
+    salaryData.push(`${state.salary.currency}`)
+  }
+  if (Boolean(state.salary.gross)) {
+    salaryData.push("(до налогов)")
+  }
   const reqDaata = {
     title: state.name,
     company: state.employer,
-    salary: `${state.salary.from} - ${state.salary.to} ${state.salary.currency}`,
+    salary: salaryData.join(" "),
     address: state.area,
     description: state.description,
     employment: state.employment,
