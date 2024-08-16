@@ -3,6 +3,7 @@ __pycache__/
 *.pyc
 # backend/parsing/result.json
 jobs.db
+.venv
 venv
 virtenv
 .env
