@@ -11,6 +11,8 @@ class VacancyCreate(BaseModel):
     responsibilities: str | None
     specialty: str | None
     description: str
+    employment: str | None
+    schedule: str | None
     url: str
 
 

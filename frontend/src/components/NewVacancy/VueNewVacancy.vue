@@ -62,15 +62,17 @@ const onSubmit = () => {
     salary: `${state.salary.from} - ${state.salary.to} ${state.salary.currency}`,
     address: state.area,
     description: state.description,
+    employment: state.employment,
+    schedule: state.schedule,
+    specialty: state.specialty,
     requirements: '',
     responsibilities: '',
-    specialty: state.specialty,
     url: state.url
   };
   addNewVacancy(reqDaata)
   .then(function (response) {
     console.log(response);
-    //router.back();
+    router.push("/");
   })
   .catch(function (error) {
     console.log(error);

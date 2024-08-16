@@ -41,8 +41,8 @@ def new_vacancy(vacancy: VacancyCreate, db: Session = Depends(get_db)):
         'location': vacancy.address,
         'description': vacancy.description,
         'speciality': vacancy.specialty and vacancy.specialty.lower() or None,
-        'internship': False,
-        'remote': False,
+        'internship': (vacancy.employment or '').casefold() == "стажировка".casefold(),
+        'remote': (vacancy.schedule or '').casefold() == "удаленный".casefold(),
         'url': vacancy.url
     }
     print(data)
