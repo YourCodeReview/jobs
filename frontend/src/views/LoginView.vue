@@ -156,9 +156,9 @@ onMounted(() => {
         <v-btn block type="submit" class="mb-2" size="large" variant="tonal">
           {{ type === 'register' ? 'Зарегистрироваться' : 'Войти' }}
         </v-btn>
-        <v-btn class="btn__google mb-2" @click="googleAuth" size="large" block>
+        <!-- <v-btn class="btn__google mb-2" @click="googleAuth" size="large" block>
           Войти через Google
-        </v-btn>
+        </v-btn> -->
 
         <v-card-text class="text-center">
           <v-btn

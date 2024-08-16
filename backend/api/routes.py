@@ -5,7 +5,7 @@ from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy.orm import Session
 
 from database import get_db
-from schemas import VacancyCreate
+from schemas import EntityId, VacancyCreate
 from crud import (
     create_vacancy, get_locations, get_vacancies, get_vacancy_by_id
 )
@@ -29,9 +29,26 @@ SPECIALITIES = "List of specialities to filter by, separated by '&"
 NOT_FOUND = "Job not found"
 
 
-@router.post("/jobs/", response_model=VacancyCreate)
+@router.post("/jobs/", response_model=EntityId)
 def new_vacancy(vacancy: VacancyCreate, db: Session = Depends(get_db)):
-    return create_vacancy(db, vacancy)
+    print("new_vacancy")
+    print(vacancy)
+    data = {
+        'id': None,
+        'company_name': vacancy.company,
+        'title': vacancy.title,
+        'salary': vacancy.salary,
+        'location': vacancy.address,
+        'description': vacancy.description,
+        'speciality': vacancy.specialty and vacancy.specialty.lower() or None,
+        'internship': False,
+        'remote': False,
+        'url': vacancy.url
+    }
+    print(data)
+    entity = create_vacancy(db, data)
+    response = EntityId(id=entity.id)
+    return response
 
 
 @router.get("/jobs/")

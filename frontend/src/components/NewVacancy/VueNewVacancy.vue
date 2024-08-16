@@ -6,6 +6,13 @@ import NewVacancyDescription from '@/components/NewVacancy/VueNewVacancyDescript
 
 import formFields from '@/data/new-vacancy-fields'
 
+import { useAddJob } from '@/api/requests'
+const { data, loading, error, execute } = useAddJob()
+const addNewVacancy = async (data) => {
+    await execute(data)
+}
+
+
 const router = useRouter()
 
 const state = reactive({
@@ -23,7 +30,8 @@ const state = reactive({
   specialty: '',
   employment: 'Полная занятость',
   schedule: 'Офис',
-  description: '<p>Описание вакансии!</p>'
+  description: '<p>Описание вакансии!</p>',
+  url: ''
 })
 
 const validations = {
@@ -38,7 +46,8 @@ const validations = {
   email: [
     (v) => !!v || 'Поле должно быть заполнено',
     (v) => /.+@.+..+/.test(v) || 'Введите действительный адрес электронной почты'
-  ]
+  ],
+  url: [(v) => !!v || 'Поле должно быть заполнено'],
 }
 
 const getValidationRules = (field) => {
@@ -46,7 +55,27 @@ const getValidationRules = (field) => {
 }
 
 const onSubmit = () => {
-  console.log(state)
+  console.log(state);
+  const reqDaata = {
+    title: state.name,
+    company: state.employer,
+    salary: `${state.salary.from} - ${state.salary.to} ${state.salary.currency}`,
+    address: state.area,
+    description: state.description,
+    requirements: '',
+    responsibilities: '',
+    specialty: state.specialty,
+    url: state.url
+  };
+  addNewVacancy(reqDaata)
+  .then(function (response) {
+    console.log(response);
+    //router.back();
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+  
 }
 </script>
 
