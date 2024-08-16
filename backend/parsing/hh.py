@@ -168,7 +168,7 @@ session = SessionLocal()
 
 
 def delete_duplicates():
-    column_name = Vacancy.external_id
+    column_name = Vacancy.url
 
     subquery = (
         session.query(column_name, func.min(Vacancy.id).label("min_id"))

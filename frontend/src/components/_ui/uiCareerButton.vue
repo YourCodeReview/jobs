@@ -9,7 +9,7 @@
     :block="block"
     target="_blank"
   >
-    Карьерная поддержка
+    Карьерный трекинг
   </v-btn>
 </template>
 

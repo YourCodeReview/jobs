@@ -6,7 +6,7 @@ from database import Base
 class Vacancy(Base):
     __tablename__ = "vacancies"
 
-    id = Column(Integer, primary_key=True, index=True)
+    id = Column(Integer, primary_key=True, index=True, autoincrement=True)
     active = Column(Boolean, default=True)
     external_id = Column(Text, index=True, nullable=True)
     company_name = Column(String, index=True)

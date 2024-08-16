@@ -1,0 +1,47 @@
+#0 building with "default" instance using docker driver
+
+#1 [internal] load .dockerignore
+#1 transferring context: 2B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 343B 0.0s done
+#2 DONE 0.1s
+
+#3 [internal] load metadata for docker.io/library/node:latest
+#3 DONE 0.4s
+
+#4 [internal] load metadata for docker.io/library/nginx:alpine
+#4 DONE 0.4s
+
+#5 [stage-1 1/2] FROM docker.io/library/nginx:alpine@sha256:16164a43b5faec40adb521e98272edc528e74f31c1352719132b8f7e53418d70
+#5 DONE 0.0s
+
+#6 [build-stage 1/6] FROM docker.io/library/node:latest@sha256:14bd39208dbc0eb171cbfb26ccb9ac09fa1b2eba04ccd528ab5d12983fd9ee24
+#6 resolve docker.io/library/node:latest@sha256:14bd39208dbc0eb171cbfb26ccb9ac09fa1b2eba04ccd528ab5d12983fd9ee24 0.0s done
+#6 DONE 0.0s
+
+#7 [internal] load build context
+#7 transferring context: 3.29kB 0.0s done
+#7 DONE 0.0s
+
+#8 [build-stage 2/6] WORKDIR /app
+#8 CACHED
+
+#9 [build-stage 3/6] COPY package*.json .
+#9 CACHED
+
+#10 [build-stage 4/6] RUN npm install
+#10 CACHED
+
+#11 [build-stage 5/6] COPY . .
+#11 DONE 0.1s
+
+#12 [build-stage 6/6] RUN npm run build
+#12 2.567 
+#12 2.567 > codereview@0.0.0 build
+#12 2.567 > vite build
+#12 2.567 
+#12 3.578 vite v4.4.9 building for production...
+#12 3.829 transforming...
+#12 17.73 ✓ 392 modules transformed.

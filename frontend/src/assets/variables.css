@@ -1,6 +1,8 @@
 :root {
   --blue-gradient: linear-gradient(80deg, rgba(0, 87, 255, 1) 0%, rgb(117, 244, 229) 91%);
   /* --purple-gradient: linear-gradient(.092turn,rgb(32 147 254 / 80%) 0%,rgb(194 23 254 / 80%) 90%); */
+  --orange-gradient: linear-gradient(0.092turn,rgba(255,27,206,1) 0%,rgba(228,178,0,1) 91%);
+  --purple-reverse-gradient: linear-gradient(166deg, rgba(177,1,255,1) 0%,rgba(59,0,217,1) 100%);
   --purple-gradient: linear-gradient(0.24turn, rgb(32 147 254 / 90%) 0%, rgb(230 23 254 / 90%) 90%);
   --lime-gradient: linear-gradient(
     98.14deg,

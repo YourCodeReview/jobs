@@ -38,7 +38,7 @@ def habr_find_vacancy_url(url):
             link_elements = soup.find_all("a", {"class": "vacancy-card__title-link"})
 
             for link in link_elements:
-                full_url = f"https://career.habr.com/{link['href']}"
+                full_url = f"https://career.habr.com{link['href']}"
                 links_habr.append(full_url)
 
         else:
