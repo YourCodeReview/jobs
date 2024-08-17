@@ -1,14 +1,21 @@
+from datetime import datetime
 from http import HTTPStatus
 from typing import Optional
 
 from fastapi import APIRouter, Depends, HTTPException, Query
+import requests
 from sqlalchemy.orm import Session
 
 from database import get_db
-from schemas import VacancyCreate
+from schemas import EntityId, UserData, VacancyCreate, VacancyCreateBase
 from crud import (
     create_vacancy, get_locations, get_vacancies, get_vacancy_by_id
 )
+
+from dotenv import dotenv_values
+import urllib.parse
+
+config = dotenv_values(".env")
 
 
 router = APIRouter()
@@ -29,9 +36,74 @@ SPECIALITIES = "List of specialities to filter by, separated by '&"
 NOT_FOUND = "Job not found"
 
 
-@router.post("/jobs/", response_model=VacancyCreate)
-def new_vacancy(vacancy: VacancyCreate, db: Session = Depends(get_db)):
-    return create_vacancy(db, vacancy)
+@router.post("/register")
+def register_user(data: UserData):
+    crm_url = config["CRM_URL"]
+    crm_token = config["CRM_TOKEN"]
+    crm_status = config["CRM_LEAD_STATUS"]
+    crm_status = int(crm_status)
+    crm_pipeline = config["CRM_LEAD_PIPELINE"]
+    crm_pipeline = int(crm_pipeline)
+
+    create_lead_url = urllib.parse.urljoin(crm_url, "/api/v4/leads/complex")
+
+    create_lead_data = [
+        {
+            "name": "Регистрация на jobsyourcodereview",
+            "status_id": crm_status,
+            "pipeline_id": crm_pipeline,
+            "_embedded": {
+                "contacts": [
+                    {
+                        "name": data.username,
+                        "custom_fields_values": [
+                            {
+                                "field_code": "PHONE",
+                                "values": [
+                                    {
+                                        "value": data.phone
+                                    }
+                                ]
+                            },
+                            {
+                                "field_code": "EMAIL",
+                                "values": [
+                                    {
+                                        "value": data.email
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    ]
+    create_lead_headers = {'Authorization': f'Bearer {crm_token}'}
+    requests.post(create_lead_url, json=create_lead_data, headers=create_lead_headers)
+
+
+@router.post("/jobs/", response_model=EntityId)
+def new_vacancy(vacancy: VacancyCreateBase, db: Session = Depends(get_db)):
+    print("new_vacancy")
+    print(vacancy)
+    data = {
+        'id': None,
+        'company_name': vacancy.company,
+        'title': vacancy.title,
+        'salary': vacancy.salary,
+        'location': vacancy.address,
+        'description': vacancy.description,
+        'speciality': vacancy.specialty and vacancy.specialty.lower() or None,
+        'internship': (vacancy.employment or '').casefold() == "стажировка".casefold(),
+        'remote': (vacancy.schedule or '').casefold() == "удаленный".casefold(),
+        'url': vacancy.url,
+        'date_publication': datetime.now()
+    }
+    print(data)
+    entity = create_vacancy(db, data)
+    response = EntityId(id=entity.id)
+    return response
 
 
 @router.get("/jobs/")

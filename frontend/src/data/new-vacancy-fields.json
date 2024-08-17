@@ -31,5 +31,9 @@
     "type": "select",
     "label": "Специализация",
     "items": ["Python", "Java", "JavaScript", "Data Science", "QA", "C#"]
+  },
+  "url": {
+    "type": "text",
+    "label": "Ссылка на вакансию"
   }
 }

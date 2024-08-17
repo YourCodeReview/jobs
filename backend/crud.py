@@ -15,6 +15,12 @@ def get_vacancies(
         locations: list[str]
 
 ):
+    print(skip)
+    print(limit)
+    print(specialities)
+    print(internship)
+    print(remote)
+    print(locations)
     """ Retrieve filtred vacancies. """
     query = db.query(Vacancy)
     if specialities:
@@ -25,7 +31,11 @@ def get_vacancies(
         query = query.filter(Vacancy.remote)
     if locations:
         query = query.filter(Vacancy.location.in_(locations))
-    return query.count(), query.offset(skip).limit(limit).all()
+    result = query.offset(skip).limit(limit).all()
+    cnt = query.count()
+    print(result)
+    print(cnt)
+    return cnt, result
 
 def get_vacancies_with_specialities(db: Session, skip: int, limit: int, specialities: list):
     """ Retrieve vacancies filtered by speciality along with the total count """

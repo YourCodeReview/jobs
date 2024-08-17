@@ -27,11 +27,13 @@
     "pinia": "^2.0.23",
     "roboto-fontface": "*",
     "unisender-node": "^0.0.7",
+    "vee-validate": "^4.13.2",
     "vite": "^4.5.1",
     "vue": "^3.3.10",
     "vue-router": "^4.0.0",
     "vuetify": "^3.4.4",
-    "webfontloader": "^1.0.0"
+    "webfontloader": "^1.0.0",
+    "yup": "^1.4.0"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.5.1",

@@ -6,6 +6,13 @@ import NewVacancyDescription from '@/components/NewVacancy/VueNewVacancyDescript
 
 import formFields from '@/data/new-vacancy-fields'
 
+import { useAddJob } from '@/api/requests'
+const { data, loading, error, execute } = useAddJob()
+const addNewVacancy = async (data) => {
+    await execute(data)
+}
+
+
 const router = useRouter()
 
 const state = reactive({
@@ -23,7 +30,8 @@ const state = reactive({
   specialty: '',
   employment: 'Полная занятость',
   schedule: 'Офис',
-  description: '<p>Описание вакансии!</p>'
+  description: '<p>Описание вакансии!</p>',
+  url: ''
 })
 
 const validations = {
@@ -38,7 +46,8 @@ const validations = {
   email: [
     (v) => !!v || 'Поле должно быть заполнено',
     (v) => /.+@.+..+/.test(v) || 'Введите действительный адрес электронной почты'
-  ]
+  ],
+  url: [(v) => !!v || 'Поле должно быть заполнено'],
 }
 
 const getValidationRules = (field) => {
@@ -46,7 +55,42 @@ const getValidationRules = (field) => {
 }
 
 const onSubmit = () => {
-  console.log(state)
+  console.log(state);
+  const salaryData = [];
+  if (!!state.salary.from) {
+    salaryData.push(`от ${state.salary.from}`)
+  }
+  if (!!state.salary.to) {
+    salaryData.push(`до ${state.salary.to}`)
+  }
+  if (!!state.salary.currency) {
+    salaryData.push(`${state.salary.currency}`)
+  }
+  if (Boolean(state.salary.gross)) {
+    salaryData.push("(до налогов)")
+  }
+  const reqDaata = {
+    title: state.name,
+    company: state.employer,
+    salary: salaryData.join(" "),
+    address: state.area,
+    description: state.description,
+    employment: state.employment,
+    schedule: state.schedule,
+    specialty: state.specialty,
+    requirements: '',
+    responsibilities: '',
+    url: state.url
+  };
+  addNewVacancy(reqDaata)
+  .then(function (response) {
+    console.log(response);
+    router.push("/");
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+  
 }
 </script>
 
