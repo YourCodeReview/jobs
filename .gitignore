@@ -2,7 +2,7 @@ __pycache__/
 .idea/
 *.pyc
 # backend/parsing/result.json
-jobs.db
+*.db
 venv
 virtenv
 .env
