@@ -1,0 +1,982 @@
+[33mcommit c4948e45b06383ffdb841fb3e3975f12be1e7eec[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Khachkara <khachkara@gmail.com>
+Date:   Mon Sep 18 00:52:17 2023 +0300
+
+    рабочая версия с Postgresql
+
+[33mcommit 65551b58c7b998ab72038465ef5501fcfb9744f1[m
+Merge: c4ce9e1 c13e3e7
+Author: Khachkara <khachkara@gmail.com>
+Date:   Mon Sep 18 00:35:46 2023 +0300
+
+    Merge branch 'main' of https://github.com/YourCodeReview/jobs
+
+[33mcommit c4ce9e1499f24bafb51dac26721c88dd3212083f[m
+Author: Khachkara <khachkara@gmail.com>
+Date:   Mon Sep 18 00:34:23 2023 +0300
+
+    проставили корневой путь PYTHONPATH
+    
+    поменяли database на 68.183.220.246
+
+[33mcommit c13e3e7c4f7a7bcc903ae8527f656869413af58a[m
+Merge: 24ef651 9ace569
+Author: Kirill Levin <levinkirill@yandex.ru>
+Date:   Sun Sep 17 19:40:47 2023 +0300
+
+    Merge branch 'main' of github.com:YourCodeReview/jobs
+
+[33mcommit 24ef651da0f4d4f1000e75f9ea8331e6d7b39e52[m
+Author: Kirill Levin <levinkirill@yandex.ru>
+Date:   Sun Sep 17 19:40:20 2023 +0300
+
+    Added filters by specialities to GET api route
+
+[33mcommit 9ace569c2878332fcf1b1cea9c5c9b18b44bd116[m
+Author: Khachkara <khachkara@gmail.com>
+Date:   Sun Sep 17 19:25:19 2023 +0300
+
+    ...
+
+[33mcommit deb9e7c2690997897221a984c53a359c5f060f7e[m
+Author: Khachkara <khachkara@gmail.com>
+Date:   Sun Sep 17 19:13:07 2023 +0300
+
+    ...
+
+[33mcommit 7a3a5e81ff263a082f6bfb91da0638b104f2b38b[m
+Author: Khachkara <khachkara@gmail.com>
+Date:   Sun Sep 17 18:30:56 2023 +0300
+
+    перенес логику в hh.py
+
+[33mcommit ac027d176d3fe285ce18f9afb787e2a39c73fe2e[m
+Author: Kirill Levin <levinkirill@yandex.ru>
+Date:   Sun Sep 17 16:33:03 2023 +0300
+
+    Changed db hostname in docker-compose
+
+[33mcommit 86f1a6a2858dfd08d57507db982070035efc5bf4[m
+Author: Kirill Levin <levinkirill@yandex.ru>
+Date:   Sun Sep 17 16:28:48 2023 +0300
+
+    Added restart statement to docker-compose backend container
+
+[33mcommit 9505adb912cf6acc8279dc52cea4d0f9426c0ee4[m
+Merge: 03839fe 41c1464
+Author: Kirill Levin <levinkirill@yandex.ru>
+Date:   Sun Sep 17 16:15:32 2023 +0300
+
+    Merge branch 'main' of github.com:YourCodeReview/jobs
+
+[33mcommit 03839feb2630b340df9156b1d0bced280de71548[m
+Author: Kirill Levin <levinkirill@yandex.ru>
+Date:   Sun Sep 17 15:48:48 2023 +0300
+
+    Changed default DB to PostgreSQL
+
+[33mcommit 41c1464e375d495bc1c4b83b7f493dc06420119f[m
+Author: Khachkara <khachkara@gmail.com>
+Date:   Sun Sep 17 12:23:31 2023 +0300
+
+    ...
+
+[33mcommit ca1f38e11d2eb5d4f8a9a559535724495e606d78[m
+Author: Khachkara <khachkara@gmail.com>
+Date:   Sun Sep 17 12:16:41 2023 +0300
+
+    ...
+
+[33mcommit b30efce75cd219dcc45d64697d35b8ed2fb6a1a2[m
+Author: Khachkara <khachkara@gmail.com>
+Date:   Sun Sep 17 10:44:33 2023 +0300
+
+    ...
+
+[33mcommit 80f3f4448183184a42fc46d762d9e0154b03d58b[m
+Author: Khachkara <khachkara@gmail.com>
+Date:   Sun Sep 17 10:34:36 2023 +0300
+
+    рабочая версия
+    
+    файл БД удален из репозитория
+
+[33mcommit a1b0d9e7e2dd216e483edb8cd81110b8a987c696[m
+Author: Khachkara <khachkara@gmail.com>
+Date:   Sun Sep 17 10:11:35 2023 +0300
+
+    ...
+
+[33mcommit 13d9271e60e1e15a0042d64ab70c7c63617c6454[m
+Author: Khachkara <khachkara@gmail.com>
+Date:   Sun Sep 17 09:55:17 2023 +0300
+
+    ...
+
+[33mcommit 04ad50937721ce059e72abf792b8a9df86e859dd[m
+Author: Khachkara <khachkara@gmail.com>
+Date:   Sun Sep 17 09:54:12 2023 +0300
+
+    ...
+
+[33mcommit e61c06167e9b4dfadc3d32949408efe089aacfdc[m
+Author: Khachkara <khachkara@gmail.com>
+Date:   Sun Sep 17 09:51:54 2023 +0300
+
+    ...
+
+[33mcommit 28875df9329e80fc265bb9471df6aa9738a5841a[m
+Author: Khachkara <khachkara@gmail.com>
+Date:   Sun Sep 17 09:43:26 2023 +0300
+
+    ...
+
+[33mcommit 237ced62721e8049d90882eabaf86952abcad82e[m
+Author: Khachkara <khachkara@gmail.com>
+Date:   Sun Sep 17 09:23:58 2023 +0300
+
+    ...
+
+[33mcommit 8884d44fedb87e5384897f1c8d2fe77ece613093[m
+Author: Khachkara <khachkara@gmail.com>
+Date:   Sun Sep 17 09:15:28 2023 +0300
+
+    ...
+
+[33mcommit 8b16301a85446bc8676f4102922dff0faee857f2[m
+Author: Khachkara <khachkara@gmail.com>
+Date:   Sun Sep 17 09:10:36 2023 +0300
+
+    ...
+
+[33mcommit 8cf46d47d4aab7e7ed3a1b178e32e3ccd223c80d[m
+Author: Khachkara <khachkara@gmail.com>
+Date:   Sun Sep 17 08:38:23 2023 +0300
+
+    subprocess
+
+[33mcommit 652cf43da31a702f3ee4c32afe8b83e62a44a342[m
+Author: Khachkara <khachkara@gmail.com>
+Date:   Sun Sep 17 08:11:26 2023 +0300
+
+    ...
+
+[33mcommit 781e3a0460b400f7f4702bb1726c897b4e613697[m
+Author: Khachkara <khachkara@gmail.com>
+Date:   Sat Sep 16 11:46:57 2023 +0300
+
+    ...
+
+[33mcommit 6dda73bfc161e8e5d18ee550ac4d13f0063faa29[m
+Author: Khachkara <khachkara@gmail.com>
+Date:   Sat Sep 16 11:27:43 2023 +0300
+
+    убрал main_words, languages_stacks
+
+[33mcommit 33be51205e2ba37529d85833a6a147262664a168[m
+Author: Khachkara <khachkara@gmail.com>
+Date:   Sat Sep 16 11:24:26 2023 +0300
+
+    api_routes.test_vacancy()
+    запуск при загрузке main
+
+[33mcommit 435871478035434378411b7927a9a603c3cfc39e[m
+Author: Khachkara <khachkara@gmail.com>
+Date:   Sat Sep 16 11:02:10 2023 +0300
+
+    тестовое подключение и заливка вакансий в БД
+
+[33mcommit a3c5291053b4099af94d71b086d42c545cafd74d[m
+Author: gra4evyakov <gra4evyakov@yandex.ru>
+Date:   Fri Sep 15 18:31:10 2023 +0300
+
+    refactoring
+
+[33mcommit 350e33decb65679bb242319dee143f3a0795f5ca[m
+Author: gra4evyakov <gra4evyakov@yandex.ru>
+Date:   Fri Sep 15 17:07:59 2023 +0300
+
+    del font loader
+
+[33mcommit 2576a0d4fd5ac97b3cacf134d67bab48266bdf99[m
+Author: gra4evyakov <gra4evyakov@yandex.ru>
+Date:   Fri Sep 15 16:40:16 2023 +0300
+
+    lint, prettier and csscomb changes
+
+[33mcommit dec137e07355300e23b31e17415e100fd304f36e[m
+Author: gra4evyakov <gra4evyakov@yandex.ru>
+Date:   Fri Sep 15 15:59:40 2023 +0300
+
+    changing chips
+
+[33mcommit dbd30fd438775f6d45045c01799e6800352aab65[m
+Author: gra4evyakov <gra4evyakov@yandex.ru>
+Date:   Fri Sep 15 15:59:31 2023 +0300
+
+    changing filter fields
+
+[33mcommit fe4d14d5399afb0d50a7a8732757911559bea399[m
+Author: gra4evyakov <gra4evyakov@yandex.ru>
+Date:   Fri Sep 15 15:59:15 2023 +0300
+
+    opening in a new tab
+
+[33mcommit cd97ba4c99aded123fd7ecb713810ee617f80c1e[m
+Author: gra4evyakov <gra4evyakov@yandex.ru>
+Date:   Fri Sep 15 15:58:36 2023 +0300
+
+    deleting a font
+
+[33mcommit d541abe7ffe32ffb51656fb86c5f8202099b66a8[m
+Author: gra4evyakov <gra4evyakov@yandex.ru>
+Date:   Fri Sep 15 15:58:21 2023 +0300
+
+    renaming
+
+[33mcommit 9cba64a9d7eb3e67ea656098727e425bada81827[m
+Author: Khachkara <khachkara@gmail.com>
+Date:   Fri Sep 15 00:34:11 2023 +0300
+
+    приведено к структуре по примеру
+    {
+    "id": 8564312,
+    "company_name": "TechCo",
+    "title": "Python backend Developer",
+    "salary": "80000-100000 RUR",
+    "location": "Москва, Вологодский Бульвар, 20",
+    "speciality": "Python",
+    “internship”: False,
+    "remote": False,
+    "url": "https://example.com/job/python-developer"
+    "description": "",
+    }
+
+[33mcommit 4884865d9d6fd69a7f9f02511343af697a3dc72f[m
+Author: gra4evyakov <gra4evyakov@yandex.ru>
+Date:   Thu Sep 14 21:54:37 2023 +0300
+
+    add loader and small fix
+
+[33mcommit d68525851fb92866d8911b981da528650bf1b5ba[m
+Author: gra4evyakov <gra4evyakov@yandex.ru>
+Date:   Thu Sep 14 21:54:22 2023 +0300
+
+    validation
+
+[33mcommit a2168c9f157a3622a4c1e197bfd411aee6ad00d4[m
+Author: gra4evyakov <gra4evyakov@yandex.ru>
+Date:   Thu Sep 14 21:54:11 2023 +0300
+
+    text-editor component
+
+[33mcommit e0a42174b4d77de352f00f4b7e635dd4a229bb20[m
+Author: gra4evyakov <gra4evyakov@yandex.ru>
+Date:   Thu Sep 14 21:52:51 2023 +0300
+
+    add 404 route
+
+[33mcommit e77347e959bb176a4551bbcd1b41329b34aafba9[m
+Author: gra4evyakov <gra4evyakov@yandex.ru>
+Date:   Thu Sep 14 21:52:36 2023 +0300
+
+    nginx config
+
+[33mcommit 68d04a84665f9d70a3478b1ba0fccf39c452ee23[m
+Author: gra4evyakov <gra4evyakov@yandex.ru>
+Date:   Thu Sep 14 13:10:05 2023 +0300
+
+    log
+
+[33mcommit c0163e92ff399f825e216700d3f74f2abe9e9c43[m
+Author: gra4evyakov <gra4evyakov@yandex.ru>
+Date:   Thu Sep 14 12:58:34 2023 +0300
+
+    api
+
+[33mcommit 5416a9e8b3a239ecf0bca1956232098bc20abf0d[m
+Author: Kirill Levin <levinkirill@yandex.ru>
+Date:   Thu Sep 14 11:48:50 2023 +0300
+
+    Renewed DB fields and model
+
+[33mcommit fd8908e6aa8a0f6354b1de84068b456f2e58df09[m
+Author: khachkara@gmail.com <khachkara@gmail.com>
+Date:   Thu Sep 14 10:12:11 2023 +0300
+
+    глобальная очистка кода
+    
+    Убрал все комменты, все описаний функций, убрал создание файлов на сервере
+    все закоментированные строки
+
+[33mcommit 147c1415c69ebbfe4914c1e4eea3476cca3f1926[m
+Author: gra4evyakov <gra4evyakov@yandex.ru>
+Date:   Wed Sep 13 19:11:13 2023 +0300
+
+    edit url
+
+[33mcommit c0a78a6cee075409071b3c24ab3819e65ab92dce[m
+Author: gra4evyakov <gra4evyakov@yandex.ru>
+Date:   Wed Sep 13 19:09:29 2023 +0300
+
+    changes for rendering data from the server
+
+[33mcommit d87667e30b6f2e2520aa3e4f6b532962ea057c95[m
+Author: gra4evyakov <gra4evyakov@yandex.ru>
+Date:   Wed Sep 13 19:06:24 2023 +0300
+
+    rename
+
+[33mcommit 5476c9d1fc8f84f97c552be9a06e6557e7137919[m
+Author: gra4evyakov <gra4evyakov@yandex.ru>
+Date:   Wed Sep 13 19:05:52 2023 +0300
+
+    style for ul
+
+[33mcommit df3cad77cd3827dc3b4238e5b2de8de2cd5fab00[m
+Author: gra4evyakov <gra4evyakov@yandex.ru>
+Date:   Wed Sep 13 19:05:42 2023 +0300
+
+    rename axios service
+
+[33mcommit 3a9b995d9b4d90000e2334573cec431aa38637cb[m
+Author: Kirill Levin <levinkirill@yandex.ru>
+Date:   Wed Sep 13 16:49:44 2023 +0300
+
+    Added more hosts and ports to CORS list
+
+[33mcommit 61032679a4233412c468629ea02c13daedffc7ec[m
+Author: Kirill Levin <levinkirill@yandex.ru>
+Date:   Wed Sep 13 16:28:10 2023 +0300
+
+    Added more origins to CORS list
+
+[33mcommit 4a6e1378a76d369efe4b682a44eb2f6f0e078636[m
+Author: Kirill Levin <levinkirill@yandex.ru>
+Date:   Wed Sep 13 15:49:00 2023 +0300
+
+    CORS frontend host port changed
+
+[33mcommit 4e26d3537515fa90e3865d15d0d3c64ffb460223[m
+Merge: eba9fd8 94794cc
+Author: Kirill Levin <levinkirill@yandex.ru>
+Date:   Wed Sep 13 15:41:06 2023 +0300
+
+    Merge branch 'main' of https://github.com/YourCodeReview/jobs
+
+[33mcommit eba9fd8952e54b47ddb71dba0fceac93349c4739[m
+Author: Kirill Levin <levinkirill@yandex.ru>
+Date:   Wed Sep 13 15:40:48 2023 +0300
+
+    CORS policy added
+
+[33mcommit 94794ccb372e7264f56fea22e0402e34867deffa[m
+Author: khachkara@gmail.com <khachkara@gmail.com>
+Date:   Wed Sep 13 11:03:00 2023 +0300
+
+    добавил путь для сохранения лог файла на сервере
+
+[33mcommit 8e7e33d00a99c2cd690a0ad829176eb246761502[m
+Merge: b66600f 8653d68
+Author: khachkara@gmail.com <khachkara@gmail.com>
+Date:   Wed Sep 13 10:31:49 2023 +0300
+
+    Merge branch 'main' of https://github.com/YourCodeReview/jobs
+
+[33mcommit b66600f49634ae289997fa6436d10513233c87ab[m
+Author: khachkara@gmail.com <khachkara@gmail.com>
+Date:   Wed Sep 13 10:31:31 2023 +0300
+
+    Merge branch 'main' of https://github.com/YourCodeReview/jobs
+
+[33mcommit 8653d68c284b658ad4e8d3e4899b7e11ae5748ce[m
+Merge: e8bfb9a aea90c8
+Author: Яков Грачев <112635182+gra4evyakov@users.noreply.github.com>
+Date:   Tue Sep 12 19:01:14 2023 +0300
+
+    Merge pull request #9 from YourCodeReview/dev-frontend
+    
+    add route for new vacancy
+
+[33mcommit aea90c8f61ecefc10447f42602669236dd18ca0b[m[33m ([m[1;31morigin/dev-frontend[m[33m)[m
+Author: gra4evyakov <gra4evyakov@yandex.ru>
+Date:   Tue Sep 12 18:58:27 2023 +0300
+
+    add new route for new vacancy
+
+[33mcommit 169ec5199bf5d0d8986368f16426cad6395826b9[m
+Author: gra4evyakov <gra4evyakov@yandex.ru>
+Date:   Tue Sep 12 18:57:21 2023 +0300
+
+    del mx for lg display
+
+[33mcommit cc0bfd86dc0c6faca8f1c68091d6f0fda675f923[m
+Author: gra4evyakov <gra4evyakov@yandex.ru>
+Date:   Tue Sep 12 18:56:34 2023 +0300
+
+    del vuelidate
+
+[33mcommit e8bfb9a1de5166cb3f04009ae47201bbafe3cdc1[m
+Author: khachkara@gmail.com <khachkara@gmail.com>
+Date:   Tue Sep 12 11:05:37 2023 +0300
+
+    убрал php
+
+[33mcommit 1661d17a31df4df2cf1491871a160ecced8e219f[m
+Author: khachkara@gmail.com <khachkara@gmail.com>
+Date:   Tue Sep 12 11:01:45 2023 +0300
+
+    окончательный стек и ключевые слова
+
+[33mcommit 9b3d3d195ab45b0c04fbb0749df7d11998fb9ef9[m
+Author: khachkara@gmail.com <khachkara@gmail.com>
+Date:   Tue Sep 12 10:35:56 2023 +0300
+
+    ...
+
+[33mcommit 3f2fa63b79bd0b962d131601b4c3d99320c156db[m
+Author: khachkara@gmail.com <khachkara@gmail.com>
+Date:   Tue Sep 12 10:24:53 2023 +0300
+
+    ...
+
+[33mcommit 8cbbc7ed977d4c46a1f8f95817463964851b5866[m
+Author: khachkara@gmail.com <khachkara@gmail.com>
+Date:   Tue Sep 12 10:09:46 2023 +0300
+
+    ...
+
+[33mcommit 36de29acfaa8666ea390466415ce9faa0a9eaa39[m
+Author: Khachkara <khachkara@gmail.com>
+Date:   Tue Sep 12 00:38:08 2023 +0300
+
+    ...
+
+[33mcommit cc11026c6685845d8e012b4679b0488c522d1c83[m
+Author: Khachkara <khachkara@gmail.com>
+Date:   Tue Sep 12 00:34:43 2023 +0300
+
+    ...
+
+[33mcommit 056560c380dedc55ccd4c25c4b294a963626903c[m
+Author: Яков Грачев <112635182+gra4evyakov@users.noreply.github.com>
+Date:   Mon Sep 11 21:02:23 2023 +0300
+
+    Add files via upload
+
+[33mcommit 642be87a694f6096adb739ad49de0638d9efcd37[m
+Author: gra4evyakov <gra4evyakov@yandex.ru>
+Date:   Mon Sep 11 20:51:37 2023 +0300
+
+    add nginx.conf
+
+[33mcommit 48e50ee436d1c388a28a46ef8ddfbf73585baeb3[m
+Author: gra4evyakov <gra4evyakov@yandex.ru>
+Date:   Mon Sep 11 18:56:30 2023 +0300
+
+    refactoring
+
+[33mcommit 637d024388541f4e6c7844e6dafc0fa6e7a85f2b[m
+Author: gra4evyakov <gra4evyakov@yandex.ru>
+Date:   Mon Sep 11 18:56:05 2023 +0300
+
+    del popup
+
+[33mcommit c8b01ba2f0b25eb9b4613ca216898d266e22f45d[m
+Author: gra4evyakov <gra4evyakov@yandex.ru>
+Date:   Mon Sep 11 18:55:54 2023 +0300
+
+    new components
+
+[33mcommit 33c804a5ecbefa7e2002d4319a535901ce77a5ca[m
+Author: khachkara@gmail.com <khachkara@gmail.com>
+Date:   Mon Sep 11 15:40:07 2023 +0300
+
+    новый путь
+    ~/jobs/backend/parsing/result.json
+
+[33mcommit 745035bf18f02f505c405e2416c6c19b66c6c705[m
+Author: khachkara@gmail.com <khachkara@gmail.com>
+Date:   Mon Sep 11 14:49:58 2023 +0300
+
+    поменял путь
+    
+    /root/jobs/backend/parsing/
+
+[33mcommit 87b2771c7f91a028d125b2ca347159daf0ccd830[m
+Merge: f886319 7d9b2ab
+Author: khachkara@gmail.com <khachkara@gmail.com>
+Date:   Mon Sep 11 11:58:16 2023 +0300
+
+    Merge branch 'main' of https://github.com/YourCodeReview/jobs
+
+[33mcommit f88631997f8f9f1578f7691b2f59fdc82f39f8bd[m
+Author: khachkara@gmail.com <khachkara@gmail.com>
+Date:   Mon Sep 11 11:57:04 2023 +0300
+
+    добавил путь выходного файла ~\ и закомитил принт
+
+[33mcommit 7d9b2ab828634a8acff16c8f21aa9b7760fc2385[m
+Merge: 710bc2b 9660470
+Author: Kirill Levin <levinkirill@yandex.ru>
+Date:   Mon Sep 11 11:47:59 2023 +0300
+
+    Merge branch 'main' of https://github.com/YourCodeReview/jobs
+
+[33mcommit 710bc2b77c9e687544ecd9fe9a5765a876812d21[m
+Author: Kirill Levin <levinkirill@yandex.ru>
+Date:   Mon Sep 11 11:47:29 2023 +0300
+
+    Fixed typos in frontend components names
+
+[33mcommit 9660470ad085b0d801fb431d522d3593acf41ccf[m
+Author: khachkara@gmail.com <khachkara@gmail.com>
+Date:   Mon Sep 11 10:01:10 2023 +0300
+
+    ...
+
+[33mcommit 65918b295dfd1e8348bc09cab17bae46cd2f9200[m
+Author: khachkara@gmail.com <khachkara@gmail.com>
+Date:   Mon Sep 11 09:48:26 2023 +0300
+
+    добавил salary и стек R и Pandas
+    
+    закоммитил поля requerment, responsobility, address
+
+[33mcommit fe68638596a9ae7b92a470e153dc4f926b48a176[m
+Author: Khachkara <khachkara@gmail.com>
+Date:   Mon Sep 11 00:08:48 2023 +0300
+
+    ...
+
+[33mcommit e9be5a2e260dd8094b0f63c53f5dd306b7306e6f[m
+Merge: cb98dbe 3492ca1
+Author: Khachkara <khachkara@gmail.com>
+Date:   Sun Sep 10 21:38:32 2023 +0300
+
+    Merge branch 'main' of https://github.com/YourCodeReview/jobs
+
+[33mcommit cb98dbee0a544884b6fd04e9e5a28eaddd4cef4a[m
+Author: Khachkara <khachkara@gmail.com>
+Date:   Sun Sep 10 21:37:12 2023 +0300
+
+    рабочая версия
+    
+    добавл стеки, вывел поля schedual и description
+
+[33mcommit 3492ca1866a246fecec2949e1c5c9dd769118566[m
+Merge: d65744c 63a9b35
+Author: Яков Грачев <112635182+gra4evyakov@users.noreply.github.com>
+Date:   Sun Sep 10 15:29:58 2023 +0300
+
+    Merge pull request #7 from YourCodeReview/dev-front
+    
+    Dev front
+
+[33mcommit 63a9b355a2d4f3fcf86fe8baf625bc946add4e8d[m[33m ([m[1;31morigin/dev-front[m[33m)[m
+Author: gra4evyakov <gra4evyakov@yandex.ru>
+Date:   Sun Sep 10 15:28:04 2023 +0300
+
+    vite.conf
+
+[33mcommit 2db84f3942ccf94ddbefbe3b7c6a022e4b69916f[m
+Merge: 86cb19a afbb07e
+Author: gra4evyakov <gra4evyakov@yandex.ru>
+Date:   Sun Sep 10 15:27:16 2023 +0300
+
+    Merge branch 'dev-front' of https://github.com/YourCodeReview/jobs into dev-front
+
+[33mcommit 86cb19a519a72ea80f013556db0503a98a57fe95[m
+Author: gra4evyakov <gra4evyakov@yandex.ru>
+Date:   Sun Sep 10 15:20:17 2023 +0300
+
+    okazivaet'sya eto ne nado
+
+[33mcommit 8545370f41d83da2c843df4596e92cdb3bd49f65[m
+Author: gra4evyakov <gra4evyakov@yandex.ru>
+Date:   Sun Sep 10 15:02:30 2023 +0300
+
+    rewrite with vuetify
+
+[33mcommit afbb07e1947c4ec090be488496d4ce92d2bc9a2d[m
+Author: gra4evyakov <gra4evyakov@yandex.ru>
+Date:   Sun Sep 10 15:20:17 2023 +0300
+
+    okazivaet'sya eto ne nado
+
+[33mcommit 4f1bad2d9b9eb10b388c622bf615e3d5e65dbabb[m
+Author: gra4evyakov <gra4evyakov@yandex.ru>
+Date:   Sun Sep 10 15:06:58 2023 +0300
+
+    docker and nginx
+
+[33mcommit ba7df78b40187aa59747c991e34011d06c426179[m
+Author: gra4evyakov <gra4evyakov@yandex.ru>
+Date:   Sun Sep 10 15:02:30 2023 +0300
+
+    rewrite with vuetify
+
+[33mcommit d65744ca19c20985c735141ab36fec289033e4df[m
+Author: Khachkara <khachkara@gmail.com>
+Date:   Sun Sep 10 10:54:46 2023 +0300
+
+    добавил еще стек
+    
+    вывел поле в видом работы (Удаленка, офиз и т.д)
+
+[33mcommit 46e8059971669f6447b4162da96f16966ef53c01[m
+Author: Khachkara <khachkara@gmail.com>
+Date:   Sun Sep 10 10:06:04 2023 +0300
+
+    Merge branch 'main' of https://github.com/YourCodeReview/jobs
+
+[33mcommit 875bdaa86160c7ab93226dba168079d1a48d20ac[m
+Author: Khachkara <khachkara@gmail.com>
+Date:   Sun Sep 10 09:18:27 2023 +0300
+
+    исключены дубоикаты
+
+[33mcommit 85fcb6b40739d1efaca731118a80388cc68898b2[m
+Author: Kirill Levin <levinkirill@yandex.ru>
+Date:   Sat Sep 9 20:57:32 2023 +0300
+
+    Moved backend requirements file to backend folder
+
+[33mcommit 52e92be2bd033efebb2d53abd519bc5634659310[m
+Author: Kirill Levin <levinkirill@yandex.ru>
+Date:   Sat Sep 9 19:47:15 2023 +0300
+
+    Changed docker-compose file
+
+[33mcommit 6e5957003a7d3c5cec2a5baf81de669c913579ce[m
+Author: Kirill Levin <levinkirill@yandex.ru>
+Date:   Sat Sep 9 19:34:50 2023 +0300
+
+    Added docker-compose file
+
+[33mcommit 1c5b07dfa85f26fbb8322e49f5333481816734a8[m
+Author: Kirill Levin <levinkirill@yandex.ru>
+Date:   Sat Sep 9 18:38:31 2023 +0300
+
+    Removed redundant __init__ files
+
+[33mcommit 713aeaba84ee927d1096d94e53f6cede39cc9770[m
+Author: Kirill Levin <levinkirill@yandex.ru>
+Date:   Sat Sep 9 16:10:08 2023 +0300
+
+    Remove tracked .pyc files and __pycache__/ directories
+
+[33mcommit 50965ff7abe0a6fad7f970a696f20865ba0c1191[m
+Author: Kirill Levin <levinkirill@yandex.ru>
+Date:   Sat Sep 9 15:56:09 2023 +0300
+
+    Added files to gitignore
+
+[33mcommit a0aba237d351289d0fdf4acfb8f42212ba2ae9f2[m
+Merge: b815e5b 523d0f5
+Author: Kirill Levin <levinkirill@yandex.ru>
+Date:   Sat Sep 9 15:47:42 2023 +0300
+
+    Merging with main
+
+[33mcommit b815e5ba9b4a2c6575276d72616c62dbdeedcb2d[m
+Author: Kirill Levin <levinkirill@yandex.ru>
+Date:   Sat Sep 9 15:29:10 2023 +0300
+
+    Refactored routing, added DB functionality and parsing routing
+
+[33mcommit 523d0f5744db8ef0f6b389afa5a7d99d14d30746[m
+Author: Khachkara <khachkara@gmail.com>
+Date:   Fri Sep 8 20:42:28 2023 +0300
+
+    добавил time.asctime
+
+[33mcommit aa1aef6090d7f895a541eeb585086940ccd80c15[m
+Author: Khachkara <khachkara@gmail.com>
+Date:   Fri Sep 8 20:21:09 2023 +0300
+
+    merge with description
+
+[33mcommit f478b842d1d41d2a6607d4ecea40c216a47894a9[m
+Merge: e803d30 a145fbe
+Author: Khachkara <khachkara@gmail.com>
+Date:   Fri Sep 8 20:19:25 2023 +0300
+
+    Merge branch 'main' of https://github.com/YourCodeReview/jobs
+
+[33mcommit e803d300a960b813785b697d45f4540a9a9b1ef8[m
+Merge: 6f0af5e 1f6e86c
+Author: Khachkara <khachkara@gmail.com>
+Date:   Fri Sep 8 20:17:41 2023 +0300
+
+    Merge branch 'description'
+
+[33mcommit 1f6e86cafd9b1a4c688b182a665221da90b3d264[m[33m ([m[1;31morigin/description[m[33m)[m
+Author: Khachkara <khachkara@gmail.com>
+Date:   Fri Sep 8 19:16:39 2023 +0300
+
+    добавил файл result.json
+
+[33mcommit c03968882bb899fc42462e5c81b106b4df623d92[m
+Author: Khachkara <khachkara@gmail.com>
+Date:   Fri Sep 8 18:46:08 2023 +0300
+
+    залил версию от 08/09 с работающим парсером
+
+[33mcommit 8af79cc00f7ba1f6fd7baab0db1b9bb066e8ac46[m
+Author: Khachkara <khachkara@gmail.com>
+Date:   Wed Sep 6 19:23:57 2023 +0300
+
+    правки с ментором
+
+[33mcommit a145fbefc332b3b20456d120a987454b5285f043[m[33m ([m[1;32mdescription[m[33m)[m
+Author: Kirill Levin <levinkirill@yandex.ru>
+Date:   Sun Sep 3 23:26:20 2023 +0300
+
+    Refactored hh api call functions and project structure
+
+[33mcommit 2eddee2c16da028775a774cd26e45115497b88a6[m
+Author: Kirill Levin <levinkirill@yandex.ru>
+Date:   Sun Sep 3 16:13:56 2023 +0300
+
+    Modified node version in Dockerfile
+
+[33mcommit 399a9c233b79e7105af57011e5ebd904422e7a3c[m
+Author: Kirill Levin <levinkirill@yandex.ru>
+Date:   Sun Sep 3 15:24:43 2023 +0300
+
+    Modified Dockerfile
+
+[33mcommit 31c72ac901318b16f7c2123c03d8fa405dd57323[m
+Merge: 11e7ec3 6f0af5e
+Author: Kirill Levin <levinkirill@yandex.ru>
+Date:   Sun Sep 3 15:23:02 2023 +0300
+
+    Merge branch 'main' of https://github.com/YourCodeReview/jobs
+
+[33mcommit 11e7ec333e50886f5912541aaafdde6ca6199464[m
+Author: Kirill Levin <levinkirill@yandex.ru>
+Date:   Sun Sep 3 15:21:54 2023 +0300
+
+    Added Docker & nginx config for frontend app
+
+[33mcommit 13841f61412080bca47e46384bab9e6198d0d59c[m
+Author: Khachkara <khachkara@gmail.com>
+Date:   Sun Sep 3 10:54:44 2023 +0300
+
+    try to fix a bug in description field
+
+[33mcommit 8ba60c63b6febd6171b6a9cb8a5f2581b19847c3[m
+Author: Khachkara <khachkara@gmail.com>
+Date:   Sun Sep 3 09:35:59 2023 +0300
+
+    ...
+
+[33mcommit 30a5144c22079c443ace9862184bd677120bef73[m
+Author: Khachkara <khachkara@gmail.com>
+Date:   Sat Sep 2 00:10:40 2023 +0300
+
+    field description
+
+[33mcommit 6f0af5e1ab08932d4ab57fb72e601c2a11a80101[m
+Merge: 8e364e8 5d7345b
+Author: khachkara@gmail.com <khachkara@gmail.com>
+Date:   Fri Sep 1 13:12:12 2023 +0300
+
+    Merge branch 'main' of https://github.com/YourCodeReview/jobs
+
+[33mcommit 8e364e830a5e25b204e894f45d17ec43c893d02c[m
+Author: khachkara@gmail.com <khachkara@gmail.com>
+Date:   Fri Sep 1 13:10:06 2023 +0300
+
+    get_description_from_vacancy(id)
+    
+    функция которая возвращает описание  вакансии
+
+[33mcommit 5d7345b09c373202043598128304c24e11b14e6b[m
+Merge: 202d70b 2993d5c
+Author: Яков Грачев <112635182+gra4evyakov@users.noreply.github.com>
+Date:   Fri Sep 1 12:52:09 2023 +0300
+
+    Merge pull request #4 from YourCodeReview/dev-front
+    
+    delete 'base /jobs/'
+
+[33mcommit 2993d5c6e9858f6a33e2a9d71d16c841b98c2ac7[m
+Author: gra4evyakov <gra4evyakov@yandex.ru>
+Date:   Fri Sep 1 12:51:21 2023 +0300
+
+    delete 'base /jobs/'
+
+[33mcommit 202d70b364e31e1c80e0a6431f9da430c18d35ce[m
+Merge: 32d040a 5c5ac30
+Author: Яков Грачев <112635182+gra4evyakov@users.noreply.github.com>
+Date:   Fri Sep 1 10:18:32 2023 +0300
+
+    Merge pull request #3 from YourCodeReview/dev-front
+    
+    Dev front
+
+[33mcommit 5c5ac30e30981d6b14510fccb8431ecb629b12df[m
+Merge: efd1089 7b43d4d
+Author: Яков Грачев <112635182+gra4evyakov@users.noreply.github.com>
+Date:   Fri Sep 1 10:17:55 2023 +0300
+
+    Merge pull request #2 from YourCodeReview/feature-useRequest
+    
+    create frontend folder
+
+[33mcommit 7b43d4d889e23fa7aeb358ff7b509ce2855ff99a[m[33m ([m[1;31morigin/feature-useRequest[m[33m)[m
+Author: gra4evyakov <gra4evyakov@yandex.ru>
+Date:   Fri Sep 1 10:17:14 2023 +0300
+
+    create frontend folder
+
+[33mcommit efd10892b01bb42f078a8774feecbffd6d41d10d[m
+Merge: 5c1a491 6a26af6
+Author: Яков Грачев <112635182+gra4evyakov@users.noreply.github.com>
+Date:   Fri Sep 1 10:11:09 2023 +0300
+
+    Merge pull request #1 from YourCodeReview/feature-useRequest
+    
+    Feature use request
+
+[33mcommit 6a26af6a141f5e329f258729e9b651c14e3d5b2c[m
+Author: gra4evyakov <gra4evyakov@yandex.ru>
+Date:   Fri Sep 1 10:10:28 2023 +0300
+
+    refactor
+
+[33mcommit a49e40f4bf288e70cc533aee6c170e0906001b8d[m
+Author: gra4evyakov <gra4evyakov@yandex.ru>
+Date:   Fri Sep 1 10:10:16 2023 +0300
+
+    add adaptive and variables
+
+[33mcommit f68de99e17980071320397b5394e6810e8175f7f[m
+Author: gra4evyakov <gra4evyakov@yandex.ru>
+Date:   Fri Sep 1 10:09:37 2023 +0300
+
+    add modal store
+
+[33mcommit 32d040ad67a00457a309894f7e45e501a0c9abd1[m
+Author: khachkara@gmail.com <khachkara@gmail.com>
+Date:   Fri Sep 1 09:08:58 2023 +0300
+
+    убрал пустые строки
+
+[33mcommit 0d4afceb211a32e3477aede0c6fd1d6e4bc195c2[m
+Author: Khachkara <khachkara@gmail.com>
+Date:   Thu Aug 31 23:42:36 2023 +0300
+
+    добавил requirement
+
+[33mcommit bc81ade2da382984b0326845fbe96e2030c2be8b[m
+Author: Khachkara <khachkara@gmail.com>
+Date:   Thu Aug 31 23:30:13 2023 +0300
+
+    получение всех вакансий
+
+[33mcommit 1d600b1ee509eded5cacb565340fd504564dcaa9[m
+Author: khachkara@gmail.com <khachkara@gmail.com>
+Date:   Thu Aug 31 13:22:18 2023 +0300
+
+    данные получены
+
+[33mcommit c021b086a4234a6b35d4b9e7dcb80f5b5426addb[m
+Author: Khachkara <khachkara@gmail.com>
+Date:   Thu Aug 31 00:05:08 2023 +0300
+
+    отладка полей
+
+[33mcommit 609268110669a92f97540412184352df6e62b59f[m
+Author: Khachkara <khachkara@gmail.com>
+Date:   Wed Aug 30 23:02:59 2023 +0300
+
+    khach
+
+[33mcommit d27b64722a861c8196babb99ae7b5f7931ed9e80[m
+Merge: ecd5add 60cc99f
+Author: Khachkara <khachkara@gmail.com>
+Date:   Wed Aug 30 21:58:03 2023 +0300
+
+    Merge branch 'main' of https://github.com/YourCodeReview/jobs
+
+[33mcommit ecd5addda27d84fcb3bfde4a16a2b2ea14883b2e[m
+Author: Khachkara <khachkara@gmail.com>
+Date:   Wed Aug 30 21:57:33 2023 +0300
+
+    0
+
+[33mcommit 1fbdf454be773d5bab9bf513213efb8ebe2e9fb4[m
+Author: gra4evyakov <gra4evyakov@yandex.ru>
+Date:   Wed Aug 30 20:31:56 2023 +0300
+
+    moved useFirebase
+
+[33mcommit edfadf916256b6bd8bb17ba56ff9cf81a3db5f7c[m
+Author: gra4evyakov <gra4evyakov@yandex.ru>
+Date:   Wed Aug 30 20:30:51 2023 +0300
+
+    add useRequest hook and axios
+
+[33mcommit 60cc99f3befe52849761765416cab0fa8727b44f[m
+Author: Kirill Levin <levinkirill@yandex.ru>
+Date:   Wed Aug 30 20:10:20 2023 +0300
+
+    Changed port ampping in Dockerfile
+
+[33mcommit 4595eb658c9ee3305f721e94d00e930ef21e23ba[m
+Author: Kirill Levin <levinkirill@yandex.ru>
+Date:   Wed Aug 30 19:30:07 2023 +0300
+
+    Added Dockerfile
+
+[33mcommit cdd843d38e3c6e476460459f6d826f0623ac9124[m
+Author: Kirill Levin <levinkirill@yandex.ru>
+Date:   Wed Aug 30 18:49:26 2023 +0300
+
+    Refcatored project structure, added FastAPI's main.py and requirements.txt
+
+[33mcommit 5c1a491634711be6c56297db9f58d79608615ab1[m
+Author: gra4evyakov <gra4evyakov@yandex.ru>
+Date:   Wed Aug 30 17:42:55 2023 +0300
+
+    init
+
+[33mcommit d70579d722846520c590d645148509e3572cfba5[m
+Author: khachkara@gmail.com <khachkara@gmail.com>
+Date:   Wed Aug 30 15:16:35 2023 +0300
+
+    scrapy
+
+[33mcommit 5ffb83e3aae12ccdbb52681a8c57d147d306ffc4[m
+Author: gra4evyakov <gra4evyakov@yandex.ru>
+Date:   Wed Aug 30 13:43:39 2023 +0300
+
+    init
+
+[33mcommit efa9d70da22f9cedbd6940d636c156621d12aba4[m
+Author: khachkara@gmail.com <khachkara@gmail.com>
+Date:   Wed Aug 30 13:10:17 2023 +0300
+
+    todo
+
+[33mcommit 36d68593bba409c9c7dd4ca0cde0e0360ce0c224[m
+Author: khachkara@gmail.com <khachkara@gmail.com>
+Date:   Wed Aug 30 12:46:37 2023 +0300
+
+    maain.py
+    парсит сайт hh
+
+[33mcommit 4159abf9d4bb4bf70213bb71dad46860cf00f157[m
+Author: khachkara@gmail.com <khachkara@gmail.com>
+Date:   Tue Aug 29 10:48:20 2023 +0300
+
+    ...
+
+[33mcommit c2d74d8269d0fd624db55b09f3a8906afcc9cc57[m
+Author: khachkara@gmail.com <khachkara@gmail.com>
+Date:   Tue Aug 29 10:45:59 2023 +0300
+
+    Readme

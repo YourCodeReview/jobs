@@ -3,6 +3,7 @@ import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useFirebase } from '@/hooks/useFirebase'
 import { useUnisender } from '@/hooks/useUnisender'
+import { subscribeNew } from '@/hooks/useNew'
 
 import svgLogo from '@/components/_icons/svgLogo.vue'
 import uiSnackbar from '@/components/_ui/uiSnackbar.vue'
@@ -31,7 +32,7 @@ const authenticate = async (email, password) => {
 
 const googleAuth = async () => {
   await auth.loginWithGoogle()
-  subscribe(auth.currentUser.value.email)
+  subscribeNew(auth.currentUser.value.email)
   console.log(auth.currentUser.value.email)
   auth.isLoggedIn.value ? router.back() : (snackbar.value = true)
 }
@@ -44,7 +45,7 @@ onMounted(() => {
 
 <template>
   <div class="background pa-8 h-screen d-flex flex-column justify-center align-center">
-    <svg-logo />
+я    <svg-logo />
     <v-form @submit.prevent="authenticate(email, password)" v-show="expand">
       <v-card
         class="mx-auto pa-8 mt-8 w-100"

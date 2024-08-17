@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import { useFirebase } from '@/hooks/useFirebase'
+import { generateTargetUrl } from '@/components/utils/utils'
 
 import UiCard from '@/components/_ui/uiCard.vue'
 
@@ -10,6 +11,8 @@ const props = defineProps({
 
 const auth = useFirebase()
 const dialog = ref(false)
+
+
 </script>
 
 <template>
@@ -32,16 +35,16 @@ const dialog = ref(false)
         <v-hover v-slot="{ isHovering, props }">
           <v-card
             v-bind="props"
-            class="blue-banner mt-2 pa-2"
+            class="orange-banner mt-2 pa-2"
             rounded="xl"
             :elevation="isHovering ? 10 : 1"
-            href="https://yourcodereview.com/"
+            :href="'https://yourcodereview.com/' + generateTargetUrl('button_2')"
           >
             <v-card-title class="d-flex align-center font-weight-bold">
-              Как зарабатывать больше?
+              Одни отĸазы и не зовут на собеседования?
               <v-icon class="ml-auto" color="white" icon="mdi-arrow-right" />
             </v-card-title>
-            <v-card-text> Расскажем в наших карьерных консультациях </v-card-text>
+            <v-card-text> Поможем тебе получить оффер на нашем ĸарьерном треĸе </v-card-text>
           </v-card>
         </v-hover>
         <v-card v-if="props.data.description" class="mt-2 pa-6" rounded="xl">
@@ -52,26 +55,26 @@ const dialog = ref(false)
         <v-card class="pa-4 d-flex flex-column" rounded="xl">
           <v-card-title class="pa-0 pb-1 font-weight-bold">Отклик</v-card-title>
           <v-btn block size="large" class="card-btn__purple mb-2" rounded="lg">
-            Турбо отклик
+            Получить оффер
             <v-dialog v-model="dialog" activator="parent" width="auto">
               <v-card class="pa-4" rounded="xl" max-width="600">
-                <v-img src="/images/popup.png" />
+                <v-img src="/images/popup_2.png" />
                 <h2 class="pa-2 text-h4 font-weight-bold">
-                  Поможем откликнуться и сопроводим на всех этапах
+                  Поможем тебе найти работу, с оплатой за результат.
                 </h2>
                 <p class="pa-2 text-h6 mb-4">
-                  71% наших клиентов находят работу за 3 месяца. Среднее время поиска - 57 дней
+                  Средняя зарплата ребят, ĸоторых мы трудоустраиваем — 109.000 руб. Средняя время трудоустройства 76 дней
                 </p>
                 <v-btn
                   height="60"
-                  href="https://yourcodereview.com"
+                  :href="'https://yourcodereview.com/' + generateTargetUrl('button_3')"
                   color="black"
                   size="large"
                   rounded="xl"
                   block
                   target="_blank"
                 >
-                  Узнать подробнее
+                  Получить помощь с трудоустройством.
                 </v-btn>
                 <v-btn class="close-popup" size="small" icon="mdi-close" @click="dialog = false" />
               </v-card>
@@ -85,21 +88,21 @@ const dialog = ref(false)
             :href="props.data.url"
             target="_blank"
           >
-            Отклик
+            Откликнуться
           </v-btn>
           <v-btn v-else :to="{ name: 'Login' }" color="black" size="large" rounded="lg" block>
-            Отклик
+            Откликнуться
           </v-btn>
         </v-card>
       </v-col>
       <v-col cols="12" lg="10" sm="12">
-        <v-card class="lime-banner pa-6" rounded="xl">
-          <h2 class="pa-2 text-h4 font-weight-bold">Поможем найти работу за 3 месяца</h2>
+        <v-card class="orange-banner pa-6" rounded="xl">
+          <h2 class="pa-2 text-h4 font-weight-bold">Хочешь попасть в эту ĸомпанию?</h2>
           <p class="pa-2 text-h6 mb-4">
-            71% наших клиентов находят работу за 3 месяца. Среднее время поиска - 57 дней
+            Помогаем разработчиĸам найти работу за 76 дней. С Зарплатой на 30-40% выше рыночной. С оплатой за результат.
           </p>
-          <v-btn color="black" rounded="xl" size="x-large" href="https://yourcodereview.com/"
-            >Узнать подробнее</v-btn
+          <v-btn color="black" rounded="xl" size="x-large" :href="'https://yourcodereview.com/' + generateTargetUrl('button_4')"
+            >Узнать подробнее.</v-btn
           >
         </v-card>
       </v-col>
@@ -121,7 +124,7 @@ const dialog = ref(false)
 
 .card-btn__purple {
   color: white;
-  background-image: var(--purple-gradient);
+  background-image: var(--purple-reverse-gradient);
 }
 
 .blue-banner {
@@ -129,6 +132,13 @@ const dialog = ref(false)
 
   color: white;
   background-image: var(--blue-gradient);
+}
+
+.orange-banner {
+  cursor: pointer;
+
+  color: white;
+  background-image: var(--orange-gradient);
 }
 
 .page-nav {

@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from pydantic import BaseModel
 
 
@@ -10,3 +12,4 @@ class VacancyCreate(BaseModel):
     requirements: str
     responsibilities: str
     description: str
+    date_publication: datetime

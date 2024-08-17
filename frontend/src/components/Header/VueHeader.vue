@@ -11,6 +11,8 @@ import UiMenu from '@/components/_ui/uiMenu.vue'
 
 import SvgLogo from '@/components/_icons/svgLogo.vue'
 
+import { useRouter } from 'vue-router'
+
 const auth = useFirebase()
 
 const links = [
@@ -29,6 +31,10 @@ const links = [
 ]
 
 const showLoginButton = computed(() => !auth.isLoggedIn.value)
+
+const router = useRouter()
+const currentQueryParams = router.currentRoute.value.query
+
 </script>
 
 <template>
@@ -40,7 +46,7 @@ const showLoginButton = computed(() => !auth.isLoggedIn.value)
       <v-row justify="space-between">
         <v-col cols="6" sm="4" md="4" lg="3" class="d-flex justify-start align-center">
           <v-app-bar-title>
-            <router-link to="/" class="d-flex">
+            <router-link :to="{ path: '/', query: currentQueryParams }" class="d-flex">
               <svg-logo />
             </router-link>
           </v-app-bar-title>

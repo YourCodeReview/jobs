@@ -79,3 +79,25 @@ def read_locations(db: Session = Depends(get_db)):
         "total_count": total_count,
         "data": locations
     }
+
+###################################
+import httpx
+
+
+@router.post("/subscribe")
+async def subscribe(api_key: str, email: str):
+    target_url = "https://api.unisender.com/ru/api/subscribe"
+    headers = {
+        "Content-Type": "application/json",
+    }
+
+    params = {
+        "api_key": api_key,
+        "format": "json",
+        "list_ids": 244,
+        "double_optin": 3,
+        "fields[email]": email,
+    }
+    import requests
+    req = requests.post(target_url, params=params)
+    print(req.content)
