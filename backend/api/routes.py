@@ -38,18 +38,48 @@ NOT_FOUND = "Job not found"
 @router.post("/register")
 def register_user(data: UserData):
     crm_url = config["CRM_URL"]
-    post_url = urllib.parse.urljoin(crm_url, "/api/v4/leads")
     crm_token = config["CRM_TOKEN"]
-    postData = {
-        "name": f"{data.email} / {data.phone}",
-        "status_id": 66541410,
-        "pipeline_id": 8134114
-    }
-    payload = [
-        postData
+    crm_status = config["CRM_LEAD_STATUS"]
+    crm_status = int(crm_status)
+    crm_pipeline = config["CRM_LEAD_PIPELINE"]
+    crm_pipeline = int(crm_pipeline)
+
+    create_lead_url = urllib.parse.urljoin(crm_url, "/api/v4/leads/complex")
+
+    create_lead_data = [
+        {
+            "name": "Регистрация на jobsyourcodereview",
+            "status_id": crm_status,
+            "pipeline_id": crm_pipeline,
+            "_embedded": {
+                "contacts": [
+                    {
+                        "name": data.username,
+                        "custom_fields_values": [
+                            {
+                                "field_code": "PHONE",
+                                "values": [
+                                    {
+                                        "value": data.phone
+                                    }
+                                ]
+                            },
+                            {
+                                "field_code": "EMAIL",
+                                "values": [
+                                    {
+                                        "value": data.email
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
     ]
-    headers = {'Authorization': f'Bearer {crm_token}'}
-    requests.post(post_url, json=payload, headers=headers)
+    create_lead_headers = {'Authorization': f'Bearer {crm_token}'}
+    requests.post(create_lead_url, json=create_lead_data, headers=create_lead_headers)
 
 
 @router.post("/jobs/", response_model=EntityId)

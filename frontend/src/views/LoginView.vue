@@ -19,6 +19,11 @@ const registerUserOnServer = async (data) => {
 
 
 const validationSchema = yup.object({
+  userName: yup
+    .string()
+    .min(3, "Минимум 3 символа")
+    .max(50, "Максимум 50 символов")
+    .required("Имя обязательно"),
   email: yup
     .string()
     .email('Некорректный формат email')
@@ -40,6 +45,7 @@ const { handleReset } = useForm({
   validationSchema
 })
 
+const userName = useField('userName')
 const email = useField('email')
 const password = useField('password')
 const phone = useField('phone')
@@ -72,12 +78,17 @@ const handlePhoneModalWithGoogle = async ({ act }) => {
   auth.isLoggedIn.value ? router.back() : (snackbar.value = true)
 }
 
-const authenticate = async (email, password, phoneNumber) => {
+const authenticate = async (userName, email, password, phoneNumber) => {
   if (type.value === 'register' && !phone.errorMessage.value) {
+    console.log("register")
+    if (!userName || !email || !password || !phoneNumber) {
+      return false;
+    }
     console.log("sending to server")
     await auth.registerUser(email, password)
     await database.writeUserDataById(auth.currentUser.value.uid, email, phoneNumber)
     const serverData = {
+      username: userName,
       email: email,
       phone: phoneNumber
     }
@@ -113,7 +124,7 @@ onMounted(() => {
   <div class="background pa-8 h-screen d-flex flex-column justify-center align-center">
     <svg-logo />
     <v-form
-      @submit.prevent="authenticate(email.value.value, password.value.value, phone.value.value)"
+      @submit.prevent="authenticate(userName.value.value, email.value.value, password.value.value, phone.value.value)"
       v-show="expand"
     >
       <v-card
@@ -123,6 +134,22 @@ onMounted(() => {
         max-width="600"
         rounded="lg"
       >
+      <div v-if="type === 'register'">
+          <div
+            class="text-subtitle-1 text-medium-emphasis d-flex align-center justify-space-between"
+          >
+            Имя
+          </div>
+
+          <v-text-field
+            v-model="userName.value.value"
+            :error-messages="userName.errorMessage.value"
+            placeholder="Введите имя"
+            density="compact"
+            variant="outlined"
+          ></v-text-field>
+        </div>
+
         <div class="text-subtitle-1 text-medium-emphasis">Почта</div>
 
         <v-text-field

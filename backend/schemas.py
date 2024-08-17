@@ -28,5 +28,6 @@ class EntityId(BaseModel):
 
 
 class UserData(BaseModel):
+    username: str
     email: str
     phone: str
