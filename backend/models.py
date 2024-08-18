@@ -16,5 +16,5 @@ class Vacancy(Base):
     speciality = Column(String)
     internship = Column(Boolean, default=False)
     remote = Column(Boolean, default=False)
-    url = Column(String)
+    url = Column(String, nullable=True)
     description = Column(Text)

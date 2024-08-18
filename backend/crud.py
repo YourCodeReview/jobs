@@ -35,16 +35,16 @@ def get_vacancy_by_id(db: Session, vacancy_id: int):
 def create_vacancy(db: Session, vacancy: VacancyCreate):
     """ Create a new vacancy and insert it into the database. """
     db_vacancy = Vacancy(
-        external_id=vacancy["id"],
-        company_name=vacancy["company_name"],
-        title=vacancy["title"],
-        salary=vacancy["salary"],
-        location=vacancy["location"],
-        speciality=vacancy["speciality"],
-        internship=vacancy["internship"],
-        remote=vacancy["remote"],
-        url=vacancy["url"],
-        description=vacancy["description"],
+        external_id=vacancy.external_id,
+        company_name=vacancy.company_name,
+        title=vacancy.title,
+        salary=vacancy.salary,
+        location=vacancy.location,
+        speciality=vacancy.speciality,
+        internship=vacancy.internship,
+        remote=vacancy.remote,
+        url=vacancy.url,
+        description=vacancy.description,
     )
     db.add(db_vacancy)
     db.commit()
