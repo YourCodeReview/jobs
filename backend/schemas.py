@@ -2,7 +2,7 @@ from pydantic import BaseModel, Field
 
 
 class VacancyCreate(BaseModel):
-    external_id: int = Field(alias="id", default=None)
+    external_id: int | None = None
     company_name: str | None = None
     title: str
     salary: str | None = None

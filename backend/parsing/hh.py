@@ -83,7 +83,7 @@ def fetch_hh_page_vacancies(all_ides, text, page=0):
         if stop_invalid_vacancies(item):
             break    
         vacancy = {
-            "id": item.get("id"),
+            "external_id": item.get("id"),
             "company_name": item.get("employer")["name"] if item.get("employer") else None,
             "title": item.get("name"),
             "salary": get_salary(vacancy_data["salary"]) if vacancy_data and vacancy_data["salary"] else None,
@@ -95,9 +95,9 @@ def fetch_hh_page_vacancies(all_ides, text, page=0):
             "description": vacancy_data["description"] if vacancy_data and vacancy_data["description"] else None,
         }
         time.sleep(0.5)
-        if vacancy["id"] not in all_ides:
+        if vacancy["external_id"] not in all_ides:
             vacancies.append(vacancy)
-            all_ides.add(vacancy["id"])
+            all_ides.add(vacancy["external_id"])
         else:
             continue
         if vacancy['description'] and re.search(r"удаленная работа|удаленн", vacancy['description'], re.IGNORECASE):

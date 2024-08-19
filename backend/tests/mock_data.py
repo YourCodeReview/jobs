@@ -1,7 +1,7 @@
 
 vacancy_list = [
   {
-      "id": 1,
+      "external_id": 1,
       "title": "Младший Python Разработчик",
       "company_name": "ТехКорп",
       "salary": "50,000 USD",
@@ -13,7 +13,7 @@ vacancy_list = [
       "description": "Ищем младшего Python разработчика для работы в нашей команде."
   },
   {
-      "id": 2,
+      "external_id": 2,
       "title": "Стажёр Data Scientist",
       "company_name": "ДатГен",
       "salary": "Стипендия стажировки",
@@ -25,7 +25,7 @@ vacancy_list = [
       "description": "Стажировка для начинающих Data Scientist."
   },
   {
-      "id": 3,
+      "external_id": 3,
       "title": "Frontend Разработчик",
       "company_name": "ВебВоркс",
       "salary": "60,000 USD",
@@ -37,7 +37,7 @@ vacancy_list = [
       "description": "Присоединяйтесь к нашей команде в качестве Frontend разработчика для работы над интересными проектами."
   },
   {
-      "id": 4,
+      "external_id": 4,
       "title": "UX/UI Дизайнер",
       "company_name": "ДизайнХаб",
       "salary": "70,000 USD",
@@ -49,7 +49,7 @@ vacancy_list = [
       "description": "Ищем талантливого UX/UI дизайнера для улучшения наших продуктов."
   },
   {
-      "id": 5,
+      "external_id": 5,
       "title": "DevOps Инженер",
       "company_name": "СистемСолюшнс",
       "salary": "80,000 USD",
@@ -61,7 +61,7 @@ vacancy_list = [
       "description": "Нам требуется DevOps инженер для поддержки и оптимизации нашей инфраструктуры."
   },
   {
-      "id": 6,
+      "external_id": 6,
       "title": "Аналитик Данных",
       "company_name": "АналитикПро",
       "salary": "55,000 USD",
@@ -73,7 +73,7 @@ vacancy_list = [
       "description": "Ищем аналитика данных для работы с большими объёмами информации."
   },
   {
-      "id": 7,
+      "external_id": 7,
       "title": "Системный Администратор",
       "company_name": "ИнфоТех",
       "salary": "45,000 USD",
@@ -85,7 +85,7 @@ vacancy_list = [
       "description": "Требуется системный администратор для поддержки корпоративной сети."
   },
   {
-      "id": 8,
+      "external_id": 8,
       "title": "Младший Разработчик Java",
       "company_name": "КодИнк",
       "salary": "50,000 USD",
@@ -97,7 +97,7 @@ vacancy_list = [
       "description": "Ищем младшего Java разработчика для участия в наших проектах."
   },
   {
-      "id": 9,
+      "external_id": 9,
       "title": "Стажёр Тестировщик",
       "company_name": "ТестСофт",
       "salary": "Стипендия стажировки",
@@ -109,7 +109,7 @@ vacancy_list = [
       "description": "Предлагаем стажировку для начинающих тестировщиков ПО."
   },
   {
-      "id": 10,
+      "external_id": 10,
       "title": "Менеджер по Продукту",
       "company_name": "ПродактМенеджмент",
       "salary": "70,000 USD",
@@ -121,7 +121,7 @@ vacancy_list = [
       "description": "Требуется менеджер по продукту для работы над новыми проектами."
   },
   {
-      "id": 11,
+      "external_id": 11,
       "title": "Старший Разработчик Ruby",
       "company_name": "РубиПро",
       "salary": "85,000 USD",
@@ -133,7 +133,7 @@ vacancy_list = [
       "description": "Ищем старшего разработчика на Ruby для работы над крупными проектами."
   },
   {
-      "id": 12,
+      "external_id": 12,
       "title": "Администратор Баз Данных",
       "company_name": "Датабаза",
       "salary": "60,000 USD",
@@ -145,7 +145,7 @@ vacancy_list = [
       "description": "Требуется администратор баз данных для работы с SQL и NoSQL системами."
   },
   {
-      "id": 13,
+      "external_id": 13,
       "title": "Мобильный Разработчик",
       "company_name": "МобилАпп",
       "salary": "75,000 USD",
@@ -157,7 +157,7 @@ vacancy_list = [
       "description": "Ищем мобильного разработчика для создания приложений под iOS и Android."
   },
   {
-      "id": 14,
+      "external_id": 14,
       "title": "Инженер по Безопасности",
       "company_name": "СекьюрИТ",
       "salary": "90,000 USD",
@@ -169,7 +169,7 @@ vacancy_list = [
       "description": "Требуется инженер по безопасности для защиты корпоративных систем."
   },
   {
-      "id": 15,
+      "external_id": 15,
       "title": "Разработчик C++",
       "company_name": "СиПлюсПлюс",
       "salary": "80,000 USD",
@@ -181,7 +181,7 @@ vacancy_list = [
       "description": "Ищем разработчика C++ для участия в разработке высокопроизводительных приложений."
   },
   {
-      "id": 16,
+      "external_id": 16,
       "title": "Старший Разработчик JavaScript",
       "company_name": "ДжаваСкриптПро",
       "salary": "85,000 USD",
@@ -193,7 +193,7 @@ vacancy_list = [
       "description": "Требуется старший разработчик JavaScript для работы над веб-приложениями."
   },
   {
-      "id": 17,
+      "external_id": 17,
       "title": "Системный Архитектор",
       "company_name": "АрхитекТех",
       "salary": "100,000 USD",
@@ -205,7 +205,7 @@ vacancy_list = [
       "description": "Ищем системного архитектора для проектирования и оптимизации корпоративных систем."
   },
   {
-      "id": 18,
+      "external_id": 18,
       "title": "Инженер Программного Обеспечения",
       "company_name": "СофтИнженер",
       "salary": "75,000 USD",
@@ -217,7 +217,7 @@ vacancy_list = [
       "description": "Ищем инженера программного обеспечения для разработки и поддержки наших продуктов."
   },
   {
-      "id": 19,
+      "external_id": 19,
       "title": "Разработчик Go",
       "company_name": "ГоПро",
       "salary": "80,000 USD",
@@ -229,7 +229,7 @@ vacancy_list = [
       "description": "Требуется разработчик Go для создания высоконагруженных сервисов."
   },
   {
-      "id": 20,
+      "external_id": 20,
       "title": "Инженер по Автоматизации Тестирования",
       "company_name": "ТестАвто",
       "salary": "70,000 USD",

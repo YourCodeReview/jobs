@@ -103,7 +103,7 @@ def locations_endpoint():
 def all_data_vancancy_payload():
     """Generate a vancancy."""
     return {
-        "id": 123,
+        "external_id": 123,
         "company_name": "ABC Corporation",
         "title": "Software Engineer",
         "salary": "100000",
