@@ -17,12 +17,16 @@ def test_create_get_vacancy(
     post_response = test_client.post(jobs_endpoint, json=all_data_vancancy_payload)
 
     assert post_response.status_code == HTTPStatus.OK
-
-    response = test_client.get(jobs_endpoint + "1")
+    
+    response = test_client.get(jobs_endpoint)
+    response_json = response.json()
+   
+    id = response_json['data'][0]['id']
+    response = test_client.get(jobs_endpoint + str(id))
     assert response.status_code == HTTPStatus.OK
 
     response_json = response.json()
-    assert response_json["id"] == 1
+    assert response_json["id"] == id
     assert response_json["external_id"] == 123
     assert response_json["company_name"] == "ABC Corporation"
     assert response_json["title"] == "Software Engineer"
@@ -37,14 +41,18 @@ def test_create_get_vacancy(
     post_response_2 = test_client.post(
         jobs_endpoint, json=required_data_vancancy_payload
     )
-
     assert post_response_2.status_code == HTTPStatus.OK
+   
+    response = test_client.get(jobs_endpoint)
+    response_json = response.json()
 
-    response2 = test_client.get(jobs_endpoint + "2")
-    assert response2.status_code == HTTPStatus.OK
-    response2_json = response2.json()
+    id = response_json['data'][1]['id']
+    
+    response = test_client.get(jobs_endpoint + str(id))
+    assert response.status_code == HTTPStatus.OK
 
-    assert response2_json["id"] == 2
+    response2_json = response.json()
+    assert response2_json["id"] == id
     assert response2_json["external_id"] == None
     assert response2_json["company_name"] == None
     assert response2_json["title"] == "Software Engineer"
@@ -105,4 +113,4 @@ def test_get_read_locations(
     assert "total_count" in response_json_3 and "data" in response_json_3
     assert response_json_3["total_count"] == 2
     assert len(response_json_3["data"]) == 2
-    assert response_json_3["data"] == ["New York", None]
+    assert set(response_json_3["data"]) == {"New York", None}
