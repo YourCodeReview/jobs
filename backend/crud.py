@@ -15,12 +15,6 @@ def get_vacancies(
         locations: list[str]
 
 ):
-    print(skip)
-    print(limit)
-    print(specialities)
-    print(internship)
-    print(remote)
-    print(locations)
     """ Retrieve filtred vacancies. """
     query = db.query(Vacancy)
     if specialities:
@@ -31,6 +25,7 @@ def get_vacancies(
         query = query.filter(Vacancy.remote)
     if locations:
         query = query.filter(Vacancy.location.in_(locations))
+    query = query.order_by(Vacancy.date_publication.desc())
     result = query.offset(skip).limit(limit).all()
     cnt = query.count()
     print(result)

@@ -15,8 +15,8 @@ services:
       POSTGRES_USER: team
       POSTGRES_PASSWORD: password
       POSTGRES_DB: jobs
-    ports:
-      - "5432:5432"
+#    ports:
+#      - "5432:5432"
     volumes:
       - ./backend/db_data:/var/lib/postgresql/data
   frontend:
@@ -26,6 +26,6 @@ services:
     volumes:
       - ./frontend:/app
     ports:
-      - "8080:80"
-    depends_on:
-      - backend
+ #     - "8080:8080"
+#      - "80:80"
+      - "443:443"

@@ -12,7 +12,7 @@ const unisender = axios.create({
   }
 })
 const unisender_proxy = axios.create({
-  baseURL: 'https://jobs.yourcodereview.com:8000/api/subscribe',
+  baseURL: '/api/subscribe',
 })
 
 export function useUnisender() {
