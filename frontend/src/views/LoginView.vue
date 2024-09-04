@@ -75,7 +75,7 @@ const handlePhoneModalWithGoogle = async ({ act }) => {
   }
   showModal.value = false
   handleReset()
-  auth.isLoggedIn.value ? router.back() : (snackbar.value = true)
+  auth.isLoggedIn.value ? router.replace({ name: 'Jobs' }) : (snackbar.value = true)
 }
 
 const authenticate = async (userName, email, password, phoneNumber) => {
@@ -100,7 +100,7 @@ const authenticate = async (userName, email, password, phoneNumber) => {
   }
   subscribe(auth.currentUser.value.email)
   handleReset()
-  auth.isLoggedIn.value ? router.back() : (snackbar.value = true)
+  auth.isLoggedIn.value ? router.replace({ name: 'Jobs' }) : (snackbar.value = true)
 }
 
 const googleAuth = async () => {
@@ -113,7 +113,7 @@ const googleAuth = async () => {
   if (!currentUserFromDatabase.phone) {
     showModal.value = true
   } else {
-    auth.isLoggedIn.value ? router.back() : (snackbar.value = true)
+    auth.isLoggedIn.value ? router.replace({ name: 'Jobs' }) : (snackbar.value = true)
   }
 }
 
@@ -217,10 +217,21 @@ onMounted(() => {
             <v-icon icon="mdi-chevron-right"></v-icon>
           </v-btn>
         </v-card-text>
+        <v-card-text class="text-center" v-if="type !== 'register'">
+          <v-btn
+            class="text-decoration-none text-pink"
+            variant="text"
+            size="small"
+            @click="router.push({ name: 'ForgotPassword' })"
+          >
+            Забыли пароль?
+            <v-icon icon="mdi-chevron-right"></v-icon>
+          </v-btn>
+        </v-card-text>
       </v-card>
       <ui-snackbar color="red" v-model="snackbar" :message="auth.errorMsg.value" />
     </v-form>
-    <v-btn class="btn__close" icon="mdi-close" @click="router.back()"></v-btn>
+    <v-btn class="btn__close" icon="mdi-close" @click="router.replace({ name: 'Jobs' })"></v-btn>
     <v-dialog v-model="showModal" max-width="400" persistent transition="dialog-bottom-transition">
       <v-form>
         <v-card title="Введите номер телефона">
