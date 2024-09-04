@@ -80,12 +80,8 @@ def register_user(data: UserData):
         }
     ]
     create_lead_headers = {'Authorization': f'Bearer {crm_token}'}
-    print(create_lead_headers)
-    print(create_lead_data)
     r = requests.post(create_lead_url, json=create_lead_data, headers=create_lead_headers)
     print(r.status_code)
-    print(r)
-    print(r.json())
 
 
 @router.post("/jobs/", response_model=EntityId)

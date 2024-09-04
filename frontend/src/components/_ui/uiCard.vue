@@ -57,10 +57,16 @@ defineProps({
           >{{ item.salary }}</v-chip
         >
         <v-chip
-          v-else
+          v-else-if="!item.salary && size !== 'lg'"
           class="chip chip-salary text-grey-darken-2"
           label
           >з/п не указана</v-chip
+        >
+        <v-chip
+          v-if="item.date_publication"
+          class="chip chip-salary text-grey-darken-2"
+          label
+          >{{ item.date_publication }}</v-chip
         >
       </v-chip-group>
     </v-card>

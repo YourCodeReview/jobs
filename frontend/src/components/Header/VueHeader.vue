@@ -21,10 +21,6 @@ const links = [
     url: 'https://t.me/YourCodeReview'
   },
   {
-    title: 'Полезные материалы',
-    url: 'https://blog.yourcodereview.com/category/career/'
-  },
-  {
     title: 'Блог',
     url: 'https://blog.yourcodereview.com/'
   }
