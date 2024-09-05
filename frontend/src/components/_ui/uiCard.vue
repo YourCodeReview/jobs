@@ -62,13 +62,8 @@ defineProps({
           label
           >з/п не указана</v-chip
         >
-        <v-chip
-          v-if="item.date_publication"
-          class="chip chip-salary text-grey-darken-2"
-          label
-          >{{ new Date(item.date_publication).toLocaleDateString('ru-RU') }}</v-chip
-        >
       </v-chip-group>
+      <v-card-subtitle v-if="item.date_publication">Опубликовано {{ new Date(item.date_publication).toLocaleDateString('ru-RU') }}</v-card-subtitle>
     </v-card>
   </v-hover>
 </template>
