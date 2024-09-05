@@ -66,7 +66,7 @@ defineProps({
           v-if="item.date_publication"
           class="chip chip-salary text-grey-darken-2"
           label
-          >{{ item.date_publication }}</v-chip
+          >{{ new Date(item.date_publication).toLocaleDateString('ru-RU') }}</v-chip
         >
       </v-chip-group>
     </v-card>
