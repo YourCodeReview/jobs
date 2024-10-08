@@ -3,7 +3,7 @@ import time
 
 import psycopg2
 
-from backend.crud import create_vacancy
+from crud import create_vacancy
 from models import Vacancy
 from database import get_db
 
