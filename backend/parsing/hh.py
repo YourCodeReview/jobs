@@ -152,6 +152,10 @@ languages_stacks = [
 ]
 
 
+def _import():
+    return get_vacancies(main_words, languages_stacks)
+
+
 if __name__ == "__main__":
     print("Импорт HH")
-    perform_import(get_vacancies)
+    perform_import(_import)
