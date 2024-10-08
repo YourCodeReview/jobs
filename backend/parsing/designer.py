@@ -1,6 +1,6 @@
 import requests
-import time
 from bs4 import BeautifulSoup
+from parsing.utils import perform_import
 
 
 def get_max_page(url):
@@ -67,7 +67,7 @@ def designer_create_vacancy(url):
             combined_description.append(element)
 
         vacancy = {
-            "id": url.split("/")[-2],
+            "id": "designer_" + url.split("/")[-2],
             "site": site,
             "company_name": company_name.text if company_name else None,
             "title": title.text if title else None,
@@ -95,21 +95,6 @@ def designer_get_vacancies_info():
     return vacancies
 
 
-from database import get_db
-from crud import create_vacancy
-from parsing.hh import delete_duplicates
-
-
-def import_vacancies():
-    result = designer_get_vacancies_info()
-    for db in get_db():
-        for job in result:
-            create_vacancy(db, job)
-
-
 if __name__ == "__main__":
-    start = time.time()
-    import_vacancies()
-    delete_duplicates()
-    end = time.time()
-    print(f"Время: {round((end - start) / 60)} мин.")
+    print("Импорт Designer")
+    perform_import(designer_get_vacancies_info)

@@ -2,6 +2,13 @@ import requests
 import re
 import time
 from datetime import datetime
+from parsing.utils import perform_import
+import os
+import psycopg2
+from dotenv import load_dotenv
+
+
+load_dotenv()
 
 
 def clean_name(text):
@@ -82,9 +89,9 @@ def fetch_hh_page_vacancies(all_ides, text, page=0):
     for item in items:
         vacancy_data = get_data_from_vacancy(item.get("id"))
         if stop_invalid_vacancies(item):
-            break    
+            break
         vacancy = {
-            "id": item.get("id"),
+            "id": "hh_" + item.get("id"),
             "company_name": item.get("employer")["name"] if item.get("employer") else None,
             "title": item.get("name"),
             "salary": get_salary(vacancy_data["salary"]) if vacancy_data and vacancy_data["salary"] else None,
@@ -121,67 +128,6 @@ def get_vacancies(main_words, languages_stacks):
     return result
 
 
-from database import get_db
-from crud import create_vacancy
-def import_vacancies():
-    result = get_vacancies(main_words, languages_stacks)
-    for db in get_db():
-        for job in result:
-            create_vacancy(db, job)
-
-
-import os
-import psycopg2
-from dotenv import load_dotenv
-
-load_dotenv()
-
-
-def clear_db():
-    try:
-        conn = psycopg2.connect(
-            dbname=os.getenv('DB_NAME'),
-            user=os.getenv('DB_USER'),
-            password=os.getenv('DB_PASSWORD'),
-            host=os.getenv('DB_HOST'),
-            port=os.getenv('DB_PORT')
-        )
-
-        cur = conn.cursor()
-
-        cur.execute("DELETE FROM vacancies;")
-
-        conn.commit()
-
-        cur.close()
-        conn.close()
-    except Exception as e:
-        print("Error: ", str(e))
-
-
-from models import Vacancy, Base
-from database import engine, SessionLocal
-from sqlalchemy import func
-
-Base.metadata.create_all(engine)
-session = SessionLocal()
-
-
-def delete_duplicates():
-    column_name = Vacancy.url
-
-    subquery = (
-        session.query(column_name, func.min(Vacancy.id).label("min_id"))
-        .group_by(column_name)
-        .subquery()
-    )
-
-    session.query(Vacancy).filter(
-        ~Vacancy.id.in_(session.query(subquery.c.min_id))
-    ).delete(synchronize_session=False)
-    session.commit()
-
-
 main_words = [
     "junior",
     "intern",
@@ -207,9 +153,5 @@ languages_stacks = [
 
 
 if __name__ == "__main__":
-    start = time.time()
-    # clear_db()
-    import_vacancies()
-    delete_duplicates()
-    end = time.time()
-    print(f"Время: {round((end - start) / 60)} мин.")
+    print("Импорт HH")
+    perform_import(get_vacancies)

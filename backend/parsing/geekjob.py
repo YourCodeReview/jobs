@@ -4,6 +4,7 @@ import re
 import requests
 import time
 from bs4 import BeautifulSoup
+from parsing.utils import perform_import
 
 
 locale.setlocale(locale.LC_ALL, "ru_RU.UTF-8")
@@ -74,11 +75,11 @@ def geekjob_get_vacancy_html(vacancy_id: str) -> str:
 def geekjob_get_vacancies_info() -> list:
     vacancies = []
     for item in geekjob_filter_recent_vacancies():
-        vacancy_html = geekjob_get_vacancy_html(item["id"])
+        vacancy_html = geek(item["id"])
         soup = BeautifulSoup(vacancy_html, features="html.parser")
         description = soup.find("div", id="vacancy-description").decode_contents()
         vacancy = {
-            "id": item.get("id"),
+            "id": "geekjob_" + item.get("id"),
             "company_name": item["company"]["name"],
             "title": item["position"],
             "salary": item["salary"],
@@ -95,21 +96,6 @@ def geekjob_get_vacancies_info() -> list:
     return vacancies
 
 
-from database import get_db
-from crud import create_vacancy
-from parsing.hh import delete_duplicates
-
-
-def import_vacancies():
-    result = geekjob_get_vacancies_info()
-    for db in get_db():
-        for job in result:
-            create_vacancy(db, job)
-
-
 if __name__ == "__main__":
-    start = time.time()
-    import_vacancies()
-    delete_duplicates()
-    end = time.time()
-    print(f"Время: {round((end - start) / 60)} мин.")
+    print("Импорт GeekJob")
+    perform_import(geekjob_get_vacancies_info)

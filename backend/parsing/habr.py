@@ -1,6 +1,5 @@
 import requests
-import lxml
-import time
+from parsing.utils import perform_import
 from bs4 import BeautifulSoup
 from datetime import datetime
 
@@ -83,7 +82,7 @@ def habr_get_vacancy_data(url):
         description = soup.find("div", {"class": "vacancy-description__text"})
         date = soup.find('time', {'class': 'basic-date'})['datetime']
         vacancy = {
-            "id": idx,
+            "id": "habr_" + idx,
             "site": site,
             "company_name": company_name.text if company_name else None,
             "title": title.text if title else None,
@@ -111,21 +110,6 @@ def habr_get_vacancies_info():
     return vacancies
 
 
-from database import get_db
-from crud import create_vacancy
-from parsing.hh import delete_duplicates
-
-
-def import_vacancies():
-    result = habr_get_vacancies_info()
-    for db in get_db():
-        for job in result:
-            create_vacancy(db, job)
-
-
 if __name__ == "__main__":
-    start = time.time()
-    import_vacancies()
-    delete_duplicates()
-    end = time.time()
-    print(f"Время: {round((end - start) / 60)} мин.")
+    print("Импорт habr")
+    perform_import(habr_get_vacancies_info)

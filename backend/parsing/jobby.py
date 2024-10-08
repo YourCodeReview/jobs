@@ -1,12 +1,12 @@
 import re
 import time
 from bs4 import BeautifulSoup
+from parsing.utils import perform_import
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.service import Service
-
 
 
 def jobby_get_vacancies_raw_data() -> list:
@@ -62,7 +62,7 @@ def jobby_get_vacancies_info() -> list:
         soup = BeautifulSoup(vacancy_html, features="html.parser")
         description = soup.find("div", class_="coaSaaB2").decode_contents()
         vacancy = {
-            "id": re.search("vacancy=([^&]+)", url).group(1),
+            "id": "jobby_" + re.search("vacancy=([^&]+)", url).group(1),
             "company_name": soup.find("div", class_="coaSbaJ2").text,
             "title": soup.find("h1", class_="coaSam2").text,
             "salary": soup.find("div", class_="coaSbaC2").text,
@@ -88,21 +88,6 @@ def jobby_get_vacancies_info() -> list:
     return vacancies
 
 
-from database import get_db
-from crud import create_vacancy
-from parsing.hh import delete_duplicates
-
-
-def import_vacancies():
-    result = jobby_get_vacancies_info()
-    for db in get_db():
-        for job in result:
-            create_vacancy(db, job)
-
-
 if __name__ == "__main__":
-    start = time.time()
-    import_vacancies()
-    delete_duplicates()
-    end = time.time()
-    print(f"Время: {round((end - start) / 60)} мин.")
+    print("Импорт Jobby")
+    perform_import(jobby_get_vacancies_info)

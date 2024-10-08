@@ -1,0 +1,19 @@
+FROM python:3.11-slim
+
+WORKDIR /app
+COPY . /app
+
+
+RUN pip install --no-cache-dir -r requirements.txt
+
+RUN apt-get update && apt-get -y install cron
+
+COPY ./parsing/cron-parse /etc/cron.d/cron-parse
+
+RUN chmod 0644 /etc/cron.d/cron-parse
+
+RUN touch /var/log/cron.log
+
+ENV PYTHONPATH=/app
+
+CMD cron && tail -f /var/log/cron.log

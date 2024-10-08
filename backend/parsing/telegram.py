@@ -1,4 +1,3 @@
-import json
 import re
 import os
 import time
@@ -7,6 +6,7 @@ from bs4 import BeautifulSoup
 import requests
 
 from dotenv import find_dotenv, load_dotenv
+from parsing.utils import perform_import
 from telethon.sync import TelegramClient
 from telethon.tl.functions.messages import GetHistoryRequest
 from telethon.tl.types import PeerChannel
@@ -210,7 +210,7 @@ def telegram_get_vacancy_data(data, vacancy, sequence_number):
         if not description:
             return
         vacancy_data = {
-            "id": f"{data['id'] * 100 + sequence_number}",
+            "id": f"telegram_{data['id'] * 100 + sequence_number}",
             "title": title,
             "company_name": company_name,
             "description": description,
@@ -239,24 +239,6 @@ def telegram_get_vacancies_info():
     return all_vacancies
 
 
-from database import get_db
-from crud import create_vacancy
-from parsing.hh import delete_duplicates
-
-
-def import_vacancies():
-    result = telegram_get_vacancies_info()
-    for db in get_db():
-        for job in result:
-            create_vacancy(db, job)
-
-
 if __name__ == "__main__":
-    #
-    start = time.time()
-    import_vacancies()
-    delete_duplicates()
-    end = time.time()
-    print(f"Время: {round((end - start) / 60)} мин.")
-    # telegram_get_vacancies_info()
-
+    print("Импорт Telegram")
+    perform_import(telegram_get_vacancies_info)
