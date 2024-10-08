@@ -17,15 +17,19 @@ def get_duplicates(session, external_ids):
 
 def import_new_vacancies(vacancies):
     external_ids = [v["id"] for v in vacancies]
+    count_new = 0
+    count_existing = 0
     for db in get_db():
         existing = get_duplicates(db, external_ids)
         existing = [item[1] for item in existing]
         for vacancy in vacancies:
             if vacancy["id"] not in existing:
-                print("Creating")
-                # create_vacancy(db, vacancy)
+                create_vacancy(db, vacancy)
+                count_new += 1
             else:
-                print("Skipping")
+                count_existing += 1
+    print(f"Новых {count_new}, существующих {count_existing}")
+    return count_new
 
 
 def perform_import(import_func):
