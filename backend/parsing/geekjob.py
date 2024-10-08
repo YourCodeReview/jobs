@@ -75,7 +75,7 @@ def geekjob_get_vacancy_html(vacancy_id: str) -> str:
 def geekjob_get_vacancies_info() -> list:
     vacancies = []
     for item in geekjob_filter_recent_vacancies():
-        vacancy_html = geek(item["id"])
+        vacancy_html = geekjob_get_vacancy_html(item["id"])
         soup = BeautifulSoup(vacancy_html, features="html.parser")
         description = soup.find("div", id="vacancy-description").decode_contents()
         vacancy = {
