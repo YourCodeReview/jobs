@@ -9,6 +9,7 @@ services:
       - ./backend:/app
     depends_on:
       - database
+
   parser:
     build:
       context: ./backend
@@ -17,16 +18,16 @@ services:
       - ./backend:/app
     depends_on:
       - database
+
   database:
     image: postgres:latest
     environment:
       POSTGRES_USER: team
       POSTGRES_PASSWORD: password
       POSTGRES_DB: jobs
-#    ports:
-#      - "5432:5432"
     volumes:
       - ./backend/db_data:/var/lib/postgresql/data
+
   frontend:
     restart: always
     build:
@@ -34,6 +35,4 @@ services:
     volumes:
       - ./frontend:/app
     ports:
- #     - "8080:8080"
-#      - "80:80"
-      - "443:443"
+      - "8080:80"
