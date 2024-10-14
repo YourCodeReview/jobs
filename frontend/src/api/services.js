@@ -11,3 +11,5 @@ export const apiService = {
     return (await axiosInstance.get('locations')).data
   }
 }
+
+

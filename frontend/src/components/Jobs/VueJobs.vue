@@ -4,17 +4,21 @@ import JobsTools from '@/components/Jobs/VueJobsTools.vue'
 import JobsPagination from '@/components/Jobs/VueJobsPagination.vue'
 
 import { useJobsStore } from '@/store/jobs'
-import { onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
 
 const jobsStore = useJobsStore()
+let jobPageTitle = ref('')
 
 onMounted(() => {
   jobsStore.fetchJobsData()
+  jobPageTitle.value = jobsStore.getCardTitle()
 })
+
 </script>
 
 <template>
   <div class="container">
+    <h1 class="job-page-title">"Стажировки и Junior вакансии {{ jobPageTitle }}"</h1>
     <v-row class="min-height" justify-sm="center" justify-md="start">
       <v-col cols="12" sm="10" md="3" lg="3" class="d-flex flex-column align-end">
         <jobs-tools />
@@ -40,5 +44,10 @@ onMounted(() => {
 <style scoped>
 .min-height {
   min-height: 100vh;
+}
+
+.job-page-title {
+  width: 90%;
+  margin-bottom: 3%;
 }
 </style>

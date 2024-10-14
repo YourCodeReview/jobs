@@ -19,6 +19,11 @@ export const useJobsStore = defineStore('jobs', () => {
 
   const page = ref(1)
 
+  const getCardTitle = () => {
+    const vacancyCardTitle = fetchQuery.value.specialities
+    return vacancyCardTitle
+  }
+
   const fetchJobsData = async () => {
     await execute(fetchQuery.value)
     saveToLocalStorage()
@@ -66,6 +71,7 @@ export const useJobsStore = defineStore('jobs', () => {
     error,
     fetchJobsData,
     fetchJobsDataWithDebounce,
-    editCurrentPage
+    editCurrentPage,
+    getCardTitle
   }
 })
