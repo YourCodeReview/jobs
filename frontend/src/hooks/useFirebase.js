@@ -1,4 +1,5 @@
 import { ref, onMounted } from 'vue'
+import { getDatabase, ref as dbRef, set } from "firebase/database";
 import {
   getAuth,
   onAuthStateChanged,
@@ -47,11 +48,14 @@ export function useFirebase() {
     })
   }
 
-  const registerUser = async (email, password) => {
+  const registerUser = async (email, password, vacancyType) => {
     isLoading.value = true
     try {
       const result = await createUserWithEmailAndPassword(auth, email, password)
       currentUser.value = result.user
+      const db = getDatabase();
+      const userRef = dbRef(db, 'users/' + result.user.uid)
+      await set(userRef, {vacancyType: vacancyType})
       isLoggedIn.value = true
       clearError()
     } catch (error) {

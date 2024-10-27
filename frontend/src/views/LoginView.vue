@@ -15,16 +15,37 @@ const email = ref('')
 const password = ref('')
 const type = ref('login')
 
+const emptyVacancy = 'Не выбрано'
+const otherVacancy = 'Другое'
+const vacancyType = ref(emptyVacancy)
+
+const vacancyTypes = ref([
+  'Python',
+  'Java',
+  'JavaScript',
+  'Data Science',
+  'QA',
+  'C#',
+  otherVacancy
+])
+
 const visible = ref(false)
 const snackbar = ref(false)
 const expand = ref(false)
 
-const authenticate = async (email, password) => {
+const authenticate = async (email, password, vacancyType, customVacancyType) => {
   if (type.value === 'register') {
-    await auth.registerUser(email, password)
+    if (vacancyType === emptyVacancy || vacancyType === otherVacancy && !customVacancyType) {
+      snackbar.value = true
+      auth.errorMsg.value = 'Пожалуйста, выберите направление'
+      return
+    }
+    vacancyType = customVacancyType || vacancyType
+    await auth.registerUser(email, password, vacancyType)
   } else if (type.value === 'login') {
     await auth.loginUser(email, password)
   }
+
   subscribe(auth.currentUser.value.email)
   auth.isLoggedIn.value ? router.back() : (snackbar.value = true)
 }
@@ -44,7 +65,7 @@ onMounted(() => {
 <template>
   <div class="background pa-8 h-screen d-flex flex-column justify-center align-center">
     <svg-logo />
-    <v-form @submit.prevent="authenticate(email, password)" v-show="expand">
+    <v-form @submit.prevent="authenticate(email, password, vacancyType, customVacancyType)" v-show="expand">
       <v-card
         class="mx-auto pa-8 mt-8 w-100"
         elevation="8"
@@ -78,6 +99,30 @@ onMounted(() => {
           required
           @click:append-inner="visible = !visible"
         ></v-text-field>
+
+        <div v-if="type === 'register'">
+            <div class="text-subtitle-1 text-medium-emphasis d-flex align-center justify-space-between">
+              Выберите направление
+            </div>
+
+            <v-select
+              v-model="vacancyType"
+              :items="vacancyTypes"
+              :placeholder="emptyVacancy"
+              density="compact"
+              variant="outlined"
+              required
+            ></v-select>
+
+            <v-text-field
+              v-if="vacancyType === otherVacancy"
+              v-model="customVacancyType"
+              placeholder="Введите направление"
+              density="compact"
+              variant="outlined"
+              required
+            ></v-text-field>
+        </div>
 
         <v-btn block type="submit" class="mb-2" size="large" variant="tonal">
           {{ type === 'register' ? 'Зарегистрироваться' : 'Войти' }}
