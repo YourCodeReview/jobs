@@ -1,6 +1,6 @@
-0 2 * * *    root    python /app/parsing/designer.py
-0 3 * * *    root    python /app/parsing/geekjob.py
-0 4 * * *    root    python /app/parsing/habr.py
-0 5 * * *    root    python /app/parsing/hh.py
-0 6 * * *    root    python /app/parsing/jobby.py
-0 7 * * *    root    python /app/parsing/telegram.py
+0 2 * * *    root    python /app/parsing/designer.py >> /var/log/vacancies.log
+0 3 * * *    root    python /app/parsing/geekjob.py >> /var/log/vacancies.log
+0 4 * * *    root    python /app/parsing/habr.py >> /var/log/vacancies.log
+0 5 * * *    root    python /app/parsing/hh.py >> /var/log/vacancies.log
+0 6 * * *    root    python /app/parsing/jobby.py >> /var/log/vacancies.log
+0 7 * * *    root    python /app/parsing/telegram.py >> /var/log/vacancies.log
