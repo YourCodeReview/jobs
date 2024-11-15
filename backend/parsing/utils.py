@@ -40,7 +40,6 @@ def perform_import(import_func):
         imported_count = import_new_vacancies(result)
     except Exception as e:
         print(f"Ошибка {e}")
-        raise
     else:
         print(f"Импортировано вакансий: {imported_count}")
     finally:
