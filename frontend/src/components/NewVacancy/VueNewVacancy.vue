@@ -88,6 +88,7 @@ const onSubmit = () => {
     router.push("/");
   })
   .catch(function (error) {
+    alert("Ошибка при добавлении вакансии, подробности в консоле")
     console.log(error);
   });
   
