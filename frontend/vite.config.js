@@ -9,34 +9,26 @@ import { fileURLToPath, URL } from 'node:url'
 export default defineConfig({
   // base: '/codereview-vuetify/',
   plugins: [
-    vue({ 
+    vue({
       template: { transformAssetUrls }
     }),
     vuetify({
-      autoImport: true,
-    }),
+      autoImport: true
+    })
   ],
-  define: { 'process.env': {} },
+  define: { 'process.env': {}, __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: false },
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
     },
-    extensions: [
-      '.js',
-      '.json',
-      '.jsx',
-      '.mjs',
-      '.ts',
-      '.tsx',
-      '.vue',
-    ],
+    extensions: ['.js', '.json', '.jsx', '.mjs', '.ts', '.tsx', '.vue']
   },
   server: {
     watch: {
-      usePolling: true, 
+      usePolling: true
     },
     host: true,
     strictPort: true,
-    port: 3000,
-  },
+    port: 3000
+  }
 })

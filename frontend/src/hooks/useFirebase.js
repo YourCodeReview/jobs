@@ -110,6 +110,7 @@ export function useFirebase() {
   })
 
   return {
+    auth,
     currentUser,
     isLoggedIn,
     isLoading,
