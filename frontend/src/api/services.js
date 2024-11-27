@@ -24,4 +24,14 @@ export const apiService = {
         }
     })).data
   },
+  async getUuid() {
+    return (await axios.get('https://review.gorbunov-ai.ru/auth/get-uuid/')).data
+  },
+  async getCheckAuth(uuid) {
+    return (
+      await axios.get('https://review.gorbunov-ai.ru/auth/check-uuid/', {
+        params: { uuid_for_login: uuid }
+      })
+    ).data  
+  },
 }

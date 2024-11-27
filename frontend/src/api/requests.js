@@ -20,3 +20,11 @@ export const useAddJob = () => {
 export const useRegister = () => {
   return useRequest(apiService.register)
 }
+
+export const useGetUuid = () => {
+  return useRequest(apiService.getUuid)
+}
+
+export const useCheckAuth = () => {
+  return useRequest(apiService.getCheckAuth)
+}
