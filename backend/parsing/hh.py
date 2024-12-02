@@ -83,21 +83,21 @@ def fetch_hh_page_vacancies(all_ides, text, page=0):
         if stop_invalid_vacancies(item):
             break    
         vacancy = {
-            "id": item.get("id"),
+            "external_id": item.get("id"),
             "company_name": item.get("employer")["name"] if item.get("employer") else None,
             "title": item.get("name"),
             "salary": get_salary(vacancy_data["salary"]) if vacancy_data and vacancy_data["salary"] else None,
             "location": item.get("address")["raw"] if item.get("address") else item.get("area")["name"] if  item.get("area") else None,
             "speciality": text.split(' ')[1],
-            "internship": get_internship(item.get("employment")["name"] if item.get("employment") else None),
+            "internship": True if item.get("employment") and get_internship(item.get("employment")["name"]) else False,
             "remote": True if item.get("schedule") and item.get("schedule")["name"] == 'удаленная работа' else False,
             "url": vacancy_data["alternate_url"] if vacancy_data and vacancy_data["alternate_url"] else None,
             "description": vacancy_data["description"] if vacancy_data and vacancy_data["description"] else None,
         }
         time.sleep(0.5)
-        if vacancy["id"] not in all_ides:
+        if vacancy["external_id"] not in all_ides:
             vacancies.append(vacancy)
-            all_ides.add(vacancy["id"])
+            all_ides.add(vacancy["external_id"])
         else:
             continue
         if vacancy['description'] and re.search(r"удаленная работа|удаленн", vacancy['description'], re.IGNORECASE):
@@ -119,13 +119,15 @@ def get_vacancies(main_words, languages_stacks):
     return result
 
 
+from backend.schemas import VacancyCreate
 from database import get_db
 from crud import create_vacancy
 def import_vacancies():
     result = get_vacancies(main_words, languages_stacks)
     for db in get_db():
         for job in result:
-            create_vacancy(db, job)
+            vacancy = VacancyCreate(**job)
+            create_vacancy(db, vacancy)
 
 
 import os

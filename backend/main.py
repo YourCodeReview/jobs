@@ -35,3 +35,7 @@ app.add_middleware(
 )
 
 app.include_router(routes.router, prefix="/api", tags=["API"])
+
+@app.get("/api/healthchecker")
+def root():
+    return {"message": "The API is LIVE!!"}
