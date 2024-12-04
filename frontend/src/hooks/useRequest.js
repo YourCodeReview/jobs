@@ -11,7 +11,6 @@ export const useRequest = (requestFunction) => {
       data.value = await requestFunction(params)
     } catch (e) {
       error.value = e.response
-      console.log(error.value)
     } finally {
       loading.value = false
     }

@@ -12,11 +12,14 @@
 </template>
 
 <script setup>
-import { useFirebase } from '@/hooks/useFirebase'
+import { useJobsStore } from '@/store/jobs'
 
-const auth = useFirebase()
+// const auth = useFirebase()
+const store = useJobsStore()
 const handleLogout = () => {
-  auth.logoutUser()
+  localStorage.removeItem('token')
+
+  store.isAuth = false
 }
 defineProps({
   variant: String,

@@ -1,7 +1,4 @@
 <script setup>
-import { computed } from 'vue'
-import { useFirebase } from '@/hooks/useFirebase'
-
 import HeaderNavigation from '@/components/Header/VueHeaderNavigation.vue'
 
 import UiLoginButton from '@/components/_ui/uiLoginButton.vue'
@@ -12,8 +9,9 @@ import UiMenu from '@/components/_ui/uiMenu.vue'
 import SvgLogo from '@/components/_icons/svgLogo.vue'
 
 import { useRouter } from 'vue-router'
+import { useJobsStore } from '@/store/jobs'
 
-const auth = useFirebase()
+const jobsStore = useJobsStore()
 
 const links = [
   {
@@ -26,11 +24,8 @@ const links = [
   }
 ]
 
-const showLoginButton = computed(() => !auth.isLoggedIn.value)
-
 const router = useRouter()
 const currentQueryParams = router.currentRoute.value.query
-
 </script>
 
 <template>
@@ -50,7 +45,7 @@ const currentQueryParams = router.currentRoute.value.query
         <v-col cols="6" sm="7" md="8" lg="9" class="d-flex justify-end align-center">
           <header-navigation v-if="$vuetify.display.lgAndUp" :links="links" />
           <ui-career-button v-if="$vuetify.display.smAndUp" variant="elevated" />
-          <ui-login-button v-if="showLoginButton" variant="elevated" />
+          <ui-login-button v-if="!jobsStore.isAuth" variant="elevated" />
           <ui-logout-button v-else variant="elevated" />
           <ui-menu v-if="$vuetify.display.mdAndDown">
             <header-navigation :links="links" />

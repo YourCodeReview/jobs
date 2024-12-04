@@ -2,17 +2,20 @@
 import { ref } from 'vue'
 import { useFirebase } from '@/hooks/useFirebase'
 import { generateTargetUrl } from '@/components/utils/utils'
+import { useJobsStore } from '@/store/jobs'
 
 import UiCard from '@/components/_ui/uiCard.vue'
+import UiAuthDialog from '../_ui/uiAuthDialog.vue'
 
 const props = defineProps({
   data: Object
 })
 
+const store = useJobsStore()
 const auth = useFirebase()
 const dialog = ref(false)
 
-
+const authDialog = ref(false)
 </script>
 
 <template>
@@ -63,7 +66,8 @@ const dialog = ref(false)
                   Поможем тебе найти работу, с оплатой за результат.
                 </h2>
                 <p class="pa-2 text-h6 mb-4">
-                  Средняя зарплата ребят, ĸоторых мы трудоустраиваем — 109.000 руб. Средняя время трудоустройства 76 дней
+                  Средняя зарплата ребят, ĸоторых мы трудоустраиваем — 109.000 руб. Средняя время
+                  трудоустройства 76 дней
                 </p>
                 <v-btn
                   height="60"
@@ -81,7 +85,7 @@ const dialog = ref(false)
             </v-dialog>
           </v-btn>
           <v-btn
-            v-if="auth.isLoggedIn.value"
+            v-if="store.isAuth"
             block
             color="black"
             size="large"
@@ -90,8 +94,11 @@ const dialog = ref(false)
           >
             Откликнуться
           </v-btn>
-          <v-btn v-else :to="{ name: 'Login' }" color="black" size="large" rounded="lg" block>
+          <v-btn v-else color="black" size="large" rounded="lg" block>
             Откликнуться
+            <v-dialog v-model="authDialog" activator="parent" width="auto">
+              <UiAuthDialog @success="authDialog = false" closable @close="authDialog = false" />
+            </v-dialog>
           </v-btn>
         </v-card>
       </v-col>
@@ -99,9 +106,14 @@ const dialog = ref(false)
         <v-card class="orange-banner pa-6" rounded="xl">
           <h2 class="pa-2 text-h4 font-weight-bold">Хочешь попасть в эту ĸомпанию?</h2>
           <p class="pa-2 text-h6 mb-4">
-            Помогаем разработчиĸам найти работу за 76 дней. С Зарплатой на 30-40% выше рыночной. С оплатой за результат.
+            Помогаем разработчиĸам найти работу за 76 дней. С Зарплатой на 30-40% выше рыночной. С
+            оплатой за результат.
           </p>
-          <v-btn color="black" rounded="xl" size="x-large" :href="'https://yourcodereview.com/' + generateTargetUrl('button_4')"
+          <v-btn
+            color="black"
+            rounded="xl"
+            size="x-large"
+            :href="'https://yourcodereview.com/' + generateTargetUrl('button_4')"
             >Узнать подробнее.</v-btn
           >
         </v-card>
@@ -144,7 +156,7 @@ const dialog = ref(false)
 .page-nav {
   position: sticky;
   z-index: 1006;
-  top: 90px;
+  top: 100px;
 
   border-radius: 50px;
 }

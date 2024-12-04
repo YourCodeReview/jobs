@@ -10,5 +10,6 @@
 <style scoped>
 svg {
   display: block;
+  cursor: pointer;
 }
 </style>

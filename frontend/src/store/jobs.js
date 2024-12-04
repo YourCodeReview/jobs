@@ -6,6 +6,8 @@ import debounce from 'lodash.debounce'
 export const useJobsStore = defineStore('jobs', () => {
   const { data, loading, error, execute } = useGetJobs()
 
+  const isAuth = ref(false)
+
   const list = computed(() => data?.value)
   const counter = computed(() => data?.value?.total_count)
   const listIsEmpty = computed(() => data?.value?.total_count === 0)
@@ -56,6 +58,7 @@ export const useJobsStore = defineStore('jobs', () => {
   })
 
   return {
+    isAuth,
     fetchQuery,
     changeQuery,
     list,

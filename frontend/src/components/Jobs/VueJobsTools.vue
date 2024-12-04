@@ -14,11 +14,11 @@ const fetchWithQuery = (event) => {
 </script>
 
 <template>
-  <v-expansion-panels variant="accordion" class="sticky-expansion-panels mb-2">
+  <v-expansion-panels variant="accordion" class="sticky-expansion-panels-tg mb-2">
     <v-btn
       block
       class="px-6 py-4 font-weight-bold justify-start"
-      height="70"
+      height="50"
       rounded="xl"
       size="small"
       href="https://t.me/YCRJobs"
@@ -50,22 +50,22 @@ const fetchWithQuery = (event) => {
         </template>
       </v-expansion-panel-text>
     </v-expansion-panel>
-    </v-expansion-panels>
-    <v-expansion-panels variant="accordion" class="sticky-expansion-panels mb-2">
+  </v-expansion-panels>
+  <v-expansion-panels variant="accordion" class="sticky-expansion-panels mb-2">
     <v-expansion-panel title="Город" rounded="xl">
       <v-expansion-panel-text>
         <locations-tools />
       </v-expansion-panel-text>
     </v-expansion-panel>
   </v-expansion-panels>
-    <v-expansion-panels variant="accordion" class="sticky-expansion-panels mb-2">
+  <v-expansion-panels variant="accordion" class="sticky-expansion-panels mb-2">
     <v-expansion-panel title="Источник вакансии" rounded="xl">
       <v-expansion-panel-text>
         <source-tools />
       </v-expansion-panel-text>
     </v-expansion-panel>
   </v-expansion-panels>
-    <v-expansion-panels variant="accordion" class="sticky-expansion-panels mb-2">
+  <v-expansion-panels variant="accordion" class="sticky-expansion-panels mb-2">
     <v-expansion-panel title="Дополнительно" rounded="xl">
       <v-expansion-panel-text>
         <checkbox-tools />
@@ -83,11 +83,17 @@ const fetchWithQuery = (event) => {
   margin: 0 auto;
 }
 
+.sticky-expansion-panels-tg {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
 @media screen and (min-width: 960px) {
   .sticky-expansion-panels {
     max-width: 280px;
     margin: 0;
     margin-left: auto;
+    white-space: nowrap;
   }
 }
 </style>

@@ -1,8 +1,10 @@
 <script setup>
 import { ref, onMounted } from 'vue'
+import { useJobsStore } from './store/jobs'
 // import uiAdvertisingDialog from '@/components/_ui/uiAdvertisingDialog.vue'
 
 // const dialog = ref(false)
+const store = useJobsStore()
 
 // const setDialogIsOpen = () => {
 //   dialog.value = true
@@ -10,6 +12,10 @@ import { ref, onMounted } from 'vue'
 // }
 
 onMounted(() => {
+  const token = localStorage.getItem('token')
+  if (!token) store.isAuth = false
+  if (token) store.isAuth = true
+
   // const advertisingShown = localStorage.getItem('advertising-shown')
   // if (advertisingShown) return
   // document.addEventListener('mousemove', (event) => {

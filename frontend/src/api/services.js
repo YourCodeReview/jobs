@@ -11,27 +11,31 @@ export const apiService = {
     return (await axiosInstance.get('locations')).data
   },
   async addJob(data) {
-    return (await axiosInstance.post('jobs', data, {
+    return (
+      await axiosInstance.post('jobs', data, {
         headers: {
           'Content-Type': 'application/json'
         }
-    })).data
+      })
+    ).data
   },
   async register(data) {
-    return (await axiosInstance.post('register', data, {
+    return (
+      await axiosInstance.post('register', data, {
         headers: {
           'Content-Type': 'application/json'
         }
-    })).data
+      })
+    ).data
   },
   async getUuid() {
-    return (await axios.get('https://review.gorbunov-ai.ru/auth/get-uuid/')).data
+    return (await axiosInstance.get('auth/get-uuid/')).data
   },
   async getCheckAuth(uuid) {
     return (
-      await axios.get('https://review.gorbunov-ai.ru/auth/check-uuid/', {
+      await axiosInstance.get('auth/check-uuid/', {
         params: { uuid_for_login: uuid }
       })
-    ).data  
-  },
+    ).data
+  }
 }

@@ -1,20 +1,17 @@
 <script setup>
-import { computed, onBeforeUnmount, onMounted } from 'vue'
+import { onBeforeUnmount, onMounted } from 'vue'
 import svgClose from '@/components/_icons/svgClose.vue'
 import SvgTelegram from '../_icons/svgTelegram.vue'
 import SvgArrow from '../_icons/svgArrow.vue'
 import { useGetUuid, useCheckAuth } from '@/api/requests'
+import { useJobsStore } from '@/store/jobs'
 
-const props = defineProps({
-  modelValue: Boolean
+const jobsStore = useJobsStore()
+
+defineProps({
+  closable: Boolean
 })
-
-const dialog = computed({
-  get: () => props.modelValue,
-  set: (value) => emits('update:modelValue', value)
-})
-
-const emits = defineEmits(['update:modelValue'])
+const emits = defineEmits(['success', 'close'])
 
 const { data: uuid, execute: getUuid } = useGetUuid()
 const { data: authToken, execute: checkAuth } = useCheckAuth()
@@ -31,6 +28,11 @@ const onAuth = async () => {
     if (authToken.value) {
       clearInterval(authInterval)
       authInterval = null
+
+      localStorage.setItem('token', authToken.value.access_token)
+      jobsStore.isAuth = true
+
+      emits('success')
     }
   }, 1000)
 }
@@ -45,54 +47,34 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <v-dialog v-model="dialog" width="320" class="dialog">
-    <v-card class="banner">
-      <div class="info">
-        <h3>
-          Авторизуйтесь <br />
-          через бота в <br />
-          Telegram
-        </h3>
-        <p>
-          <span>получите доступ к вакансиям</span> и полезным материалам, которые ускорят ваше
-          трудоустройство в 5 раз
-        </p>
-        <SvgArrow />
-        <button class="close" @click="dialog = false">
-          <svgClose />
-        </button>
-        <button class="btn" @click="onAuth">
-          <div>
-            <SvgTelegram />
-            <span>Авторизоваться</span>
-          </div>
-        </button>
-      </div>
-    </v-card>
-  </v-dialog>
+  <v-card class="banner">
+    <div class="info">
+      <h3>
+        Авторизуйтесь <br />
+        через бота в <br />
+        Telegram
+      </h3>
+      <p>
+        <span>получите доступ к вакансиям</span> и полезным материалам, которые ускорят ваше
+        трудоустройство в 5 раз
+      </p>
+      <SvgArrow />
+      <button v-if="closable" class="close" @click="emits('close')">
+        <svgClose />
+      </button>
+      <button class="btn" @click="onAuth">
+        <div>
+          <SvgTelegram />
+          <span>Авторизоваться</span>
+        </div>
+      </button>
+    </div>
+  </v-card>
 </template>
 
 <style scoped>
-.dialog {
-  --v-theme-on-surface: 0, 0, 0, 0.749;
-}
-
-.dialog::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.75);
-  backdrop-filter: blur(4px);
-}
-
-.v-overlay__scrim {
-  background-color: rgba(0, 0, 0, 0) !important;
-}
-
 .banner {
+  width: 320px;
   flex-direction: row !important;
   border-radius: 16px !important;
 }
